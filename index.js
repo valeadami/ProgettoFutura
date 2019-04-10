@@ -26,7 +26,7 @@ const utf8=require('utf8');
 
 
 var app = express();
-var bot='ChitChat'; // CHICKCHAT
+var bot=''; // CHICKCHAT
 /*app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");*/
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -91,6 +91,8 @@ app.use(function (req, res, next) {
     //10/01/2019
     //copiato codice da progetto api
     console.log('------sono su FUTURA app ----- la richiesta proviene da '+ agent.requestSource);
+    bot=req.query.ava;
+    console.log('Il bot  interrogato : '+bot);
     var name=req.body.queryResult.intent.name;
     //QUALSIASI INTENT RISPONDE A CALLAVA ANCHE FALLBACK
     var displayname=req.body.queryResult.intent.displayName;
@@ -257,12 +259,30 @@ function leggiSessione(path, strSessione){
  
    let data = '';
    let strOutput='';
- 
+  //aggiunta la sessione
+    var ss=leggiSessione(__dirname +'/sessions/', sessionId);
+    if (ss===''){
+        options.headers.Cookie='JSESSIONID=';
+        console.log('DENTRO CALL AVA: SESSIONE VUOTA');
+    }else {
+        options.headers.Cookie='JSESSIONID='+ss;
+        console.log('DENTRO CALL AVA:  HO LA SESSIONE + JSESSIONID');
+    }
     const req = https.request(options, (res) => {
     console.log(`STATUS DELLA RISPOSTA: ${res.statusCode}`);
     console.log(`HEADERS DELLA RISPOSTA: ${JSON.stringify(res.headers)}`);
 
+    //aggiunta la sessione
+    if (res.headers["set-cookie"]){
 
+        var x = res.headers["set-cookie"].toString();
+        var arr=x.split(';')
+        var y=arr[0].split('=');
+        
+       // scriviSessione(__dirname+'/sessions/',sess, y[1]); 
+       
+       scriviSessione(__dirname+'/sessions/',sessionId, y[1]); 
+      } 
     res.setEncoding('utf8');
     res.on('data', (chunk) => {
      console.log(`BODY: ${chunk}`);
