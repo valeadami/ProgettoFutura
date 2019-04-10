@@ -125,21 +125,22 @@ app.use(function (req, res, next) {
      //la funzione callAva sostiutisce la funzione welcome 
      // callAVA anytext AnyText sostituisce 'qualunquetesto'
       let intentMap = new Map();
-      intentMap.set(displayname, callAVA);
 
-      /*if (blnIsFallback){
+      if (blnIsFallback){
   
         //recupero il query text del body
         var stringa=req.body.queryResult.queryText;
         console.log('query text del fallback :'+stringa);
         agent.queryText=stringa;
-        intentMap.set(displayname, callAVA);
-        console.log('funzione callAva per default fallback');
-      } else{
+        //
+        console.log('agent.queryText fallback '+agent.queryText);
+      } /*else{
         intentMap.set(displayname, callAVANEW); 
         console.log('funzione callAVANEW per tutto il resto');
       }*/
-    agent.handleRequest(intentMap);
+      //a prescindere,
+      intentMap.set(displayname, callAVA);
+      agent.handleRequest(intentMap);
   }
   
   //app.post('/fulfillment', appDFActions);
@@ -232,21 +233,30 @@ function leggiSessione(path, strSessione){
    
   } 
 
- 
+ /* 10/04/2019  per domani stazione marittima*/
  function callAVA(agent) {
   return new Promise((resolve, reject) => {
  
-  let strRicerca=agent.queryText;
-   console.log('valore di strRicerca ' + strRicerca);
+    let strRicerca='';
+    if (agent.queryText){
+        strRicerca=utf8.encode(agent.queryText);
+        console.log('FALLBACK in CAllAva valore di strRicerca ' + strRicerca); 
+    } 
+    if (agent.parameters.searchText){
+        strRicerca= utf8.encode(agent.parameters.searchText); 
+        console.log('***** in CAllAva valore di strRicerca ' + strRicerca);
+    }
   
-  var str= utf8.encode(strRicerca); 
-  if (str) {
-    strRicerca=querystring.escape(str); 
+   
+  //var str= utf8.encode(strRicerca); 
+  if (strRicerca) {
+    strRicerca=querystring.escape(strRicerca); 
     options.path+=strRicerca+'&user=&pwd=&ava='+bot;
+    console.log(' valore di options.path INIZIO = '+ options.path);
   }
  
    let data = '';
-    let strOutput='';
+   let strOutput='';
  
     const req = https.request(options, (res) => {
     console.log(`STATUS DELLA RISPOSTA: ${res.statusCode}`);
