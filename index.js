@@ -240,6 +240,9 @@ function leggiSessione(path, strSessione){
   return new Promise((resolve, reject) => {
  
     let strRicerca='';
+    let sessionId = agent.sessionId;
+    console.log('dentro call ava il mio session id '+sessionId);
+    
     if (agent.queryText){
         strRicerca=utf8.encode(agent.queryText);
         console.log('FALLBACK in CAllAva valore di strRicerca ' + strRicerca); 
