@@ -194,7 +194,7 @@ function leggiSessione(path, strSessione){
 
 } 
 //prova del 12/04/2019
-function leggiSessioneNew(path, strSessione){
+/*function leggiSessioneNew(path, strSessione){
   var contents='';
   
     fs.accessSync(__dirname+ '/sessions/'+ strSessione);
@@ -205,7 +205,7 @@ function leggiSessioneNew(path, strSessione){
      contents=data;
     });
     return contents;
-} 
+} */
  // 18/12/2018
  function getComandi(arComandi)
   {
