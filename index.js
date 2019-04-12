@@ -244,7 +244,8 @@ function leggiSessione(path, strSessione){
     console.log('dentro call ava il mio session id '+sessionId);
     
     if (agent.queryText){
-        strRicerca=utf8.encode(agent.queryText);
+      strRicerca=agent.queryText;
+      //  strRicerca=utf8.encode(agent.queryText);
         console.log('FALLBACK in CAllAva valore di strRicerca ' + strRicerca); 
     } 
     if (agent.parameters.searchText){
