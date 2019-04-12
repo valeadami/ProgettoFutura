@@ -196,10 +196,14 @@ function leggiSessione(path, strSessione){
 //prova del 12/04/2019
 function leggiSessioneNew(path, strSessione){
  var contents='';
+ 
     fs.accessSync(__dirname+ '/sessions/'+ strSessione);
    fs.readFileSync(__dirname+'/sessions/'+ strSessione, 'utf8', (err, data) => {
-     if (err) throw err;
-   
+     if (err) {
+      if (err.code==='ENOENT')
+      console.log('DENTRO LEGGI SESSIONE :il file non esiste...')
+     
+     }
      console.log('DENTRO LEGGI SESSIONE ' +data);
     contents=data;
    });
