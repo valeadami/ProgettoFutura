@@ -194,7 +194,7 @@ function leggiSessione(path, strSessione){
 
 } 
 //prova del 12/04/2019
-/*function leggiSessioneNew(path, strSessione){
+function leggiSessioneNew(path, strSessione){
  var contents='';
     fs.accessSync(__dirname+ '/sessions/'+ strSessione);
    fs.readFileSync(__dirname+'/sessions/'+ strSessione, 'utf8', (err, data) => {
@@ -204,7 +204,7 @@ function leggiSessione(path, strSessione){
     contents=data;
    });
    return contents;
-} */
+} 
 
  // 18/12/2018
  function getComandi(arComandi)
@@ -277,7 +277,7 @@ function leggiSessione(path, strSessione){
    let data = '';
    let strOutput='';
   //aggiunta la sessione
-    var ss=leggiSessione(__dirname +'/sessions/', sessionId); //leggiSessioneNew   leggiSessione
+    var ss=leggiSessioneNew(__dirname +'/sessions/', sessionId); //leggiSessioneNew   leggiSessione
     if (ss===''){
         options.headers.Cookie='JSESSIONID=';
         console.log('DENTRO CALL AVA: SESSIONE VUOTA');
