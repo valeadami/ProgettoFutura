@@ -180,9 +180,9 @@ function scriviSessione(path, strSessione, strValore) {
 function leggiSessione(path, strSessione){
   var contents='';
   try {
-    fs.accessSync(__dirname+ '/sessions/'+ strSessione);
-    contents = fs.readFileSync(__dirname+'/sessions/'+ strSessione, 'utf8');
-    console.log('DENTRO LEGGI SESSIIONE ' +contents);
+    fs.accessSync(path + strSessione); //__dirname +'/sessions/'
+    contents = fs.readFileSync(path + strSessione, 'utf8'); //__dirname+'/sessions/'
+    console.log('DENTRO LEGGI SESSIONE ' +contents);
   
 
   }catch (err) {
@@ -193,7 +193,7 @@ function leggiSessione(path, strSessione){
   return contents;
 
 } 
-//prova del 12/04/2019
+//prove del 12/04/2019
 /*function leggiSessioneNew(path, strSessione){
  var contents='';
  
@@ -208,7 +208,18 @@ function leggiSessione(path, strSessione){
     contents=data;
    });
    return contents;
-} */
+} 
+eliminare file
+function deleteSessione(path, strSessione){
+  fs.unlink(__dirname+ '/sessions/'+ strSessione, (err) => {
+    if (err) throw err;
+    console.log('in deleteSessione: eliminato il file: ' + path + strSessione));
+  });
+
+}
+
+
+*/
 
  // 18/12/2018
  function getComandi(arComandi)
