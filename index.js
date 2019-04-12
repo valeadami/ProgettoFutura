@@ -194,7 +194,7 @@ function leggiSessione(path, strSessione){
 
 } 
 //prova del 12/04/2019
-function leggiSessioneNew(path, strSessione){
+/*function leggiSessioneNew(path, strSessione){
  var contents='';
  
     fs.accessSync(__dirname+ '/sessions/'+ strSessione);
@@ -202,13 +202,13 @@ function leggiSessioneNew(path, strSessione){
      if (err) {
       if (err.code==='ENOENT')
       console.log('DENTRO LEGGI SESSIONE :il file non esiste...')
-     
+     reject('si è verificato errore '+err.code)
      }
      console.log('DENTRO LEGGI SESSIONE ' +data);
     contents=data;
    });
    return contents;
-} 
+} */
 
  // 18/12/2018
  function getComandi(arComandi)
@@ -281,7 +281,7 @@ function leggiSessioneNew(path, strSessione){
    let data = '';
    let strOutput='';
   //aggiunta la sessione
-    var ss=leggiSessioneNew(__dirname +'/sessions/', sessionId); //leggiSessioneNew   leggiSessione
+    var ss=leggiSessione(__dirname +'/sessions/', sessionId); //leggiSessioneNew   leggiSessione
     if (ss===''){
         options.headers.Cookie='JSESSIONID=';
         console.log('DENTRO CALL AVA: SESSIONE VUOTA');
