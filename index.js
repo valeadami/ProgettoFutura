@@ -14,7 +14,7 @@ const https = require('https');
 /*** DIALOGFLOW FULFILLMENT */
 const {WebhookClient} = require('dialogflow-fulfillment');
 
-var controller=require('./Classi/clsControllerS3.js');
+var controller; //=require('./Classi/clsControllerS3.js')
 
 var studente;
 var carrieraStudente;
@@ -110,6 +110,7 @@ app.get('/deleteSessione', function(req, res, next) {
     bot=req.query.ava;
     console.log('Il bot  interrogato : '+bot);
     if (bot=='HEADdemo'){
+      controller=require('./Classi/clsControllerS3.js')
       console.log('tipo di controller ---->'+ typeof controller);
       
       controller.testCC().then((t)=>{
