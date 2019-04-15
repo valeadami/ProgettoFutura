@@ -363,10 +363,42 @@ function deleteSessione(path, strSessione){
     res.on('data', (chunk) => {
      console.log(`BODY: ${chunk}`);
      data += chunk;
-  
+     let comandi=[];
      let c=JSON.parse(data);
       strOutput=c.output[0].output;
       strOutput=strOutput.replace(/(<\/p>|<p>|<b>|<\/b>|<br>|<\/br>|<strong>|<\/strong>|<div>|<\/div>|<ul>|<li>|<\/ul>|<\/li>|&nbsp;|)/gi, '');
+      
+      //con i comandi
+      comandi=getComandi(c.output[0].commands);
+      if (typeof comandi!=='undefined' && comandi.length>=1) {
+        console.log('ho almeno un comando, quindi prosegui con l\' azione ' + comandi[0]);
+       
+        if(comandi[0]=='STOP'){
+
+          //CHIUDO LA CONV ED ELIMINO IL FILE 
+          if (agent.requestSource=="ACTIONS_ON_GOOGLE"){
+
+            let conv = agent.conv();
+  
+            console.log(' ---- la conversazione PRIMA ----- ' + JSON.stringify(conv));
+            conv.close(strOutput);
+            console.log(' ---- la conversazione DOPO CHIUSURA ----- ' + JSON.stringify(conv));
+            agent.add(conv);
+            deleteSessione(__dirname+'/sessions/'+sessionId); 
+            //altrimenti ritorna la strOutput
+          } else{
+            agent.add(strOutput);
+            //lo faccio anche per altre piattaforme???
+             deleteSessione(__dirname+'/sessions/'+sessionId); 
+          }
+        }
+    
+     
+     } else {
+      
+        console.log('qui ho solo la strOutput ');
+     }
+   
       agent.add(strOutput); 
       resolve(agent);
     });
