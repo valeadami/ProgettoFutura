@@ -906,9 +906,11 @@ function deleteSingoloAppelloDaPrenotare(cdsId,adId,appId,studId){ //csdId= 1009
     });
 } 
 function testCC(){
+    return new Promise(function(resolve, reject) {
     var t='sono in testCC';
     console.log('sono in testCC');
-    return t;
+    resolve(t);
+});
 }
 exports.doLogin= doLogin;
 exports.doLogout = doLogout;

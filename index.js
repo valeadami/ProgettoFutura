@@ -112,8 +112,10 @@ app.get('/deleteSessione', function(req, res, next) {
     if (bot=='HEADdemo'){
       console.log('tipo di controller ---->'+ typeof controller);
       
-      controller.doLogin();
-     
+      controller.testCC().then((t)=>{
+        console.log('sto cazzo de t '+ t);
+      });
+    
     }
     var name=req.body.queryResult.intent.name;
     //QUALSIASI INTENT RISPONDE A CALLAVA ANCHE FALLBACK
