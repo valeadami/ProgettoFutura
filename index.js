@@ -384,10 +384,12 @@ function deleteSessione(path, strSessione){
             conv.close(strOutput);
             console.log(' ---- la conversazione DOPO CHIUSURA ----- ' + JSON.stringify(conv));
             agent.add(conv);
+            resolve(agent);
             deleteSessione(__dirname+'/sessions/'+sessionId); 
             //altrimenti ritorna la strOutput
           } else{
             agent.add(strOutput);
+            resolve(agent);
             //lo faccio anche per altre piattaforme???
              deleteSessione(__dirname+'/sessions/'+sessionId); 
           }
@@ -397,10 +399,11 @@ function deleteSessione(path, strSessione){
      } else {
       
         console.log('qui ho solo la strOutput ');
+        agent.add(strOutput); 
+        resolve(agent);
      }
    
-      agent.add(strOutput); 
-      resolve(agent);
+     
     });
     res.on('end', () => {
       console.log('No more data in response.');
