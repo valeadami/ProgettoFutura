@@ -84,7 +84,18 @@ app.use(function (req, res, next) {
           res.end()
       
       })
+//15/04/2019
+app.get('/listSessione', function(req, res, next) {
+      
+  listSessione(__dirname +'/sessions/');
 
+})
+/*
+app.get('/deleteSessione', function(req, res, next) {
+      
+  listSessione(__dirname +'/sessions/');
+
+})*/
 //CHICKCHAT
  function WebhookProcessing(req, res) {
     const agent = new WebhookClient({request: req, response: res});
@@ -193,6 +204,21 @@ function leggiSessione(path, strSessione){
   return contents;
 
 } 
+//15/04/2019 questa funzione lista tutti i files che si trovano sotto la cartella sessions
+function listSessione(path){
+  //var stringa='';
+  fs.readdir(path, (err, files) => {
+  if (err) return console.log('Unable to scan directory: ' + err);
+      files.forEach(file => {
+          stringa+=file+'\n';
+      console.log('NOME DEL FILE '+file +'\n');
+     
+      });
+     // console.log('stringa '+stringa);
+     // return stringa;
+  });
+  
+}    
 //prove del 12/04/2019
 /*function leggiSessioneNew(path, strSessione){
  var contents='';
@@ -208,18 +234,18 @@ function leggiSessione(path, strSessione){
     contents=data;
    });
    return contents;
-} 
-eliminare file
+} */
+//eliminare file
 function deleteSessione(path, strSessione){
-  fs.unlink(__dirname+ '/sessions/'+ strSessione, (err) => {
+  fs.unlink(path+ strSessione, (err) => {
     if (err) throw err;
-    console.log('in deleteSessione: eliminato il file: ' + path + strSessione));
+    console.log('in deleteSessione: eliminato il file: ' + path + strSessione);
   });
 
 }
 
 
-*/
+
 
  // 18/12/2018
  function getComandi(arComandi)
