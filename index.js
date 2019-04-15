@@ -90,12 +90,14 @@ app.get('/listSessione', function(req, res, next) {
   listSessione(__dirname +'/sessions/');
 
 })
-/*
+//15/04/2019 attenzione: a te serve solo il remove singolo!!!
+
 app.get('/deleteSessione', function(req, res, next) {
       
-  listSessione(__dirname +'/sessions/');
+  res.send('ora elimino i files, poi gira di nuovo listSessione per verifica...');
+  listDeleteSessione(__dirname +'/sessions/');
 
-})*/
+})
 //CHICKCHAT
  function WebhookProcessing(req, res) {
     const agent = new WebhookClient({request: req, response: res});
@@ -219,6 +221,22 @@ function listSessione(path){
   });
   
 }    
+ //list + delete 15/04/2019
+ function listDeleteSessione(path){
+  var stringa='';
+  fs.readdir(path, (err, files) => {
+  if (err) return console.log('Unable to scan directory: ' + err);
+      files.forEach(file => {
+         
+      console.log('NOME DEL FILE DA ELIMINARE '+file +'\n');
+      deleteSessione(path, file)
+     
+      });
+     
+     
+  });
+  
+}  
 //prove del 12/04/2019
 /*function leggiSessioneNew(path, strSessione){
  var contents='';
