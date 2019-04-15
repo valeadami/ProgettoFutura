@@ -86,7 +86,7 @@ app.use(function (req, res, next) {
       })
 //15/04/2019
 app.get('/listSessione', function(req, res, next) {
-      
+  res.send('guarda la console per vedere elenco file...');
   listSessione(__dirname +'/sessions/');
 
 })
@@ -210,7 +210,7 @@ function listSessione(path){
   fs.readdir(path, (err, files) => {
   if (err) return console.log('Unable to scan directory: ' + err);
       files.forEach(file => {
-          stringa+=file+'\n';
+          //stringa+=file+'\n';
       console.log('NOME DEL FILE '+file +'\n');
      
       });
