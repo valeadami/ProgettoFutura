@@ -114,7 +114,7 @@ app.get('/deleteSessione', function(req, res, next) {
       console.log('tipo di controller ---->'+ typeof controller);
       
       controller.testCC().then((t)=>{
-        console.log('sto cazzo de t '+ t);
+        console.log('sto cazzo de t in WebhookProcessing '+ t);
       });
     
     }
@@ -370,7 +370,14 @@ function deleteSessione(path, strSessione){
         console.log('ho almeno un comando, quindi prosegui con l\' azione ' + comandi[0]);
        
         if(comandi[0]=='STOP'){
-
+         
+          
+           //per test
+            controller.testCC().then((t)=>{
+              console.log('sto cazzo de t in comando stop '+ t);
+            });
+          
+        
           //CHIUDO LA CONV ED ELIMINO IL FILE 
           if (agent.requestSource=="ACTIONS_ON_GOOGLE"){
             deleteSessione(__dirname+'/sessions/',sessionId); 
