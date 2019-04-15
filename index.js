@@ -14,7 +14,9 @@ const https = require('https');
 /*** DIALOGFLOW FULFILLMENT */
 const {WebhookClient} = require('dialogflow-fulfillment');
 
-
+var controller;
+var studente;
+var carrieraStudente;
 /** utilità */
 const fs = require("fs");
 const utf8=require('utf8');
@@ -106,6 +108,13 @@ app.get('/deleteSessione', function(req, res, next) {
     console.log('------sono su FUTURA app ----- la richiesta proviene da '+ agent.requestSource);
     bot=req.query.ava;
     console.log('Il bot  interrogato : '+bot);
+    if (bot=='HEADdemo'){
+
+       controller=require('./Classi/clsControllerS3.js');
+     /*  studente=require('./Classi/clsStudente.js');
+       carrieraStudente=require('./Classi/clsCarriera.js');*/
+       controller.testCC();
+    }
     var name=req.body.queryResult.intent.name;
     //QUALSIASI INTENT RISPONDE A CALLAVA ANCHE FALLBACK
     var displayname=req.body.queryResult.intent.displayName;
@@ -161,9 +170,9 @@ app.get('/deleteSessione', function(req, res, next) {
   //app.post('/fulfillment', appDFActions);
   app.post("/fulfillment", function (req,res){
 
-    console.log('Dialogflow Request headers: ' + JSON.stringify(req.headers));
+   // console.log('Dialogflow Request headers: ' + JSON.stringify(req.headers));
     console.log('DIALOGFLOW Request body: ' + JSON.stringify(req.body));
-    //console.log('vedo le var di sessione di Express ?? '+ req.session.id );
+  
     
     WebhookProcessing(req, res); 
   
@@ -237,22 +246,6 @@ function listSessione(path){
   });
   
 }  
-//prove del 12/04/2019
-/*function leggiSessioneNew(path, strSessione){
- var contents='';
- 
-    fs.accessSync(__dirname+ '/sessions/'+ strSessione);
-   fs.readFileSync(__dirname+'/sessions/'+ strSessione, 'utf8', (err, data) => {
-     if (err) {
-      if (err.code==='ENOENT')
-      console.log('DENTRO LEGGI SESSIONE :il file non esiste...')
-     reject('si è verificato errore '+err.code)
-     }
-     console.log('DENTRO LEGGI SESSIONE ' +data);
-    contents=data;
-   });
-   return contents;
-} */
 //eliminare file
 function deleteSessione(path, strSessione){
   fs.unlink(path+ strSessione, (err) => {
@@ -261,7 +254,7 @@ function deleteSessione(path, strSessione){
   });
 
 }
-
+/**********/ 
 
 
 
