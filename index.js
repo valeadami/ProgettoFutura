@@ -111,9 +111,10 @@ app.get('/deleteSessione', function(req, res, next) {
     if (bot=='HEADdemo'){
 
        controller=require('./Classi/clsControllerS3.js');
+       var s=controller.testCC();
      /*  studente=require('./Classi/clsStudente.js');
        carrieraStudente=require('./Classi/clsCarriera.js');
-       controller.testCC();*/
+      */
     }
     var name=req.body.queryResult.intent.name;
     //QUALSIASI INTENT RISPONDE A CALLAVA ANCHE FALLBACK
