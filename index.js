@@ -385,13 +385,13 @@ function deleteSessione(path, strSessione){
             console.log(' ---- la conversazione DOPO CHIUSURA ----- ' + JSON.stringify(conv));
             agent.add(conv);
            
-            deleteSessione(__dirname+'/sessions/'+sessionId); 
+            deleteSessione(__dirname+'/sessions/',sessionId); 
             //altrimenti ritorna la strOutput
           } else{
             agent.add(strOutput);
            
             //lo faccio anche per altre piattaforme???
-             deleteSessione(__dirname+'/sessions/'+sessionId); 
+             deleteSessione(__dirname+'/sessions/',sessionId); 
           }
          
         }
