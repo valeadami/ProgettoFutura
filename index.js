@@ -377,15 +377,15 @@ function deleteSessione(path, strSessione){
 
           //CHIUDO LA CONV ED ELIMINO IL FILE 
           if (agent.requestSource=="ACTIONS_ON_GOOGLE"){
-
+            deleteSessione(__dirname+'/sessions/',sessionId); 
             let conv = agent.conv();
   
             console.log(' ---- la conversazione PRIMA ----- ' + JSON.stringify(conv));
             conv.close(strOutput);
             console.log(' ---- la conversazione DOPO CHIUSURA ----- ' + JSON.stringify(conv));
             agent.add(conv);
+           //iera qua
            
-            deleteSessione(__dirname+'/sessions/',sessionId); 
             //altrimenti ritorna la strOutput
           } else{
             agent.add(strOutput);
