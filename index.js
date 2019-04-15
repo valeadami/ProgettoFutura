@@ -14,7 +14,7 @@ const https = require('https');
 /*** DIALOGFLOW FULFILLMENT */
 const {WebhookClient} = require('dialogflow-fulfillment');
 
-var controller;
+var controller=require('./Classi/clsControllerS3.js');
 var studente;
 var carrieraStudente;
 /** utilità */
@@ -110,11 +110,9 @@ app.get('/deleteSessione', function(req, res, next) {
     console.log('Il bot  interrogato : '+bot);
     if (bot=='HEADdemo'){
 
-       controller=require('./Classi/clsControllerS3.js');
+      
        var s=controller.testCC();
-     /*  studente=require('./Classi/clsStudente.js');
-       carrieraStudente=require('./Classi/clsCarriera.js');
-      */
+     
     }
     var name=req.body.queryResult.intent.name;
     //QUALSIASI INTENT RISPONDE A CALLAVA ANCHE FALLBACK
