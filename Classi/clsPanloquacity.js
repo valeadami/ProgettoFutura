@@ -10,6 +10,10 @@ PROPRIETA':
 */
 /** PROPRIETA */
 const querystring = require('querystring');
+const fs = require("fs");
+const utf8=require('utf8');
+const https = require('https');
+
 const nomeClasse='clsPanloquacity';
 function Log(){
 

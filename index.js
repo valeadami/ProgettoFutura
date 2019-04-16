@@ -5,12 +5,12 @@ const bodyParser = require("body-parser");
 const session = require('express-session');
 const clsPLQ=require('./Classi/clsPanloquacity.js')
 /*********** */
-const request = require('request');
+//const request = require('request');
 
-const querystring = require('querystring');
+/*const querystring = require('querystring');
 const parseurl = require('parseurl');
 const path = require("path");
-const https = require('https');
+const https = require('https');*/
 
 /*** DIALOGFLOW FULFILLMENT */
 const {WebhookClient} = require('dialogflow-fulfillment');
@@ -20,9 +20,10 @@ var controller; //=require('./Classi/clsControllerS3.js')
 var studente;
 var carrieraStudente;
 
-/** utilità */
+/** utilità 
 const fs = require("fs");
-const utf8=require('utf8');
+const utf8=require('utf8');*/
+const fs = require("fs");
 //file di configurazione
 //const env = require('node-env-file');
 //env(__dirname + '/.env');
@@ -55,6 +56,7 @@ app.use(function (req, res, next) {
   
     next();
   })
+  /*
   postData = querystring.stringify({
     'searchText': 'ciao',
     'user':'',
@@ -62,7 +64,7 @@ app.use(function (req, res, next) {
     'ava':'FarmaInfoBot'
     
   });
-  
+  */
 
     //PER TEST
     app.get('/testSessione', function(req, res, next) {
@@ -77,6 +79,7 @@ app.use(function (req, res, next) {
       
       })
 //15/04/2019
+
 app.get('/listSessione', function(req, res, next) {
   res.send('guarda la console per vedere elenco file...');
   listSessione(__dirname +'/sessions/');
@@ -176,4 +179,41 @@ app.get('/deleteSessione', function(req, res, next) {
 app.listen(process.env.PORT || 3000, function() {
     console.log("App started on port " + process.env.PORT );
   });
-
+//PER VERIFICHE DEI FILES DI SESSIONE
+  function listSessione(path){
+    //var stringa='';
+    fs.readdir(path, (err, files) => {
+    if (err) return console.log('Unable to scan directory: ' + err);
+        files.forEach(file => {
+            //stringa+=file+'\n';
+        console.log('NOME DEL FILE '+file +'\n');
+       
+        });
+       // console.log('stringa '+stringa);
+       // return stringa;
+    });
+    
+  } 
+  function listDeleteSessione(path){
+    
+    fs.readdir(path, (err, files) => {
+    if (err) return console.log('Unable to scan directory: ' + err);
+        files.forEach(file => {
+           
+        console.log('NOME DEL FILE DA ELIMINARE '+file +'\n');
+        deleteSessione(path, file)
+       
+        });
+       
+       
+    });
+    
+  } 
+  //eliminare file
+function deleteSessione(path, strSessione){
+    fs.unlink(path+ strSessione, (err) => {
+      if (err) throw err;
+      console.log('in deleteSessione: eliminato il file: ' + path + strSessione);
+    });
+  
+  } 
