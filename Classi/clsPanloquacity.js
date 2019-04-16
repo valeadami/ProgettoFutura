@@ -13,21 +13,10 @@ const querystring = require('querystring');
 const fs = require("fs");
 const utf8=require('utf8');
 const https = require('https');
-//var bot='ChitChat';
-const dirname='.' //metto qui il nome della cartella di Heroku
-//costruttore
-function Panloquacity(bot){
 
-  this.bot=bot;
-}
-/*************** */
-const nomeClasse='clsPanloquacity';
+const dirname='.' //metto qui la root, funge, prima era '/app'
 
 
-function LogPD(){
-
-  console.log('sono nella classe Plq  ');
-}
 const options = {
   //modifica del 12/11/2018 : cambiato porta per supportare HTTPS
   
@@ -296,7 +285,6 @@ function deleteSessione(path, strSessione){
 }
 //exports.callAVA= callAVA;
 exports.callAVA=callAVA;
-exports.nomeClasse=nomeClasse;
-exports.LogPD=LogPD;
+
 //exports.Panloquacity=Panloquacity;
 //module.exports=Panloquacity;
