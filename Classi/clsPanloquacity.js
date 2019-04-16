@@ -9,6 +9,7 @@ PROPRIETA':
 -GETCOMANDI: funzione per ottenere i comandi da Plq, torna un array di stringhe composto da almeno un elemento, due per comando multimodale e/o immagine
 */
 /** PROPRIETA */
+const querystring = require('querystring');
 const nomeClasse='clsPanloquacity';
 function Log(){
 
@@ -71,6 +72,7 @@ function getComandi(arComandi)
     }
    
 } 
+
 postData = querystring.stringify({
   'searchText': 'ciao',
   'user':'',
