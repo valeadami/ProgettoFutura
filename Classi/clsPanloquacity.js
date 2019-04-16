@@ -14,6 +14,7 @@ const fs = require("fs");
 const utf8=require('utf8');
 const https = require('https');
 var bot='ChitChat';
+const dirname='/app/'
 //costruttore
 function Panloquacity(bot){
 
@@ -123,7 +124,7 @@ function callAVA(agent) {
     let data = '';
     let strOutput = '';
     //aggiunta la sessione
-    var ss = leggiSessione(__dirname + '/sessions/', sessionId);
+    var ss = leggiSessione(dirname + '/sessions/', sessionId);
     if (ss === '') {
       options.headers.Cookie = 'JSESSIONID=';
       console.log('DENTRO CALL AVA: SESSIONE VUOTA');
@@ -144,7 +145,7 @@ function callAVA(agent) {
 
         // scriviSessione(__dirname+'/sessions/',sess, y[1]); 
 
-        scriviSessione(__dirname + '/sessions/', sessionId, y[1]);
+        scriviSessione(dirname + '/sessions/', sessionId, y[1]);
       }
       res.setEncoding('utf8');
       res.on('data', (chunk) => {
@@ -168,7 +169,7 @@ function callAVA(agent) {
 
             //CHIUDO LA CONV ED ELIMINO IL FILE 
             if (agent.requestSource == "ACTIONS_ON_GOOGLE") {
-              deleteSessione(__dirname + '/sessions/', sessionId);
+              deleteSessione(dirname + '/sessions/', sessionId);
               let conv = agent.conv();
 
               console.log(' ---- la conversazione PRIMA ----- ' + JSON.stringify(conv));
@@ -180,7 +181,7 @@ function callAVA(agent) {
               agent.add(strOutput);
 
             
-              deleteSessione(__dirname + '/sessions/', sessionId);
+              deleteSessione(dirname + '/sessions/', sessionId);
             }
 
           }

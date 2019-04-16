@@ -69,7 +69,7 @@ app.use(function (req, res, next) {
     //PER TEST
     app.get('/testSessione', function(req, res, next) {
       
-        clsPLQ.Log();
+        
           res.setHeader('Content-Type', 'text/html')
           res.write("sono nella root ");
           res.write('<p>views: ' + req.session.views + '</p>')
