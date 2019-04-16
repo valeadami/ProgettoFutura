@@ -56,15 +56,7 @@ app.use(function (req, res, next) {
   
     next();
   })
-  /*
-  postData = querystring.stringify({
-    'searchText': 'ciao',
-    'user':'',
-    'pwd':'',
-    'ava':'FarmaInfoBot'
-    
-  });
-  */
+
 
     //PER TEST
     app.get('/testSessione', function(req, res, next) {
@@ -104,7 +96,7 @@ app.get('/deleteSessione', function(req, res, next) {
     console.log('Il bot  interrogato : '+bot);
 
     //15/04/2019 questo funziona
-   /* if (bot=='HEADdemo'){
+    if (bot=='HEADdemo'){
       controller=require('./Classi/clsControllerS3.js')
       console.log('tipo di controller ---->'+ typeof controller);
       
@@ -112,7 +104,7 @@ app.get('/deleteSessione', function(req, res, next) {
         console.log('sto cazzo de t in WebhookProcessing '+ t);
       });
     
-    }*/
+    }
     var name=req.body.queryResult.intent.name;
     //QUALSIASI INTENT RISPONDE A CALLAVA ANCHE FALLBACK
     var displayname=req.body.queryResult.intent.displayName;
@@ -122,20 +114,14 @@ app.get('/deleteSessione', function(req, res, next) {
     //recupero la sessionId della conversazione
     
     agent.sessionId=req.body.session.split('/').pop();
-    /********* prova del 16/04/2019 */
+    /********* modifica del 16/04/2019: aggiungo il bot come parametro per passarlo alla clsPlq */
     agent.parameters['bot']=bot;
     if (agent.parameters['bot']){
         console.log('************* se vedi questo ok '+ agent.parameters['bot']);
     }
     
     /************* */
-  //assegno all'agente il parametro di ricerca da invare sotto forma di searchText a Panloquacity
-  /*  agent.parameters['Command']=req.body.queryResult.parameters.Command;
-    if (req.body.queryResult.parameters.esame){
-
-      console.log(' ho esame =' + req.body.queryResult.parameters.esame);
-      agent.parameters['esame']=req.body.queryResult.parameters.esame;
-    }*/
+  
     //fulfillment text
     agent.fulfillmentText=req.body.queryResult.fulfillmentText;
     console.log('----> fulfillment text =' +agent.fulfillmentText);
