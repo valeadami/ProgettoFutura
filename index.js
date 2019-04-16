@@ -122,7 +122,13 @@ app.get('/deleteSessione', function(req, res, next) {
     //recupero la sessionId della conversazione
     
     agent.sessionId=req.body.session.split('/').pop();
-   // agent.parameters['bot']=bot;
+    /********* prova del 16/04/2019 */
+    agent.parameters['bot']=bot;
+    if (agent.parameters['bot']){
+        console.log('************* se vedi questo ok '+ agent.parameters['bot']);
+    }
+    
+    /************* */
   //assegno all'agente il parametro di ricerca da invare sotto forma di searchText a Panloquacity
   /*  agent.parameters['Command']=req.body.queryResult.parameters.Command;
     if (req.body.queryResult.parameters.esame){

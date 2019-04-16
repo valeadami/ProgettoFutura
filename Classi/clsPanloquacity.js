@@ -14,7 +14,7 @@ const fs = require("fs");
 const utf8=require('utf8');
 const https = require('https');
 var bot='ChitChat';
-const dirname='/app/'
+const dirname='/app' //metto qui il nome della cartella di Heroku
 //costruttore
 function Panloquacity(bot){
 
