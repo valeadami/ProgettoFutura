@@ -85,7 +85,7 @@ postData = querystring.stringify({
   
 });
 //callAva di index.js del progetto Futura
-function callAVA(agent) {
+function callAVA(agent,bot) {
   return new Promise((resolve, reject) => {
  
     let strRicerca='';
