@@ -287,7 +287,7 @@ function deleteSessione(path, strSessione){
 
 }
 //exports.callAVA= callAVA;
-exports=callAVA;
+exports.callAVA=callAVA;
 exports.nomeClasse=nomeClasse;
 exports.LogPD=LogPD;
 //exports.Panloquacity=Panloquacity;
