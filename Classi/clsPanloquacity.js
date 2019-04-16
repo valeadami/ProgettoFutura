@@ -14,10 +14,16 @@ const fs = require("fs");
 const utf8=require('utf8');
 const https = require('https');
 
+//costruttore
+function Panloquacity(bot){
+
+  this.bot=bot;
+}
+/*************** */
 const nomeClasse='clsPanloquacity';
 function Log(){
 
-  console.log('sono nella classe Plq');
+  console.log('sono nella classe Plq con il bot '+this.bot);
 }
 const options = {
   //modifica del 12/11/2018 : cambiato porta per supportare HTTPS
@@ -29,13 +35,14 @@ const options = {
  method: 'POST', 
  headers: {
    'Content-Type': 'application/json', 
-   'Cookie':'' // +avaSession 
+   'Cookie':'' 
  }
 };
 var responseFromPlq={
     'strOutput':'',
     'cmd':[]
   }
+ 
 function getComandi(arComandi)
   {
 
@@ -85,7 +92,7 @@ postData = querystring.stringify({
   
 });
 //callAva di index.js del progetto Futura
-function callAVA(agent,bot) {
+function callAVA(agent) {
   return new Promise((resolve, reject) => {
  
     let strRicerca='';
@@ -284,3 +291,4 @@ function deleteSessione(path, strSessione){
 exports.callAVA= callAVA;
 exports.nomeClasse=nomeClasse;
 exports.Log=Log;
+exports.Panloquacity=Panloquacity;
