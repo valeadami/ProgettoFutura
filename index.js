@@ -100,7 +100,7 @@ app.get('/deleteSessione', function(req, res, next) {
     //copiato codice da progetto api
     console.log('------sono su FUTURA app ----- la richiesta proviene da '+ agent.requestSource);
     bot=req.query.ava;
-    var plq=new clsPLQ(bot);
+    var plq=new Panloquacity(bot);
     plq.Log();
     console.log('Il bot  interrogato : '+bot);
 
