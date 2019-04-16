@@ -13,7 +13,7 @@ const querystring = require('querystring');
 const fs = require("fs");
 const utf8=require('utf8');
 const https = require('https');
-var bot='ChitChat';
+//var bot='ChitChat';
 const dirname='/app' //metto qui il nome della cartella di Heroku
 //costruttore
 function Panloquacity(bot){
@@ -103,6 +103,13 @@ function callAVA(agent) {
     let sessionId = agent.sessionId;
     console.log('dentro call ava il mio session id ' + sessionId);
 
+    /* modifica del 16/04/2019 */
+    var bot='';
+    if (agent.parameters.bot){
+
+      bot=agent.parameters.bot;
+      console.log('DENTRO CALLAVA IL BOT DAL PARAMS '+ bot);
+    }
     if (agent.queryText) {
       //strRicerca=agent.queryText;
       strRicerca = utf8.encode(agent.queryText);
