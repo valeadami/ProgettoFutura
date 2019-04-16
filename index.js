@@ -96,7 +96,7 @@ app.get('/deleteSessione', function(req, res, next) {
     console.log('Il bot  interrogato : '+bot);
 
     //15/04/2019 questo funziona
-    if (bot=='HEADdemo'){
+   /* if (bot=='HEADdemo'){
       controller=require('./Classi/clsControllerS3.js')
       console.log('tipo di controller ---->'+ typeof controller);
       
@@ -104,7 +104,7 @@ app.get('/deleteSessione', function(req, res, next) {
         console.log('sto cazzo de t in WebhookProcessing '+ t);
       });
     
-    }
+    }*/
     var name=req.body.queryResult.intent.name;
     //QUALSIASI INTENT RISPONDE A CALLAVA ANCHE FALLBACK
     var displayname=req.body.queryResult.intent.displayName;
