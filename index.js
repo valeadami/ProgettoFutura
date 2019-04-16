@@ -100,8 +100,7 @@ app.get('/deleteSessione', function(req, res, next) {
     //copiato codice da progetto api
     console.log('------sono su FUTURA app ----- la richiesta proviene da '+ agent.requestSource);
     bot=req.query.ava;
-    var plq=new Panloquacity(bot);
-    plq.Log();
+   
     console.log('Il bot  interrogato : '+bot);
 
     //15/04/2019 questo funziona
@@ -123,6 +122,7 @@ app.get('/deleteSessione', function(req, res, next) {
     //recupero la sessionId della conversazione
     
     agent.sessionId=req.body.session.split('/').pop();
+   // agent.parameters['bot']=bot;
   //assegno all'agente il parametro di ricerca da invare sotto forma di searchText a Panloquacity
   /*  agent.parameters['Command']=req.body.queryResult.parameters.Command;
     if (req.body.queryResult.parameters.esame){
@@ -162,7 +162,7 @@ app.get('/deleteSessione', function(req, res, next) {
         console.log('funzione callAVANEW per tutto il resto');
       }*/
       //a prescindere,
-      intentMap.set(displayname, plq.callAVA); //clsPLQ.callAVA
+      intentMap.set(displayname, clsPLQ.callAVA); //clsPLQ.callAVA
       agent.handleRequest(intentMap);
   }
   

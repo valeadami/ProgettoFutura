@@ -13,7 +13,7 @@ const querystring = require('querystring');
 const fs = require("fs");
 const utf8=require('utf8');
 const https = require('https');
-
+var bot='ChitChat';
 //costruttore
 function Panloquacity(bot){
 
@@ -21,9 +21,11 @@ function Panloquacity(bot){
 }
 /*************** */
 const nomeClasse='clsPanloquacity';
-function Log(){
 
-  console.log('sono nella classe Plq con il bot '+this.bot);
+
+function LogPD(){
+
+  console.log('sono nella classe Plq  ');
 }
 const options = {
   //modifica del 12/11/2018 : cambiato porta per supportare HTTPS
@@ -93,125 +95,121 @@ postData = querystring.stringify({
 });
 //callAva di index.js del progetto Futura
 function callAVA(agent) {
+ 
   return new Promise((resolve, reject) => {
- 
-    let strRicerca='';
+
+    let strRicerca = '';
     let sessionId = agent.sessionId;
-    console.log('dentro call ava il mio session id '+sessionId);
-    
-    if (agent.queryText){
+    console.log('dentro call ava il mio session id ' + sessionId);
+
+    if (agent.queryText) {
       //strRicerca=agent.queryText;
-       strRicerca=utf8.encode(agent.queryText);
-        console.log('FALLBACK in CAllAva valore di strRicerca ' + strRicerca); 
-    } 
-    if (agent.parameters.searchText){
-        strRicerca= utf8.encode(agent.parameters.searchText); 
-        console.log('***** in CAllAva valore di strRicerca ' + strRicerca);
+      strRicerca = utf8.encode(agent.queryText);
+      console.log('FALLBACK in CAllAva valore di strRicerca ' + strRicerca);
     }
-  
-   
-  //var str= utf8.encode(strRicerca); 
-  if (strRicerca) {
-    strRicerca=querystring.escape(strRicerca); 
-    options.path+=strRicerca+'&user=&pwd=&ava='+bot;
-    console.log(' valore di options.path INIZIO = '+ options.path);
-  }
- 
-   let data = '';
-   let strOutput='';
-  //aggiunta la sessione
-    var ss=leggiSessione(__dirname +'/sessions/', sessionId); 
-    if (ss===''){
-        options.headers.Cookie='JSESSIONID=';
-        console.log('DENTRO CALL AVA: SESSIONE VUOTA');
-    }else {
-        options.headers.Cookie='JSESSIONID='+ss;
-        console.log('DENTRO CALL AVA:  HO LA SESSIONE + JSESSIONID');
+    if (agent.parameters.searchText) {
+      strRicerca = utf8.encode(agent.parameters.searchText);
+      console.log('***** in CAllAva valore di strRicerca ' + strRicerca);
+    }
+
+
+    //var str= utf8.encode(strRicerca); 
+    if (strRicerca) {
+      strRicerca = querystring.escape(strRicerca);
+      options.path += strRicerca + '&user=&pwd=&ava=' + bot;
+      console.log(' valore di options.path INIZIO = ' + options.path);
+    }
+
+    let data = '';
+    let strOutput = '';
+    //aggiunta la sessione
+    var ss = leggiSessione(__dirname + '/sessions/', sessionId);
+    if (ss === '') {
+      options.headers.Cookie = 'JSESSIONID=';
+      console.log('DENTRO CALL AVA: SESSIONE VUOTA');
+    } else {
+      options.headers.Cookie = 'JSESSIONID=' + ss;
+      console.log('DENTRO CALL AVA:  HO LA SESSIONE + JSESSIONID');
     }
     const req = https.request(options, (res) => {
-    console.log(`STATUS DELLA RISPOSTA: ${res.statusCode}`);
-    console.log(`HEADERS DELLA RISPOSTA: ${JSON.stringify(res.headers)}`);
+      console.log(`STATUS DELLA RISPOSTA: ${res.statusCode}`);
+      console.log(`HEADERS DELLA RISPOSTA: ${JSON.stringify(res.headers)}`);
 
-    //aggiunta la sessione
-    if (res.headers["set-cookie"]){
+      //aggiunta la sessione
+      if (res.headers["set-cookie"]) {
 
         var x = res.headers["set-cookie"].toString();
-        var arr=x.split(';')
-        var y=arr[0].split('=');
-        
-       // scriviSessione(__dirname+'/sessions/',sess, y[1]); 
-       
-       scriviSessione(__dirname+'/sessions/',sessionId, y[1]); 
-      } 
-    res.setEncoding('utf8');
-    res.on('data', (chunk) => {
-     console.log(`BODY: ${chunk}`);
-     data += chunk;
-     let comandi=[];
-     let c=JSON.parse(data);
-      strOutput=c.output[0].output;
-      strOutput=strOutput.replace(/(<\/p>|<p>|<b>|<\/b>|<br>|<\/br>|<strong>|<\/strong>|<div>|<\/div>|<ul>|<li>|<\/ul>|<\/li>|&nbsp;|)/gi, '');
-      
-      //con i comandi
-      comandi=getComandi(c.output[0].commands);
-      if (typeof comandi!=='undefined' && comandi.length>=1) {
-        console.log('ho almeno un comando, quindi prosegui con l\' azione ' + comandi[0]);
-       
-        if(comandi[0]=='STOP'){
-         
+        var arr = x.split(';')
+        var y = arr[0].split('=');
+
+        // scriviSessione(__dirname+'/sessions/',sess, y[1]); 
+
+        scriviSessione(__dirname + '/sessions/', sessionId, y[1]);
+      }
+      res.setEncoding('utf8');
+      res.on('data', (chunk) => {
+        console.log(`BODY: ${chunk}`);
+        data += chunk;
+        let comandi = [];
+        let c = JSON.parse(data);
+        strOutput = c.output[0].output;
+        strOutput = strOutput.replace(/(<\/p>|<p>|<b>|<\/b>|<br>|<\/br>|<strong>|<\/strong>|<div>|<\/div>|<ul>|<li>|<\/ul>|<\/li>|&nbsp;|)/gi, '');
+
+        //con i comandi
+        comandi = getComandi(c.output[0].commands);
+        if (typeof comandi !== 'undefined' && comandi.length >= 1) {
+          console.log('ho almeno un comando, quindi prosegui con l\' azione ' + comandi[0]);
+
+          if (comandi[0] == 'STOP') {
+
+
+            //per test
           
-           //per test
-            /*controller.testCC().then((t)=>{
-              console.log('sto cazzo de t in comando stop '+ t);
-            });
-          */
-        
-          //CHIUDO LA CONV ED ELIMINO IL FILE 
-          if (agent.requestSource=="ACTIONS_ON_GOOGLE"){
-            deleteSessione(__dirname+'/sessions/',sessionId); 
-            let conv = agent.conv();
-  
-            console.log(' ---- la conversazione PRIMA ----- ' + JSON.stringify(conv));
-            conv.close(strOutput);
-            console.log(' ---- la conversazione DOPO CHIUSURA ----- ' + JSON.stringify(conv));
-            agent.add(conv);
-           //iera qua
+
+            //CHIUDO LA CONV ED ELIMINO IL FILE 
+            if (agent.requestSource == "ACTIONS_ON_GOOGLE") {
+              deleteSessione(__dirname + '/sessions/', sessionId);
+              let conv = agent.conv();
+
+              console.log(' ---- la conversazione PRIMA ----- ' + JSON.stringify(conv));
+              conv.close(strOutput);
+              console.log(' ---- la conversazione DOPO CHIUSURA ----- ' + JSON.stringify(conv));
+              agent.add(conv);
            
-            //altrimenti ritorna la strOutput
-          } else{
-            agent.add(strOutput);
-           
-            //lo faccio anche per altre piattaforme???
-             deleteSessione(__dirname+'/sessions/',sessionId); 
+            } else {
+              agent.add(strOutput);
+
+            
+              deleteSessione(__dirname + '/sessions/', sessionId);
+            }
+
           }
-         
+
+
+        } else {
+
+          console.log('qui ho solo la strOutput ');
+          agent.add(strOutput);
+
         }
-    
-     
-     } else {
-      
-        console.log('qui ho solo la strOutput ');
-        agent.add(strOutput); 
-       
-     }
-     resolve(agent);
-     
-    });
-    res.on('end', () => {
-      console.log('No more data in response.');
-      options.path='/AVA/rest/searchService/search_2?searchText=';      
-      console.log('valore di options.path FINE ' +  options.path);
- 
-    });
-  });
-   req.on('error', (e) => {
-   console.error(`problem with request: ${e.message}`);
-   strOutput="si è verificato errore " + e.message;
+        resolve(agent);
 
-  });
+      });
+      res.on('end', () => {
+        console.log('No more data in response.');
+        options.path = '/AVA/rest/searchService/search_2?searchText=';
+        console.log('valore di options.path FINE ' + options.path);
 
-   req.write(postData);
-  req.end();
+      });
+    });
+    req.on('error', (e) => {
+      console.error(`problem with request: ${e.message}`);
+      strOutput = "si è verificato errore " + e.message;
+
+    });
+
+    req.write(postData);
+    req.end();
   });
  }
 
@@ -288,7 +286,9 @@ function deleteSessione(path, strSessione){
   });
 
 }
-exports.callAVA= callAVA;
+//exports.callAVA= callAVA;
+exports=callAVA;
 exports.nomeClasse=nomeClasse;
-exports.Log=Log;
-exports.Panloquacity=Panloquacity;
+exports.LogPD=LogPD;
+//exports.Panloquacity=Panloquacity;
+//module.exports=Panloquacity;
