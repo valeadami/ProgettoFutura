@@ -94,6 +94,7 @@ function getComandi(arComandi)
            
            //comandi=arComandi;
            temp=comandi[0].toString();
+           console.log('sono in getComandi, caso (1), temp = '+temp);
            //è una stringa? Se si contiene il carattere "="
            var pos = temp.indexOf("=");
            if (pos >- 1) {
@@ -102,6 +103,7 @@ function getComandi(arComandi)
             temp=temp.split("=");
             console.log('valore di temp[1]= ' +temp[1]);
             arComandi[0]=temp[1];
+            console.log('arComandi[0]= '+arComandi[0]);
             comandi=arComandi;
            }
            break;
@@ -109,6 +111,7 @@ function getComandi(arComandi)
          case 2:
          //caso 2: ho due comandi, stop e img=path image, quindi devo scomporre comandi[1] 
             temp=arComandi[1].toString();
+            console.log('sono in getComandi, caso (2), temp = '+temp);
            //temp=img=https.....
            //splitto temp in un array con due elementi divisi da uguale
            temp=temp.split("=");
