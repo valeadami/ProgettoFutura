@@ -242,6 +242,9 @@ function callAVA(agent) {
               deleteSessione(dirname + '/sessions/', sessionId);
             }
 
+          }else{
+            console.log('comando immagine o altro comando: torno solo output')
+            agent.add(strOutput);
           }
 
 
