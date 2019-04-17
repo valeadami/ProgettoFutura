@@ -218,8 +218,8 @@ function callAVA(agent) {
         comandi = getComandi(c.output[0].commands);
         if (typeof comandi !== 'undefined' && comandi.length >= 1) {
           console.log('ho almeno un comando, quindi prosegui con l\' azione ' + comandi[0]);
-
-          if (comandi[0] == 'STOP') {
+//controllo del 17/04/2019 con comando multi, ho sia lo stop che immagine, quindi la risposta viene ripetuta 2 volte
+          if (comandi[0] == 'STOP' && typeof comandi[1] == 'undefined') {
             //per test
     
             //CHIUDO LA CONV ED ELIMINO IL FILE 
