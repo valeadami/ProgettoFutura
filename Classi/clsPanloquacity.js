@@ -216,10 +216,10 @@ function callAVA(agent) {
 
         //con i comandi
         comandi = getComandi(c.output[0].commands);
-        for (var i=0;i<comandi.length;i++)
+      /*  for (var i=0;i<comandi.length;i++)
         {
           console.log('sti cazzi de comandi '+ comandi[i] +'\n');
-        }
+        }*/
         //modifica del 17/04/2019
         //distinguo il caso in cui ho 1 solo comando da quello in cui i comandi sono 2 o più
         if (typeof comandi !== 'undefined' && comandi.length== 1) { //tolto >, in origine  comandi.length >=1
@@ -247,7 +247,8 @@ function callAVA(agent) {
                 agent.add('sono in getInizializzazione');
               break;*/
               default:
-                agent.add('sono nel default quindi img');
+                agent.add(strOutput);
+                console.log('sono nel default quindi img')
               break;
             }
         /* //OLD prima del 17/04/2019
