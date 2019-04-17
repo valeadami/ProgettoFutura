@@ -118,7 +118,7 @@ function getComandi(arComandi)
            console.log('valore di temp[1]= ' +temp[1]);
            arComandi[1]=temp[1];
            comandi=arComandi;
-
+           console.log('comandi0='+comandi[0]+', comandi1='+comandi[1]);
            //scompongo arComandi[1]
            break;
 
