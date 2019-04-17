@@ -16,9 +16,9 @@ const https = require('https');*/
 const {WebhookClient} = require('dialogflow-fulfillment');
 //15/04/2019: se metto le variabili globali, poi posso caricare dinamicamente i moduli
 // a seconda del bot utilizzato
-var controller; //=require('./Classi/clsControllerS3.js')
+/*var controller; 
 var studente;
-var carrieraStudente;
+var carrieraStudente;*/
 
 /** utilità 
 const fs = require("fs");
@@ -96,15 +96,15 @@ app.get('/deleteSessione', function(req, res, next) {
     console.log('Il bot  interrogato : '+bot);
 
     //15/04/2019 questo funziona
-    if (bot=='HEADdemo'|| bot=='HEAD'){
+    /* if (bot=='HEADdemo'|| bot=='HEAD'){
       controller=require('./Classi/clsControllerS3.js')
       console.log('sono su HEADdemo o HEAD, con controller ---->'+ typeof controller);
       
-    /*  controller.testCC().then((t)=>{
+     controller.testCC().then((t)=>{
         console.log('sto cazzo de t in WebhookProcessing '+ t);
-      });*/
+      });
     
-    }
+    }*/
     var name=req.body.queryResult.intent.name;
     //QUALSIASI INTENT RISPONDE A CALLAVA ANCHE FALLBACK
     var displayname=req.body.queryResult.intent.displayName;

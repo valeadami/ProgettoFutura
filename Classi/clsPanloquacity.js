@@ -15,7 +15,7 @@ const utf8=require('utf8');
 const https = require('https');
 
 const dirname='.' //metto qui la root, funge, prima era '/app'
-
+var controller=require('./clsControllerS3.js'); //
 
 const options = {
   //modifica del 12/11/2018 : cambiato porta per supportare HTTPS
