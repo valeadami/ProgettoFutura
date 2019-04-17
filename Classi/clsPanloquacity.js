@@ -216,48 +216,84 @@ function callAVA(agent) {
 
         //con i comandi
         comandi = getComandi(c.output[0].commands);
-        if (typeof comandi !== 'undefined' && comandi.length >= 1) {
-          console.log('ho almeno un comando, quindi prosegui con l\' azione ' + comandi[0]);
-//controllo del 17/04/2019 con comando multi, ho sia lo stop che immagine, quindi la risposta viene ripetuta 2 volte
-          if (comandi[0] == 'STOP') {
-            //per test
-    
-            //CHIUDO LA CONV ED ELIMINO IL FILE 
-            if (agent.requestSource == "ACTIONS_ON_GOOGLE") {
-              deleteSessione(dirname + '/sessions/', sessionId);
-              let conv = agent.conv();
-
-              console.log(' ---- la conversazione PRIMA ----- ' + JSON.stringify(conv));
-              conv.close(strOutput);
-              console.log(' ---- la conversazione DOPO CHIUSURA ----- ' + JSON.stringify(conv));
-              agent.add(conv);
-           
-            } else {
-              agent.add(strOutput);
-
-            
-              deleteSessione(dirname + '/sessions/', sessionId);
+        for (var i=0;i<comandi.length;i++)
+        {
+          console.log('sti cazzi de comandi '+ comandi[i] +'\n');
+        }
+        //modifica del 17/04/2019
+        //distinguo il caso in cui ho 1 solo comando da quello in cui i comandi sono 2 o più
+        if (typeof comandi !== 'undefined' && comandi.length== 1) { //tolto >, in origine  comandi.length >=1
+            var cmd=comandi[0]; //cmd è una stringa che contiene ad esempio STOP, getInizializzazione, https://www.imag.jpeg
+            console.log('ho  un comando, quindi prosegui con l\' azione ' + comandi[0]);
+            //controllo del 17/04/2019 con comando multi, ho sia lo stop che immagine, quindi la risposta viene ripetuta 2 volte
+            switch (cmd){
+              case 'STOP':
+                if (agent.requestSource == "ACTIONS_ON_GOOGLE") {
+                  deleteSessione(dirname + '/sessions/', sessionId);
+                  let conv = agent.conv();
+                  console.log(' ---- la conversazione PRIMA ----- ' + JSON.stringify(conv));
+                  conv.close(strOutput);
+                  console.log(' ---- la conversazione DOPO CHIUSURA ----- ' + JSON.stringify(conv));
+                  agent.add(conv);
+              
+                } else {
+                  //canale chat e altro
+                  agent.add(strOutput);
+                  deleteSessione(dirname + '/sessions/', sessionId);
+                }
+              break;
+  //questo non va perchè viene dall'intent dell'agente, non da PLQ
+            /* case 'getInizializzazione':
+                agent.add('sono in getInizializzazione');
+              break;*/
+              default:
+                agent.add('sono nel default quindi img');
+              break;
             }
+        /* //OLD prima del 17/04/2019
+          if (comandi[0] == 'STOP') {
+              //per test
+      
+              //CHIUDO LA CONV ED ELIMINO IL FILE 
+              if (agent.requestSource == "ACTIONS_ON_GOOGLE") {
+                deleteSessione(dirname + '/sessions/', sessionId);
+                let conv = agent.conv();
 
-         /* }else if (typeof comandi[1] !== 'undefined' && comandi[0]=="STOP"){
-            console.log('+++++++++ stoppo la conversazione e mando link immagine')
-            agent.add(strOutput);
-           */
-          }else{
-            console.log('comando immagine o altro comando: torno solo output')
-            agent.add(strOutput);
-          }
-          /*
+                console.log(' ---- la conversazione PRIMA ----- ' + JSON.stringify(conv));
+                conv.close(strOutput);
+                console.log(' ---- la conversazione DOPO CHIUSURA ----- ' + JSON.stringify(conv));
+                agent.add(conv);
+            
+              } else {
+                agent.add(strOutput);
+
+              
+                deleteSessione(dirname + '/sessions/', sessionId);
+              }
+
+          
+            }else{
+              console.log('comando immagine o altro comando: torno solo output')
+              agent.add(strOutput);
+            }
+            /*
+            if (typeof comandi[1] !== 'undefined' && comandi[0]=="STOP"){
+              console.log('+++++++++ stoppo la conversazione e mando link immagine')
+              agent.add(strOutput);
+            
+            }*/
+
+          } 
+          //** provo  */
+        else if (typeof comandi !== 'undefined' && comandi.length > 1){
           if (typeof comandi[1] !== 'undefined' && comandi[0]=="STOP"){
-            console.log('+++++++++ stoppo la conversazione e mando link immagine')
+              console.log('+++++++++ stoppo la conversazione e mando link immagine')
+              agent.add(strOutput);
+            } 
+        }else {
+          //NON HO COMANDI
+            console.log('qui ho solo la strOutput ');
             agent.add(strOutput);
-           
-          }*/
-
-        } else {
-
-          console.log('qui ho solo la strOutput ');
-          agent.add(strOutput);
 
         }
         resolve(agent);
