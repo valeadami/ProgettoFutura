@@ -220,11 +220,8 @@ function callAVA(agent) {
           console.log('ho almeno un comando, quindi prosegui con l\' azione ' + comandi[0]);
 
           if (comandi[0] == 'STOP') {
-
-
             //per test
-          
-
+    
             //CHIUDO LA CONV ED ELIMINO IL FILE 
             if (agent.requestSource == "ACTIONS_ON_GOOGLE") {
               deleteSessione(dirname + '/sessions/', sessionId);
@@ -246,7 +243,11 @@ function callAVA(agent) {
             console.log('comando immagine o altro comando: torno solo output')
             agent.add(strOutput);
           }
-
+          if (typeof comandi[1] !== 'undefined' && comandi[0]=="STOP"){
+            console.log('+++++++++ stoppo la conversazione e mando link immagine')
+            agent.add(strOutput);
+           
+          }
 
         } else {
 
