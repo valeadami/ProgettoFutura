@@ -898,7 +898,12 @@ function callAVA(agent) {
               var arAdId=[]; //array per adId per la prenotazione
               var arIDS=[]; //adsceId degli esami del libretto
               var arEsami=[]; //descrizioni degli esami del libretto
-              
+               controller.testCC().then((t)=>{
+                console.log('sto cazzo de t in WebhookProcessing '+ t);
+                agent.add('funge');
+                resolve(agent);
+                });
+              /*
               controller.doLogin().then((stud) => { 
                console.log('sono in getInizializzazione doLogin');
                console.log('questo il valore di studente '+ JSON.stringify(stud));
@@ -941,7 +946,7 @@ function callAVA(agent) {
                   console.log('Si è verificato errore in getInizializzazione -doLogin: ' +error);
                  
             });
-           
+           */
            
             
           break;

@@ -117,7 +117,7 @@ app.get('/deleteSessione', function(req, res, next) {
     /********* modifica del 16/04/2019: aggiungo il bot come parametro per passarlo alla clsPlq */
     agent.parameters['bot']=bot;
     if (agent.parameters['bot']){
-        console.log('************* se vedi questo ok '+ agent.parameters['bot']);
+        console.log('************* NOME DEL BOT = '+ agent.parameters['bot']);
     }
     
     /************* */
@@ -158,8 +158,15 @@ app.get('/deleteSessione', function(req, res, next) {
         intentMap.set(displayname, callAVANEW); 
         console.log('funzione callAVANEW per tutto il resto');
       }*/
-      //a prescindere,
-      intentMap.set(displayname, clsPLQ.callAVA); //clsPLQ.callAVA
+      //modifica del 17/04/2019
+      if (agent.parameters['bot']=='HEAD' || agent.parameters['bot'] || 'HEADdemo' )
+      {
+       
+        intentMap.set(displayname, clsPLQ.callAVANEW);
+      }else{
+        intentMap.set(displayname, clsPLQ.callAVA); 
+      }
+    
       agent.handleRequest(intentMap);
   }
   
@@ -174,7 +181,8 @@ app.get('/deleteSessione', function(req, res, next) {
   
   
   });
- 
+
+
 app.listen(process.env.PORT || 3000, function() {
     console.log("App started on port " + process.env.PORT );
   });
