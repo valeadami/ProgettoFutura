@@ -96,15 +96,15 @@ app.get('/deleteSessione', function(req, res, next) {
     console.log('Il bot  interrogato : '+bot);
 
     //15/04/2019 questo funziona
-   /* if (bot=='HEADdemo'){
+    if (bot=='HEADdemo'|| bot=='HEAD'){
       controller=require('./Classi/clsControllerS3.js')
-      console.log('tipo di controller ---->'+ typeof controller);
+      console.log('sono su HEADdemo o HEAD, con controller ---->'+ typeof controller);
       
-      controller.testCC().then((t)=>{
+    /*  controller.testCC().then((t)=>{
         console.log('sto cazzo de t in WebhookProcessing '+ t);
-      });
+      });*/
     
-    }*/
+    }
     var name=req.body.queryResult.intent.name;
     //QUALSIASI INTENT RISPONDE A CALLAVA ANCHE FALLBACK
     var displayname=req.body.queryResult.intent.displayName;
@@ -132,6 +132,11 @@ app.get('/deleteSessione', function(req, res, next) {
       console.log(' ho param searchText per PLQ =' + req.body.queryResult.parameters.searchText);
       agent.parameters['searchText']=req.body.queryResult.parameters.searchText;
     }
+//17/04/2019 è presente un comando?
+    if (req.body.queryResult.parameters.Command){
+      agent.parameters['Command']=req.body.queryResult.parameters.Command;
+    }
+    
     //gestione degli intent
     //nuovo del 21/03/2019 fallback intent
       var blnIsFallback=req.body.queryResult.intent.isFallback;
