@@ -219,7 +219,7 @@ function callAVA(agent) {
         if (typeof comandi !== 'undefined' && comandi.length >= 1) {
           console.log('ho almeno un comando, quindi prosegui con l\' azione ' + comandi[0]);
 //controllo del 17/04/2019 con comando multi, ho sia lo stop che immagine, quindi la risposta viene ripetuta 2 volte
-          if (comandi[0] == 'STOP' && typeof comandi[1] == 'undefined') {
+          if (comandi[0] == 'STOP') {
             //per test
     
             //CHIUDO LA CONV ED ELIMINO IL FILE 
@@ -239,15 +239,20 @@ function callAVA(agent) {
               deleteSessione(dirname + '/sessions/', sessionId);
             }
 
+         /* }else if (typeof comandi[1] !== 'undefined' && comandi[0]=="STOP"){
+            console.log('+++++++++ stoppo la conversazione e mando link immagine')
+            agent.add(strOutput);
+           */
           }else{
             console.log('comando immagine o altro comando: torno solo output')
             agent.add(strOutput);
           }
+          /*
           if (typeof comandi[1] !== 'undefined' && comandi[0]=="STOP"){
             console.log('+++++++++ stoppo la conversazione e mando link immagine')
             agent.add(strOutput);
            
-          }
+          }*/
 
         } else {
 
