@@ -1012,7 +1012,7 @@ function callAVA(agent) {
           console.log('nel default ');
           callAVA(agent);
           //agent.add('sono nel default');
-          resolve(agent);
+          //resolve(agent);
           break;
       } //fine switch
         
