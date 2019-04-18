@@ -334,7 +334,11 @@ function callAVA(agent) {
     let sessionId = agent.sessionId /*.split('/').pop()*/;
     console.log('dentro call ava il mio session id '+sessionId);
   //questo lo tengo perchè mi serve per recuperare parametro comando proveniente dall'agente
-    var str= utf8.encode(agent.parameters.Command); 
+  
+    //var str= utf8.encode(agent.parameters.Command); 
+    //se è presente il parametro Command proveniente da un intent di DF, ok, altrimenti prendi la 
+    //queryText del FALLBACK
+    var str=agent.parameters.Command?utf8.encode(agent.parameters.Command):agent.queryText;
     if (str) {
       strRicerca=querystring.escape(str); //lo tengo comunque
      // options.path+=strRicerca+'&user=&pwd=&ava='+bot;
