@@ -1008,9 +1008,10 @@ function callAVA(agent) {
   
               break;
         default:
-          //console.log('nel default ho solo strOutput :' +responseFromPlq.strOutput);
+        
           console.log('nel default ');
-          agent.add('sono nel default');
+          callAVA(agent);
+          //agent.add('sono nel default');
           resolve(agent);
           break;
       } //fine switch
