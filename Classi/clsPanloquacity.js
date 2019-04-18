@@ -1010,7 +1010,9 @@ function callAVA(agent) {
         default:
         
           console.log('nel default ');
-          callAVA(agent);
+          callAVA(agent).then((agent)=>{
+            resolve(agent);
+          });
           //agent.add('sono nel default');
           //resolve(agent);
           break;
