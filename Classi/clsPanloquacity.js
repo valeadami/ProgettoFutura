@@ -15,7 +15,7 @@ const utf8=require('utf8');
 const https = require('https');
 
 const dirname='.' //metto qui la root, funge, prima era '/app'
-var controller=require('./clsControllerS3.js'); //
+var controller; // =require('./clsControllerS3.js'); sposto qua le dichirazioni al posto di index.js
 
 const options = {
   //modifica del 12/11/2018 : cambiato porta per supportare HTTPS
@@ -324,6 +324,11 @@ function callAVA(agent) {
   function callAVANEW(agent) { 
     return new Promise((resolve, reject) => {
   
+      /*  modifica del 18/04/2019: carico dinamicamente la classe controller per gestire Esse3 */
+      if(agent.bot=='HEAD' || agent.bot=='HEADdemo'){
+
+        controller=require('./clsControllerS3.js');
+      }
     let strRicerca='';
    
     let sessionId = agent.sessionId /*.split('/').pop()*/;
