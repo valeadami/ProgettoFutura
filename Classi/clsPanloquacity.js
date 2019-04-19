@@ -16,6 +16,7 @@ const https = require('https');
 
 const dirname='.' //metto qui la root, funge, prima era '/app'
 var controller; // =require('./clsControllerS3.js'); sposto qua le dichirazioni al posto di index.js
+//prova cul del 19/04/2019
 
 const options = {
   //modifica del 12/11/2018 : cambiato porta per supportare HTTPS
@@ -250,6 +251,7 @@ function callAVA(agent) {
                 agent.add(strOutput);
                 /* *********************** prova cul del 19/04/2019, test su FarmaInfoBot */
                 console.log('sono nel default quindi img');
+                const {Card} = require('dialogflow-fulfillment');
                 agent.add(
                   new Card({
                   title: 'Il Paguro',
