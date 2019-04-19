@@ -352,7 +352,7 @@ function callAVA(agent) {
               })
               ); 
               //modifica del 18/04/2019 : comando MULTI/CANGURO stoppo la conversazione e visualizzo immagine
-            /*  if (agent.requestSource == "ACTIONS_ON_GOOGLE") {
+              if (agent.requestSource == "ACTIONS_ON_GOOGLE") {
               
                 deleteSessione(dirname + '/sessions/', sessionId);
                 let conv = agent.conv();
@@ -381,7 +381,7 @@ function callAVA(agent) {
                 ); 
                 deleteSessione(dirname + '/sessions/', sessionId);
               }
-              */
+            
             } 
         }else {
           //NON HO COMANDI
