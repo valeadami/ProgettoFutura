@@ -338,28 +338,29 @@ function callAVA(agent) {
         else if (typeof comandi !== 'undefined' && comandi.length > 1){
           if (typeof comandi[1] !== 'undefined' && comandi[0]=="STOP"){
               console.log('+++++++++ stoppo la conversazione e mando link immagine')
-              //agent.add(strOutput);
-              //INSERISCO QUI IMG BASIC CARD
+              //agent.add(strOutput); lo commento se no viene ripetuto due volte
+             
               const {Card} = require('dialogflow-fulfillment');
-              agent.add(
-                new Card({
-                title: '\n',
-                imageUrl: comandi[1],//'https://upload.wikimedia.org/wikipedia/commons/a/ab/House_mouse.jpg',
-                accessibilityText:'image', //per testo alternativo
-                text: '',
-                buttonText: '+',
-                buttonUrl: comandi[1] //'https://upload.wikimedia.org/wikipedia/commons/a/ab/House_mouse.jpg'
-              })
-              );
+            
               //modifica del 18/04/2019 : comando MULTI/CANGURO stoppo la conversazione e visualizzo immagine
               if (agent.requestSource == "ACTIONS_ON_GOOGLE") {
                 deleteSessione(dirname + '/sessions/', sessionId);
                 let conv = agent.conv();
                 console.log(' ---- comando MULTI la conversazione PRIMA ----- ' + JSON.stringify(conv));
-               
-                
+             
                 //sposto qua la chiusura dopo aver creato la card
-                conv.close(strOutput);
+               // conv.close(strOutput);
+                conv.close(
+                  new Card({
+                    title: '\n',
+                    imageUrl: comandi[1],//'https://upload.wikimedia.org/wikipedia/commons/a/ab/House_mouse.jpg',
+                    accessibilityText:'image', //per testo alternativo
+                    text: strOutput,
+                    buttonText: '+',
+                    buttonUrl: comandi[1] //'https://upload.wikimedia.org/wikipedia/commons/a/ab/House_mouse.jpg'
+                  })
+
+                );
                 console.log(' ---- comando MULTI la conversazione DOPO CHIUSURA ----- ' + JSON.stringify(conv));
                 agent.add(conv);
             
