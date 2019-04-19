@@ -339,6 +339,47 @@ function callAVA(agent) {
           if (typeof comandi[1] !== 'undefined' && comandi[0]=="STOP"){
               console.log('+++++++++ stoppo la conversazione e mando link immagine')
               agent.add(strOutput);
+
+              //modifica del 18/04/2019 : comando MULTI/CANGURO stoppo la conversazione e visualizzo immagine
+              if (agent.requestSource == "ACTIONS_ON_GOOGLE") {
+                deleteSessione(dirname + '/sessions/', sessionId);
+                let conv = agent.conv();
+                console.log(' ---- comando MULTI la conversazione PRIMA ----- ' + JSON.stringify(conv));
+                conv.close(strOutput);
+                console.log(' ---- comando MULTI la conversazione DOPO CHIUSURA ----- ' + JSON.stringify(conv));
+                //INSERISCO QUI IMG BASIC CARD
+                const {Card} = require('dialogflow-fulfillment');
+                agent.add(
+                  new Card({
+                  title: '\n',
+                  imageUrl: comandi[1],//'https://upload.wikimedia.org/wikipedia/commons/a/ab/House_mouse.jpg',
+                  accessibilityText:'image', //per testo alternativo
+                  text: '',
+                  buttonText: '+',
+                  buttonUrl: comandi[1] //'https://upload.wikimedia.org/wikipedia/commons/a/ab/House_mouse.jpg'
+                })
+                );
+                
+                agent.add(conv);
+            
+              } else {
+                //canale web chat e altro, tipo telegram
+                agent.add(strOutput);
+                //MODIFICA DEL 18/04/2019 
+                const {Card} = require('dialogflow-fulfillment');
+                agent.add(
+                  new Card({
+                  title: '\n',
+                  imageUrl: comandi[1],//'https://upload.wikimedia.org/wikipedia/commons/a/ab/House_mouse.jpg',
+                  accessibilityText:'image', //per testo alternativo
+                  text: '',
+                  buttonText: '+',
+                  buttonUrl: comandi[1] //'https://upload.wikimedia.org/wikipedia/commons/a/ab/House_mouse.jpg'
+                })
+                ); /* FINO A QUA */
+                deleteSessione(dirname + '/sessions/', sessionId);
+              }
+              
             } 
         }else {
           //NON HO COMANDI
