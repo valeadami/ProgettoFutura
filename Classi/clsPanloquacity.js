@@ -251,17 +251,39 @@ function callAVA(agent) {
                 agent.add(strOutput);
                 /* *********************** prova cul del 19/04/2019, test su FarmaInfoBot */
                 console.log('sono nel default quindi img');
-                const {Card} = require('dialogflow-fulfillment');
+               /* const {Card} = require('dialogflow-fulfillment');
                 agent.add(
                   new Card({
-                  title: 'Il Paguro',
+                  title: '',
                   imageUrl: cmd,//'https://www.ideegreen.it/wp-content/uploads/2018/03/paguro-bernardo-3.jpg',
                   accessibilityText:'image', //per testo alternativo
                   text: '',
                   buttonText: '+',
                   buttonUrl: cmd //'https://www.ideegreen.it/wp-content/uploads/2018/03/paguro-bernardo-3.jpg'
                 })
-              ); 
+              ); */
+              //in alternativa prova con custom payload
+              const { Payload} = require('dialogflow-fulfillment');
+              agent.add(new Payload( 
+                agent.ACTIONS_ON_GOOGLE, {
+                "google": {
+                
+                    "card": {
+                      "title": "TITOLO",
+                      "imageUri": "https://www.ideegreen.it/wp-content/uploads/2018/03/paguro-bernardo-3.jpg",
+                      "buttons": [
+                        {
+                          "text": "+",
+                          "postback": "https://www.ideegreen.it/wp-content/uploads/2018/03/paguro-bernardo-3.jpg"
+                        }
+                      ]
+                    }
+                  }
+                     
+                 
+                //
+              })
+              );
               break;
             }
         /* //OLD prima del 17/04/2019
