@@ -341,22 +341,23 @@ function callAVA(agent) {
               //agent.add(strOutput); lo commento in data 18/04/2019 se no viene ripetuto due volte
              
               const {Card} = require('dialogflow-fulfillment');
-            
+             
               //modifica del 18/04/2019 : comando MULTI/CANGURO stoppo la conversazione e visualizzo immagine
               if (agent.requestSource == "ACTIONS_ON_GOOGLE") {
+                agent.add(
+                  new Card({
+                  title: '\n',
+                  imageUrl: comandi[1],//'https://upload.wikimedia.org/wikipedia/commons/a/ab/House_mouse.jpg',
+                  accessibilityText:'image', //per testo alternativo
+                  text: '',
+                  buttonText: '+',
+                  buttonUrl: comandi[1] //'https://upload.wikimedia.org/wikipedia/commons/a/ab/House_mouse.jpg'
+                })
+                ); 
                 deleteSessione(dirname + '/sessions/', sessionId);
                 let conv = agent.conv();
                 console.log(' ---- comando MULTI la conversazione PRIMA ----- ' + JSON.stringify(conv));
-                conv.ask(
-                  new Card({
-                    title: '\n',
-                    imageUrl: comandi[1],
-                    accessibilityText:'image',
-                    text: strOutput,
-                    buttonText: '+',
-                    buttonUrl: comandi[1] 
-                  })
-                );
+                
                 //sposto qua la chiusura dopo aver creato la card
                conv.close(strOutput);
                
