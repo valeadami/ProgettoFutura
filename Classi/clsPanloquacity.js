@@ -347,20 +347,19 @@ function callAVA(agent) {
                 deleteSessione(dirname + '/sessions/', sessionId);
                 let conv = agent.conv();
                 console.log(' ---- comando MULTI la conversazione PRIMA ----- ' + JSON.stringify(conv));
-             
-                //sposto qua la chiusura dopo aver creato la card
-               // conv.close(strOutput);
-                conv.close(
+                conv.ask(
                   new Card({
                     title: '\n',
-                    imageUrl: comandi[1],//'https://upload.wikimedia.org/wikipedia/commons/a/ab/House_mouse.jpg',
-                    accessibilityText:'image', //per testo alternativo
+                    imageUrl: comandi[1],
+                    accessibilityText:'image',
                     text: strOutput,
                     buttonText: '+',
-                    buttonUrl: comandi[1] //'https://upload.wikimedia.org/wikipedia/commons/a/ab/House_mouse.jpg'
+                    buttonUrl: comandi[1] 
                   })
-
                 );
+                //sposto qua la chiusura dopo aver creato la card
+               conv.close(strOutput);
+               
                 console.log(' ---- comando MULTI la conversazione DOPO CHIUSURA ----- ' + JSON.stringify(conv));
                 agent.add(conv);
             
