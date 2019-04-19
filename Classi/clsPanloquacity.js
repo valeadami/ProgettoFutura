@@ -255,10 +255,10 @@ function callAVA(agent) {
                 agent.add(
                   new Card({
                   title: 'Il Paguro',
-                  imageUrl: 'https://www.ideegreen.it/wp-content/uploads/2018/03/paguro-bernardo-3.jpg',
+                  imageUrl: cmd,//'https://www.ideegreen.it/wp-content/uploads/2018/03/paguro-bernardo-3.jpg',
                   text: '',
                   buttonText: '+',
-                  buttonUrl: 'https://www.ideegreen.it/wp-content/uploads/2018/03/paguro-bernardo-3.jpg'
+                  buttonUrl: cmd //'https://www.ideegreen.it/wp-content/uploads/2018/03/paguro-bernardo-3.jpg'
                 })
               ); 
               break;
