@@ -251,19 +251,20 @@ function callAVA(agent) {
                 agent.add(strOutput);
                 /* *********************** prova cul del 19/04/2019, test su FarmaInfoBot */
                 console.log('sono nel default quindi img');
-               /* const {Card} = require('dialogflow-fulfillment');
+                const {Card} = require('dialogflow-fulfillment');
                 agent.add(
                   new Card({
-                  title: '',
+                  title: 'TITOLO',
                   imageUrl: cmd,//'https://www.ideegreen.it/wp-content/uploads/2018/03/paguro-bernardo-3.jpg',
                   accessibilityText:'image', //per testo alternativo
                   text: '',
                   buttonText: '+',
                   buttonUrl: cmd //'https://www.ideegreen.it/wp-content/uploads/2018/03/paguro-bernardo-3.jpg'
                 })
-              ); */
-              //in alternativa prova con custom payload
-              const {Payload} = require('dialogflow-fulfillment');
+              ); 
+              //in alternativa prova con custom payload, esempio da https://github.com/dialogflow/dialogflow-fulfillment-nodejs/issues/10
+              //ma non funge!!
+             /* const {Payload} = require('dialogflow-fulfillment');
               agent.add(new Payload( agent.ACTIONS_ON_GOOGLE, {
                 "google": {
                   "expectUserResponse": true,
@@ -296,7 +297,7 @@ function callAVA(agent) {
                   }
                 }
              })
-              );
+              );*/
               break;
             }
         /* //OLD prima del 17/04/2019
