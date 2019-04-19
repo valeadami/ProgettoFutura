@@ -338,7 +338,7 @@ function callAVA(agent) {
         else if (typeof comandi !== 'undefined' && comandi.length > 1){
           if (typeof comandi[1] !== 'undefined' && comandi[0]=="STOP"){
               console.log('+++++++++ stoppo la conversazione e mando link immagine')
-              //agent.add(strOutput); lo commento se no viene ripetuto due volte
+              //agent.add(strOutput); lo commento in data 18/04/2019 se no viene ripetuto due volte
              
               const {Card} = require('dialogflow-fulfillment');
             
