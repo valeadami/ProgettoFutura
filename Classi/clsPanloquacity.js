@@ -251,7 +251,7 @@ function callAVA(agent) {
                 agent.add(strOutput);
                 /* *********************** prova cul del 19/04/2019, test su FarmaInfoBot */
                 console.log('sono nel default quindi img');
-                const {Card} = require('dialogflow-fulfillment');
+               // const {Card} = require('dialogflow-fulfillment');
                 agent.add(
                   new Card({
                   title: 'Il Paguro',

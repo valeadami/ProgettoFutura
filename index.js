@@ -13,7 +13,7 @@ const path = require("path");
 const https = require('https');*/
 
 /*** DIALOGFLOW FULFILLMENT */
-const {WebhookClient} = require('dialogflow-fulfillment');
+const {WebhookClient,Card} = require('dialogflow-fulfillment');
 //15/04/2019: se metto le variabili globali, poi posso caricare dinamicamente i moduli
 // a seconda del bot utilizzato
 /*var controller; 
