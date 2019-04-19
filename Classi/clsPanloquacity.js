@@ -248,7 +248,17 @@ function callAVA(agent) {
               break;*/
               default:
                 agent.add(strOutput);
-                console.log('sono nel default quindi img')
+                /* *********************** prova cul del 19/04/2019, test su FarmaInfoBot */
+                console.log('sono nel default quindi img');
+                agent.add(
+                  new Card({
+                  title: 'Il Paguro',
+                  imageUrl: 'https://www.ideegreen.it/wp-content/uploads/2018/03/paguro-bernardo-3.jpg',
+                  text: '',
+                  buttonText: '+',
+                  buttonUrl: 'https://www.ideegreen.it/wp-content/uploads/2018/03/paguro-bernardo-3.jpg'
+                })
+              ); 
               break;
             }
         /* //OLD prima del 17/04/2019
@@ -1009,7 +1019,7 @@ function callAVA(agent) {
               break;
         default:
         
-          console.log('nel default ');
+          console.log('nel default ossia risponde il fallback in callAVANEW ');
           callAVA(agent).then((agent)=>{
             resolve(agent);
           });
