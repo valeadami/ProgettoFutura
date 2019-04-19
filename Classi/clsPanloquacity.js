@@ -256,6 +256,7 @@ function callAVA(agent) {
                   new Card({
                   title: 'Il Paguro',
                   imageUrl: cmd,//'https://www.ideegreen.it/wp-content/uploads/2018/03/paguro-bernardo-3.jpg',
+                  accessibilityText:'image', //per testo alternativo
                   text: '',
                   buttonText: '+',
                   buttonUrl: cmd //'https://www.ideegreen.it/wp-content/uploads/2018/03/paguro-bernardo-3.jpg'
