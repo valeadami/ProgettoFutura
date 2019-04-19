@@ -338,7 +338,7 @@ function callAVA(agent) {
         else if (typeof comandi !== 'undefined' && comandi.length > 1){
           if (typeof comandi[1] !== 'undefined' && comandi[0]=="STOP"){
               console.log('+++++++++ stoppo la conversazione e mando link immagine')
-              //agent.add(strOutput); lo commento in data 18/04/2019 se no viene ripetuto due volte
+              agent.add(strOutput); //lo commento in data 18/04/2019 se no viene ripetuto due volte
              
               const {Card} = require('dialogflow-fulfillment');
               agent.add(
@@ -352,7 +352,7 @@ function callAVA(agent) {
               })
               ); 
               //modifica del 18/04/2019 : comando MULTI/CANGURO stoppo la conversazione e visualizzo immagine
-              if (agent.requestSource == "ACTIONS_ON_GOOGLE") {
+            /*  if (agent.requestSource == "ACTIONS_ON_GOOGLE") {
               
                 deleteSessione(dirname + '/sessions/', sessionId);
                 let conv = agent.conv();
@@ -378,10 +378,10 @@ function callAVA(agent) {
                   buttonText: '+',
                   buttonUrl: comandi[1] //'https://upload.wikimedia.org/wikipedia/commons/a/ab/House_mouse.jpg'
                 })
-                ); /* FINO A QUA */
+                ); 
                 deleteSessione(dirname + '/sessions/', sessionId);
               }
-              
+              */
             } 
         }else {
           //NON HO COMANDI
