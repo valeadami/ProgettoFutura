@@ -1,4 +1,5 @@
 /*
+18/04/2019: gestione output immagini con comandi paguro e canguro, su G. Assistant e Telegram
 16/04/2019
 INIZIO A SCRIVERE LIBRERIA PER CONNETTERSI A PLQ:
 PROPRIETA':
@@ -334,7 +335,7 @@ function callAVA(agent) {
             }*/
 
           } 
-          //** provo  */
+          //** provo  18/04/2019 */
         else if (typeof comandi !== 'undefined' && comandi.length > 1){
           if (typeof comandi[1] !== 'undefined' && comandi[0]=="STOP"){
               console.log('+++++++++ stoppo la conversazione e mando link immagine')
@@ -366,7 +367,7 @@ function callAVA(agent) {
             
               } else {
                 //canale web chat e altro, tipo telegram
-                agent.add(strOutput);
+                //agent.add(strOutput);
                 //MODIFICA DEL 18/04/2019 
                 const {Card} = require('dialogflow-fulfillment');
                 agent.add(
