@@ -117,18 +117,19 @@ function getComandi(arComandi)
          var temp1=[]; //array temporaneo per gestire QR
          var tmp=''; 
          //mi servono per QR
-         //aggiunta del 24/04
+         //aggiunta del 24/04/2019: modificato rispetto al progetto PlqChat in quanto ora mi serve avere indicazione di QR=
+         //0="QR=Question 1|how are you" , 1="QR=Question 2|p2"
          for(var i=0;i<comandi.length;i++){
           if (comandi[i].startsWith('QR')) {
               tmp=comandi[i].toString();
-              tmp=tmp.split("=");
+              tmp=tmp.split(","); //
               console.log('tmp= ' + tmp);
               tmp=tmp.toString();
-              tmp=tmp.split(",");
+              tmp=tmp.split("|");
               console.log('tmp ora =' + tmp);
               //recupero solo il titolo
-              tmp=tmp[1].toString();
-              tmp=tmp.split("|");
+              tmp=tmp[0].toString();
+            
               console.log('tmp finale =' + tmp);
               temp1.push(tmp[0]);            
               
