@@ -130,8 +130,12 @@ function getComandi(arComandi)
               //recupero solo il titolo
               tmp=tmp[0].toString();
             */
-              console.log('tmp finale =' + tmp);
-              temp1.push(tmp);            
+           for(var i=0;i<tmp.length;i++){
+            temp1.push(tmp[i]);   
+            console.log('tmp[1] =' + tmp[i]);
+           }
+           //console.log('tmp finale =' + tmp);
+                     
               
               
           }  else {
