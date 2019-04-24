@@ -5,7 +5,7 @@ INIZIO A SCRIVERE LIBRERIA PER CONNETTERSI A PLQ:
 PROPRIETA':
 - OPTIONS: parametri del server indirizzo ip e porta + impostazioni ssl
 - CALLAVA: funzione per consumare il web service, ottenere la risposta JSON: serve la strOutput e cmd (eventuale)-> 
--RESPONSEFROMPLQ (vedi sopra)
+NOTA BENE: CALLAVA è funzione "generale" serve a tt i bot. CALLAVANEW è specifica per il progetto Università-
 -GESTIONE DELLA SESSIONE: leggi, scrivi ed elimina file fisico sul server dove risiede applicazione (Heroku)
 -GETCOMANDI: funzione per ottenere i comandi da Plq, torna un array di stringhe composto da almeno un elemento, due per comando multimodale e/o immagine
 */
@@ -80,6 +80,7 @@ function getComandi(arComandi)
    
 } 
 */
+//modifica del 24/04/2019: aggiungo gestione comando con QR ["QR=Question 1|how are you","QR= Question 2|Who are your creators"]
 //aggiungo getComandi come da progetto Alexa, in modo da gestire il comando con STOP/GETLibretto/IMG=
 //["IMG=https://www.ideegreen.it/wp-content/uploads/2018/03/paguro-bernardo-3.jpg"]
 function getComandi(arComandi)
@@ -111,22 +112,49 @@ function getComandi(arComandi)
            break;
 
          case 2:
+         //modifica del 24/04/2019 gestione comandi QR 
          //caso 2: ho due comandi, stop e img=path image, quindi devo scomporre comandi[1] 
-            temp=arComandi[1].toString();
-            console.log('sono in getComandi, caso (2), temp = '+temp);
-           //temp=img=https.....
-           //splitto temp in un array con due elementi divisi da uguale
-           temp=temp.split("=");
-           console.log('valore di temp[1]= ' +temp[1]);
-           arComandi[1]=temp[1];
-           comandi=arComandi;
-           console.log('comandi0='+comandi[0]+', comandi1='+comandi[1]);
-           //scompongo arComandi[1]
-           break;
-
-         default:
+         var temp1=[]; //array temporaneo per gestire QR
+         var tmp=''; 
+         //mi servono per QR
+         //aggiunta del 24/04
+         for(var i=0;i<comandi.length;i++){
+          if (comandi[i].startsWith('QR')) {
+              tmp=comandi[i].toString();
+              tmp=tmp.split("=");
+              console.log('tmp= ' + tmp);
+              tmp=tmp.toString();
+              tmp=tmp.split(",");
+              console.log('tmp ora =' + tmp);
+              //recupero solo il titolo
+              tmp=tmp[1].toString();
+              tmp=tmp.split("|");
+              console.log('tmp finale =' + tmp);
+              temp1.push(tmp[0]);            
+              
+              
+          }  else {
+            //originale, poi con il 24/04/2019 caso else...
+             temp=arComandi[1].toString();
+              console.log('sono in getComandi, caso (2), temp = '+temp);
+              //temp=img=https.....
+              //splitto temp in un array con due elementi divisi da uguale
+              temp=temp.split("=");
+              console.log('valore di temp[1]= ' +temp[1]);
+              arComandi[1]=temp[1];
+              comandi=arComandi;
+              console.log('comandi0='+comandi[0]+', comandi1='+comandi[1]);
+              break;
+              //scompongo arComandi[1]
+            } 
+            comandi=temp1; //qui ho i titoli dei due QR
+            console.log('qui i comandi sono '+comandi.toString());
+      }
+       break;
+  
+      default:
            //
-           console.log('sono in default');
+        console.log('sono in default');
 
        }
       return comandi; //ritorno array come mi serve STOP oppure STOP, PATH img
