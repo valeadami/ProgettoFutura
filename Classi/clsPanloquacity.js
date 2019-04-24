@@ -132,7 +132,7 @@ function getComandi(arComandi)
             */
            for(var i=0;i<tmp.length;i++){
             temp1.push(tmp[i]);   
-            console.log('tmp[1] =' + tmp[i]);
+            console.log('tmp[i] =' + tmp[i]);
            }
            //console.log('tmp finale =' + tmp);
                      
@@ -153,7 +153,7 @@ function getComandi(arComandi)
               //scompongo arComandi[1]
             } 
             comandi=temp1; //qui ho i titoli dei due QR
-            console.log('qui i comandi sono '+comandi.toString());
+            //console.log('qui i comandi sono '+comandi.toString());
       //}
        break;
   
@@ -415,7 +415,12 @@ function callAVA(agent) {
                 ); 
                 deleteSessione(dirname + '/sessions/', sessionId);
               }
-            
+            //24/04/2019
+            } else if(comandi[0].startsWith('QR')) {
+              const {Suggestion} = require('dialogflow-fulfillment');
+              agent.add(strOutput); 
+              agent.add(new Suggestion(`Quick Reply`));
+
             } 
         }else {
           //NON HO COMANDI
