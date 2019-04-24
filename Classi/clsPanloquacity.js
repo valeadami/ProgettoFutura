@@ -131,7 +131,7 @@ function getComandi(arComandi)
               tmp=tmp[0].toString();
             
               console.log('tmp finale =' + tmp);
-              temp1.push(tmp[0]);            
+              temp1.push(tmp);            
               
               
           }  else {
