@@ -419,7 +419,24 @@ function callAVA(agent) {
             } else if(comandi[0].startsWith('QR')) {
               const {Suggestion} = require('dialogflow-fulfillment');
               agent.add(strOutput); 
-              agent.add(new Suggestion(`Quick Reply`));
+              //recupero il titolo e creo i qr 
+              for(var i=0;i<comandi.length;i++){
+         
+                tmp=comandi[i].toString();
+                tmp=tmp.split("="); 
+                console.log('tmp[0] = ' + tmp[0]+ ', tmp[1] ='+tmp[1]);
+                tmp=tmp[1].toString();
+                tmp=tmp.split("|");
+                //recupero solo il titolo
+                tmp=tmp[0].toString();
+                console.log('tmp con titolo '+ tmp)
+                agent.add(new Suggestion(tmp));
+
+           
+              }
+              
+              
+              //agent.add(new Suggestion(`Quick Reply`));
 
             } 
         }else {
