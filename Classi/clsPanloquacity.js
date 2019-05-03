@@ -953,7 +953,7 @@ function callAVA(agent) {
         break;
         //getCreditiUltimoAnno-> dal 2017 al 2018 19/03/2019
         case 'getCreditiUltimoAnno':
-        controller.getEsamiUltimoAnno(matId,2017).then((libretto) => { 
+        controller.getEsamiUltimoAnno(matId,2018).then((libretto) => { 
           console.log('sono in getCreditiUltimoAnno')
           var strTemp='0'; 
           var conteggioCFU=0;
@@ -992,7 +992,6 @@ function callAVA(agent) {
             console.log('sono in getMediaComplessiva');
             //verifico che la media non sia null
             if (media===null){ 
-              strTemp='0';
             } else{
               strTemp=''; 
               strTemp+=media; 
