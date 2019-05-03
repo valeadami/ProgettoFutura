@@ -990,10 +990,14 @@ function callAVA(agent) {
           case 'getMediaComplessiva':
           controller.getMediaComplessiva(matId).then((media) => { 
             console.log('sono in getMediaComplessiva');
+            //verifico che la media non sia null
+            if (media===null){ 
+              strTemp='0';
+            } else{
               strTemp=''; 
-            
-            
               strTemp+=media; 
+            }
+            
                 
               console.log('la media '+ strTemp);
               
@@ -1002,9 +1006,8 @@ function callAVA(agent) {
                 strOutput=str;
                 agent.add(strOutput);
                 
-                console.log('strOutput con replace '+ strOutput);
-                
-                //agent.setContext({ name: 'libretto', lifespan: 5, parameters: { matID: studente.trattiCarriera[0].matId }});
+                console.log('strOutput con replace in getMediaComplessiva '+ strOutput);
+            
                 resolve(agent);
             }).catch((error) => {
               console.log('Si è verificato errore in getMediaComplessiva: ' +error);
