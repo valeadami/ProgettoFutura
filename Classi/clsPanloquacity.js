@@ -415,7 +415,7 @@ function callAVA(agent) {
                 ); 
                 deleteSessione(dirname + '/sessions/', sessionId);
               }
-            //24/04/2019
+            //24/04/2019 gestione QR
             } else if(comandi[0].startsWith('QR')) {
               const {Suggestion} = require('dialogflow-fulfillment');
               agent.add(strOutput); 
@@ -431,13 +431,7 @@ function callAVA(agent) {
                 tmp=tmp[0].toString();
                 console.log('tmp con titolo '+ tmp)
                 agent.add(new Suggestion(tmp));
-
-           
               }
-              
-              
-              //agent.add(new Suggestion(`Quick Reply`));
-
             } 
         }else {
           //NON HO COMANDI
@@ -1055,12 +1049,8 @@ function callAVA(agent) {
               var arAdId=[]; //array per adId per la prenotazione
               var arIDS=[]; //adsceId degli esami del libretto
               var arEsami=[]; //descrizioni degli esami del libretto
-               controller.testCC().then((t)=>{
-                console.log('sto cazzo de t in WebhookProcessing '+ t);
-                agent.add('funge');
-                resolve(agent);
-                });
-              /*
+               
+              //ripristinato in data 03/05/2019
               controller.doLogin().then((stud) => { 
                console.log('sono in getInizializzazione doLogin');
                console.log('questo il valore di studente '+ JSON.stringify(stud));
@@ -1103,7 +1093,7 @@ function callAVA(agent) {
                   console.log('Si è verificato errore in getInizializzazione -doLogin: ' +error);
                  
             });
-           */
+           
            
             
           break;
