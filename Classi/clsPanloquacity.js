@@ -990,15 +990,17 @@ function callAVA(agent) {
           case 'getMediaComplessiva':
           controller.getMediaComplessiva(matId).then((media) => { 
             console.log('sono in getMediaComplessiva');
+            var strTemp='';
             //verifico che la media non sia null
             if (media===null){ 
+              strTemp='0';
             } else{
-              strTemp=''; 
+              //strTemp=''; 
               strTemp+=media; 
             }
             
                 
-              console.log('la media '+ strTemp);
+              console.log('la media in getMediaComplessiva= '+ strTemp);
               
                 var str=strOutput;
                 str=str.replace(/(@)/gi, strTemp);
