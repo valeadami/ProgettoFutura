@@ -873,7 +873,7 @@ function callAVA(agent) {
         case 'getDocenteEsame':
         //controllo che idEsame rientri nell'elenco degli esami 
         //paramEsame
-        console.log('.......idEsame è stringa vuota ? '+idEsame);
+       // console.log('.......idEsame è stringa vuota ? '+idEsame);
         if (idEsame!=='')
         {
             controller.GetDocente(matId,idEsame).then((esame) => { 
@@ -896,6 +896,7 @@ function callAVA(agent) {
       }else{
         console.log('esame '+ paramEsame +' non presente nel libretto');
         agent.add('esame '+ paramEsame +' non presente nel libretto');
+        resolve(agent);
       }
       break;
       
