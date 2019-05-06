@@ -1126,11 +1126,11 @@ function callAVA(agent) {
                 }
             
             }
-            agent.add('questo è appello che puoi prenotare '+idAp);
-            resolve(agent);
-           // return idAp;
-        /*  }).then(function (idAp){
-            controller.getAppelloDaPrenotare(cdsId,111218).then((appelliDaPrenotare)=>{
+           // agent.add('questo è appello che puoi prenotare '+idAp);
+          //  resolve(agent);
+            return idAp; //111218
+         }).then(function (idAp){
+            controller.getAppelloDaPrenotare(cdsId,idAp).then((appelliDaPrenotare)=>{
               if (Array.isArray(appelliDaPrenotare)){
                 console.log('2) sono dentro getAppelloDaPrenotare');
                 var strTemp='';
@@ -1154,7 +1154,9 @@ function callAVA(agent) {
                 resolve(agent);
              }).catch((error) => {
             console.log('Si è verificato errore in getPrenotazioneAppelli-> getAppelloDaPrenotare ' +error);
-          });*/
+            agent.add('Si è verificato errore in getPrenotazioneAppelli> getAppelloDaPrenotare  ' +error);
+            resolve(agent);
+          });
   
         }).catch((error) => {
           console.log('Si è verificato errore in getPrenotazioneAppelli: ' +error);
