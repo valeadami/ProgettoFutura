@@ -873,7 +873,8 @@ function callAVA(agent) {
         case 'getDocenteEsame':
         //controllo che idEsame rientri nell'elenco degli esami 
         //paramEsame
-        if ((idEsame!=='') || (idEsame!==null))
+        console.log('.......idEsame è stringa vuota ? '+idEsame);
+        if (idEsame!=='')
         {
             controller.GetDocente(matId,idEsame).then((esame) => { 
               var strTemp=''; 
