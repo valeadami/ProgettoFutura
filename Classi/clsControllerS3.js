@@ -785,7 +785,7 @@ function getSingoloAppelloDaPrenotare(cdsId,adId){
     return new Promise(function(resolve, reject) {
         var options = { 
             method: 'GET',
-            url: strUrlGetAppelloDaPrenotare  + cdsId +'/' + adId + '/?stato=P', //'/215'
+            url: strUrlGetAppelloDaPrenotare  + cdsId +'/' + adId +  '/215', //?stato=P', 
             headers: 
                 { 
                     'cache-control': 'no-cache',
