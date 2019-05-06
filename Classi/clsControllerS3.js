@@ -18,7 +18,7 @@ var strUrlGetSingoloEsame='https://units.esse3.pp.cineca.it/e3rest/api/libretto-
 //var GetSingoloDettaglioEsame='https://units.esse3.pp.cineca.it/e3rest/api/libretto-service-v1/libretti'; // 286879/righe/5057980?fields=annoCorso';
 //var strUrlAppelliPrenotabili='https://units.esse3.pp.cineca.it/e3rest/api/libretto-service-v1/libretti/' ;// 286879/righe/?filter=numAppelliPrenotabili%3D%3D1';
 //qui recupero ultima data utile dell'appello collegato a una riga del libretto
-var strUrlGetAppelloDaPrenotare='https://units.esse3.pp.cineca.it/e3rest/api/calesa-service-v1/appelli/'; //10094/117740/?stato=P'
+var strUrlGetAppelloDaPrenotare='https://units.esse3.pp.cineca.it/e3rest/api/calesa-service-v1/appelli/'; //10094/117740/?stato=P'  appelli/10094/111218/215
 var strUrlPostAppello='https://units.esse3.pp.cineca.it/e3rest/api/calesa-service-v1/appelli/'; //10094/117740/5/iscritti'
 var strUrlDeleteAppello='https://units.esse3.pp.cineca.it/e3rest/api/calesa-service-v1/appelli/'; //10094/117740/5/iscritti/236437;'
 // PARTIZIONI-> PER NOME DOCENTE 'https://units.esse3.pp.cineca.it/e3rest/api/libretto-service-v1/libretti/286879/righe/5057982/partizioni; //
@@ -777,7 +777,7 @@ function getSingoloAppelloDaPrenotare(cdsId,adId){
     return new Promise(function(resolve, reject) {
         var options = { 
             method: 'GET',
-            url: strUrlGetAppelloDaPrenotare  + cdsId +'/' + adId +'/?stato=P',
+            url: strUrlGetAppelloDaPrenotare  + cdsId +'/' + adId + '/?stato=P', //'/215'
             headers: 
                 { 
                     'cache-control': 'no-cache',

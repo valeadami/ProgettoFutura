@@ -1114,7 +1114,7 @@ function callAVA(agent) {
           //************* PRENOTAZIONE 25/03/2019 */
           case 'getPrenotazioneAppelli':
           var idAp=''; 
-         /* controller.getPrenotazioni(matId).then((prenotazioni) => { 
+          controller.getPrenotazioni(matId).then((prenotazioni) => { 
              console.log('1) sono in getPrenotazioni'); //+ JSON.stringify(prenotazioni)
             
              if (Array.isArray(prenotazioni)){
@@ -1126,8 +1126,10 @@ function callAVA(agent) {
                  }
               console.log('**********idAp=========='+idAp);
             }
-            return idAp;
-          }).then(function (idAp){*/
+            agent.add('questo è appello che puoi prenotare '+idAp);
+            resolve(agent);
+           // return idAp;
+        /*  }).then(function (idAp){
             controller.getAppelloDaPrenotare(cdsId,111218).then((appelliDaPrenotare)=>{
               if (Array.isArray(appelliDaPrenotare)){
                 console.log('2) sono dentro getAppelloDaPrenotare');
@@ -1152,11 +1154,13 @@ function callAVA(agent) {
                 resolve(agent);
              }).catch((error) => {
             console.log('Si è verificato errore in getPrenotazioneAppelli-> getAppelloDaPrenotare ' +error);
-          });
-  /*
+          });*/
+  
         }).catch((error) => {
           console.log('Si è verificato errore in getPrenotazioneAppelli: ' +error);
-        }); */
+          agent.add('Si è verificato errore in getPrenotazioneAppelli: ' +error);
+          resolve(agent);
+        }); 
   
               break;
         default:
