@@ -871,23 +871,31 @@ function callAVA(agent) {
           
         //nuovo: 19/03/2019
         case 'getDocenteEsame':
-        controller.GetDocente(matId,idEsame).then((esame) => { 
-          var strTemp=''; 
-          console.log( '**************** dati del DOCENTE getDocenteEsame ');
-  
-          strTemp +=  esame; //ritorna una stringa con cognome e nome del docente
-          var str=strOutput;
-          str=str.replace(/(@)/gi, strTemp);
-          strOutput=str;
-          agent.add(strOutput);
-          console.log('strOutput con replace in getDocenteEsame '+ strOutput);
-          resolve(agent);
-  
-      }).catch((error) => {
-        console.log('Si è verificato errore in getDocenteEsame: ' +error);
-        
+        //controllo che idEsame rientri nell'elenco degli esami 
+        //paramEsame
+        if ((idEsame!=='') || (idEsame!==null))
+        {
+            controller.GetDocente(matId,idEsame).then((esame) => { 
+              var strTemp=''; 
+              console.log( '**************** dati del DOCENTE getDocenteEsame ');
       
-      });
+              strTemp +=  esame; //ritorna una stringa con cognome e nome del docente
+              var str=strOutput;
+              str=str.replace(/(@)/gi, strTemp);
+              strOutput=str;
+              agent.add(strOutput);
+              console.log('strOutput con replace in getDocenteEsame '+ strOutput);
+              resolve(agent);
+      
+          }).catch((error) => {
+            console.log('Si è verificato errore in getDocenteEsame: ' +error);
+            
+          
+          });
+      }else{
+        console.log('esame '+ paramEsame +' non presente nel libretto');
+        agent.add('esame '+ paramEsame +' non presente nel libretto');
+      }
       break;
       
         //nuovo del 18/03/2019
