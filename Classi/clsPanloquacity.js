@@ -1118,13 +1118,13 @@ function callAVA(agent) {
              console.log('1) sono in getPrenotazioni'); //+ JSON.stringify(prenotazioni)
             
              if (Array.isArray(prenotazioni)){
-               
+               console.log('sono in array prenotazioni');
                for(var i=0; i<prenotazioni.length; i++){
        
                  idAp= prenotazioni[i].chiaveADContestualizzata.adId + '\n ' ;
-                 
-                 }
-              console.log('**********idAp=========='+idAp);
+                 console.log('**********idAp=========='+idAp);
+                }
+            
             }
             agent.add('questo è appello che puoi prenotare '+idAp);
             resolve(agent);
