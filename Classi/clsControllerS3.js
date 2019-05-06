@@ -488,7 +488,11 @@ function getElencoEsamiUltimoAnno(matId,anno){
                 if (response.statusCode==200){
                  
                     resolve(body); 
-                }  
+                }  else {
+
+                    console.log('status code getElencoEsamiUltimoAnno = '+response.statusCode);
+                    resolve(response.statusCode);
+                }
             }
     
         });
@@ -522,6 +526,10 @@ function getEsamiUltimoAnno(matId,anno){ //matID, adsceId, param con param=annoC
     
                 }
                 resolve(libretto);
+            }else{
+                console.log('in getEsamiUltimoAnno: non ho esami ');
+                resolve(body.statusCode);
+
             }
           
         });
