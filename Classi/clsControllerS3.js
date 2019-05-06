@@ -705,7 +705,15 @@ function getPrenotazioni(matId){
 
                     prenotazioni[i]= new rigaLibretto(body[i].aaFreqId,body[i].adCod, 
                         body[i].adDes,body[i].adsceId, body[i].annoCorso, 
-                        body[i].dataFreq,body[i].dataScadIscr,body[i].esito);
+                        body[i].chiaveADContestualizzata,
+                        body[i].dataFreq, body[i].dataScadIscr, body[i].dataChiusura, body[i].esito,
+                        //aggiunti qua
+                        body[i].freqObbligFlg, body[i].freqUffFlg, body[i].gruppoGiudCod,  body[i].gruppoGiudDes,
+                        body[i].gruppoVotoId, body[i].gruppoVotoLodeFlg, body[i].gruppoVotoMaxVoto,
+                        body[i].gruppoVotoMinVoto, body[i].itmId, body[i].matId, body[i].numAppelliPrenotabili,
+                        body[i].numPrenotazioni, body[i].ord, body[i].peso, body[i].pianoId, body[i].ragId,body[i].raggEsaTipo,
+                        body[i].ricId, body[i].sovranFlg,body[i].stato, body[i].statoDes, body[i].stuId,body[i].superataFlg,
+                        body[i].tipoEsaCod, body[i].tipoEsaDes, body[i].tipoInsCod, body[i].tipoInsDes);
 
                         prenotazioni[i].log();
 
