@@ -1116,20 +1116,28 @@ function callAVA(agent) {
           var idAp=''; 
           controller.getPrenotazioni(matId).then((prenotazioni) => { 
              console.log('1) sono in getPrenotazioni'); //+ JSON.stringify(prenotazioni)
-            
+             var strTemp='';
              if (Array.isArray(prenotazioni)){
                console.log('sono in array prenotazioni');
                for(var i=0; i<prenotazioni.length; i++){
        
-                 idAp= prenotazioni[i].chiaveADContestualizzata.adId + '\n ' ;
-                 console.log('**********idAp=========='+idAp);
+               /*  idAp= prenotazioni[i].chiaveADContestualizzata.adId + '\n ' ;
+                 console.log('**********idAp=========='+idAp);*/
+                 strTemp+= 'Appello di ' + prenotazioni[i].adDes+ '\n';
+
                 }
-            
+                var str=strOutput;
+                str=str.replace(/(@)/gi, strTemp);
+                strOutput=str;
+                agent.add(strOutput);
+                console.log('strOutput con replace in  getPrenotazioneAppelli->  '+ strOutput);
+                resolve(agent);
             }
-           // agent.add('questo è appello che puoi prenotare '+idAp);
+            //commentato in data 08/05/2019 perchè la query impiega troppo tempo
+          // agent.add('questo è appello che puoi prenotare '+idAp);
           //  resolve(agent);
-            return idAp; //111218
-         }).then(function (idAp){
+            //return idAp; //111218
+         /*}).then(function (idAp){
             controller.getAppelloDaPrenotare(cdsId,idAp).then((appelliDaPrenotare)=>{
               if (Array.isArray(appelliDaPrenotare)){
                 console.log('2) sono dentro getAppelloDaPrenotare');
@@ -1156,7 +1164,7 @@ function callAVA(agent) {
             console.log('Si è verificato errore in getPrenotazioneAppelli-> getAppelloDaPrenotare ' +error);
             agent.add('Si è verificato errore in getPrenotazioneAppelli> getAppelloDaPrenotare  ' +error);
             resolve(agent);
-          });
+          });*/
   
         }).catch((error) => {
           console.log('Si è verificato errore in getPrenotazioneAppelli: ' +error);
