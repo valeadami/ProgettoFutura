@@ -785,7 +785,7 @@ function getSingoloAppelloDaPrenotare(cdsId,adId){
     return new Promise(function(resolve, reject) {
         var options = { 
             method: 'GET',
-            url: strUrlGetAppelloDaPrenotare  + cdsId +'/' + adId +  '/215', //?stato=P', 
+            url: strUrlGetAppelloDaPrenotare  + cdsId +'/' + adId +  '/215/?stato=P', //', 
             headers: 
                 { 
                     'cache-control': 'no-cache',
@@ -795,7 +795,7 @@ function getSingoloAppelloDaPrenotare(cdsId,adId){
             json: true 
         }
         request(options, function (error, response, body) {
-            console.log('url di getSingoloAppelloDaPrenotare'+ options.url);
+            console.log('url di getSingoloAppelloDaPrenotare '+ options.url);
             if (error) {
                 reject(error);
                 console.log('errore in getSingoloAppelloDaPrenotare '+ error);
