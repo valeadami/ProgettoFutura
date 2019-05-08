@@ -699,7 +699,7 @@ function getPrenotazioni(matId){
             //controllo che body sia un array
             if (Array.isArray(body)){
                 rawData=JSON.stringify(body);
-                console.log('\n\nQUESTO IL BODY ESAMI PRENOTABILI ' +rawData);
+                //console.log('\n\nQUESTO IL BODY ESAMI PRENOTABILI ' +rawData);
                 //creo oggetto libretto
                 for(var i=0; i<body.length; i++){
 
@@ -821,7 +821,7 @@ function getAppelloDaPrenotare(cdsId,adId){
             //controllo che body sia un array
             if (Array.isArray(body)){
                 rawData=JSON.stringify(body);
-                console.log('\n\nQUESTO IL BODY ESAMI PRENOTABILI ' +rawData);
+              //  console.log('\n\nQUESTO IL BODY ESAMI PRENOTABILI ' +rawData);
                 //creo oggetto libretto
                 for(var i=0; i<body.length; i++){
 
