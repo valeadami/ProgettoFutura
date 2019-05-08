@@ -1120,7 +1120,7 @@ function callAVA(agent) {
              if (Array.isArray(prenotazioni)){
                console.log('sono in array prenotazioni');
                for(var i=0; i<prenotazioni.length; i++){
-       
+                
                /*  idAp= prenotazioni[i].chiaveADContestualizzata.adId + '\n ' ;
                  console.log('**********idAp=========='+idAp);*/
                  strTemp+= 'Appello di ' + prenotazioni[i].adDes+ '\n';
@@ -1173,6 +1173,37 @@ function callAVA(agent) {
         }); 
   
               break;
+        //08/05/2019 getAppelliPrenotati: recupero la lista delle prenotazioni effettuate
+        case 'getAppelliPrenotati':
+          console.log('sono in getApppelliPrenotati');
+        //intanto recupero dal libretto gli appelli prenotati 
+        controller.getPrenotati(matId).then((prenotazioni) => { 
+          var adIdPrenotato='';
+          var strTemp='';
+          if (Array.isArray(prenotazioni)){
+            console.log('ho gli appelli  già prenotati ');
+            for(var i=0; i<prenotazioni.length; i++){
+             
+              adIdPrenotato=prenotazioni[i].adId;
+              console.log('adId di appello prenotato '+ adIdPrenotato);
+              strTemp+= 'Appello di ' + prenotazioni[i].adDes+ ', codice '+prenotazioni[i].adCod +', tipo esame '+prenotazioni[i].tipoEsaDes;
+
+             }
+             var str=strOutput;
+             str=str.replace(/(@)/gi, strTemp);
+             strOutput=str;
+             agent.add(strOutput);
+             console.log('strOutput con replace in  getAppelliPrenotati->  '+ strOutput);
+             resolve(agent);
+           
+            }
+          }).catch((error) => {
+            console.log('Si è verificato errore in getAppelliPrenotati: ' +error);
+            agent.add('Si è verificato errore in getAppelliPrenotati: ' +error);
+            resolve(agent);
+          }); 
+        break;
+
         default:
         
           console.log('nel default ossia risponde il fallback in callAVANEW ');
