@@ -1176,17 +1176,33 @@ function callAVA(agent) {
         //08/05/2019 getAppelliPrenotati: recupero la lista delle prenotazioni effettuate
         case 'getAppelliPrenotati':
           console.log('sono in getApppelliPrenotati');
+          var strTemp='';
           //09/05/2018
          /* controller.getSingoloAppelloPrenotato(matId).then((body) => { 
            agent.add('ho il body con cdsId= '+body[0].cdsId + ', adId= '+ body[0].adId + ', appId= '+body[0].appId);
 */
            controller.getSingoloAppelloPrenotato(matId).then((appelliPrenotati) => { 
           
-           agent.add('ho il body con i dati dettagliati = '+appelliPrenotati[0].cdsId);
-            resolve(agent);
+           //agent.add('ho il body con i dati dettagliati = '+appelliPrenotati[0].cdsId); //questo funge
+
+           if (Array.isArray(appelliPrenotati)){
+          
+              for(var i=0; i<appelliPrenotati.length; i++){
+
+                strTemp+= 'Appello di ' + appelliPrenotati[i].desApp+ ', codice '+appelliPrenotati[i].adCod +//', tipo esame '+appelliPrenotati[i].tipoEsaDes;
+                + 'data appello ' +body[i].dataInizioApp + ' , con docente '+appelliPrenotati[i].presidenteCognome + appelliPrenotati[i].presidenteNome;
+              } 
+              var str=strOutput;
+              str=str.replace(/(@)/gi, strTemp);
+              strOutput=str;
+              agent.add(strOutput);
+              console.log('strOutput con replace in  getAppelliPrenotati-> getSingoloAppelloPrenotato '+ strOutput);
+              resolve(agent);
+           } //fine if array
+            //resolve(agent);
           }).catch((error) => {
-            console.log('Si è verificato errore in getSingoloAppelloPrenotato: ' +error);
-            agent.add('Si è verificato errore in getSingoloAppelloPrenotato: ' +error);
+            console.log('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotato: ' +error);
+            agent.add('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotato: ' +error);
             resolve(agent);
           });
         //intanto recupero dal libretto gli appelli prenotati 
