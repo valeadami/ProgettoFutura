@@ -843,7 +843,7 @@ return new Promise(function(resolve, reject) {
             console.log('errore in getAppId '+ error);
         } else {
             if (response.statusCode==200){
-                console.log('body di getAppId = '+body); //nel body ho appId cdsId adID
+               // console.log('body di getAppId = '+body); //nel body ho appId cdsId adID
                 resolve(body); 
             }  
         }
@@ -872,7 +872,7 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
                 console.log('errore in getDettaglioSingoloAppelloPrenotato '+ error);
             } else {
                 if (response.statusCode==200){
-                    console.log('il dettaglio di appello prenotato = '+JSON.stringify(body));
+                   // console.log('il dettaglio di appello prenotato = '+JSON.stringify(body));
                     resolve(body); 
                 }  
             }
@@ -893,15 +893,15 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
             //controllo che body sia un array
             if (Array.isArray(body)){
                 rawData=JSON.stringify(body);
-                console.log('\n\nQUESTO IL BODY DI PRENOTAZIONI ' +rawData);
+               // console.log('\n\nQUESTO IL BODY DI PRENOTAZIONI ' +rawData);
                 //creo oggetto libretto
                 for(var i=0; i<body.length; i++){
                     idAdId[i]=body[i].adId;
                     idAppId[i]=body[i].appId;
                     idCdsId=body[i].cdsId;
-                    console.log('*********** idAdId ' +idAdId[i] );
+                    /*console.log('*********** idAdId ' +idAdId[i] );
                     console.log('************ idAppId ' +idAppId[i] );
-                    console.log('************ cdsId ' +idCdsId );
+                    console.log('************ cdsId ' +idCdsId );*/
                 } 
             }
            
@@ -912,7 +912,7 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
             getDettaglioSingoloAppelloPrenotato(idCdsId, idAdId[0],idAppId[0]).then((body)=>{
                 console.log('HO IL DETTAGLIO DI APPELLO con data inizio= ' + body.dataInizioApp);
                if (Array.isArray(body)){
-                    console.log('body del dettaglio è un array'); 
+                  //  console.log('body del dettaglio è un array'); 
                     for(var i=0; i<body.length; i++){
                         appelliPrenotati[i]= new appello(body[i].aaCalId,body[i].adCod, body[i].adDes, body[i].adId,body[i].appId, body[i].cdsCod,
                             body[i].cdsDes,body[i].cdsId,body[i].condId,body[i].dataFineIscr,body[i].dataInizioApp, body[i].dataInizioIscr, body[i].desApp,
@@ -923,7 +923,7 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
                         
                     } 
                 }else{
-                    console.log('body del dettaglio è di tipo ' +typeof body); //object quindi una riga sola
+                  //  console.log('body del dettaglio è di tipo ' +typeof body); //object quindi una riga sola
                     appelliPrenotati[0]=new appello(body.aaCalId,body.adCod, body.adDes, body.adId,body.appId, body.cdsCod,
                         body.cdsDes,body.cdsId,body.condId,body.dataFineIscr,body.dataInizioApp, body.dataInizioIscr, body.desApp,
                         //aggiunto qui

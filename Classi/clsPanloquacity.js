@@ -1186,24 +1186,30 @@ function callAVA(agent) {
            //agent.add('ho il body con i dati dettagliati = '+appelliPrenotati[0].cdsId); //questo funge
 
            if (Array.isArray(appelliPrenotati)){
-              console.log('sono in array di appelliPrenotati')
+              //console.log('sono in array di appelliPrenotati')
               for(var i=0; i<appelliPrenotati.length; i++){
 
                 strTemp+= 'Appello di ' + appelliPrenotati[i].desApp+ ', codice '+appelliPrenotati[i].adCod +//', tipo esame '+appelliPrenotati[i].tipoEsaDes;
                 + 'data appello ' +appelliPrenotati[i].dataInizioApp + ' , con docente '+appelliPrenotati[i].presidenteCognome +' '+ appelliPrenotati[i].presidenteNome;
               } 
-              var str=strOutput;
+             /* var str=strOutput;
               str=str.replace(/(@)/gi, strTemp);
               strOutput=str;
               agent.add(strOutput);
               console.log('strOutput con replace in  getAppelliPrenotati-> getSingoloAppelloPrenotato '+ strOutput);
-              resolve(agent);
+              resolve(agent);*/
            } //fine if array
            else{
             console.log('appelliPrenotati NON è ARRAY');
 
            }
             //resolve(agent);
+              var str=strOutput;
+              str=str.replace(/(@)/gi, strTemp);
+              strOutput=str;
+              agent.add(strOutput);
+              console.log('strOutput con replace in  getAppelliPrenotati-> getSingoloAppelloPrenotato '+ strOutput);
+              resolve(agent);
           }).catch((error) => {
             console.log('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotato: ' +error);
             agent.add('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotato: ' +error);
