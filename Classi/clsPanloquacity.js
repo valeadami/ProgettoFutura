@@ -1183,33 +1183,30 @@ function callAVA(agent) {
 */
            controller.getSingoloAppelloPrenotato(matId).then((appelliPrenotati) => { 
           
-           //agent.add('ho il body con i dati dettagliati = '+appelliPrenotati[0].cdsId); //questo funge
+           agent.add('Appello di ' + appelliPrenotati[0].desApp+ ', codice '+appelliPrenotati[0].adCod +
+           + 'data appello ' +appelliPrenotati[0].dataInizioApp + ' , con docente '+appelliPrenotati[0].presidenteCognome +' '+ appelliPrenotati[0].presidenteNome); //questo funge
+           resolve(agent);
 
-           if (Array.isArray(appelliPrenotati)){
+           /*if (Array.isArray(appelliPrenotati)){
               //console.log('sono in array di appelliPrenotati')
               for(var i=0; i<appelliPrenotati.length; i++){
 
                 strTemp+= 'Appello di ' + appelliPrenotati[i].desApp+ ', codice '+appelliPrenotati[i].adCod +//', tipo esame '+appelliPrenotati[i].tipoEsaDes;
                 + 'data appello ' +appelliPrenotati[i].dataInizioApp + ' , con docente '+appelliPrenotati[i].presidenteCognome +' '+ appelliPrenotati[i].presidenteNome;
               } 
-             /* var str=strOutput;
-              str=str.replace(/(@)/gi, strTemp);
-              strOutput=str;
-              agent.add(strOutput);
-              console.log('strOutput con replace in  getAppelliPrenotati-> getSingoloAppelloPrenotato '+ strOutput);
-              resolve(agent);*/
-           } //fine if array
-           else{
-            console.log('appelliPrenotati NON è ARRAY');
-
-           }
-            //resolve(agent);
               var str=strOutput;
               str=str.replace(/(@)/gi, strTemp);
               strOutput=str;
               agent.add(strOutput);
               console.log('strOutput con replace in  getAppelliPrenotati-> getSingoloAppelloPrenotato '+ strOutput);
               resolve(agent);
+           } 
+           else{
+            console.log('appelliPrenotati NON è ARRAY');
+
+           }*/
+            //
+             
           }).catch((error) => {
             console.log('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotato: ' +error);
             agent.add('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotato: ' +error);
