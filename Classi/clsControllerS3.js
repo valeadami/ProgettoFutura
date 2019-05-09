@@ -872,7 +872,7 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
                 console.log('errore in getDettaglioSingoloAppelloPrenotato '+ error);
             } else {
                 if (response.statusCode==200){
-                    console.log('il dettaglio di appello prenotato = '+body);
+                    console.log('il dettaglio di appello prenotato = '+JSON.stringify(body));
                     resolve(body); 
                 }  
             }
