@@ -930,7 +930,7 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
                         body.note,body.numIscritti,body.numPubblicazioni,body.numVerbaliCar,body.numVerbaliGen,
                         body.presidenteCognome,body.presidenteId,body.presidenteNome,body.riservatoFlg,body.stato,body.statoAperturaApp,body.statoDes,body.statoInsEsiti,body.statoLog,body.statoPubblEsiti,body.statoVerb,
                         body.tipoDefAppCod,body.tipoDefAppDes,body.tipoEsaCod,body.tipoSceltaTurno);
-                        console.log('TEST di appelliPrenotati[0] anno '+ appelliPrenotati[0].aaCalId);
+                       // console.log('TEST di appelliPrenotati[0] anno '+ appelliPrenotati[0].aaCalId);
                 }
                 //resolve(body);
                 resolve(appelliPrenotati);
