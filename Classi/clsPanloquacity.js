@@ -1203,14 +1203,15 @@ function callAVA(agent) {
                             for(var i=0; i<body.length; i++){
                                 strTemp+='appello ' + body.aaCalId + ',' + body.dataInizioApp;
                             } 
-                            var str=strOutput;
-                            str=str.replace(/(@)/gi, strTemp);
-                            strOutput=str;
-                            agent.add(strOutput);
-                            console.log('strOutput con replace '+ strOutput);
-                            resolve(agent);
+                           
                         }
-                      });   
+                      });  
+                      var str=strOutput;
+                      str=str.replace(/(@)/gi, strTemp);
+                      strOutput=str;
+                      agent.add(strOutput);
+                      console.log('strOutput con replace '+ strOutput);
+                      resolve(agent); 
                   } 
               }
             
