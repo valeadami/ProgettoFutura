@@ -1186,7 +1186,7 @@ function callAVA(agent) {
            //agent.add('ho il body con i dati dettagliati = '+appelliPrenotati[0].cdsId); //questo funge
 
            if (Array.isArray(appelliPrenotati)){
-          
+              console.log('sono in array di appelliPrenotati')
               for(var i=0; i<appelliPrenotati.length; i++){
 
                 strTemp+= 'Appello di ' + appelliPrenotati[i].desApp+ ', codice '+appelliPrenotati[i].adCod +//', tipo esame '+appelliPrenotati[i].tipoEsaDes;
@@ -1199,6 +1199,10 @@ function callAVA(agent) {
               console.log('strOutput con replace in  getAppelliPrenotati-> getSingoloAppelloPrenotato '+ strOutput);
               resolve(agent);
            } //fine if array
+           else{
+            console.log('appelliPrenotati NON è ARRAY');
+
+           }
             //resolve(agent);
           }).catch((error) => {
             console.log('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotato: ' +error);
