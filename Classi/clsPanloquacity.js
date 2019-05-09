@@ -1177,9 +1177,12 @@ function callAVA(agent) {
         case 'getAppelliPrenotati':
           console.log('sono in getApppelliPrenotati');
           //09/05/2018
-          controller.getSingoloAppelloPrenotato(matId).then((body) => { 
+         /* controller.getSingoloAppelloPrenotato(matId).then((body) => { 
            agent.add('ho il body con cdsId= '+body[0].cdsId + ', adId= '+ body[0].adId + ', appId= '+body[0].appId);
-           //agent.add('ho il body con i dati dettagliati = '+body.cdsId + ', adId= '+ body.adId + ', appId= '+body.appId + ', corso di ' +body.cdsDes);
+*/
+           controller.getSingoloAppelloPrenotato(matId).then((appelliPrenotati) => { 
+          
+           agent.add('ho il body con i dati dettagliati = '+appelliPrenotati[0].cdsId);
             resolve(agent);
           }).catch((error) => {
             console.log('Si è verificato errore in getSingoloAppelloPrenotato: ' +error);
