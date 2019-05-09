@@ -1184,7 +1184,7 @@ function callAVA(agent) {
             console.log('ho gli appelli  già prenotati ');
             for(var i=0; i<prenotazioni.length; i++){
              
-              adIdPrenotato=prenotazioni[i].adId;
+              adIdPrenotato=prenotazioni[i].chiaveADContestualizzata.adId;
               console.log('adId di appello prenotato '+ adIdPrenotato);
               strTemp+= 'Appello di ' + prenotazioni[i].adDes+ ', codice '+prenotazioni[i].adCod +', tipo esame '+prenotazioni[i].tipoEsaDes;
 
