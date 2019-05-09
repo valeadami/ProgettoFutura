@@ -905,8 +905,8 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
             resolve(body);
             //resolve(appelliPrenotati);
         }).then((body)=>{
-            console.log('SONO NELLA PARTE 2 ' +body[0].appId);
-            controller.getDettaglioSingoloAppelloPrenotato(body[0].cdsId,idAdId[0],idAppId[0]).then((body)=>{
+            console.log('SONO NELLA PARTE 2 con idAd ' + idAdId[0] + ', appId'  +idAppId[0]);
+            controller.getDettaglioSingoloAppelloPrenotato('10094', idAdId[0],idAppId[0]).then((body)=>{
                 console.log('HO IL DETTAGLIO DI APPELLO con data inizio= ' + body.dataInizioApp);
                 resolve(body);
             }); //fine  controller.getDettaglioSingoloAppelloPrenotato
