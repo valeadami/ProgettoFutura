@@ -1190,7 +1190,7 @@ function callAVA(agent) {
               for(var i=0; i<appelliPrenotati.length; i++){
 
                 strTemp+= 'Appello di ' + appelliPrenotati[i].desApp+ ', codice '+appelliPrenotati[i].adCod +//', tipo esame '+appelliPrenotati[i].tipoEsaDes;
-                + 'data appello ' +body[i].dataInizioApp + ' , con docente '+appelliPrenotati[i].presidenteCognome + appelliPrenotati[i].presidenteNome;
+                + 'data appello ' +appelliPrenotati[i].dataInizioApp + ' , con docente '+appelliPrenotati[i].presidenteCognome +' '+ appelliPrenotati[i].presidenteNome;
               } 
               var str=strOutput;
               str=str.replace(/(@)/gi, strTemp);
