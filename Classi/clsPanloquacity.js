@@ -1178,7 +1178,7 @@ function callAVA(agent) {
           console.log('sono in getApppelliPrenotati');
           //09/05/2018
           controller.getSingoloAppelloPrenotato(matId).then((body) => { 
-            agent.add('ho il body con cdsId= '+body.cdsId + ', adId= '+ body.adId + ', appId= '+body.appId);
+            agent.add('ho il body con cdsId= '+body[0].cdsId + ', adId= '+ body[0].adId + ', appId= '+body[0].appId);
             resolve(agent);
           }).catch((error) => {
             console.log('Si è verificato errore in getSingoloAppelloPrenotato: ' +error);
