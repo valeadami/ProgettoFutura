@@ -1176,6 +1176,10 @@ function callAVA(agent) {
         //08/05/2019 getAppelliPrenotati: recupero la lista delle prenotazioni effettuate
         case 'getAppelliPrenotati':
           console.log('sono in getApppelliPrenotati');
+          var rawData='';
+          var idAdId=[]; //tengo traccia degli adId attività didattica
+          var idAppId=[]; //tengo traccia degli appId 
+          var idCdsId='';
           var strTemp='';
           //09/05/2018
          /* controller.getSingoloAppelloPrenotato(matId).then((body) => { 
