@@ -1205,12 +1205,13 @@ function callAVA(agent) {
                             } 
                            
                         }
+                        var str=strOutput;
+                        str=str.replace(/(@)/gi, strTemp);
+                        strOutput=str;
+                        agent.add(strOutput);
+                        console.log('strOutput con replace '+ strOutput);
                       });  
-                      var str=strOutput;
-                      str=str.replace(/(@)/gi, strTemp);
-                      strOutput=str;
-                      agent.add(strOutput);
-                      console.log('strOutput con replace '+ strOutput);
+                      
                       resolve(agent); 
                   } 
               }
