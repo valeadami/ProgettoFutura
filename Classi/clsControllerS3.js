@@ -911,17 +911,25 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
             console.log('SONO NELLA PARTE 2 con idAd =' + idAdId[0] + ', appId='  +idAppId[0] +', cdsId=' +idCdsId);
             getDettaglioSingoloAppelloPrenotato(idCdsId, idAdId[0],idAppId[0]).then((body)=>{
                 console.log('HO IL DETTAGLIO DI APPELLO con data inizio= ' + body.dataInizioApp);
-                if (Array.isArray(body)){
-                    console.log('body del dettaglio è un array');
+               if (Array.isArray(body)){
+                    console.log('body del dettaglio è un array'); 
+                    for(var i=0; i<body.length; i++){
+                        appelliPrenotati[i]= new appello(body[i].aaCalId,body[i].adCod, body[i].adDes, body[i].adId,body[i].appId, body[i].cdsCod,
+                            body[i].cdsDes,body[i].cdsId,body[i].condId,body[i].dataFineIscr,body[i].dataInizioApp, body[i].dataInizioIscr, body[i].desApp);
+                    } 
                 }else{
-                    console.log('body del dettaglio è di tipo ' +typeof body);
-
+                    console.log('body del dettaglio è di tipo ' +typeof body); //object quindi una riga sola
+                    appelliPrenotati[0]=new appello(body.aaCalId,body.adCod, body.adDes, body.adId,body.appId, body.cdsCod,
+                        body.cdsDes,body.cdsId,body.condId,body.dataFineIscr,body.dataInizioApp, body.dataInizioIscr, body.desApp,
+                        //aggiunto qui
+                        body.note,body.numIscritti,body.numPubblicazioni,body.numVerbaliCar,body.numVerbaliGen,
+                        body.presidenteCognome,body.presidenteId,body.presidenteNome,body.riservatoFlg,body.stato,body.statoAperturaApp,body.statoDes,body.statoInsEsiti,body.statoLog,body.statoPubblEsiti,body.statoVerb,
+                        body.tipoDefAppCod,body.tipoDefAppDes,body.tipoEsaCod,body.tipoSceltaTurno);
+                        console.log('TEST di appelliPrenotati[0] anno '+ appelliPrenotati[0].aaCalId);
                 }
-                resolve(body);
-                /*appelliPrenotati[0]= new appello(body[i].aaCalId,body[i].adCod, body[i].adDes, body[i].adId,body[i].appId, body[i].cdsCod,
-                    body[i].cdsDes,body[i].cdsId,body[i].condId,body[i].dataFineIscr,body[i].dataInizioApp, body[i].dataInizioIscr, body[i].desApp);
-                   // 
-                  // resolve(appelliPrenotati);*/
+                //resolve(body);
+                resolve(appelliPrenotati);
+                
             }); //fine  controller.getDettaglioSingoloAppelloPrenotato
             
        
