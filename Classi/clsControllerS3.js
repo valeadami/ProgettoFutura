@@ -872,7 +872,7 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
                 console.log('errore in getDettaglioSingoloAppelloPrenotato '+ error);
             } else {
                 if (response.statusCode==200){
-                    console.log('il dettaglio di appello prenotato ='+body);
+                    console.log('il dettaglio di appello prenotato = '+body);
                     resolve(body); 
                 }  
             }
@@ -904,20 +904,18 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
             }
             resolve(body);
             //resolve(appelliPrenotati);
-   })/*.then(function(){
-       controller.getDettaglioSingoloAppelloPrenotato(cdsId,idAdId[0],idAppId[0]).then((body)=>{
-    
-    
-    
-
-    }*/
-
-   });
-//});
- 
-
-}
-        //
+        }).then((body)=>{
+            console.log('SONO NELLA PARTE 2 ' +body[0].appId);
+            controller.getDettaglioSingoloAppelloPrenotato(body[0].cdsId,idAdId[0],idAppId[0]).then((body)=>{
+                console.log('HO IL DETTAGLIO DI APPELLO con data inizio= ' + body.dataInizioApp);
+                resolve(body);
+            }); //fine  controller.getDettaglioSingoloAppelloPrenotato
+            
+       
+        });
+    });
+    }
+       //
 // getAppelloDaPrenotare(cdsId,adId)
 function getAppelloDaPrenotare(cdsId,adId){
     return new Promise(function(resolve, reject) {
