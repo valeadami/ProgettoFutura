@@ -1176,8 +1176,17 @@ function callAVA(agent) {
         //08/05/2019 getAppelliPrenotati: recupero la lista delle prenotazioni effettuate
         case 'getAppelliPrenotati':
           console.log('sono in getApppelliPrenotati');
+          //09/05/2018
+          controller.getSingoloAppelloPrenotato(matId).then((body) => { 
+            agent.add('ho il body con cdsId= '+body.cdsId + ', adId= '+ body.adId + ', appId= '+body.appId);
+            resolve(agent);
+          }).catch((error) => {
+            console.log('Si è verificato errore in getSingoloAppelloPrenotato: ' +error);
+            agent.add('Si è verificato errore in getSingoloAppelloPrenotato: ' +error);
+            resolve(agent);
+          });
         //intanto recupero dal libretto gli appelli prenotati 
-        controller.getPrenotati(matId).then((prenotazioni) => { 
+       /* controller.getPrenotati(matId).then((prenotazioni) => { 
           var adIdPrenotato='';
           var strTemp='';
           if (Array.isArray(prenotazioni)){
@@ -1201,7 +1210,8 @@ function callAVA(agent) {
             console.log('Si è verificato errore in getAppelliPrenotati: ' +error);
             agent.add('Si è verificato errore in getAppelliPrenotati: ' +error);
             resolve(agent);
-          }); 
+          }); */
+
         break;
 
         default:

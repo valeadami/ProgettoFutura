@@ -21,8 +21,11 @@ var strUrlGetSingoloEsame='https://units.esse3.pp.cineca.it/e3rest/api/libretto-
 var strUrlGetAppelloDaPrenotare='https://units.esse3.pp.cineca.it/e3rest/api/calesa-service-v1/appelli/'; //10094/117740/?stato=P'  appelli/10094/111218/215
 var strUrlPostAppello='https://units.esse3.pp.cineca.it/e3rest/api/calesa-service-v1/appelli/'; //10094/117740/5/iscritti'
 var strUrlDeleteAppello='https://units.esse3.pp.cineca.it/e3rest/api/calesa-service-v1/appelli/'; //10094/117740/5/iscritti/236437;'
+//09/05/2019
+var prenotazioniMatIdAppId='https://units.esse3.pp.cineca.it/e3rest/api/calesa-service-v1/prenotazioni/'; // + mattricola cioè /291783/
+//var dettSingoloAppelloPrenotato='https://units.esse3.pp.cineca.it/e3rest/api/calesa-service-v1/appelli/10094/111218/215'
 // PARTIZIONI-> PER NOME DOCENTE 'https://units.esse3.pp.cineca.it/e3rest/api/libretto-service-v1/libretti/286879/righe/5057982/partizioni; //
-//segmenti -> per il tipo di corso LEZ https://units.esse3.pp.cineca.it/e3rest/api/libretto-service-v1/libretti/286879/righe/5057980/segmenti
+//segmenti -> per il tipo di corso LEZ https://units.esse3.pp.cineca.it/e3rest/api/lifbretto-service-v1/libretti/286879/righe/5057980/segmenti
 // ESAMI SOSTENUTI NEL 2018 PERTINENTI AL 2017 https://units.esse3.pp.cineca.it/e3rest/api/libretto-service-v1/libretti/286879/righe/?filter=esito.aaSupId%3D%3D2017
 // MEDIA ARITMETICA DEL LIBRETTO https://units.esse3.pp.cineca.it/e3rest/api/libretto-service-v1/libretti/286879/medie/CDSORD/A
 //var strUrlGetAppelliPrenotati=strUrlGetSingoloEsame';
@@ -792,7 +795,7 @@ function getSingoloAppelloDaPrenotare(cdsId,adId){
     return new Promise(function(resolve, reject) {
         var options = { 
             method: 'GET',
-            url: strUrlGetAppelloDaPrenotare  + cdsId +'/' + adId +  '/215/?stato=P', //', 
+            url: strUrlGetAppelloDaPrenotare  + cdsId +'/' + adId +  '/?stato=P', //', 
             headers: 
                 { 
                     'cache-control': 'no-cache',
@@ -817,7 +820,104 @@ function getSingoloAppelloDaPrenotare(cdsId,adId){
     });
 
 } 
+//PRENOTAZIONE: FASE 1) DOPO AVER PRENOTATO UN APPELLO, PER AVERE TUTTI I DETTAGLI DEVO LEGGERE PRENOTAZIONI/MATID PER AVERE APPID
+//09/05/2019
+//per recuperare appId, url https://units.esse3.pp.cineca.it/e3rest/api/calesa-service-v1/prenotazioni/291783/
+function getAppId(matId){
+return new Promise(function(resolve, reject) {
+    var options = { 
+        method: 'GET',
+        url: prenotazioniMatIdAppId  + matId +  '/',
+        headers: 
+            { 
+                'cache-control': 'no-cache',
+                'Content-Type': 'application/json',
+                'Authorization': 'Basic czI2MjUwMjpDR1ZZUDNURQ=='
+            },
+        json: true 
+    }
+    request(options, function (error, response, body) {
+        console.log('url di getAppId '+ options.url);
+        if (error) {
+            reject(error);
+            console.log('errore in getAppId '+ error);
+        } else {
+            if (response.statusCode==200){
+                console.log('body di getAppId = '+body); //nel body ho appId cdsId adID
+                resolve(body); 
+            }  
+        }
 
+    });
+});
+}
+//2) ora che ho appId cdsId adID, query su appelli/cdsId/adId/appId https://units.esse3.pp.cineca.it/e3rest/api/calesa-service-v1/appelli/10094/111218/215
+function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
+    return new Promise(function(resolve, reject) {
+        var options = { 
+            method: 'GET',
+            url: strUrlGetAppelloDaPrenotare  + cdsId +  '/' +adId+'/'+appId+'/',
+            headers: 
+                { 
+                    'cache-control': 'no-cache',
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Basic czI2MjUwMjpDR1ZZUDNURQ=='
+                },
+            json: true 
+        }
+        request(options, function (error, response, body) {
+            console.log('url di getDettaglioSingoloAppelloPrenotato '+ options.url);
+            if (error) {
+                reject(error);
+                console.log('errore in getDettaglioSingoloAppelloPrenotato '+ error);
+            } else {
+                if (response.statusCode==200){
+                    console.log('il dettaglio di appello prenotato ='+body);
+                    resolve(body); 
+                }  
+            }
+    
+        });
+    });
+    }
+    //09/05/2019 HO IL DETTAGLIO COMPLETO DELLA SCHERMATA DELL'APPELLO PRENOTATO
+    //3) funzione che raccoglie 1) e 2) 
+    function getSingoloAppelloPrenotato(matId){
+        return new Promise(function(resolve, reject) {
+        var appelliPrenotati=[];
+        var rawData='';
+        var idAdId=[]; //tengo traccia degli adId attività didattica
+        var idAppId=[]; //tengo traccia degli appId 
+
+        getAppId(matId).then((body)=>{
+            //controllo che body sia un array
+            if (Array.isArray(body)){
+                rawData=JSON.stringify(body);
+                console.log('\n\nQUESTO IL BODY DI PRENOTAZIONI ' +rawData);
+                //creo oggetto libretto
+                for(var i=0; i<body.length; i++){
+                    idAdId[i]=body[i].adId;
+                    idAppId[i]=body[i].appId;
+                    console.log('*********** idAdId ' +idAdId[i] );
+                    console.log('************idAppId ' +idAppId[i] );
+                } 
+            }
+            resolve(body);
+            //resolve(appelliPrenotati);
+   })/*.then(function(){
+       controller.getDettaglioSingoloAppelloPrenotato(cdsId,idAdId[0],idAppId[0]).then((body)=>{
+    
+    
+    
+
+    }*/
+
+   });
+//});
+ 
+
+}
+        //
 // getAppelloDaPrenotare(cdsId,adId)
 function getAppelloDaPrenotare(cdsId,adId){
     return new Promise(function(resolve, reject) {
@@ -953,4 +1053,5 @@ exports.GetDocente=GetDocente;
 exports.getSegmento=getSegmento;
 exports.getEsamiUltimoAnno=getEsamiUltimoAnno;
 exports.getMediaComplessiva=getMediaComplessiva;
+exports.getSingoloAppelloPrenotato=getSingoloAppelloPrenotato;
 exports.testCC=testCC;
