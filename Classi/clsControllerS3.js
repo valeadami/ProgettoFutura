@@ -888,7 +888,7 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
         var rawData='';
         var idAdId=[]; //tengo traccia degli adId attività didattica
         var idAppId=[]; //tengo traccia degli appId 
-        var b='';
+        var idCdsId='';
         getAppId(matId).then((body)=>{
             //controllo che body sia un array
             if (Array.isArray(body)){
@@ -898,18 +898,30 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
                 for(var i=0; i<body.length; i++){
                     idAdId[i]=body[i].adId;
                     idAppId[i]=body[i].appId;
+                    idCdsId=body[i].cdsId;
                     console.log('*********** idAdId ' +idAdId[i] );
-                    console.log('************idAppId ' +idAppId[i] );
+                    console.log('************ idAppId ' +idAppId[i] );
+                    console.log('************ cdsId ' +idCdsId );
                 } 
             }
-            b=body;
-            resolve(b);
+           
+            resolve(body);
             //resolve(appelliPrenotati);
-        }).then((b)=>{
-            console.log('SONO NELLA PARTE 2 con idAd =' + idAdId[0] + ', appId='  +idAppId[0] + ', cdsId '+b[0].cdsId);
-            getDettaglioSingoloAppelloPrenotato(cdsId, idAdId[0],idAppId[0]).then((body)=>{
+        }).then((body)=>{
+            console.log('SONO NELLA PARTE 2 con idAd =' + idAdId[0] + ', appId='  +idAppId[0] +', cdsId=' +idCdsId);
+            getDettaglioSingoloAppelloPrenotato(idCdsId, idAdId[0],idAppId[0]).then((body)=>{
                 console.log('HO IL DETTAGLIO DI APPELLO con data inizio= ' + body.dataInizioApp);
+                if (Array.isArray(body)){
+                    console.log('body del dettaglio è un array');
+                }else{
+                    console.log('body del dettaglio è di tipo ' +typeof body);
+
+                }
                 resolve(body);
+                /*appelliPrenotati[0]= new appello(body[i].aaCalId,body[i].adCod, body[i].adDes, body[i].adId,body[i].appId, body[i].cdsCod,
+                    body[i].cdsDes,body[i].cdsId,body[i].condId,body[i].dataFineIscr,body[i].dataInizioApp, body[i].dataInizioIscr, body[i].desApp);
+                   // 
+                  // resolve(appelliPrenotati);*/
             }); //fine  controller.getDettaglioSingoloAppelloPrenotato
             
        
