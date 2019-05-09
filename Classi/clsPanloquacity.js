@@ -1183,7 +1183,7 @@ function callAVA(agent) {
 */
            controller.getSingoloAppelloPrenotato(matId).then((appelliPrenotati) => { 
           console.log('***********sti cazzi de appelliPrenotati '+JSON.stringify(appelliPrenotati));
-           agent.add('Appello di ' + appelliPrenotati[0].cdsId); /*+ ', codice '+appelliPrenotati[0].adCod +
+           agent.add('Appello di ' +appelliPrenotati[0].dataInizioApp); /*   + body[0].cdsId  + ', codice '+appelliPrenotati[0].adCod +
            + 'data appello ' +appelliPrenotati[0].dataInizioApp + ' , con docente '+appelliPrenotati[0].presidenteCognome +' '+ appelliPrenotati[0].presidenteNome)*/
            resolve(agent);
 
