@@ -1180,12 +1180,42 @@ function callAVA(agent) {
           //09/05/2018
          /* controller.getSingoloAppelloPrenotato(matId).then((body) => { 
            agent.add('ho il body con cdsId= '+body[0].cdsId + ', adId= '+ body[0].adId + ', appId= '+body[0].appId);
-*/
-           controller.getSingoloAppelloPrenotato(matId).then((appelliPrenotati) => { 
+          */
+            //PROVA DEL 09/05/2019 DE SERA
+            controller.getAppId(matId).then((body)=>{
+              //controllo che body sia un array
+              if (Array.isArray(body)){
+                  rawData=JSON.stringify(body);
+              
+                  for(var i=0; i<body.length; i++){
+                      idAdId[i]=body[i].adId;
+                      idAppId[i]=body[i].appId;
+                      idCdsId=body[i].cdsId;
+                      //passo 2
+                      controller.getDettaglioSingoloAppelloPrenotato(idCdsId, idAdId[i], idAppId[i]).then((body)=>{
+                        console.log('HO IL DETTAGLIO DI APPELLO con data inizio= ' + body.dataInizioApp);
+                       if (Array.isArray(body)){
+                          //  console.log('body del dettaglio è un array'); 
+                            for(var i=0; i<body.length; i++){
+                                strTemp+='appello ' + body.aaCalId + ',' + body.dataInizioApp;
+                            } 
+                            var str=strOutput;
+                            str=str.replace(/(@)/gi, strTemp);
+                            strOutput=str;
+                            agent.add(strOutput);
+                            console.log('strOutput con replace '+ strOutput);
+                            resolve(agent);
+                        }
+                      });   
+                  } 
+              }
+            
+             
+           //controller.getSingoloAppelloPrenotato(matId).then((appelliPrenotati) => { 
            //console.log('***********sti cazzi de appelliPrenotati '+JSON.stringify(appelliPrenotati));
-           agent.add('Appello di ' +appelliPrenotati[0].dataInizioApp); /*   + body[0].cdsId  + ', codice '+appelliPrenotati[0].adCod +
-           + 'data appello ' +appelliPrenotati[0].dataInizioApp + ' , con docente '+appelliPrenotati[0].presidenteCognome +' '+ appelliPrenotati[0].presidenteNome)*/
-           resolve(agent);
+          // agent.add('Appello di ' +appelliPrenotati[0].dataInizioApp); /*   + body[0].cdsId  + ', codice '+appelliPrenotati[0].adCod +
+          // + 'data appello ' +appelliPrenotati[0].dataInizioApp + ' , con docente '+appelliPrenotati[0].presidenteCognome +' '+ appelliPrenotati[0].presidenteNome)*/
+          // resolve(agent);
 
            /*if (Array.isArray(appelliPrenotati)){
               //console.log('sono in array di appelliPrenotati')
@@ -1212,7 +1242,7 @@ function callAVA(agent) {
             agent.add('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotato: ' +error);
             resolve(agent);
           });
-        //intanto recupero dal libretto gli appelli prenotati 
+        //intanto recupero dal libretto gli appelli prenotati DAL LIBRETTO
        /* controller.getPrenotati(matId).then((prenotazioni) => { 
           var adIdPrenotato='';
           var strTemp='';

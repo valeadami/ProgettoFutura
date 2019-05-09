@@ -1077,5 +1077,7 @@ exports.GetDocente=GetDocente;
 exports.getSegmento=getSegmento;
 exports.getEsamiUltimoAnno=getEsamiUltimoAnno;
 exports.getMediaComplessiva=getMediaComplessiva;
+exports.getAppId=getAppId;
 exports.getSingoloAppelloPrenotato=getSingoloAppelloPrenotato;
+exports.getDettaglioSingoloAppelloPrenotato=getDettaglioSingoloAppelloPrenotato;
 exports.testCC=testCC;
