@@ -1188,7 +1188,26 @@ function callAVA(agent) {
             //PROVA DEL 09/05/2019 DE SERA
             controller.getAppId(matId).then((body)=>{
               //controllo che body sia un array
-              if (Array.isArray(body)){
+              //10/05/2019 per il momento è solo un elemento, chiama statico 
+              
+              controller.getDettaglioSingoloAppelloPrenotato(body[0].cdsId, body[0].adId, body[0].appId).then((body)=>{
+                        console.log('HO IL DETTAGLIO DI APPELLO con data inizio= ' + body.dataInizioApp);
+                       if (Array.isArray(body)){
+                          //  console.log('body del dettaglio è un array'); 
+                            for(var i=0; i<body.length; i++){
+                                strTemp+='appello ' + body.aaCalId + ',' + body.dataInizioApp;
+                            } 
+                           
+                        }
+                        var str=strOutput;
+                        str=str.replace(/(@)/gi, strTemp);
+                        strOutput=str;
+                        agent.add(strOutput);
+                        console.log('strOutput con replace '+ strOutput);
+                        resolve(agent); 
+                      });   
+             //commento temp 10/05/2019
+              /*if (Array.isArray(body)){
                   rawData=JSON.stringify(body);
               
                   for(var i=0; i<body.length; i++){
@@ -1210,13 +1229,14 @@ function callAVA(agent) {
                         strOutput=str;
                         agent.add(strOutput);
                         console.log('strOutput con replace '+ strOutput);
+                        resolve(agent); 
                       });  
                       
-                      resolve(agent); 
+                    
                   } 
               }
             
-             
+             */ //fine commento temp del 10/05/2019
            //controller.getSingoloAppelloPrenotato(matId).then((appelliPrenotati) => { 
            //console.log('***********sti cazzi de appelliPrenotati '+JSON.stringify(appelliPrenotati));
           // agent.add('Appello di ' +appelliPrenotati[0].dataInizioApp); /*   + body[0].cdsId  + ', codice '+appelliPrenotati[0].adCod +
