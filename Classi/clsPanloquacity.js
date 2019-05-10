@@ -1317,14 +1317,15 @@ function callAVA(agent) {
           //console.log('sono in array di appelliPrenotati')
           for(var i=0; i<appelliPrenotati.length; i++){
 
-            strTemp+= 'Appello di ' + appelliPrenotati[i].desApp+ ', codice '+appelliPrenotati[i].adCod +//', tipo esame '+appelliPrenotati[i].tipoEsaDes;
-            + 'data appello ' +appelliPrenotati[i].dataInizioApp + ' , con docente '+appelliPrenotati[i].presidenteCognome +' '+ appelliPrenotati[i].presidenteNome;
+            strTemp+= 'Appello di ' + appelliPrenotati[i].desApp
+            /*+ ', codice '+appelliPrenotati[i].adCod
+            + 'data appello ' +appelliPrenotati[i].dataInizioApp + ' , con docente '+appelliPrenotati[i].presidenteCognome +' '+ appelliPrenotati[i].presidenteNome;*/
           } 
           var str=strOutput;
           str=str.replace(/(@)/gi, strTemp);
           strOutput=str;
           agent.add(strOutput);
-          console.log('strOutput con replace in  getAppelliPrenotati-> getSingoloAppelloPrenotato '+ strOutput);
+          console.log('strOutput con replace in  getAppelliPrenotatiNuovo-> '+ strOutput);
           resolve(agent);
        } 
        else{
