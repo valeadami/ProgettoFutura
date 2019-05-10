@@ -941,7 +941,58 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
         });
     });
     }
-       //
+//nuova versione di getSingoloAppelloPrenotatoNuovo
+function getSingoloAppelloPrenotatoNuovo(matId){
+    return new Promise(function(resolve, reject) {
+    var appelliPrenotati=[];
+    var rawData='';
+    var idAdId=[]; //tengo traccia degli adId attività didattica
+    var idAppId=[]; //tengo traccia degli appId 
+    var idCdsId='';
+    getAppId(matId).then((body)=>{
+        //controllo che body sia un array
+        if (Array.isArray(body)){
+            rawData=JSON.stringify(body);
+           // console.log('\n\nQUESTO IL BODY DI PRENOTAZIONI ' +rawData);
+            //creo oggetto libretto
+            for(var i=0; i<body.length; i++){
+                idAdId[i]=body[i].adId;
+                idAppId[i]=body[i].appId;
+                idCdsId=body[i].cdsId;
+               //faccio qui la chiamata al dettaglio
+                 getDettaglioSingoloAppelloPrenotato(idCdsId, idAdId[i],idAppId[i]).then((body)=>{
+                console.log('ClsController->getSingoloAppelloPrenotatoNuovo :HO IL DETTAGLIO DI APPELLO con data inizio= ' + body.dataInizioApp);
+                    if (Array.isArray(body)){
+                          console.log('body del dettaglio è un array'); 
+                            for(var i=0; i<body.length; i++){
+                                appelliPrenotati[i]= new appello(body[i].aaCalId,body[i].adCod, body[i].adDes, body[i].adId,body[i].appId, body[i].cdsCod,
+                                    body[i].cdsDes,body[i].cdsId,body[i].condId,body[i].dataFineIscr,body[i].dataInizioApp, body[i].dataInizioIscr, body[i].desApp,
+                                    //aggiunto qui
+                                    body[i].note,body[i].numIscritti,body[i].numPubblicazioni,body[i].numVerbaliCar,body[i].numVerbaliGen,
+                                    body[i].presidenteCognome,body[i].presidenteId,body[i].presidenteNome,body[i].riservatoFlg,body[i].stato,body[i].statoAperturaApp,body[i].statoDes,body[i].statoInsEsiti,body[i].statoLog,body[i].statoPubblEsiti,body[i].statoVerb,
+                                    body[i].tipoDefAppCod,body[i].tipoDefAppDes,body[i].tipoEsaCod,body[i].tipoSceltaTurno);
+                                
+                            } 
+                        }else{
+                           console.log('body del dettaglio è di tipo ' +typeof body); //object quindi una riga sola
+                            appelliPrenotati[0]=new appello(body.aaCalId,body.adCod, body.adDes, body.adId,body.appId, body.cdsCod,
+                                body.cdsDes,body.cdsId,body.condId,body.dataFineIscr,body.dataInizioApp, body.dataInizioIscr, body.desApp,
+                                //aggiunto qui
+                                body.note,body.numIscritti,body.numPubblicazioni,body.numVerbaliCar,body.numVerbaliGen,
+                                body.presidenteCognome,body.presidenteId,body.presidenteNome,body.riservatoFlg,body.stato,body.statoAperturaApp,body.statoDes,body.statoInsEsiti,body.statoLog,body.statoPubblEsiti,body.statoVerb,
+                                body.tipoDefAppCod,body.tipoDefAppDes,body.tipoEsaCod,body.tipoSceltaTurno);
+                            // console.log('TEST di appelliPrenotati[0] anno '+ appelliPrenotati[0].aaCalId);
+                        }
+            //resolve(body);
+            resolve(appelliPrenotati);
+            
+        });
+            } 
+        }
+       
+    })
+});
+}
 // getAppelloDaPrenotare(cdsId,adId)
 function getAppelloDaPrenotare(cdsId,adId){
     return new Promise(function(resolve, reject) {
@@ -1080,4 +1131,5 @@ exports.getMediaComplessiva=getMediaComplessiva;
 exports.getAppId=getAppId;
 exports.getSingoloAppelloPrenotato=getSingoloAppelloPrenotato;
 exports.getDettaglioSingoloAppelloPrenotato=getDettaglioSingoloAppelloPrenotato;
+exports.getSingoloAppelloPrenotatoNuovo=getSingoloAppelloPrenotatoNuovo;
 exports.testCC=testCC;

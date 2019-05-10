@@ -1174,7 +1174,7 @@ function callAVA(agent) {
   
               break;
         //08/05/2019 getAppelliPrenotati: recupero la lista delle prenotazioni effettuate
-        case 'getAppelliPrenotati':
+        case 'getAppelliPrenotatiOLD':
           console.log('sono in getApppelliPrenotati');
           var rawData='';
           var idAdId=[]; //tengo traccia degli adId attività didattica
@@ -1196,7 +1196,7 @@ function callAVA(agent) {
                         if (Array.isArray(body)){
                           //  console.log('body del dettaglio è un array'); per de qua adesso non passa 10/05/2019
                             for(var i=0; i<body.length; i++){
-                                strTemp+='appello ' + body[i].aaCalId + ',' + body[i].dataInizioApp;
+                                strTemp+='appello di ' + body[i].desApp +' dell\'anno ' + body[i].aaCalId + ', data e ora appello ' + body[i].turni[0].dataOraEsa + ', codice '+body[i].adCod +', con docente '+body[i].presidenteCognome +' '+ body[i].presidenteNome;;
                             } 
                            
                         }else{
@@ -1299,7 +1299,46 @@ function callAVA(agent) {
           }); */
 
         break;
+      //prova del 10/05/2019
+      case 'getAppelliPrenotati':
+      console.log('sono in getApppelliPrenotati test nuovo');
+      var rawData='';
+      var idAdId=[]; //tengo traccia degli adId attività didattica
+      var idAppId=[]; //tengo traccia degli appId 
+      var idCdsId='';
+      var strTemp='';
+    
+        
+       controller.getSingoloAppelloPrenotatoNuovo(matId).then((appelliPrenotati) => { 
+       console.log('***********sti cazzi de appelliPrenotati '+JSON.stringify(appelliPrenotati));
+    
 
+       if (Array.isArray(appelliPrenotati)){
+          //console.log('sono in array di appelliPrenotati')
+          for(var i=0; i<appelliPrenotati.length; i++){
+
+            strTemp+= 'Appello di ' + appelliPrenotati[i].desApp+ ', codice '+appelliPrenotati[i].adCod +//', tipo esame '+appelliPrenotati[i].tipoEsaDes;
+            + 'data appello ' +appelliPrenotati[i].dataInizioApp + ' , con docente '+appelliPrenotati[i].presidenteCognome +' '+ appelliPrenotati[i].presidenteNome;
+          } 
+          var str=strOutput;
+          str=str.replace(/(@)/gi, strTemp);
+          strOutput=str;
+          agent.add(strOutput);
+          console.log('strOutput con replace in  getAppelliPrenotati-> getSingoloAppelloPrenotato '+ strOutput);
+          resolve(agent);
+       } 
+       else{
+        console.log('appelliPrenotati NON è ARRAY');
+
+       }
+  
+         
+      }).catch((error) => {
+        console.log('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotatoNuovo: ' +error);
+        agent.add('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotatoNuovo: ' +error);
+        resolve(agent);
+      });
+      break;
         default:
         
           console.log('nel default ossia risponde il fallback in callAVANEW ');
