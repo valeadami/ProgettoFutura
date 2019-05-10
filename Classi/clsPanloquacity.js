@@ -1192,12 +1192,15 @@ function callAVA(agent) {
               
               controller.getDettaglioSingoloAppelloPrenotato(body[0].cdsId, body[0].adId, body[0].appId).then((body)=>{
                         console.log('IN CLSPANLOQUACITY HO IL DETTAGLIO DI APPELLO con data inizio= ' + body.dataInizioApp);
-                       if (Array.isArray(body)){
-                          //  console.log('body del dettaglio è un array'); 
+                     //TE SON UN COION: ADESSO CHIAMO DIRETTAMENTE GETDETTAGLIOSINGOLOAPPELLO QUINDI HO IL BODY NON ARRAY
+                        if (Array.isArray(body)){
+                          //  console.log('body del dettaglio è un array'); per de qua adesso non passa 10/05/2019
                             for(var i=0; i<body.length; i++){
-                                strTemp+='appello ' + body.aaCalId + ',' + body.dataInizioApp;
+                                strTemp+='appello ' + body[i].aaCalId + ',' + body[i].dataInizioApp;
                             } 
                            
+                        }else{
+                          strTemp+='appello ' + body.desApp +' dell\'anno ' + body.aaCalId + ', data inizio ' + body.dataInizioApp + 'codice '+body.adCod +'data appello ' +body.dataInizioApp + ' , con docente '+body.presidenteCognome +' '+ body.presidenteNome;
                         }
                         var str=strOutput;
                         str=str.replace(/(@)/gi, strTemp);
