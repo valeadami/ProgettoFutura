@@ -1310,14 +1310,14 @@ function callAVA(agent) {
     
         
        controller.getSingoloAppelloPrenotatoNuovo(matId).then((appelliPrenotati) => { 
-       console.log('***********sti cazzi de appelliPrenotati '+JSON.stringify(appelliPrenotati));
+       //console.log('***********sti cazzi de appelliPrenotati '+JSON.stringify(appelliPrenotati));
     
 
        if (Array.isArray(appelliPrenotati)){
           //console.log('sono in array di appelliPrenotati')
           for(var i=0; i<appelliPrenotati.length; i++){
 
-            strTemp+= 'Appello di ' + appelliPrenotati[i].desApp
+            strTemp+= 'Appello di ' + appelliPrenotati[i].desApp+', codice '+appelliPrenotati[i].adCod;
             /*+ ', codice '+appelliPrenotati[i].adCod
             + 'data appello ' +appelliPrenotati[i].dataInizioApp + ' , con docente '+appelliPrenotati[i].presidenteCognome +' '+ appelliPrenotati[i].presidenteNome;*/
           } 
