@@ -1200,7 +1200,7 @@ function callAVA(agent) {
                             } 
                            
                         }else{
-                          strTemp+='appello di ' + body.desApp +' dell\'anno ' + body.aaCalId + ', data e ora appello ' + body.turni[0].dataOraEsa + ', codice '+body.adCod; //+', con docente '+body.presidenteCognome +' '+ body.presidenteNome;
+                          strTemp+='appello di ' + body.desApp +' dell\'anno ' + body.aaCalId + ', data e ora appello ' + body.turni[0].dataOraEsa + ', codice '+body.adCod +', con docente '+body.presidenteCognome +' '+ body.presidenteNome;
                         }; //
                         var str=strOutput;
                         str=str.replace(/(@)/gi, strTemp);
