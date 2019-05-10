@@ -1196,7 +1196,7 @@ function callAVA(agent) {
                         if (Array.isArray(body)){
                           //  console.log('body del dettaglio è un array'); per de qua adesso non passa 10/05/2019
                             for(var i=0; i<body.length; i++){
-                                strTemp+='appello di ' + body[i].desApp +' dell\'anno ' + body[i].aaCalId + ', data e ora appello ' + body[i].turni[0].dataOraEsa + ', codice '+body[i].adCod +', con docente '+body[i].presidenteCognome +' '+ body[i].presidenteNome;;
+                                strTemp+='appello di ' + body[i].desApp +' dell\'anno ' + body[i].aaCalId + ', data e ora appello ' + body[i].turni[0].dataOraEsa + ', codice '+body[i].adCod +', con docente '+body[i].presidenteCognome +' '+ body[i].presidenteNome;
                             } 
                            
                         }else{
@@ -1317,9 +1317,7 @@ function callAVA(agent) {
           //console.log('sono in array di appelliPrenotati')
           for(var i=0; i<appelliPrenotati.length; i++){
 
-            strTemp+= 'Appello di ' + appelliPrenotati[i].desApp+', codice '+appelliPrenotati[i].adCod;
-            /*+ ', codice '+appelliPrenotati[i].adCod
-            + 'data appello ' +appelliPrenotati[i].dataInizioApp + ' , con docente '+appelliPrenotati[i].presidenteCognome +' '+ appelliPrenotati[i].presidenteNome;*/
+            strTemp+='appello di ' + body[i].desApp +' dell\'anno ' + body[i].aaCalId + ', data e ora appello ' + body[i].turni[0].dataOraEsa + ', codice '+body[i].adCod +', con docente '+body[i].presidenteCognome +' '+ body[i].presidenteNome;
           } 
           var str=strOutput;
           str=str.replace(/(@)/gi, strTemp);
