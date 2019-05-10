@@ -1200,13 +1200,13 @@ function callAVA(agent) {
                             } 
                            
                         }else{
-                          strTemp+='appello di ' + body.desApp +' dell\'anno ' + body.aaCalId + ', data e ora appello ' + body.turni[0].dataOraEsa + ', codice '+body.adCod +', con docente '+body.presidenteCognome +' '+ body.presidenteNome;
+                          strTemp+='appello di ' + body.desApp +' dell\'anno ' + body.aaCalId; //+ ', data e ora appello ' + body.turni[0].dataOraEsa + ', codice '+body.adCod +', con docente '+body.presidenteCognome +' '+ body.presidenteNome;
                         }
                         var str=strOutput;
                         str=str.replace(/(@)/gi, strTemp);
                         strOutput=str;
                         agent.add(strOutput);
-                        console.log('strOutput con replace '+ strOutput);
+                        //console.log('strOutput con replace '+ strOutput);
                         resolve(agent); 
                       });   
              //commento temp 10/05/2019
