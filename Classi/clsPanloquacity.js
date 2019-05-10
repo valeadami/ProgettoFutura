@@ -1191,7 +1191,7 @@ function callAVA(agent) {
               //10/05/2019 per il momento è solo un elemento, chiama statico 
               
               controller.getDettaglioSingoloAppelloPrenotato(body[0].cdsId, body[0].adId, body[0].appId).then((body)=>{
-                        console.log('HO IL DETTAGLIO DI APPELLO con data inizio= ' + body.dataInizioApp);
+                        console.log('IN CLSPANLOQUACITY HO IL DETTAGLIO DI APPELLO con data inizio= ' + body.dataInizioApp);
                        if (Array.isArray(body)){
                           //  console.log('body del dettaglio è un array'); 
                             for(var i=0; i<body.length; i++){
