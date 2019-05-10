@@ -1317,7 +1317,7 @@ function callAVA(agent) {
           //console.log('sono in array di appelliPrenotati')
           for(var i=0; i<appelliPrenotati.length; i++){
 
-            strTemp+='appello di ' + body[i].desApp +' dell\'anno ' + body[i].aaCalId + ', data e ora appello ' + body[i].turni[0].dataOraEsa + ', codice '+body[i].adCod +', con docente '+body[i].presidenteCognome +' '+ body[i].presidenteNome;
+            strTemp+='appello di ' + appelliPrenotati[i].desApp +' dell\'anno ' + appelliPrenotati[i].aaCalId + ', data e ora appello ' + appelliPrenotati[i].turni[0].dataOraEsa + ', codice '+appelliPrenotati[i].adCod +', con docente '+appelliPrenotati[i].presidenteCognome +' '+ appelliPrenotati[i].presidenteNome;
           } 
           var str=strOutput;
           str=str.replace(/(@)/gi, strTemp);
