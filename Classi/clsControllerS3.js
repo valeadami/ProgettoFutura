@@ -985,7 +985,7 @@ function getSingoloAppelloPrenotatoNuovo(matId){
                                 body.presidenteCognome,body.presidenteId,body.presidenteNome,body.riservatoFlg,body.stato,body.statoAperturaApp,body.statoDes,body.statoInsEsiti,body.statoLog,body.statoPubblEsiti,body.statoVerb,
                                 body.tipoDefAppCod,body.tipoDefAppDes,body.tipoEsaCod,body.tipoSceltaTurno, body.turni);*/
                             // console.log('TEST di appelliPrenotati[0] anno '+ appelliPrenotati[0].aaCalId);
-                            appelliPrenotati[I]=new appello(body.aaCalId,body.adCod,null, null,null, null,
+                            appelliPrenotati[i]=new appello(body.aaCalId,body.adCod,null, null,null, null,
                                 null,null,null,null,null, null, body.desApp,
                                 null,null,null,null,null,
                                 body.presidenteCognome,null,body.presidenteNome,null,null,null,null,null,null, null,null,
