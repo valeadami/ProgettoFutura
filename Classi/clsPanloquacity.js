@@ -1216,14 +1216,14 @@ function callAVA(agent) {
                                 null,null,null,null,null,
                                 body.presidenteCognome,null,body.presidenteNome,null,null,null,null,null,null, null,null,
                                 null,null,null,null, body.turni);*/
-                                strTemp+='appello di ' + body.desApp + ', data ora appello  ' +body.turni[0].dataOraEsa;
+                                strTemp+=' appello di ' + body.desApp + ', data ora appello  ' +body.turni[0].dataOraEsa;
                                 console.log('strTemp= '+strTemp); 
                                 
-                   
+                                agent.add(strTemp);
                 }); //fine getDettaglioSingoloAppelloPrenotato*/
                 
               }//fine for
-             agent.add(strTemp);
+            
              resolve(agent);
           }).catch((error) => {
             console.log('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotato: ' +error);
