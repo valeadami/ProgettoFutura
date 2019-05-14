@@ -1240,6 +1240,7 @@ function callAVA(agent) {
               }
             
              */ //fine commento temp del 10/05/2019
+             
            //controller.getSingoloAppelloPrenotato(matId).then((appelliPrenotati) => { 
            //console.log('***********sti cazzi de appelliPrenotati '+JSON.stringify(appelliPrenotati));
           // agent.add('Appello di ' +appelliPrenotati[0].dataInizioApp); /*   + body[0].cdsId  + ', codice '+appelliPrenotati[0].adCod +

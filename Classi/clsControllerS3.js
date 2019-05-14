@@ -851,7 +851,7 @@ return new Promise(function(resolve, reject) {
     });
 });
 }
-//2) ora che ho appId cdsId adID, query su appelli/cdsId/adId/appId https://units.esse3.pp.cineca.it/e3rest/api/calesa-service-v1/appelli/10094/111218/215
+//2)*************** 10/05/2019 ora che ho appId cdsId adID, query su appelli/cdsId/adId/appId https://units.esse3.pp.cineca.it/e3rest/api/calesa-service-v1/appelli/10094/111218/215
 function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
     return new Promise(function(resolve, reject) {
         var options = { 
@@ -919,7 +919,7 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
                              //aggiunto qui
                              body[i].note,body[i].numIscritti,body[i].numPubblicazioni,body[i].numVerbaliCar,body[i].numVerbaliGen,
                              body[i].presidenteCognome,body[i].presidenteId,body[i].presidenteNome,body[i].riservatoFlg,body[i].stato,body[i].statoAperturaApp,body[i].statoDes,body[i].statoInsEsiti,body[i].statoLog,body[i].statoPubblEsiti,body[i].statoVerb,
-                             body[i].tipoDefAppCod,body[i].tipoDefAppDes,body[i].tipoEsaCod,body[i].tipoSceltaTurno);
+                             body[i].tipoDefAppCod,body[i].tipoDefAppDes,body[i].tipoEsaCod,body[i].tipoSceltaTurno, body[i].dataOraEsa);
                         
                     } 
                 }else{
@@ -929,7 +929,7 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
                         //aggiunto qui
                         body.note,body.numIscritti,body.numPubblicazioni,body.numVerbaliCar,body.numVerbaliGen,
                         body.presidenteCognome,body.presidenteId,body.presidenteNome,body.riservatoFlg,body.stato,body.statoAperturaApp,body.statoDes,body.statoInsEsiti,body.statoLog,body.statoPubblEsiti,body.statoVerb,
-                        body.tipoDefAppCod,body.tipoDefAppDes,body.tipoEsaCod,body.tipoSceltaTurno);
+                        body.tipoDefAppCod,body.tipoDefAppDes,body.tipoEsaCod,body.tipoSceltaTurno,body.dataOraEsa);
                        // console.log('TEST di appelliPrenotati[0] anno '+ appelliPrenotati[0].aaCalId);
                 }
                 //resolve(body);
@@ -941,7 +941,7 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
         });
     });
     }
-//nuova versione di getSingoloAppelloPrenotatoNuovo
+//******************** */10/05/2019 nuova versione di getSingoloAppelloPrenotatoNuovo
 function getSingoloAppelloPrenotatoNuovo(matId){
     return new Promise(function(resolve, reject) {
     var appelliPrenotati=[];
@@ -970,7 +970,7 @@ function getSingoloAppelloPrenotatoNuovo(matId){
                                     //aggiunto qui
                                     body[i].note,body[i].numIscritti,body[i].numPubblicazioni,body[i].numVerbaliCar,body[i].numVerbaliGen,
                                     body[i].presidenteCognome,body[i].presidenteId,body[i].presidenteNome,body[i].riservatoFlg,body[i].stato,body[i].statoAperturaApp,body[i].statoDes,body[i].statoInsEsiti,body[i].statoLog,body[i].statoPubblEsiti,body[i].statoVerb,
-                                    body[i].tipoDefAppCod,body[i].tipoDefAppDes,body[i].tipoEsaCod,body[i].tipoSceltaTurno);
+                                    body[i].tipoDefAppCod,body[i].tipoDefAppDes,body[i].tipoEsaCod,body[i].tipoSceltaTurno,body[i].dataOraEsa);
                                 
                             } 
                         }else{
@@ -980,7 +980,7 @@ function getSingoloAppelloPrenotatoNuovo(matId){
                                 //aggiunto qui
                                 body.note,body.numIscritti,body.numPubblicazioni,body.numVerbaliCar,body.numVerbaliGen,
                                 body.presidenteCognome,body.presidenteId,body.presidenteNome,body.riservatoFlg,body.stato,body.statoAperturaApp,body.statoDes,body.statoInsEsiti,body.statoLog,body.statoPubblEsiti,body.statoVerb,
-                                body.tipoDefAppCod,body.tipoDefAppDes,body.tipoEsaCod,body.tipoSceltaTurno);
+                                body.tipoDefAppCod,body.tipoDefAppDes,body.tipoEsaCod,body.tipoSceltaTurno, body.dataOraEsa);
                             // console.log('TEST di appelliPrenotati[0] anno '+ appelliPrenotati[0].aaCalId);
                         }
             //resolve(body);
