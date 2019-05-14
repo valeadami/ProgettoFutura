@@ -994,12 +994,12 @@ function getSingoloAppelloPrenotatoNuovo(matId){
                                 null,null,null,null, body.turni);
                       //  }
             //resolve(body);
-           
+            resolve(appelliPrenotati);
             
         });
           
             } // fine for 
-            resolve(appelliPrenotati);
+          
         }
        
     })
