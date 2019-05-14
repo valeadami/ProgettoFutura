@@ -1181,113 +1181,54 @@ function callAVA(agent) {
           var idAppId=[]; //tengo traccia degli appId 
           var idCdsId='';
           var strTemp='';
-          //09/05/2018
-          controller.getSingoloAppelloPrenotato(matId).then((appelliPrenotati) => { 
-            if (Array.isArray(appelliPrenotati)){
-              console.log('CLSPLQ: sono in array di appelliPrenotati');
-              for(var i=0; i<appelliPrenotati.length; i++){
-                if(appelliPrenotati[i]){
-                  strTemp+='appello di ' + appelliPrenotati[i].desApp +' dell\'anno ' + appelliPrenotati[i].aaCalId + ', data e ora appello ' + appelliPrenotati[i].turni[0].dataOraEsa+ ', codice '+appelliPrenotati[i].adCod +', con docente '+appelliPrenotati[i].presidenteCognome +' '+ appelliPrenotati[i].presidenteNome +'\n';
-                }else{
-                  console.log('VALORE NULL');
-                }
-                  
-              } 
-            //ier qua stroutput resolve
-           } 
-           else{
-            console.log('appelliPrenotati NON è ARRAY');
-    
-           }
-           var str=strOutput;
-           str=str.replace(/(@)/gi, strTemp);
-           strOutput=str;
-           agent.add(strOutput);
-           console.log('strOutput con replace in  getAppelliPrenotatiNuovo-> '+ strOutput);
-           resolve(agent);
-
-           /* agent.add('ho APPELLI PRENOTATI = '+appelliPrenotati.length);
-           resolve(agent);*/
+         
+           
             //PROVA DEL 09/05/2019 DE SERA
-            /*controller.getAppId(matId).then((body)=>{
+          
+            var appelliPrenotati=[];
             
-              
-              controller.getDettaglioSingoloAppelloPrenotato(body[0].cdsId, body[0].adId, body[0].appId).then((body)=>{
-                        console.log('IN CLSPANLOQUACITY HO IL DETTAGLIO DI APPELLO con data inizio= ' + body.dataInizioApp);
-                     //TE SON UN COION: ADESSO CHIAMO DIRETTAMENTE GETDETTAGLIOSINGOLOAPPELLO QUINDI HO IL BODY NON ARRAY
-                        if (Array.isArray(body)){
-                          //  console.log('body del dettaglio è un array'); per de qua adesso non passa 10/05/2019
-                            for(var i=0; i<body.length; i++){
-                                strTemp+='appello di ' + body[i].desApp +' dell\'anno ' + body[i].aaCalId + ', data e ora appello ' + body[i].turni[0].dataOraEsa + ', codice '+body[i].adCod +', con docente '+body[i].presidenteCognome +' '+ body[i].presidenteNome;
-                            } 
-                           
-                        }else{
-                          strTemp+='appello di ' + body.desApp +' dell\'anno ' + body.aaCalId + ', data e ora appello ' + body.turni[0].dataOraEsa + ', codice '+body.adCod +', con docente '+body.presidenteCognome +' '+ body.presidenteNome;
-                        }; //
-                        var str=strOutput;
-                        str=str.replace(/(@)/gi, strTemp);
-                        strOutput=str;
-                        agent.add(strOutput);
-                        //console.log('strOutput con replace '+ strOutput);
-                        resolve(agent); 
-                      });   */
-             //commento temp 10/05/2019
-              /*if (Array.isArray(body)){
-                  rawData=JSON.stringify(body);
-              
-                  for(var i=0; i<body.length; i++){
-                      idAdId[i]=body[i].adId;
-                      idAppId[i]=body[i].appId;
-                      idCdsId=body[i].cdsId;
-                      //passo 2
-                      controller.getDettaglioSingoloAppelloPrenotato(idCdsId, idAdId[i], idAppId[i]).then((body)=>{
-                        console.log('HO IL DETTAGLIO DI APPELLO con data inizio= ' + body.dataInizioApp);
-                       if (Array.isArray(body)){
-                          //  console.log('body del dettaglio è un array'); 
-                            for(var i=0; i<body.length; i++){
-                                strTemp+='appello ' + body.aaCalId + ',' + body.dataInizioApp;
-                            } 
-                           
-                        }
-                        var str=strOutput;
-                        str=str.replace(/(@)/gi, strTemp);
-                        strOutput=str;
-                        agent.add(strOutput);
-                        console.log('strOutput con replace '+ strOutput);
-                        resolve(agent); 
-                      });  
-                      
-                    
-                  } 
-              }
-            
-             */ //fine commento temp del 10/05/2019
-
-           //controller.getSingoloAppelloPrenotato(matId).then((appelliPrenotati) => { 
-           //console.log('***********sti cazzi de appelliPrenotati '+JSON.stringify(appelliPrenotati));
-          // agent.add('Appello di ' +appelliPrenotati[0].dataInizioApp); /*   + body[0].cdsId  + ', codice '+appelliPrenotati[0].adCod +
-          // + 'data appello ' +appelliPrenotati[0].dataInizioApp + ' , con docente '+appelliPrenotati[0].presidenteCognome +' '+ appelliPrenotati[0].presidenteNome)*/
-          // resolve(agent);
-
-           /*if (Array.isArray(appelliPrenotati)){
-              //console.log('sono in array di appelliPrenotati')
-              for(var i=0; i<appelliPrenotati.length; i++){
-
-                strTemp+= 'Appello di ' + appelliPrenotati[i].desApp+ ', codice '+appelliPrenotati[i].adCod +//', tipo esame '+appelliPrenotati[i].tipoEsaDes;
-                + 'data appello ' +appelliPrenotati[i].dataInizioApp + ' , con docente '+appelliPrenotati[i].presidenteCognome +' '+ appelliPrenotati[i].presidenteNome;
-              } 
+            controller.getAppId(matId).then((body)=>{
+                //controllo che body sia un array
+                if (Array.isArray(body)){
+                    rawData=JSON.stringify(body);
+                   // console.log('\n\nQUESTO IL BODY DI PRENOTAZIONI ' +rawData);
+                    //creo oggetto libretto
+                    for(var i=0; i<body.length; i++){
+                        idAdId[i]=body[i].adId;
+                        idAppId[i]=body[i].appId;
+                        idCdsId=body[i].cdsId;
+                       /* console.log('*********** idAdId ' +idAdId[i] );
+                        console.log('************ idAppId ' +idAppId[i] );
+                        console.log('************ cdsId ' +idCdsId );*/
+                    } 
+                }
+                return idAppId;
+            }).then((idAppId)=>{
+        
+                for(var i=0; i<idAppId.length; i++){
+                   // console.log('idapp '+idAppId[i]);
+                    controller.getDettaglioSingoloAppelloPrenotato(idCdsId, idAdId[i],idAppId[i]).then((body)=>{
+                        console.log('HO IL DETTAGLIO DI APPELLO CON data ora '+ body.turni[0].dataOraEsa +new Date());
+                       
+                          //  console.log('body del dettaglio è di tipo ' +typeof body); //object quindi una riga sola
+                            /*appelliPrenotati[i]=new appello(body.aaCalId,body.adCod,null, null,null, null,
+                                null,null,null,null,null, null, body.desApp,
+                                null,null,null,null,null,
+                                body.presidenteCognome,null,body.presidenteNome,null,null,null,null,null,null, null,null,
+                                null,null,null,null, body.turni);*/
+                                strTemp+='appello di ' + body.desApp + ', data ora appello  ' +body.turni[0].dataOraEsa;
+                                //console.log('codice '+appelliPrenotati[i].adCod + ', data ora ' +appelliPrenotati[i].turni[0].dataOraEsa + ', anno '+  appelliPrenotati[i].aaCalId +' , ' +'appello di ' + appelliPrenotati[i].desApp + ', presidente ' +appelliPrenotati[i].presidenteCognome + ' '+ appelliPrenotati[i].presidenteNome +' '+ new Date()); 
+                               
+                   
+                }); //fine getDettaglioSingoloAppelloPrenotato*/
+              }//fine for
               var str=strOutput;
               str=str.replace(/(@)/gi, strTemp);
               strOutput=str;
               agent.add(strOutput);
-              console.log('strOutput con replace in  getAppelliPrenotati-> getSingoloAppelloPrenotato '+ strOutput);
+              console.log('strOutput con replace in  getAppelliPrenotatiNuovo-> '+ strOutput);
               resolve(agent);
-           } 
-           else{
-            console.log('appelliPrenotati NON è ARRAY');
-
-           }*/
-            //
+            
              
           }).catch((error) => {
             console.log('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotato: ' +error);
