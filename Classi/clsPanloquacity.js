@@ -1220,9 +1220,9 @@ function callAVA(agent) {
                                 console.log('strTemp= '+strTemp); 
                                 
                                 agent.add(strTemp);
-                                resolve(agent);
+                                
                 }); //fine getDettaglioSingoloAppelloPrenotato*/
-                
+                resolve(agent);
               }//fine for
             
              
