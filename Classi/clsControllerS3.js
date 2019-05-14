@@ -949,6 +949,7 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
 function getSingoloAppelloPrenotatoNuovo(matId){
     return new Promise(function(resolve, reject) {
     var appelliPrenotati=[];
+    var prova=[];
     var rawData='';
     var idAdId=[]; //tengo traccia degli adId attività didattica
     var idAppId=[]; //tengo traccia degli appId 
@@ -963,10 +964,7 @@ function getSingoloAppelloPrenotatoNuovo(matId){
                 idAdId[i]=body[i].adId;
                 idAppId[i]=body[i].appId;
                 idCdsId=body[i].cdsId;
-            }
-            for(var i=0; i<body.length; i++){
-              
-            
+           
                //faccio qui la chiamata al dettaglio
                  getDettaglioSingoloAppelloPrenotato(idCdsId, idAdId[i],idAppId[i]).then((body)=>{
                 console.log('ClsController->getSingoloAppelloPrenotatoNuovo :HO IL DETTAGLIO DI APPELLO'); //  resolve(appelliPrenotati);
@@ -986,9 +984,14 @@ function getSingoloAppelloPrenotatoNuovo(matId){
                     body.presidenteCognome,null,body.presidenteNome,null,null,null,null,null,null, null,null,
                     null,null,null,null, body.turni);
                     
-            //resolve(body);
-                    resolve(appelliPrenotati);
-            
+         
+                   // resolve(appelliPrenotati);
+                        return appelliPrenotati;
+                }).then((appelliPrenotati)=>{
+                    console.log('lunghezza di appelliPrenotati '+ appelliPrenotati.length);
+                    prova=appelliPrenotati;
+                    resolve(prova);
+                
                 });
           
             } // fine for 
