@@ -19,6 +19,7 @@ var strUrlGetSingoloEsame='https://units.esse3.pp.cineca.it/e3rest/api/libretto-
 //var strUrlAppelliPrenotabili='https://units.esse3.pp.cineca.it/e3rest/api/libretto-service-v1/libretti/' ;// 286879/righe/?filter=numAppelliPrenotabili%3D%3D1';
 //qui recupero ultima data utile dell'appello collegato a una riga del libretto
 var strUrlGetAppelloDaPrenotare='https://units.esse3.pp.cineca.it/e3rest/api/calesa-service-v1/appelli/'; //10094/117740/?stato=P'  appelli/10094/111218/215
+
 var strUrlPostAppello='https://units.esse3.pp.cineca.it/e3rest/api/calesa-service-v1/appelli/'; //10094/117740/5/iscritti'
 var strUrlDeleteAppello='https://units.esse3.pp.cineca.it/e3rest/api/calesa-service-v1/appelli/'; //10094/117740/5/iscritti/236437;'
 //09/05/2019
@@ -856,7 +857,8 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
     return new Promise(function(resolve, reject) {
         var options = { 
             method: 'GET',
-            url: strUrlGetAppelloDaPrenotare  + cdsId +  '/' +adId+'/'+appId+'/',
+            /************* TEST DEL 14/05/2019  IMPOSTO I CAMPI SINGOLI PER OTTIMIZZARE LA QUERY */
+            url: strUrlGetAppelloDaPrenotare  + cdsId +  '/' +adId+'/'+appId +'?fields=desApp%2CaaCalId%2Cturni.dataOraEsa%2CadCod%2CpresidenteNome%2CpresidenteCognome',
             headers: 
                 { 
                     'cache-control': 'no-cache',
