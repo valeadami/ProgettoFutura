@@ -1222,10 +1222,10 @@ function callAVA(agent) {
                                
                                 
                 }); //fine getDettaglioSingoloAppelloPrenotato*/
-                agent.add(strTemp);
-                resolve(agent);
+               
               }//fine for
-            
+              agent.add(strTemp);
+              resolve(agent);
              
           }).catch((error) => {
             console.log('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotato: ' +error);
