@@ -1311,7 +1311,7 @@ function callAVA(agent) {
     
         
        controller.getSingoloAppelloPrenotatoNuovo(matId).then((appelliPrenotati) => { 
-       //console.log('***********sti cazzi de appelliPrenotati '+JSON.stringify(appelliPrenotati));
+       console.log('***********sBODY DEGLI appelliPrenotati '+JSON.stringify(appelliPrenotati));
     
 
        if (Array.isArray(appelliPrenotati)){
