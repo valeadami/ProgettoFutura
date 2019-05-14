@@ -1223,12 +1223,12 @@ function callAVA(agent) {
                                 strOutput=str;
                                 agent.add(strOutput);
                                 console.log('strOutput con replace in  getAppelliPrenotatiNuovo-> '+ strOutput);
-                               
+                                resolve(agent);
                    
                 }); //fine getDettaglioSingoloAppelloPrenotato*/
               }//fine for
               
-              resolve(agent);
+             
              
           }).catch((error) => {
             console.log('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotato: ' +error);
