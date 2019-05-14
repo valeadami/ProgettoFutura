@@ -978,7 +978,7 @@ function getSingoloAppelloPrenotatoNuovo(matId){
                                 
                             } 
                         }else{*/
-                           console.log('body del dettaglio è di tipo ' +typeof body); //object quindi una riga sola
+                           console.log('body del dettaglio è di tipo ' +typeof body +' valore di i '+i); //object quindi una riga sola
                            /* ORIGINALE MODIFICA DEL 14/05/2019
                                 appelliPrenotati[0]=new appello(body.aaCalId,body.adCod, body.adDes, body.adId,body.appId, body.cdsCod,
                                 body.cdsDes,body.cdsId,body.condId,body.dataFineIscr,body.dataInizioApp, body.dataInizioIscr, body.desApp,
@@ -994,10 +994,12 @@ function getSingoloAppelloPrenotatoNuovo(matId){
                                 null,null,null,null, body.turni);
                       //  }
             //resolve(body);
-            resolve(appelliPrenotati);
+           //  resolve(appelliPrenotati);
             
         });
-            } 
+          
+            } // fine for 
+            resolve(appelliPrenotati);
         }
        
     })
