@@ -858,7 +858,7 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
         var options = { 
             method: 'GET',
             /************* TEST DEL 14/05/2019  IMPOSTO I CAMPI SINGOLI PER OTTIMIZZARE LA QUERY */
-            url: strUrlGetAppelloDaPrenotare  + cdsId +  '/' +adId+'/'+appId + '/', //'?fields=desApp%2CaaCalId%2Cturni.dataOraEsa%2CadCod%2CpresidenteNome%2CpresidenteCognome',
+            url: strUrlGetAppelloDaPrenotare  + cdsId +  '/' +adId+'/'+appId +'?fields=desApp%2CaaCalId%2Cturni.dataOraEsa%2CadCod%2CpresidenteNome%2CpresidenteCognome',
             headers: 
                 { 
                     'cache-control': 'no-cache',
