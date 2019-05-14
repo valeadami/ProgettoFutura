@@ -965,7 +965,7 @@ function getSingoloAppelloPrenotatoNuovo(matId){
                 idCdsId=body[i].cdsId;
                //faccio qui la chiamata al dettaglio
                  getDettaglioSingoloAppelloPrenotato(idCdsId, idAdId[i],idAppId[i]).then((body)=>{
-                console.log('ClsController->getSingoloAppelloPrenotatoNuovo :HO IL DETTAGLIO DI APPELLO');b //  resolve(appelliPrenotati);
+                console.log('ClsController->getSingoloAppelloPrenotatoNuovo :HO IL DETTAGLIO DI APPELLO'); //  resolve(appelliPrenotati);
                     /*if (Array.isArray(body)){
                           console.log('body del dettaglio è un array'); 
                             for(var i=0; i<body.length; i++){
