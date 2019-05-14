@@ -1218,17 +1218,21 @@ function callAVA(agent) {
                                 null,null,null,null, body.turni);*/
                                 strTemp+='appello di ' + body.desApp + ', data ora appello  ' +body.turni[0].dataOraEsa;
                                 //console.log('codice '+appelliPrenotati[i].adCod + ', data ora ' +appelliPrenotati[i].turni[0].dataOraEsa + ', anno '+  appelliPrenotati[i].aaCalId +' , ' +'appello di ' + appelliPrenotati[i].desApp + ', presidente ' +appelliPrenotati[i].presidenteCognome + ' '+ appelliPrenotati[i].presidenteNome +' '+ new Date()); 
-                                var str=strOutput;
-                                str=str.replace(/(@)/gi, strTemp);
-                                strOutput=str;
-                                agent.add(strOutput);
-                                console.log('strOutput con replace in  getAppelliPrenotatiNuovo-> '+ strOutput);
-                                resolve(agent);
+                                
                    
                 }); //fine getDettaglioSingoloAppelloPrenotato*/
+                
               }//fine for
-              
-             
+              return strTemp;
+            }).then((strTemp)=>{
+
+                var str=strOutput;
+                str=str.replace(/(@)/gi, strTemp);
+                strOutput=str;
+                agent.add(strOutput);
+                console.log('strOutput con replace in  getAppelliPrenotatiNuovo-> '+ strOutput);
+                resolve(agent);
+
              
           }).catch((error) => {
             console.log('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotato: ' +error);
