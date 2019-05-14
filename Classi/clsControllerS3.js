@@ -838,7 +838,7 @@ return new Promise(function(resolve, reject) {
         json: true 
     }
     request(options, function (error, response, body) {
-        console.log('url di getAppId '+ options.url);
+       // console.log('url di getAppId '+ options.url);
         if (error) {
             reject(error);
             console.log('errore in getAppId '+ error);
@@ -857,7 +857,7 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
     return new Promise(function(resolve, reject) {
         var options = { 
             method: 'GET',
-            /************* TEST DEL 14/05/2019  IMPOSTO I CAMPI SINGOLI PER OTTIMIZZARE LA QUERY OCIO ALL'ORDINE DEI CAMPI
+            /************* MODIFICA DEL 14/05/2019  IMPOSTO I CAMPI SINGOLI PER OTTIMIZZARE LA QUERY. OCIO ALL'ORDINE DEI CAMPI
              * SEGUI ORDINE DEL COSTRUTTORE DELLA CLASSE APPELLO !!!!!!!
              */
             url: strUrlGetAppelloDaPrenotare  + cdsId +  '/' +adId+'/'+appId +'?fields=aaCalId%2CadCod%2CdesApp%2CpresidenteCognome%2CpresidenteNome%2Cturni.dataOraEsa',
@@ -870,13 +870,13 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
             json: true 
         }
         request(options, function (error, response, body) {
-            console.log('url di getDettaglioSingoloAppelloPrenotato '+ options.url);
+            //console.log('url di getDettaglioSingoloAppelloPrenotato '+ options.url);
             if (error) {
                 reject(error);
-                console.log('errore in getDettaglioSingoloAppelloPrenotato '+ error);
+               //console.log('errore in getDettaglioSingoloAppelloPrenotato '+ error);
             } else {
                 if (response.statusCode==200){
-                   // console.log('il dettaglio di appello prenotato = '+JSON.stringify(body));
+                  // console.log('il dettaglio di appello prenotato = '+JSON.stringify(body));
                     resolve(body); 
                 }  
             }
@@ -884,6 +884,7 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
         });
     });
     }
+    // ***************** MODIFICA DEL 14/05/2019
     //09/05/2019 HO IL DETTAGLIO COMPLETO DELLA SCHERMATA DELL'APPELLO PRENOTATO
     //3) funzione che raccoglie 1) e 2) 
     function getSingoloAppelloPrenotato(matId){
@@ -908,34 +909,22 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
                     console.log('************ cdsId ' +idCdsId );*/
                 } 
             }
-           
+            return idAppId;
             //resolve(body); //commentato TEMPORANEAMENTE 
            
-        }).then((body)=>{
-            console.log('SONO NELLA PARTE 2 con idAd =' + idAdId[0] + ', appId='  +idAppId[0] +', cdsId=' +idCdsId);
+        }).then((idAppId)=>{
+           // console.log('SONO NELLA PARTE 2 con idAd =' + idAdId[0] + ', appId='  +idAppId[0] +', cdsId=' +idCdsId);
             getDettaglioSingoloAppelloPrenotato(idCdsId, idAdId[0],idAppId[0]).then((body)=>{
-                console.log('HO IL DETTAGLIO DI APPELLO con data inizio= ' + body.dataInizioApp);
-               if (Array.isArray(body)){
-                  //  console.log('body del dettaglio è un array'); 
-                    for(var i=0; i<body.length; i++){
-                        appelliPrenotati[i]= new appello(body[i].aaCalId,body[i].adCod, body[i].adDes, body[i].adId,body[i].appId, body[i].cdsCod,
-                            body[i].cdsDes,body[i].cdsId,body[i].condId,body[i].dataFineIscr,body[i].dataInizioApp, body[i].dataInizioIscr, body[i].desApp,
-                             //aggiunto qui
-                             body[i].note,body[i].numIscritti,body[i].numPubblicazioni,body[i].numVerbaliCar,body[i].numVerbaliGen,
-                             body[i].presidenteCognome,body[i].presidenteId,body[i].presidenteNome,body[i].riservatoFlg,body[i].stato,body[i].statoAperturaApp,body[i].statoDes,body[i].statoInsEsiti,body[i].statoLog,body[i].statoPubblEsiti,body[i].statoVerb,
-                             body[i].tipoDefAppCod,body[i].tipoDefAppDes,body[i].tipoEsaCod,body[i].tipoSceltaTurno, body[i].turni);
-                        
-                    } 
-                }else{
+                console.log('HO IL DETTAGLIO DI APPELLO con data inizio= ' + body.turni[0].dataOraEsa);
+             
                   //  console.log('body del dettaglio è di tipo ' +typeof body); //object quindi una riga sola
-                    appelliPrenotati[0]=new appello(body.aaCalId,body.adCod, body.adDes, body.adId,body.appId, body.cdsCod,
-                        body.cdsDes,body.cdsId,body.condId,body.dataFineIscr,body.dataInizioApp, body.dataInizioIscr, body.desApp,
-                        //aggiunto qui
-                        body.note,body.numIscritti,body.numPubblicazioni,body.numVerbaliCar,body.numVerbaliGen,
-                        body.presidenteCognome,body.presidenteId,body.presidenteNome,body.riservatoFlg,body.stato,body.statoAperturaApp,body.statoDes,body.statoInsEsiti,body.statoLog,body.statoPubblEsiti,body.statoVerb,
-                        body.tipoDefAppCod,body.tipoDefAppDes,body.tipoEsaCod,body.tipoSceltaTurno,body.turni);
-                        console.log('TEST di appelliPrenotati[0] TURNI '+ body.turni[0].dataOraEsa);
-                }
+                    appelliPrenotati[i]=new appello(body.aaCalId,body.adCod,null, null,null, null,
+                        null,null,null,null,null, null, body.desApp,
+                        null,null,null,null,null,
+                        body.presidenteCognome,null,body.presidenteNome,null,null,null,null,null,null, null,null,
+                        null,null,null,null, body.turni);
+                        console.log('codice '+appelliPrenotati[i].adCod + ' ' +new Date());
+              
                 //resolve(body);
                 resolve(appelliPrenotati);
                 
@@ -967,7 +956,7 @@ function getSingoloAppelloPrenotatoNuovo(matId){
            
                //faccio qui la chiamata al dettaglio
                  getDettaglioSingoloAppelloPrenotato(idCdsId, idAdId[i],idAppId[i]).then((body)=>{
-                console.log('ClsController->getSingoloAppelloPrenotatoNuovo :HO IL DETTAGLIO DI APPELLO'); //  resolve(appelliPrenotati);
+                //console.log('ClsController->getSingoloAppelloPrenotatoNuovo :HO IL DETTAGLIO DI APPELLO'); //  resolve(appelliPrenotati);
                  
                 // console.log('body del dettaglio è di tipo ' +typeof body ); //object quindi una riga sola
                 /* ORIGINALE MODIFICA DEL 14/05/2019
@@ -983,14 +972,7 @@ function getSingoloAppelloPrenotatoNuovo(matId){
                     null,null,null,null,null,
                     body.presidenteCognome,null,body.presidenteNome,null,null,null,null,null,null, null,null,
                     null,null,null,null, body.turni);
-                    
-         
-                   // resolve(appelliPrenotati);
-                        return appelliPrenotati;
-                }).then((appelliPrenotati)=>{
-                    console.log('lunghezza di appelliPrenotati '+ appelliPrenotati.length);
-                    prova=appelliPrenotati;
-                    resolve(prova);
+                   resolve(appelliPrenotati);
                 
                 });
           

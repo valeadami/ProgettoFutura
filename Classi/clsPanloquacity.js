@@ -1174,7 +1174,7 @@ function callAVA(agent) {
   
               break;
         //08/05/2019 getAppelliPrenotati: recupero la lista delle prenotazioni effettuate
-        case 'getAppelliPrenotatiOLD':
+        case 'getAppelliPrenotati':
           console.log('sono in getApppelliPrenotati');
           var rawData='';
           var idAdId=[]; //tengo traccia degli adId attività didattica
@@ -1182,13 +1182,12 @@ function callAVA(agent) {
           var idCdsId='';
           var strTemp='';
           //09/05/2018
-         /* controller.getSingoloAppelloPrenotato(matId).then((body) => { 
-           agent.add('ho il body con cdsId= '+body[0].cdsId + ', adId= '+ body[0].adId + ', appId= '+body[0].appId);
-          */
+          controller.getSingoloAppelloPrenotato(matId).then((appelliPrenotati) => { 
+           agent.add('ho APPELLI PRENOTATI = '+appelliPrenotati.length);
+           resolve(agent);
             //PROVA DEL 09/05/2019 DE SERA
-            controller.getAppId(matId).then((body)=>{
-              //controllo che body sia un array
-              //10/05/2019 per il momento è solo un elemento, chiama statico 
+            /*controller.getAppId(matId).then((body)=>{
+            
               
               controller.getDettaglioSingoloAppelloPrenotato(body[0].cdsId, body[0].adId, body[0].appId).then((body)=>{
                         console.log('IN CLSPANLOQUACITY HO IL DETTAGLIO DI APPELLO con data inizio= ' + body.dataInizioApp);
@@ -1208,7 +1207,7 @@ function callAVA(agent) {
                         agent.add(strOutput);
                         //console.log('strOutput con replace '+ strOutput);
                         resolve(agent); 
-                      });   
+                      });   */
              //commento temp 10/05/2019
               /*if (Array.isArray(body)){
                   rawData=JSON.stringify(body);
@@ -1301,7 +1300,7 @@ function callAVA(agent) {
 
         break;
       //prova del 10/05/2019
-      case 'getAppelliPrenotati':
+      case 'getAppelliPrenotatiNEW':
       console.log('sono in getApppelliPrenotati test nuovo');
       var rawData='';
       var idAdId=[]; //tengo traccia degli adId attività didattica
