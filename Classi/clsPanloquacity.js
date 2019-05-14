@@ -1219,9 +1219,10 @@ function callAVA(agent) {
                                 strTemp+=' appello di ' + body.desApp + ', data ora appello  ' +body.turni[0].dataOraEsa;
                                 console.log('strTemp= '+strTemp); 
                                 
-                                agent.add(strTemp);
+                               
                                 
                 }); //fine getDettaglioSingoloAppelloPrenotato*/
+                agent.add(strTemp);
                 resolve(agent);
               }//fine for
             
