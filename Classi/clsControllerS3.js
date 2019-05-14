@@ -965,7 +965,7 @@ function getSingoloAppelloPrenotatoNuovo(matId){
                 idCdsId=body[i].cdsId;
                //faccio qui la chiamata al dettaglio
                  getDettaglioSingoloAppelloPrenotato(idCdsId, idAdId[i],idAppId[i]).then((body)=>{
-                console.log('ClsController->getSingoloAppelloPrenotatoNuovo :HO IL DETTAGLIO DI APPELLO con data inizio= ' + body.dataInizioApp);
+                console.log('ClsController->getSingoloAppelloPrenotatoNuovo :HO IL DETTAGLIO DI APPELLO');b //  resolve(appelliPrenotati);
                     /*if (Array.isArray(body)){
                           console.log('body del dettaglio è un array'); 
                             for(var i=0; i<body.length; i++){
@@ -978,7 +978,7 @@ function getSingoloAppelloPrenotatoNuovo(matId){
                                 
                             } 
                         }else{*/
-                           console.log('body del dettaglio è di tipo ' +typeof body +' valore di i '+i); //object quindi una riga sola
+                          // console.log('body del dettaglio è di tipo ' +typeof body ); //object quindi una riga sola
                            /* ORIGINALE MODIFICA DEL 14/05/2019
                                 appelliPrenotati[0]=new appello(body.aaCalId,body.adCod, body.adDes, body.adId,body.appId, body.cdsCod,
                                 body.cdsDes,body.cdsId,body.condId,body.dataFineIscr,body.dataInizioApp, body.dataInizioIscr, body.desApp,
@@ -987,7 +987,7 @@ function getSingoloAppelloPrenotatoNuovo(matId){
                                 body.presidenteCognome,body.presidenteId,body.presidenteNome,body.riservatoFlg,body.stato,body.statoAperturaApp,body.statoDes,body.statoInsEsiti,body.statoLog,body.statoPubblEsiti,body.statoVerb,
                                 body.tipoDefAppCod,body.tipoDefAppDes,body.tipoEsaCod,body.tipoSceltaTurno, body.turni);*/
                             // console.log('TEST di appelliPrenotati[0] anno '+ appelliPrenotati[0].aaCalId);
-                            appelliPrenotati[1]=new appello(body.aaCalId,body.adCod,null, null,null, null,
+                            appelliPrenotati[i]=new appello(body.aaCalId,body.adCod,null, null,null, null,
                                 null,null,null,null,null, null, body.desApp,
                                 null,null,null,null,null,
                                 body.presidenteCognome,null,body.presidenteNome,null,null,null,null,null,null, null,null,
