@@ -3,7 +3,7 @@
 function Appello(aaCalId, adCod,adDes,adId,appId,cdsCod,cdsDes,cdsId,
     condId,dataFineIscr,dataInizioApp,dataInizioIscr,desApp,note,numIscritti,numPubblicazioni,numVerbaliCar,numVerbaliGen,
     presidenteCognome,presidenteId,presidenteNome,riservatoFlg,stato,statoAperturaApp,statoDes,statoInsEsiti,statoLog,statoPubblEsiti,statoVerb,
-    tipoDefAppCod,tipoDefAppDes,tipoEsaCod,tipoSceltaTurno,dataOraEsa){
+    tipoDefAppCod,tipoDefAppDes,tipoEsaCod,tipoSceltaTurno,turni){
 //interi
     this.aaCalId=aaCalId; // 2017 integer, optional): anno di calendario dell'appello, viene utilizzato per agganciare una eventuale definizione di esame comune ,
     //stringhe
@@ -49,8 +49,8 @@ function Appello(aaCalId, adCod,adDes,adId,appId,cdsCod,cdsDes,cdsId,
     this.tipoEsaCod=tipoEsaCod; //"O" (string, optional): modalità dell'esame definita nell'appello (valorizzata se il par_conf=CONTR_TIPO_ESA_APP=0), i possibili valori sono ( Scritto=S, Orale=O, Scritto e Orale Congiunto=SOC, Scritto e Orale Separato=SOS). = ['S', 'O', 'SOC', 'SOS'],
     //intero
     this.tipoSceltaTurno=tipoSceltaTurno; //(integer, optional): tipo di scelta turno, i possibili valori sono i seguenti (0 - Calcolato dal sistema, viene associato il primo turno disponibile; 1 - Selezionabile dall'utente tra i turni compatibili liberi; 2 - Selezionato dall'utente prendendo un turno libero (anche non compatibile) ,
-    //data  aggiunto il 14/05/2019
-    this.dataOraEsa=dataOraEsa;
+    //data  aggiunto il 14/05/2019 turni contiene dataOraEsa
+    this.turni=turni;
     
     
     
@@ -60,7 +60,7 @@ function Appello(aaCalId, adCod,adDes,adId,appId,cdsCod,cdsDes,cdsId,
 
 
             console.log('CREATO OGGETTO APPELLO: anno calendario =' +this.aaCalId + ', adCod ' + this.adCod +', adDes '+ this.adDes + cdsCod + ', adID ' + this.adId + ', appId  ' + this.appId + ', cdsDes' + this.cdsDes + ', csdId ' + this.csdId + ', data fine iscrizione '+ this.dataFineIscr + ',  data Inizio appelo '+ this.dataInizioApp+ ', dataInizioIscr  '+ 
-                    this.dataInizioIscr +', desApp '+ this.desApp +' data/ora appello '+this.dataOraEsa);
+                    this.dataInizioIscr +', desApp '+ this.desApp +' data/ora appello '+this.turni[0].dataOraEsa);
         } else {
 
             console.log('creato oggetto appello');

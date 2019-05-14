@@ -1240,7 +1240,7 @@ function callAVA(agent) {
               }
             
              */ //fine commento temp del 10/05/2019
-             
+
            //controller.getSingoloAppelloPrenotato(matId).then((appelliPrenotati) => { 
            //console.log('***********sti cazzi de appelliPrenotati '+JSON.stringify(appelliPrenotati));
           // agent.add('Appello di ' +appelliPrenotati[0].dataInizioApp); /*   + body[0].cdsId  + ', codice '+appelliPrenotati[0].adCod +
@@ -1318,7 +1318,7 @@ function callAVA(agent) {
           //console.log('sono in array di appelliPrenotati')
           for(var i=0; i<appelliPrenotati.length; i++){
 
-            strTemp+='appello di ' + appelliPrenotati[i].desApp +' dell\'anno ' + appelliPrenotati[i].aaCalId + /*', data e ora appello ' + appelliPrenotati[i].turni[0].dataOraEsa*/ ', codice '+appelliPrenotati[i].adCod +', con docente '+appelliPrenotati[i].presidenteCognome +' '+ appelliPrenotati[i].presidenteNome;
+            strTemp+='appello di ' + appelliPrenotati[i].desApp +' dell\'anno ' + appelliPrenotati[i].aaCalId + ', data e ora appello ' + appelliPrenotati[i].turni[0].dataOraEsa+ ', codice '+appelliPrenotati[i].adCod +', con docente '+appelliPrenotati[i].presidenteCognome +' '+ appelliPrenotati[i].presidenteNome;
           } 
           var str=strOutput;
           str=str.replace(/(@)/gi, strTemp);
