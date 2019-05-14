@@ -1183,8 +1183,31 @@ function callAVA(agent) {
           var strTemp='';
           //09/05/2018
           controller.getSingoloAppelloPrenotato(matId).then((appelliPrenotati) => { 
-           agent.add('ho APPELLI PRENOTATI = '+appelliPrenotati.length);
-           resolve(agent);
+            if (Array.isArray(appelliPrenotati)){
+              console.log('CLSPLQ: sono in array di appelliPrenotati');
+              for(var i=0; i<appelliPrenotati.length; i++){
+                if(appelliPrenotati[i]){
+                  strTemp+='appello di ' + appelliPrenotati[i].desApp +' dell\'anno ' + appelliPrenotati[i].aaCalId + ', data e ora appello ' + appelliPrenotati[i].turni[0].dataOraEsa+ ', codice '+appelliPrenotati[i].adCod +', con docente '+appelliPrenotati[i].presidenteCognome +' '+ appelliPrenotati[i].presidenteNome +'\n';
+                }else{
+                  console.log('VALORE NULL');
+                }
+                  
+              } 
+              var str=strOutput;
+              str=str.replace(/(@)/gi, strTemp);
+              strOutput=str;
+              agent.add(strOutput);
+              console.log('strOutput con replace in  getAppelliPrenotatiNuovo-> '+ strOutput);
+              resolve(agent);
+           } 
+           else{
+            console.log('appelliPrenotati NON è ARRAY');
+    
+           }
+      
+
+           /* agent.add('ho APPELLI PRENOTATI = '+appelliPrenotati.length);
+           resolve(agent);*/
             //PROVA DEL 09/05/2019 DE SERA
             /*controller.getAppId(matId).then((body)=>{
             
