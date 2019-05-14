@@ -1193,18 +1193,18 @@ function callAVA(agent) {
                 }
                   
               } 
-              var str=strOutput;
-              str=str.replace(/(@)/gi, strTemp);
-              strOutput=str;
-              agent.add(strOutput);
-              console.log('strOutput con replace in  getAppelliPrenotatiNuovo-> '+ strOutput);
-              resolve(agent);
+            //ier qua stroutput resolve
            } 
            else{
             console.log('appelliPrenotati NON è ARRAY');
     
            }
-      
+           var str=strOutput;
+           str=str.replace(/(@)/gi, strTemp);
+           strOutput=str;
+           agent.add(strOutput);
+           console.log('strOutput con replace in  getAppelliPrenotatiNuovo-> '+ strOutput);
+           resolve(agent);
 
            /* agent.add('ho APPELLI PRENOTATI = '+appelliPrenotati.length);
            resolve(agent);*/
