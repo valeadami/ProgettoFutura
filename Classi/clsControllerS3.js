@@ -977,13 +977,19 @@ function getSingoloAppelloPrenotatoNuovo(matId){
                             } 
                         }else{*/
                            console.log('body del dettaglio è di tipo ' +typeof body); //object quindi una riga sola
-                            appelliPrenotati[i]=new appello(body.aaCalId,body.adCod, body.adDes, body.adId,body.appId, body.cdsCod,
+                           /* ORIGINALE MODIFICA DEL 14/05/2019
+                                appelliPrenotati[0]=new appello(body.aaCalId,body.adCod, body.adDes, body.adId,body.appId, body.cdsCod,
                                 body.cdsDes,body.cdsId,body.condId,body.dataFineIscr,body.dataInizioApp, body.dataInizioIscr, body.desApp,
                                 //aggiunto qui
                                 body.note,body.numIscritti,body.numPubblicazioni,body.numVerbaliCar,body.numVerbaliGen,
                                 body.presidenteCognome,body.presidenteId,body.presidenteNome,body.riservatoFlg,body.stato,body.statoAperturaApp,body.statoDes,body.statoInsEsiti,body.statoLog,body.statoPubblEsiti,body.statoVerb,
-                                body.tipoDefAppCod,body.tipoDefAppDes,body.tipoEsaCod,body.tipoSceltaTurno, body.turni);
+                                body.tipoDefAppCod,body.tipoDefAppDes,body.tipoEsaCod,body.tipoSceltaTurno, body.turni);*/
                             // console.log('TEST di appelliPrenotati[0] anno '+ appelliPrenotati[0].aaCalId);
+                            appelliPrenotati[I]=new appello(body.aaCalId,body.adCod,null, null,null, null,
+                                null,null,null,null,null, null, body.desApp,
+                                null,null,null,null,null,
+                                body.presidenteCognome,null,body.presidenteNome,null,null,null,null,null,null, null,null,
+                                null,null,null,null, body.turni);
                       //  }
             //resolve(body);
             resolve(appelliPrenotati);
