@@ -915,7 +915,7 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
         }).then((idAppId)=>{
            // console.log('SONO NELLA PARTE 2 con idAd =' + idAdId[0] + ', appId='  +idAppId[0] +', cdsId=' +idCdsId);
            for(var i=0; i<idAppId.length; i++){ //------> AGGIUNTO QUESTO
-            getDettaglioSingoloAppelloPrenotato(idCdsId, idAdId[0],idAppId[0]).then((body)=>{
+            getDettaglioSingoloAppelloPrenotato(idCdsId, idAdId[i],idAppId[i]).then((body)=>{
                 console.log('HO IL DETTAGLIO DI APPELLO con data inizio= ' + body.turni[0].dataOraEsa);
              
                   //  console.log('body del dettaglio è di tipo ' +typeof body); //object quindi una riga sola
