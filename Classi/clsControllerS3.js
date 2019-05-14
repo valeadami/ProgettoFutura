@@ -919,7 +919,7 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
                              //aggiunto qui
                              body[i].note,body[i].numIscritti,body[i].numPubblicazioni,body[i].numVerbaliCar,body[i].numVerbaliGen,
                              body[i].presidenteCognome,body[i].presidenteId,body[i].presidenteNome,body[i].riservatoFlg,body[i].stato,body[i].statoAperturaApp,body[i].statoDes,body[i].statoInsEsiti,body[i].statoLog,body[i].statoPubblEsiti,body[i].statoVerb,
-                             body[i].tipoDefAppCod,body[i].tipoDefAppDes,body[i].tipoEsaCod,body[i].tipoSceltaTurno, body[i].turni[0].dataOraEsa);
+                             body[i].tipoDefAppCod,body[i].tipoDefAppDes,body[i].tipoEsaCod,body[i].tipoSceltaTurno, body[i].turni);
                         
                     } 
                 }else{
@@ -929,8 +929,8 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
                         //aggiunto qui
                         body.note,body.numIscritti,body.numPubblicazioni,body.numVerbaliCar,body.numVerbaliGen,
                         body.presidenteCognome,body.presidenteId,body.presidenteNome,body.riservatoFlg,body.stato,body.statoAperturaApp,body.statoDes,body.statoInsEsiti,body.statoLog,body.statoPubblEsiti,body.statoVerb,
-                        body.tipoDefAppCod,body.tipoDefAppDes,body.tipoEsaCod,body.tipoSceltaTurno,body.turni[0].dataOraEsa);
-                       // console.log('TEST di appelliPrenotati[0] anno '+ appelliPrenotati[0].aaCalId);
+                        body.tipoDefAppCod,body.tipoDefAppDes,body.tipoEsaCod,body.tipoSceltaTurno,body.turni);
+                        console.log('TEST di appelliPrenotati[0] TURNI '+ body.turni[0].dataOraEsa);
                 }
                 //resolve(body);
                 resolve(appelliPrenotati);
@@ -970,7 +970,7 @@ function getSingoloAppelloPrenotatoNuovo(matId){
                                     //aggiunto qui
                                     body[i].note,body[i].numIscritti,body[i].numPubblicazioni,body[i].numVerbaliCar,body[i].numVerbaliGen,
                                     body[i].presidenteCognome,body[i].presidenteId,body[i].presidenteNome,body[i].riservatoFlg,body[i].stato,body[i].statoAperturaApp,body[i].statoDes,body[i].statoInsEsiti,body[i].statoLog,body[i].statoPubblEsiti,body[i].statoVerb,
-                                    body[i].tipoDefAppCod,body[i].tipoDefAppDes,body[i].tipoEsaCod,body[i].tipoSceltaTurno,body[i].turni[0].dataOraEsa);
+                                    body[i].tipoDefAppCod,body[i].tipoDefAppDes,body[i].tipoEsaCod,body[i].tipoSceltaTurno,body[i].turni);
                                 
                             } 
                         }else{
@@ -980,7 +980,7 @@ function getSingoloAppelloPrenotatoNuovo(matId){
                                 //aggiunto qui
                                 body.note,body.numIscritti,body.numPubblicazioni,body.numVerbaliCar,body.numVerbaliGen,
                                 body.presidenteCognome,body.presidenteId,body.presidenteNome,body.riservatoFlg,body.stato,body.statoAperturaApp,body.statoDes,body.statoInsEsiti,body.statoLog,body.statoPubblEsiti,body.statoVerb,
-                                body.tipoDefAppCod,body.tipoDefAppDes,body.tipoEsaCod,body.tipoSceltaTurno, body.turni[0].dataOraEsa);
+                                body.tipoDefAppCod,body.tipoDefAppDes,body.tipoEsaCod,body.tipoSceltaTurno, body.turni);
                             // console.log('TEST di appelliPrenotati[0] anno '+ appelliPrenotati[0].aaCalId);
                         }
             //resolve(body);
