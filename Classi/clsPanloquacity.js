@@ -1201,15 +1201,15 @@ function callAVA(agent) {
                          */
                         strTemp+='\n+++++++++++++++ Kodice '+result[i].adCod + ', data ora ' +result[i].turni[0].dataOraEsa + ', anno '+  result[i].aaCalId +' , ' +'appello di ' + result[i].desApp + ', presidente ' +result[i].presidenteCognome + ' '+ result[i].presidenteNome +' '+ new Date();
                       } //fine for
-          
+                      var str=strOutput;
+                      str=str.replace(/(@)/gi, strTemp);
+                      strOutput=str;
+                      agent.add(strOutput);
+                      console.log('strOutput con replace in  getAppelliPrenotati FINE->  '+ strOutput+new Date());
+                      resolve(agent);
                   } //fine if 
                 });
-                var str=strOutput;
-                str=str.replace(/(@)/gi, strTemp);
-                strOutput=str;
-                agent.add(strOutput);
-                console.log('strOutput con replace in  getAppelliPrenotati FINE->  '+ strOutput+new Date());
-                resolve(agent);
+               
           }).catch((error) => {
             console.log('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotato: ' +error);
             agent.add('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotato: ' +error);
