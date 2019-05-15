@@ -1199,7 +1199,7 @@ function callAVA(agent) {
                           null,null,null,null, result[i].turni);
                           console.log('\n+++++++++++++++ Kodice '+appelliPrenotati[i].adCod + ', data ora ' +appelliPrenotati[i].turni[0].dataOraEsa + ', anno '+  appelliPrenotati[i].aaCalId +' , ' +'appello di ' + appelliPrenotati[i].desApp + ', presidente ' +appelliPrenotati[i].presidenteCognome + ' '+ appelliPrenotati[i].presidenteNome +' '+ new Date());   
                          */
-                        strTemp+='\n+++++++++++++++ Kodice '+result[i].adCod + ', data ora ' +result[i].turni[0].dataOraEsa + ', anno '+  result[i].aaCalId +' , ' +'appello di ' + result[i].desApp + ', presidente ' +result[i].presidenteCognome + ' '+ result[i].presidenteNome +' '+ new Date();
+                        strTemp+='\n appello di ' + result[i].desApp + ', codice '+result[i].adCod + ', del giorno ' +result[i].turni[0].dataOraEsa + ', esame dell\' anno'+  result[i].aaCalId +', con presidente ' +result[i].presidenteCognome + ' '+ result[i].presidenteNome;
                       } //fine for
                       var str=strOutput;
                       str=str.replace(/(@)/gi, strTemp);
