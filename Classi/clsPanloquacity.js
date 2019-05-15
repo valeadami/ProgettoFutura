@@ -1183,7 +1183,9 @@ function callAVA(agent) {
          
           console.log('**** INIZIO TEST **** '+new Date());
           controller.getAppId(matId).then((risultato)=>{
-              console.log('IL RISULTATO \n' +JSON.stringify(risultato));
+            //verifica che CI SIANO LE PRENOTAZIONI!!!!
+            if (Array.isArray(risultato)){
+              console.log('HO LE PRENOTAZIONI \n' +JSON.stringify(risultato));
               for(var i=0; i<risultato.length; i++){
          
                   appelliPrenotatiPromises.push(controller.getDettaglioSingoloAppelloPrenotato(risultato[i].cdsId,risultato[i].adId,risultato[i].appId));
@@ -1192,13 +1194,7 @@ function callAVA(agent) {
                   console.log('all resolved [**', JSON.stringify(result)+ '**] termine ' +new Date());
                   if (Array.isArray(result)){
                       for(var i=0; i<result.length; i++){
-                     /* appelliPrenotati[i]=new appello(result[i].aaCalId,result[i].adCod,null, null,null, null,
-                          null,null,null,null,null, null, result[i].desApp,
-                          null,null,null,null,null,
-                          result[i].presidenteCognome,null,result[i].presidenteNome,null,null,null,null,null,null, null,null,
-                          null,null,null,null, result[i].turni);
-                          console.log('\n+++++++++++++++ Kodice '+appelliPrenotati[i].adCod + ', data ora ' +appelliPrenotati[i].turni[0].dataOraEsa + ', anno '+  appelliPrenotati[i].aaCalId +' , ' +'appello di ' + appelliPrenotati[i].desApp + ', presidente ' +appelliPrenotati[i].presidenteCognome + ' '+ appelliPrenotati[i].presidenteNome +' '+ new Date());   
-                         */
+                     
                         strTemp+='\n appello di ' + result[i].desApp + ', codice '+result[i].adCod + ', del giorno ' +result[i].turni[0].dataOraEsa + ', esame dell\' anno '+  result[i].aaCalId +', con presidente ' +result[i].presidenteCognome + ' '+ result[i].presidenteNome +'\n';
                       } //fine for
                       var str=strOutput;
@@ -1209,7 +1205,11 @@ function callAVA(agent) {
                       resolve(agent);
                   } //fine if 
                 });
+              }else{
+                agent.add('Mi dispiace, non hai effettuato prenotazioni');
                
+                resolve(agent);
+              }   
           }).catch((error) => {
             console.log('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotato: ' +error);
             agent.add('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotato: ' +error);
@@ -1243,49 +1243,7 @@ function callAVA(agent) {
           }); */
 
         break;
-      //prova del 10/05/2019
-      case 'getAppelliPrenotatiNEW':
-      console.log('sono in getApppelliPrenotati test nuovo');
-      var rawData='';
-      var idAdId=[]; //tengo traccia degli adId attività didattica
-      var idAppId=[]; //tengo traccia degli appId 
-      var idCdsId='';
-      var strTemp='';
-    
-        
-       controller.getSingoloAppelloPrenotatoNuovo(matId).then((appelliPrenotati) => { 
-       console.log('***********BODY DEGLI appelliPrenotati '+JSON.stringify(appelliPrenotati));
-    
-
-       if (Array.isArray(appelliPrenotati)){
-          console.log('CLSPLQ: sono in array di appelliPrenotati');
-          for(var i=0; i<appelliPrenotati.length; i++){
-            if(appelliPrenotati[i]){
-              strTemp+='appello di ' + appelliPrenotati[i].desApp +' dell\'anno ' + appelliPrenotati[i].aaCalId + ', data e ora appello ' + appelliPrenotati[i].turni[0].dataOraEsa+ ', codice '+appelliPrenotati[i].adCod +', con docente '+appelliPrenotati[i].presidenteCognome +' '+ appelliPrenotati[i].presidenteNome +'\n';
-            }else{
-              console.log('VALORE NULL');
-            }
-              
-          } 
-          var str=strOutput;
-          str=str.replace(/(@)/gi, strTemp);
-          strOutput=str;
-          agent.add(strOutput);
-          console.log('strOutput con replace in  getAppelliPrenotatiNuovo-> '+ strOutput);
-          resolve(agent);
-       } 
-       else{
-        console.log('appelliPrenotati NON è ARRAY');
-
-       }
-  
-         
-      }).catch((error) => {
-        console.log('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotatoNuovo: ' +error);
-        agent.add('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotatoNuovo: ' +error);
-        resolve(agent);
-      });
-      break;
+      
         default:
         
           console.log('nel default ossia risponde il fallback in callAVANEW ');
