@@ -847,7 +847,11 @@ return new Promise(function(resolve, reject) {
             if (response.statusCode==200){
                // console.log('body di getAppId = '+body); //nel body ho appId cdsId adID
                 resolve(body); 
-            }  
+            }   else { /*** MODIFICA DEL 15/05/2019 */
+
+                console.log('status code getAppId = '+response.statusCode);
+                resolve(response.statusCode);
+            }
         }
 
     });

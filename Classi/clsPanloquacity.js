@@ -1203,13 +1203,14 @@ function callAVA(agent) {
                       agent.add(strOutput);
                       console.log('strOutput con replace in  getAppelliPrenotati FINE->  '+ strOutput+new Date());
                       resolve(agent);
-                  } //fine if 
+                  } //fine if isArray(result
                 });
-              }else{
-                agent.add('Mi dispiace, non hai effettuato prenotazioni');
-               console.log('Mi dispiace, non hai effettuato prenotazioni');
-                resolve(agent);
-              }   
+              }else{ /*  15/05/2019 NON CI SONO PRENOTAZIONI */
+                 agent.add('Mi dispiace, non hai effettuato prenotazioni. Come posso aiutarti ora?');
+                 console.log('Mi dispiace, non hai effettuato prenotazioni. Come posso aiutarti ora?');
+                 resolve(agent);
+              }
+              //fine if sArray(risultato)
           }).catch((error) => {
             console.log('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotato: ' +error);
             agent.add('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotato: ' +error);
