@@ -824,11 +824,12 @@ function getSingoloAppelloDaPrenotare(cdsId,adId){
 //PRENOTAZIONE: FASE 1) DOPO AVER PRENOTATO UN APPELLO, PER AVERE TUTTI I DETTAGLI DEVO LEGGERE PRENOTAZIONI/MATID PER AVERE APPID
 //09/05/2019
 //per recuperare appId, url https://units.esse3.pp.cineca.it/e3rest/api/calesa-service-v1/prenotazioni/291783/
+//*******************  */MODIFICA DEL 15/05/2019 CAMBIO LA QUERY IN MODO DA AVERE I 3 CAMPI CDSID ADID APPID
 function getAppId(matId){
 return new Promise(function(resolve, reject) {
     var options = { 
         method: 'GET',
-        url: prenotazioniMatIdAppId  + matId +  '/',
+        url: prenotazioniMatIdAppId  + matId +  '/?fields=cdsId%2CadId%2CappId', //********** 15/05/2019 AGGIUNTO ?fields=cdsId%2CadId%2CappId*/
         headers: 
             { 
                 'cache-control': 'no-cache',

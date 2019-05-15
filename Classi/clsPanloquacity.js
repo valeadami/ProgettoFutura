@@ -1175,59 +1175,41 @@ function callAVA(agent) {
               break;
         //08/05/2019 getAppelliPrenotati: recupero la lista delle prenotazioni effettuate
         case 'getAppelliPrenotati':
-          console.log('sono in getApppelliPrenotati');
-          var rawData='';
-          var idAdId=[]; //tengo traccia degli adId attività didattica
-          var idAppId=[]; //tengo traccia degli appId 
-          var idCdsId='';
+          //console.log('sono in getApppelliPrenotati');
+          /*** prova del 15/05/2019 ******* */
+          var appelliPrenotatiPromises=[];
+        
           var strTemp='';
          
-           
-            //PROVA DEL 09/05/2019 DE SERA
+          console.log('**** INIZIO TEST **** '+new Date());
+          controller.getAppId(matId).then((risultato)=>{
+              console.log('IL RISULTATO \n' +JSON.stringify(risultato));
+              for(var i=0; i<risultato.length; i++){
+         
+                  appelliPrenotatiPromises.push(getDettaglioSingoloAppelloPrenotatoProva(risultato[i].cdsId,risultato[i].adId,risultato[i].appId));
+              }  
+              Promise.all(appelliPrenotatiPromises).then((result) => {
+                  console.log('all resolved [**', JSON.stringify(result)+ '**] termine ' +new Date());
+                  if (Array.isArray(result)){
+                      for(var i=0; i<result.length; i++){
+                     /* appelliPrenotati[i]=new appello(result[i].aaCalId,result[i].adCod,null, null,null, null,
+                          null,null,null,null,null, null, result[i].desApp,
+                          null,null,null,null,null,
+                          result[i].presidenteCognome,null,result[i].presidenteNome,null,null,null,null,null,null, null,null,
+                          null,null,null,null, result[i].turni);
+                          console.log('\n+++++++++++++++ Kodice '+appelliPrenotati[i].adCod + ', data ora ' +appelliPrenotati[i].turni[0].dataOraEsa + ', anno '+  appelliPrenotati[i].aaCalId +' , ' +'appello di ' + appelliPrenotati[i].desApp + ', presidente ' +appelliPrenotati[i].presidenteCognome + ' '+ appelliPrenotati[i].presidenteNome +' '+ new Date());   
+                         */
+                        strTemp+='\n+++++++++++++++ Kodice '+result[i].adCod + ', data ora ' +result[i].turni[0].dataOraEsa + ', anno '+  result[i].aaCalId +' , ' +'appello di ' + result[i].desApp + ', presidente ' +result[i].presidenteCognome + ' '+ result[i].presidenteNome +' '+ new Date();
+                      } //fine for
           
-            var appelliPrenotati=[];
-            
-            controller.getAppId(matId).then((body)=>{
-                //controllo che body sia un array
-                if (Array.isArray(body)){
-                    rawData=JSON.stringify(body);
-                   // console.log('\n\nQUESTO IL BODY DI PRENOTAZIONI ' +rawData);
-                    //creo oggetto libretto
-                    for(var i=0; i<body.length; i++){
-                        idAdId[i]=body[i].adId;
-                        idAppId[i]=body[i].appId;
-                        idCdsId=body[i].cdsId;
-                       /* console.log('*********** idAdId ' +idAdId[i] );
-                        console.log('************ idAppId ' +idAppId[i] );
-                        console.log('************ cdsId ' +idCdsId );*/
-                    } 
-                }
-                return idAppId;
-            }).then((idAppId)=>{
-        
-                for(var i=0; i<idAppId.length; i++){
-                   // console.log('idapp '+idAppId[i]);
-                    controller.getDettaglioSingoloAppelloPrenotato(idCdsId, idAdId[i],idAppId[i]).then((body)=>{
-                        console.log('HO IL DETTAGLIO DI APPELLO CON data ora '+ body.turni[0].dataOraEsa +new Date());
-                       
-                          //  console.log('body del dettaglio è di tipo ' +typeof body); //object quindi una riga sola
-                            /*appelliPrenotati[i]=new appello(body.aaCalId,body.adCod,null, null,null, null,
-                                null,null,null,null,null, null, body.desApp,
-                                null,null,null,null,null,
-                                body.presidenteCognome,null,body.presidenteNome,null,null,null,null,null,null, null,null,
-                                null,null,null,null, body.turni);*/
-                                strTemp+=' appello di ' + body.desApp + ', data ora appello  ' +body.turni[0].dataOraEsa;
-                                console.log('strTemp= '+strTemp); 
-                                agent.add(strTemp);
-                                resolve(agent);
-                               
-                                
-                }); //fine getDettaglioSingoloAppelloPrenotato*/
-               
-              }//fine for
-              
-              agent.add(strTemp);
-              resolve(agent);
+                  } //fine if 
+                });
+                var str=strOutput;
+                str=str.replace(/(@)/gi, strTemp);
+                strOutput=str;
+                agent.add(strOutput);
+                console.log('strOutput con replace in  getAppelliPrenotati FINE->  '+ strOutput+new Date());
+                resolve(agent);
           }).catch((error) => {
             console.log('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotato: ' +error);
             agent.add('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotato: ' +error);
