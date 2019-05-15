@@ -1207,7 +1207,7 @@ function callAVA(agent) {
                 });
               }else{
                 agent.add('Mi dispiace, non hai effettuato prenotazioni');
-               
+               console.log('Mi dispiace, non hai effettuato prenotazioni');
                 resolve(agent);
               }   
           }).catch((error) => {
