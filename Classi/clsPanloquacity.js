@@ -1186,7 +1186,7 @@ function callAVA(agent) {
               console.log('IL RISULTATO \n' +JSON.stringify(risultato));
               for(var i=0; i<risultato.length; i++){
          
-                  appelliPrenotatiPromises.push(getDettaglioSingoloAppelloPrenotatoProva(risultato[i].cdsId,risultato[i].adId,risultato[i].appId));
+                  appelliPrenotatiPromises.push(controller.getDettaglioSingoloAppelloPrenotato(risultato[i].cdsId,risultato[i].adId,risultato[i].appId));
               }  
               Promise.all(appelliPrenotatiPromises).then((result) => {
                   console.log('all resolved [**', JSON.stringify(result)+ '**] termine ' +new Date());
