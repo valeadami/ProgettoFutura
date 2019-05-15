@@ -1226,7 +1226,8 @@ function callAVA(agent) {
                
               }//fine for
               
-             
+              agent.add(strTemp);
+              resolve(agent);
           }).catch((error) => {
             console.log('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotato: ' +error);
             agent.add('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotato: ' +error);
