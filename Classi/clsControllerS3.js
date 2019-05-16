@@ -1009,7 +1009,7 @@ function getAppelloDaPrenotare(cdsId,adId){
                         body[i].note,body[i].numIscritti,body[i].numPubblicazioni,body[i].numVerbaliCar,body[i].numVerbaliGen,
                         body[i].presidenteCognome,body[i].presidenteId,body[i].presidenteNome,body[i].riservatoFlg,body[i].stato,body[i].statoAperturaApp,body[i].statoDes,body[i].statoInsEsiti,body[i].statoLog,body[i].statoPubblEsiti,body[i].statoVerb,
                         body[i].tipoDefAppCod,body[i].tipoDefAppDes,body[i].tipoEsaCod,body[i].tipoSceltaTurno, null);
-                        console.log('PD PD PD  data '+body[i].dataInizioApp);
+                        console.log('PD PD PD  data '+appelliDaPrenotare[i].dataInizioApp);
                         appelliDaPrenotare[i].log();
                     
 /*
