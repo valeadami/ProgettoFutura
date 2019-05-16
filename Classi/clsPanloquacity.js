@@ -1120,7 +1120,7 @@ function callAVA(agent) {
              console.log('1) sono in getPrenotazioni '+new Date()); //+ JSON.stringify(prenotazioni)
              
              if (Array.isArray(prenotazioni)){
-               console.log('sono in array prenotazioni '+new Date());
+               console.log('sono in array prenotazioni '+new Date() + ' con adId '+prenotazioni[0].chiaveADContestualizzata.adId);
                for(var i=0; i<prenotazioni.length; i++){
                 //nuovo del 16/05/2019
                 appelliPrenotabiliPromises.push(controller.getAppelloDaPrenotare(cdsId,prenotazioni[i].chiaveADContestualizzata.adId))
