@@ -1134,13 +1134,13 @@ function callAVA(agent) {
                 Promise.all(appelliPrenotabiliPromises).then((appelliDaPrenotare) => {
                   
                     if (Array.isArray(appelliDaPrenotare)){
-                      console.log('2) sono dentro getAppelloDaPrenotare PROMISES '+new Date());
+                      console.log('2) sono dentro getAppelloDaPrenotare PROMISES con '+appelliDaPrenotare.length + ' appelli');
                       //var strTemp='';
                       for(var i=0; i<appelliDaPrenotare.length; i++){
         
-                        /*strTemp+= 'Appello di ' + appelliDaPrenotare[i].adDes + ', in data '+ appelliDaPrenotare[i].dataInizioApp +', iscrizione aperta dal '+  
-                                  appelliDaPrenotare[i].dataInizioIscr + ' fino al '+ appelliDaPrenotare[i].dataFineIscr +'\n';*/
-                        strTemp+= ' data '+ appelliDaPrenotare[i].dataInizioApp  +'\n';
+                        strTemp+= 'Appello di ' + appelliDaPrenotare[i].adDes + ', in data '+ appelliDaPrenotare[i].dataInizioApp +', iscrizione aperta dal '+  
+                                  appelliDaPrenotare[i].dataInizioIscr + ' fino al '+ appelliDaPrenotare[i].dataFineIscr +'\n';
+                       // strTemp+= ' data '+ appelliDaPrenotare[i].dataInizioApp  +'\n';
                         console.log('Valore di strTemp DENTRO '+ strTemp +new Date());
                         }//fine for
                        // console.log('Valore di strTemp '+ strTemp +new Date());
