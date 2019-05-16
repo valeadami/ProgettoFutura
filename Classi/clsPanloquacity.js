@@ -1126,6 +1126,12 @@ function callAVA(agent) {
                           appelliDaPrenotare[i].dataInizioIscr + ' fino al '+ appelliDaPrenotare[i].dataFineIscr +'\n';
                
                 }
+                var str=strOutput;
+                str=str.replace(/(@)/gi, strTemp);
+                strOutput=str;
+                agent.add(strOutput);
+                console.log('strOutput con replace in  getPrenotazioneAppelli-> getAppelloDaPrenotare '+ strOutput);
+                resolve(agent);
               }
             
          // var appelliPrenotabiliPromises=[];
