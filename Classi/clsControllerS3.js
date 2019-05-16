@@ -1017,6 +1017,7 @@ function getAppelloDaPrenotare(cdsId,adId){
                     null,null,null,null,null,
                     null,null,null,null,null,null,null,null,null,null,null,
                     null,null,null,null, null);
+                    console.log('PD PD PD  data '+body[i].dataInizioApp);
                     appelliDaPrenotare[i].log();
 
                 }

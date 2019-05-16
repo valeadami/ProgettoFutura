@@ -1141,9 +1141,9 @@ function callAVA(agent) {
                         /*strTemp+= 'Appello di ' + appelliDaPrenotare[i].adDes + ', in data '+ appelliDaPrenotare[i].dataInizioApp +', iscrizione aperta dal '+  
                                   appelliDaPrenotare[i].dataInizioIscr + ' fino al '+ appelliDaPrenotare[i].dataFineIscr +'\n';*/
                         strTemp+= ' data '+ appelliDaPrenotare[i].dataInizioApp  +'\n';
-                       
+                        console.log('Valore di strTemp DENTRO '+ strTemp +new Date());
                         }//fine for
-                        console.log('Valore di strTemp '+ strTemp +new Date());
+                       // console.log('Valore di strTemp '+ strTemp +new Date());
                         var str=strOutput;
                         str=str.replace(/(@)/gi, strTemp);
                         strOutput=str;
@@ -1161,11 +1161,11 @@ function callAVA(agent) {
                 agent.add(strOutput);
                 console.log('strOutput con replace in  getPrenotazioneAppelli->  '+ strOutput);
                 resolve(agent);*/
-            }else{ /*  16/05/2019 NON CI SONO APPELLI PRENOTABILI*/
-              agent.add('Mi dispiace, non hai appelli prenotabili. Come posso aiutarti ora?');
-              console.log('Mi dispiace, non hai effettuato prenotabili. Come posso aiutarti ora?');
-              resolve(agent);
-           }
+              }else{ /*  16/05/2019 NON CI SONO APPELLI PRENOTABILI*/
+                agent.add('Mi dispiace, non hai appelli prenotabili. Come posso aiutarti ora?');
+                console.log('Mi dispiace, non hai effettuato prenotabili. Come posso aiutarti ora?');
+                resolve(agent);
+            }
             //commentato in data 08/05/2019 perchè la query impiega troppo tempo
           // agent.add('questo è appello che puoi prenotare '+idAp);
           //  resolve(agent);
