@@ -1111,28 +1111,58 @@ function callAVA(agent) {
            
             
           break;
-          //************* PRENOTAZIONE 25/03/2019 */
+          //************* PRENOTAZIONE 25/03/2019 -> MODIFICATO IN DATA 16/05/2019 */
           case 'getPrenotazioneAppelli':
-          var idAp=[]; 
-          controller.getPrenotazioni(matId).then((prenotazioni) => { 
+         // var idAp=[]; 
+          var strTemp='';
+          var appelliPrenotabiliPromises=[];
+          controller.getPrenotazioni(matId).then((prenotazioni) => { //prenotazioni sono righe del libretto
              console.log('1) sono in getPrenotazioni'); //+ JSON.stringify(prenotazioni)
-             var strTemp='';
+             
              if (Array.isArray(prenotazioni)){
                console.log('sono in array prenotazioni');
                for(var i=0; i<prenotazioni.length; i++){
-                
-                idAp[i]= prenotazioni[i].chiaveADContestualizzata.adId;
+                //nuovo del 16/05/2019
+                appelliPrenotabiliPromises.push(controller.getAppelloDaPrenotare(cdsId,prenotazioni[i].chiaveADContestualizzata.adId))
+                //originale commentato in data 16/05/2019  appelliDaPrenotare
+                /* idAp[i]= prenotazioni[i].chiaveADContestualizzata.adId;
                  console.log('**********idAp=========='+ idAp[i] + ' cdsId ' + cdsId);//prenotazioni[i].chiaveADContestualizzata.
                  strTemp+= 'Appello di ' + prenotazioni[i].adDes+ '\n';
-
+                */
                 }
-                var str=strOutput;
+                Promise.all(appelliPrenotabiliPromises).then((appelliDaPrenotare) => {
+                  
+                    if (Array.isArray(appelliDaPrenotare)){
+                      console.log('2) sono dentro getAppelloDaPrenotare PROMISES');
+                      //var strTemp='';
+                      for(var i=0; i<appelliDaPrenotare.length; i++){
+        
+                        strTemp+= 'Appello di ' + appelliDaPrenotare[i].adDes + ', in data '+ appelliDaPrenotare[i].dataInizioApp +', iscrizione aperta dal '+  
+                                  appelliDaPrenotare[i].dataInizioIscr + ' fino al '+ appelliDaPrenotare[i].dataFineIscr +'\n';
+                       
+                        }//fine for
+                      }
+                        console.log('Valore di strTemp '+ strTemp);
+                        var str=strOutput;
+                        str=str.replace(/(@)/gi, strTemp);
+                        strOutput=str;
+                        agent.add(strOutput);
+                        console.log('strOutput con replace in  getPrenotazioni PROMISES ->  '+ strOutput);
+                        resolve(agent);
+                    });
+                
+                 //originale commentato in data 16/05/2019
+             /* var str=strOutput;
                 str=str.replace(/(@)/gi, strTemp);
                 strOutput=str;
                 agent.add(strOutput);
                 console.log('strOutput con replace in  getPrenotazioneAppelli->  '+ strOutput);
-                resolve(agent);
-            }
+                resolve(agent);*/
+            }else{ /*  16/05/2019 NON CI SONO APPELLI PRENOTABILI*/
+              agent.add('Mi dispiace, non hai appelli prenotabili. Come posso aiutarti ora?');
+              console.log('Mi dispiace, non hai effettuato prenotabili. Come posso aiutarti ora?');
+              resolve(agent);
+           }
             //commentato in data 08/05/2019 perchè la query impiega troppo tempo
           // agent.add('questo è appello che puoi prenotare '+idAp);
           //  resolve(agent);
