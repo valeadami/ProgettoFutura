@@ -1117,10 +1117,10 @@ function callAVA(agent) {
           var strTemp='';
           var appelliPrenotabiliPromises=[];
           controller.getPrenotazioni(matId).then((prenotazioni) => { //prenotazioni sono righe del libretto
-             console.log('1) sono in getPrenotazioni'); //+ JSON.stringify(prenotazioni)
+             console.log('1) sono in getPrenotazioni '+new Date()); //+ JSON.stringify(prenotazioni)
              
              if (Array.isArray(prenotazioni)){
-               console.log('sono in array prenotazioni');
+               console.log('sono in array prenotazioni '+new Date());
                for(var i=0; i<prenotazioni.length; i++){
                 //nuovo del 16/05/2019
                 appelliPrenotabiliPromises.push(controller.getAppelloDaPrenotare(cdsId,prenotazioni[i].chiaveADContestualizzata.adId))
@@ -1133,7 +1133,7 @@ function callAVA(agent) {
                 Promise.all(appelliPrenotabiliPromises).then((appelliDaPrenotare) => {
                   
                     if (Array.isArray(appelliDaPrenotare)){
-                      console.log('2) sono dentro getAppelloDaPrenotare PROMISES');
+                      console.log('2) sono dentro getAppelloDaPrenotare PROMISES '+new Date());
                       //var strTemp='';
                       for(var i=0; i<appelliDaPrenotare.length; i++){
         
@@ -1142,12 +1142,12 @@ function callAVA(agent) {
                        
                         }//fine for
                       }
-                        console.log('Valore di strTemp '+ strTemp);
+                        console.log('Valore di strTemp '+ strTemp +new Date());
                         var str=strOutput;
                         str=str.replace(/(@)/gi, strTemp);
                         strOutput=str;
                         agent.add(strOutput);
-                        console.log('strOutput con replace in  getPrenotazioni PROMISES ->  '+ strOutput);
+                        console.log('strOutput con replace in  getPrenotazioni PROMISES ->  '+ strOutput +' ' +new Date());
                         resolve(agent);
                     });
                 
