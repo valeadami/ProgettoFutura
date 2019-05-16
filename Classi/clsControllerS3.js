@@ -999,7 +999,7 @@ function getAppelloDaPrenotare(cdsId,adId){
             //controllo che body sia un array
             if (Array.isArray(body)){
                 rawData=JSON.stringify(body);
-                console.log('\n\nQUESTO IL BODY ESAMI PRENOTABILI ' +rawData);
+                //console.log('\n\nQUESTO IL BODY ESAMI PRENOTABILI ' +rawData);
                 //creo oggetto libretto
                 for(var i=0; i<body.length; i++){
                     //modifica del 16/05/2019 dopo cambio query
@@ -1009,7 +1009,8 @@ function getAppelloDaPrenotare(cdsId,adId){
                         body[i].note,body[i].numIscritti,body[i].numPubblicazioni,body[i].numVerbaliCar,body[i].numVerbaliGen,
                         body[i].presidenteCognome,body[i].presidenteId,body[i].presidenteNome,body[i].riservatoFlg,body[i].stato,body[i].statoAperturaApp,body[i].statoDes,body[i].statoInsEsiti,body[i].statoLog,body[i].statoPubblEsiti,body[i].statoVerb,
                         body[i].tipoDefAppCod,body[i].tipoDefAppDes,body[i].tipoEsaCod,body[i].tipoSceltaTurno, null);
-                    
+                        console.log('PD PD PD  data '+body[i].dataInizioApp);
+                        appelliDaPrenotare[i].log();
                     
 /*
                    appelliDaPrenotare[i]= new appello(null,null, null, null,null, null,
