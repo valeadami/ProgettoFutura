@@ -1113,29 +1113,12 @@ function callAVA(agent) {
           break;
           //************* PRENOTAZIONE 25/03/2019 -> MODIFICATO IN DATA 16/05/2019 MA LA QUERY DA S3 IMPIEG 30 SECONDI QUINDI TORNO AL LIBRETTO */
           case 'getPrenotazioneAppelli':
-          var idAp=[]; 
+          //var idAp=[]; 
           var strTemp='';
 
-          controller.getAppelloDaPrenotare(cdsId,'117741').then((appelliDaPrenotare)=>{
-            if (Array.isArray(appelliDaPrenotare)){
-              console.log('2) sono dentro getAppelloDaPrenotare');
-              
-              for(var i=0; i<appelliDaPrenotare.length; i++){
-
-                strTemp+= 'Appello di ' + appelliDaPrenotare[i].adDes + ', in data '+ appelliDaPrenotare[i].dataInizioApp +', iscrizione aperta dal '+  
-                          appelliDaPrenotare[i].dataInizioIscr + ' fino al '+ appelliDaPrenotare[i].dataFineIscr +'\n';
-               
-                }
-                var str=strOutput;
-                str=str.replace(/(@)/gi, strTemp);
-                strOutput=str;
-                agent.add(strOutput);
-                console.log('strOutput con replace in  getPrenotazioneAppelli-> getAppelloDaPrenotare '+ strOutput);
-                resolve(agent);
-              }
-            
-         // var appelliPrenotabiliPromises=[];
-         /*qua commentato di sera
+         
+          var appelliPrenotabiliPromises=[];
+         
           controller.getPrenotazioni(matId).then((prenotazioni) => { //prenotazioni sono righe del libretto
              console.log('1) sono in getPrenotazioni '+new Date()); //+ JSON.stringify(prenotazioni)
              
@@ -1143,16 +1126,16 @@ function callAVA(agent) {
                console.log('sono in array prenotazioni '+new Date() + ' con adId '+prenotazioni[0].chiaveADContestualizzata.adId);
                for(var i=0; i<prenotazioni.length; i++){
                 //nuovo del 16/05/2019
-                //appelliPrenotabiliPromises.push(controller.getAppelloDaPrenotare(cdsId,'117741'))
+                appelliPrenotabiliPromises.push(controller.getAppelloDaPrenotare(cdsId,'117741'))
                 //originale commentato in data 16/05/2019  appelliDaPrenotare
-                 idAp[i]= prenotazioni[i].chiaveADContestualizzata.adId;
+                /* idAp[i]= prenotazioni[i].chiaveADContestualizzata.adId;
                  console.log('**********idAp=========='+ idAp[i] + ' cdsId ' + cdsId);//prenotazioni[i].chiaveADContestualizzata.
                  strTemp+= 'Appello di ' + prenotazioni[i].adDes+ '\n';
-                
-                }
                 */
+                }
+              
                 //ri commentato di nuovo in data 16/05/2019 perchè la query impiega troppo tempo
-               /* Promise.all(appelliPrenotabiliPromises).then((appelliDaPrenotare) => {
+                Promise.all(appelliPrenotabiliPromises).then((appelliDaPrenotare) => {
                   
                     if (Array.isArray(appelliDaPrenotare)){
                       console.log('2) sono dentro getAppelloDaPrenotare PROMISES con '+appelliDaPrenotare.length + ' appelli');
@@ -1174,19 +1157,19 @@ function callAVA(agent) {
                       } //fine if is array
                         
                     });
-                */
+                
                  //originale commentato in data 16/05/2019
                /*var str=strOutput;
                 str=str.replace(/(@)/gi, strTemp);
                 strOutput=str;
                 agent.add(strOutput);
                 console.log('strOutput con replace in  getPrenotazioneAppelli->  '+ strOutput);
-                resolve(agent);
+                resolve(agent);*/
               }else{ //  16/05/2019 NON CI SONO APPELLI PRENOTABILI
                 agent.add('Mi dispiace, non hai appelli prenotabili. Come posso aiutarti ora?');
                 console.log('Mi dispiace, non hai effettuato prenotabili. Come posso aiutarti ora?');
                 resolve(agent);
-            }*/
+            }
             //commentato in data 08/05/2019 perchè la query impiega troppo tempo
           // agent.add('questo è appello che puoi prenotare '+idAp);
           //  resolve(agent);
