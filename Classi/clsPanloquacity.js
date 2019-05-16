@@ -1115,7 +1115,21 @@ function callAVA(agent) {
           case 'getPrenotazioneAppelli':
           var idAp=[]; 
           var strTemp='';
+
+          controller.getAppelloDaPrenotare(cdsId,'117741').then((appelliDaPrenotare)=>{
+            if (Array.isArray(appelliDaPrenotare)){
+              console.log('2) sono dentro getAppelloDaPrenotare');
+              
+              for(var i=0; i<appelliDaPrenotare.length; i++){
+
+                strTemp+= 'Appello di ' + appelliDaPrenotare[i].adDes + ', in data '+ appelliDaPrenotare[i].dataInizioApp +', iscrizione aperta dal '+  
+                          appelliDaPrenotare[i].dataInizioIscr + ' fino al '+ appelliDaPrenotare[i].dataFineIscr +'\n';
+               
+                }
+              }
+            
          // var appelliPrenotabiliPromises=[];
+         /*qua commentato di sera
           controller.getPrenotazioni(matId).then((prenotazioni) => { //prenotazioni sono righe del libretto
              console.log('1) sono in getPrenotazioni '+new Date()); //+ JSON.stringify(prenotazioni)
              
@@ -1130,6 +1144,7 @@ function callAVA(agent) {
                  strTemp+= 'Appello di ' + prenotazioni[i].adDes+ '\n';
                 
                 }
+                */
                 //ri commentato di nuovo in data 16/05/2019 perchè la query impiega troppo tempo
                /* Promise.all(appelliPrenotabiliPromises).then((appelliDaPrenotare) => {
                   
@@ -1155,17 +1170,17 @@ function callAVA(agent) {
                     });
                 */
                  //originale commentato in data 16/05/2019
-               var str=strOutput;
+               /*var str=strOutput;
                 str=str.replace(/(@)/gi, strTemp);
                 strOutput=str;
                 agent.add(strOutput);
                 console.log('strOutput con replace in  getPrenotazioneAppelli->  '+ strOutput);
                 resolve(agent);
-              }else{ /*  16/05/2019 NON CI SONO APPELLI PRENOTABILI*/
+              }else{ //  16/05/2019 NON CI SONO APPELLI PRENOTABILI
                 agent.add('Mi dispiace, non hai appelli prenotabili. Come posso aiutarti ora?');
                 console.log('Mi dispiace, non hai effettuato prenotabili. Come posso aiutarti ora?');
                 resolve(agent);
-            }
+            }*/
             //commentato in data 08/05/2019 perchè la query impiega troppo tempo
           // agent.add('questo è appello che puoi prenotare '+idAp);
           //  resolve(agent);
@@ -1198,7 +1213,7 @@ function callAVA(agent) {
             agent.add('Si è verificato errore in getPrenotazioneAppelli> getAppelloDaPrenotare  ' +error);
             resolve(agent);
           });*/
-  
+  /* qua commentato di sera*/
         }).catch((error) => {
           console.log('Si è verificato errore in getPrenotazioneAppelli: ' +error);
           agent.add('Si è verificato errore in getPrenotazioneAppelli: ' +error);
