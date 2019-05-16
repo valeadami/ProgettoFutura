@@ -1113,7 +1113,7 @@ function callAVA(agent) {
           break;
           //************* PRENOTAZIONE 25/03/2019 */
           case 'getPrenotazioneAppelli':
-          var idAp=''; 
+          var idAp=[]; 
           controller.getPrenotazioni(matId).then((prenotazioni) => { 
              console.log('1) sono in getPrenotazioni'); //+ JSON.stringify(prenotazioni)
              var strTemp='';
@@ -1121,8 +1121,8 @@ function callAVA(agent) {
                console.log('sono in array prenotazioni');
                for(var i=0; i<prenotazioni.length; i++){
                 
-               /*  idAp= prenotazioni[i].chiaveADContestualizzata.adId + '\n ' ;
-                 console.log('**********idAp=========='+idAp);*/
+                idAp[i]= prenotazioni[i].chiaveADContestualizzata.adId;
+                 console.log('**********idAp=========='+ idAp[i] + ' cdsId ' + cdsId);//prenotazioni[i].chiaveADContestualizzata.
                  strTemp+= 'Appello di ' + prenotazioni[i].adDes+ '\n';
 
                 }
@@ -1212,8 +1212,8 @@ function callAVA(agent) {
               }
               //fine if sArray(risultato)
           }).catch((error) => {
-            console.log('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotato: ' +error);
-            agent.add('Si è verificato errore in getAppelliPrenotati->getSingoloAppelloPrenotato: ' +error);
+            console.log('Si è verificato errore in getAppelliPrenotati->getDettaglioSingoloAppelloPrenotato: ' +error);
+            agent.add('Si è verificato errore in getAppelliPrenotati->getDettaglioSingoloAppelloPrenotato: ' +error);
             resolve(agent);
           });
         //intanto recupero dal libretto gli appelli prenotati DAL LIBRETTO

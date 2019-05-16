@@ -796,7 +796,7 @@ function getSingoloAppelloDaPrenotare(cdsId,adId){
     return new Promise(function(resolve, reject) {
         var options = { 
             method: 'GET',
-            url: strUrlGetAppelloDaPrenotare  + cdsId +'/' + adId +  '/?stato=P', //', 
+            url: strUrlGetAppelloDaPrenotare  + cdsId +'/' + adId +  '/?aaCalId=2017&stato=P', //modifica del 16/05/2019 agginto anno=2017 per velocizzare la query', 
             headers: 
                 { 
                     'cache-control': 'no-cache',
@@ -989,7 +989,7 @@ function getSingoloAppelloPrenotatoNuovo(matId){
     })
 });
 }
-// getAppelloDaPrenotare(cdsId,adId)
+// getAppelloDaPrenotare(cdsId,adId) modificato in data 16/05/2019
 function getAppelloDaPrenotare(cdsId,adId){
     return new Promise(function(resolve, reject) {
         var appelliDaPrenotare=[];
@@ -1004,7 +1004,12 @@ function getAppelloDaPrenotare(cdsId,adId){
                 for(var i=0; i<body.length; i++){
 
                     appelliDaPrenotare[i]= new appello(body[i].aaCalId,body[i].adCod, body[i].adDes, body[i].adId,body[i].appId, body[i].cdsCod,
-                        body[i].cdsDes,body[i].cdsId,body[i].condId,body[i].dataFineIscr,body[i].dataInizioApp, body[i].dataInizioIscr, body[i].desApp);
+                        body[i].cdsDes,body[i].cdsId,body[i].condId,body[i].dataFineIscr,body[i].dataInizioApp, body[i].dataInizioIscr, body[i].desApp,
+                        //aggiunto qui in data 16/05/2019
+                        body[i].note,body[i].numIscritti,body[i].numPubblicazioni,body[i].numVerbaliCar,body[i].numVerbaliGen,
+                        body[i].presidenteCognome,body[i].presidenteId,body[i].presidenteNome,body[i].riservatoFlg,body[i].stato,body[i].statoAperturaApp,body[i].statoDes,body[i].statoInsEsiti,body[i].statoLog,body[i].statoPubblEsiti,body[i].statoVerb,
+                        body[i].tipoDefAppCod,body[i].tipoDefAppDes,body[i].tipoEsaCod,body[i].tipoSceltaTurno, null);
+                    
 
                         appelliDaPrenotare[i].log();
 
