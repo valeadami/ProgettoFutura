@@ -1063,7 +1063,8 @@ function callAVA(agent) {
               var arAdId=[]; //array per adId per la prenotazione
               var arIDS=[]; //adsceId degli esami del libretto
               var arEsami=[]; //descrizioni degli esami del libretto
-               
+               //prova del 16/05/2019
+               var idPrenotati=[];
               //ripristinato in data 03/05/2019
               controller.doLogin().then((stud) => { 
                console.log('sono in getInizializzazione doLogin');
@@ -1092,17 +1093,32 @@ function callAVA(agent) {
                       }
                       
                     //25/03/2019 AGGIUNTO cdsId E idAppelli PER LE PRENOTAZIONI APPELLI
-                    agent.context.set({ name: 'vardisessione', lifespan: 1000, parameters: {  "userId": uID, "matId":matricolaID,"adsceId":arIDS, "esami":arEsami, "cdsId":cdsId,"idAppelli":arAdId}});
+                    //commentato in data 16/05/2019
+                  /*  agent.context.set({ name: 'vardisessione', lifespan: 1000, parameters: {  "userId": uID, "matId":matricolaID,"adsceId":arIDS, "esami":arEsami, "cdsId":cdsId,"idAppelli":arAdId}});
                     agent.add(strOutput);
-                    resolve(agent); 
+                    resolve(agent); */
                   
                     }
                     }).catch((error) => {
                       console.log('Si è verificato errore in getInizializzazione -getLibretto: ' +error);
                     });
   
-            
-                
+            //prova del cazzo del 16/05/2019
+            controller.getAppelloDaPrenotare(cdsId,'111218').then((appelliDaPrenotare)=>{
+              if (Array.isArray(appelliDaPrenotare)){
+                console.log('2) sono dentro getAppelloDaPrenotare');
+                var strTemp='';
+                for(var i=0; i<appelliDaPrenotare.length; i++){
+  
+                  idPrenotati[i]=  appelliDaPrenotare[i].dataInizioApp ;
+                 
+                  }
+                  agent.context.set({ name: 'vardisessione', lifespan: 1000, parameters: {  "userId": uID, "matId":matricolaID,"adsceId":arIDS, "esami":arEsami, "cdsId":cdsId,"idAppelli":arAdId,"prenotati":idPrenotati}});
+                  agent.add(strOutput);
+                  resolve(agent); 
+                }
+              });
+              //fino a qua
             }).catch((error) => {
                   console.log('Si è verificato errore in getInizializzazione -doLogin: ' +error);
                  
