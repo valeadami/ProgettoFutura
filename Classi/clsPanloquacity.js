@@ -1141,7 +1141,6 @@ function callAVA(agent) {
                                   appelliDaPrenotare[i].dataInizioIscr + ' fino al '+ appelliDaPrenotare[i].dataFineIscr +'\n';
                        
                         }//fine for
-                      }
                         console.log('Valore di strTemp '+ strTemp +new Date());
                         var str=strOutput;
                         str=str.replace(/(@)/gi, strTemp);
@@ -1149,6 +1148,8 @@ function callAVA(agent) {
                         agent.add(strOutput);
                         console.log('strOutput con replace in  getPrenotazioni PROMISES ->  '+ strOutput +' ' +new Date());
                         resolve(agent);
+                      } //fine if is array
+                        
                     });
                 
                  //originale commentato in data 16/05/2019
