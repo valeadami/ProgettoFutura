@@ -796,7 +796,7 @@ function getSingoloAppelloDaPrenotare(cdsId,adId){
     return new Promise(function(resolve, reject) {
         var options = { 
             method: 'GET',
-            url: strUrlGetAppelloDaPrenotare  + cdsId +'/' + adId +  '/?aaCalId=2017&stato=P&fields=dataInizioApp', //modifica del 16/05/2019 agginto anno=2017 per velocizzare la query', 
+            url: strUrlGetAppelloDaPrenotare  + cdsId +'/' + adId +  '/?aaCalId=2017&fields=dataInizioApp', //  '/?aaCalId=2017&stato=P&fields=dataInizioApp' modifica del 16/05/2019 agginto anno=2017 per velocizzare la query', 
             headers: 
                 { 
                     'cache-control': 'no-cache',

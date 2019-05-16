@@ -1111,7 +1111,7 @@ function callAVA(agent) {
            
             
           break;
-          //************* PRENOTAZIONE 25/03/2019 -> MODIFICATO IN DATA 16/05/2019 */
+          //************* PRENOTAZIONE 25/03/2019 -> MODIFICATO IN DATA 16/05/2019 MA LA QUERY DA S3 IMPIEG 30 SECONDI QUINDI TORNO AL LIBRETTO */
           case 'getPrenotazioneAppelli':
          // var idAp=[]; 
           var strTemp='';
@@ -1123,13 +1123,14 @@ function callAVA(agent) {
                console.log('sono in array prenotazioni '+new Date() + ' con adId '+prenotazioni[0].chiaveADContestualizzata.adId);
                for(var i=0; i<prenotazioni.length; i++){
                 //nuovo del 16/05/2019
-                appelliPrenotabiliPromises.push(controller.getAppelloDaPrenotare(cdsId,prenotazioni[i].chiaveADContestualizzata.adId))
+                appelliPrenotabiliPromises.push(controller.getAppelloDaPrenotare(cdsId,'117741'))
                 //originale commentato in data 16/05/2019  appelliDaPrenotare
-                /* idAp[i]= prenotazioni[i].chiaveADContestualizzata.adId;
+                /*idAp[i]= prenotazioni[i].chiaveADContestualizzata.adId;
                  console.log('**********idAp=========='+ idAp[i] + ' cdsId ' + cdsId);//prenotazioni[i].chiaveADContestualizzata.
                  strTemp+= 'Appello di ' + prenotazioni[i].adDes+ '\n';
                 */
                 }
+                //ri commentato di nuovo in data 16/05/2019 perchè la query impiega troppo tempo
                 Promise.all(appelliPrenotabiliPromises).then((appelliDaPrenotare) => {
                   
                     if (Array.isArray(appelliDaPrenotare)){
@@ -1137,8 +1138,9 @@ function callAVA(agent) {
                       //var strTemp='';
                       for(var i=0; i<appelliDaPrenotare.length; i++){
         
-                        strTemp+= 'Appello di ' + appelliDaPrenotare[i].adDes + ', in data '+ appelliDaPrenotare[i].dataInizioApp +', iscrizione aperta dal '+  
-                                  appelliDaPrenotare[i].dataInizioIscr + ' fino al '+ appelliDaPrenotare[i].dataFineIscr +'\n';
+                        /*strTemp+= 'Appello di ' + appelliDaPrenotare[i].adDes + ', in data '+ appelliDaPrenotare[i].dataInizioApp +', iscrizione aperta dal '+  
+                                  appelliDaPrenotare[i].dataInizioIscr + ' fino al '+ appelliDaPrenotare[i].dataFineIscr +'\n';*/
+                        strTemp+= ' data '+ appelliDaPrenotare[i].dataInizioApp  +'\n';
                        
                         }//fine for
                         console.log('Valore di strTemp '+ strTemp +new Date());
@@ -1153,7 +1155,7 @@ function callAVA(agent) {
                     });
                 
                  //originale commentato in data 16/05/2019
-             /* var str=strOutput;
+               /* var str=strOutput;
                 str=str.replace(/(@)/gi, strTemp);
                 strOutput=str;
                 agent.add(strOutput);
@@ -1219,7 +1221,7 @@ function callAVA(agent) {
               console.log('HO LE PRENOTAZIONI \n' +JSON.stringify(risultato));
               for(var i=0; i<risultato.length; i++){
          
-                  appelliPrenotatiPromises.push(controller.getDettaglioSingoloAppelloPrenotato(risultato[i].cdsId,risultato[i].adId,risultato[i].appId));
+                  appelliPrenotatiPromises.push(controller.getDettaglioSingoloAppelloPrenotato(risultato[i].cdsId, risultato[i].adId,risultato[i].appId)); //);
               }  
               Promise.all(appelliPrenotatiPromises).then((result) => {
                   console.log('all resolved [**', JSON.stringify(result)+ '**] termine ' +new Date());
