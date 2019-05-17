@@ -507,7 +507,7 @@ function callAVA(agent) {
       var userId=ctx.parameters.userId;
       var matId=ctx.parameters.matId;
       //MODIFICA DEL 17/05/2019 
-      var stuId=ctx.parameters.studId;
+      var stuId=ctx.parameters.stuId;
       console.log('LEGGO DAL CONTESTO matricola ID ='+matId + ' stuId '+stuId);
        //modifica del 25/03/2019
        var cdsId=ctx.parameters.cdsId;
@@ -1312,7 +1312,7 @@ function callAVA(agent) {
           break;
           //***************** 17/05/2019 E L I M I N A Z I O N E   P R E N O T A Z I O N E */
           case 'getCancellaPrenotazione':
-              console.log('sono in DELETE DI getCancellaPrenotazione');
+              console.log('sono in DELETE DI getCancellaPrenotazione con stuId '+stuId);
               var strTemp=''; 
               controller.deleteSingoloAppelloDaPrenotare(cdsId,idAppello,'215',stuId).then((res)=>{ //cdsId,adId,appId,studId
                 if (res){
