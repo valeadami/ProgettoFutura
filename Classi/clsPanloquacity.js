@@ -506,7 +506,9 @@ function callAVA(agent) {
     
       var userId=ctx.parameters.userId;
       var matId=ctx.parameters.matId;
-      console.log('LEGGO DAL CONTESTO matricola ID ='+matId);
+      //MODIFICA DEL 17/05/2019 
+      var stuId=ctx.parameters.studId;
+      console.log('LEGGO DAL CONTESTO matricola ID ='+matId + ' stuId '+stuId);
        //modifica del 25/03/2019
        var cdsId=ctx.parameters.cdsId;
        console.log('LEGGO DAL CONTESTO corso di studio id  ='+cdsId);
@@ -1063,7 +1065,9 @@ function callAVA(agent) {
               var arAdId=[]; //array per adId per la prenotazione
               var arIDS=[]; //adsceId degli esami del libretto
               var arEsami=[]; //descrizioni degli esami del libretto
-               
+              //AGGIUNTA DEL 17/05/2019 PER ELIMINAZIONE PRENOTAZIONE APPELLO
+              var stuId='';
+
               //ripristinato in data 03/05/2019
               controller.doLogin().then((stud) => { 
                console.log('sono in getInizializzazione doLogin');
@@ -1071,7 +1075,8 @@ function callAVA(agent) {
                uID=stud.userId;
                console.log('uID = '+uID);
                matricolaID=stud.trattiCarriera[0].matId;
-               console.log('matricolaId ='+matricolaID);
+               stuId=trattiCarriera[0].stuId;
+               console.log('matricolaId ='+matricolaID + ' stuId '+stuId);
                //MODIFICA DEL 25/03/2019
                cdsId=stud.trattiCarriera[0].cdsId;
                console.log('CORSO DI STUDIO ID  ='+cdsId);
@@ -1093,7 +1098,7 @@ function callAVA(agent) {
                       
                     //25/03/2019 AGGIUNTO cdsId E idAppelli PER LE PRENOTAZIONI APPELLI
                     //commentato in data 16/05/2019
-                    agent.context.set({ name: 'vardisessione', lifespan: 1000, parameters: {  "userId": uID, "matId":matricolaID,"adsceId":arIDS, "esami":arEsami, "cdsId":cdsId,"idAppelli":arAdId}});
+                    agent.context.set({ name: 'vardisessione', lifespan: 1000, parameters: {  "userId": uID, "matId":matricolaID,"adsceId":arIDS, "esami":arEsami, "cdsId":cdsId,"idAppelli":arAdId,"stuId":stuId}});
                     agent.add(strOutput);
                     resolve(agent);
                   
@@ -1298,16 +1303,34 @@ function callAVA(agent) {
                // agent.add('faccio post di prenotazione con cdsId '+cdsId + 'adId '+ idAppello + 'appID lo metto io '+' adsceId '+idEsame + ' nome di paramEsame '+paramEsame);
                 resolve(agent);
               }else{
-                console.log('il post non è stato prenotato');
-                agent.add('il post non è stato prenotato');
+                console.log('la prenotazione non è andata a buon fine');
+                agent.add('la prenotazione non è andata a buon fine');
                 resolve(agent);
               }
-           
-
             });
-            
-           
             //
+          break;
+          //***************** 17/05/2019 E L I M I N A Z I O N E   P R E N O T A Z I O N E */
+          case 'getCancellaPrenotazione':
+              console.log('sono in DELETE DI getCancellaPrenotazione');
+              var strTemp=''; 
+              controller.deleteSingoloAppelloDaPrenotare(cdsId,idAppello,'215',stuId).then((res)=>{ //cdsId,adId,appId,studId
+                if (res){
+                  console.log('faccio delete della prenotazione appello con cdsId '+cdsId + 'adId '+ idAppello + 'appID lo metto io '+' stuId '+stuId+ ' nome di paramEsame '+paramEsame);
+                   strTemp=paramEsame;
+                   var str=strOutput;
+                   str=str.replace(/(@)/gi, strTemp);
+                   strOutput=str;
+                   agent.add(strOutput);
+                  //console.log('nome di paramEsame '+paramEsame);
+                 // agent.add('faccio post di prenotazione con cdsId '+cdsId + 'adId '+ idAppello + 'appID lo metto io '+' adsceId '+idEsame + ' nome di paramEsame '+paramEsame);
+                  resolve(agent);
+                }else{
+                  console.log('la cancellazione non è andata a buon fine');
+                  agent.add('la cancellazione non è andata a buon fine');
+                  resolve(agent);
+                }
+              });
           break;
         default:
         
