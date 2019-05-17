@@ -1287,7 +1287,7 @@ function callAVA(agent) {
            console.log('sono in POST DI getPrenotaEsame');
            var strTemp='';
             controller.postSingoloAppelloDaPrenotare(cdsId,idAppello,'215',idEsame).then((res)=>{ //cdsId,adId,appId,adsceId
-              if (res==201){
+              if (res){
                 console.log('faccio post di prenotazione con cdsId '+cdsId + 'adId '+ idAppello + 'appID lo metto io '+' adsceId '+idEsame+ ' nome di paramEsame '+paramEsame);
               //  strTemp=paramEsame;
                 //console.log('nome di paramEsame '+paramEsame);
