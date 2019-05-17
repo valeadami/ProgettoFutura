@@ -1282,7 +1282,13 @@ function callAVA(agent) {
           }); */
 
         break;
-      
+        /*  P R E N O T A Z I O N E    P O S T       17/05/2019    *********************/
+          case 'getPrenotaEsame':
+            console.log('faccio post di prenotazione con cdsId '+cdsId + 'adId '+ idAppello + 'appID lo metto io '+' adsceId '+idEsame);//cdsId,adId,appId,adsceId
+            agent.add('faccio post di prenotazione con cdsId '+cdsId + 'adId '+ idAppello + 'appID lo metto io '+' adsceId '+idEsame)
+            resolve(agent);
+            //controller.postSingoloAppelloDaPrenotare(cdsId,idAppello,'215',idEsame)
+          break;
         default:
         
           console.log('nel default ossia risponde il fallback in callAVANEW ');
