@@ -1289,9 +1289,13 @@ function callAVA(agent) {
             controller.postSingoloAppelloDaPrenotare(cdsId,idAppello,'215',idEsame).then((res)=>{ //cdsId,adId,appId,adsceId
               if (res){
                 console.log('faccio post di prenotazione con cdsId '+cdsId + 'adId '+ idAppello + 'appID lo metto io '+' adsceId '+idEsame+ ' nome di paramEsame '+paramEsame);
-              //  strTemp=paramEsame;
+                 strTemp=paramEsame;
+                 var str=strOutput;
+                 str=str.replace(/(@)/gi, strTemp);
+                 strOutput=str;
+                 agent.add(strOutput);
                 //console.log('nome di paramEsame '+paramEsame);
-                agent.add('faccio post di prenotazione con cdsId '+cdsId + 'adId '+ idAppello + 'appID lo metto io '+' adsceId '+idEsame + ' nome di paramEsame '+paramEsame);
+               // agent.add('faccio post di prenotazione con cdsId '+cdsId + 'adId '+ idAppello + 'appID lo metto io '+' adsceId '+idEsame + ' nome di paramEsame '+paramEsame);
                 resolve(agent);
               }else{
                 console.log('il post non è stato prenotato');
