@@ -1075,7 +1075,7 @@ function callAVA(agent) {
                uID=stud.userId;
                console.log('uID = '+uID);
                matricolaID=stud.trattiCarriera[0].matId;
-               stuId=trattiCarriera[0].stuId;
+               stuId=stud.trattiCarriera[0].stuId;
                console.log('matricolaId ='+matricolaID + ' stuId '+stuId);
                //MODIFICA DEL 25/03/2019
                cdsId=stud.trattiCarriera[0].cdsId;
