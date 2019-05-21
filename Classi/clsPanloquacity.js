@@ -513,7 +513,7 @@ function callAVA(agent) {
        var cdsId=ctx.parameters.cdsId;
        console.log('LEGGO DAL CONTESTO corso di studio id  ='+cdsId);
        /************************************************ */
-      if (c.esami){
+      if (ctx.parameters.esami){
         var idEsame='';
         var idAppello='';
         for(var i =0;i<ctx.parameters.esami.length;i++){
