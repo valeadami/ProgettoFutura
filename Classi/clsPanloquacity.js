@@ -1319,12 +1319,17 @@ function callAVA(agent) {
         /*************** MODIFICA DEL 21/05/2019 PER FORMATTARE LE DATE IN CONFERMA DI PRENOTAZIONE ESAME  */
           case 'getInfoAppelloEsame':
               console.log('sono in getInfoAppelloEsame');
-              var strTemp='';
+             
+              var strTemp;
               if (ctx.parameters.date){
                 console.log('ho il parametro data');
                 var vv=ctx.parameters.date.split('T')[0]; //2019-06-10
-                ctx.parameters.date=vv;
-                agent.add(strOutput);
+                strTemp=vv.split('-');
+
+                 var str=strOutput;
+                 str=str.replace(/(@)/gi, strTemp[2]+'/'+strTemp[1]+'/'+strTemp[0]);
+                 strOutput=str;
+                 agent.add(strOutput);
                 resolve(agent);
               }else{  
                 console.log('NON ho il parametro data');
