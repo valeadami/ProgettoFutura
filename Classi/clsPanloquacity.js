@@ -1135,7 +1135,8 @@ function callAVA(agent) {
                 //originale commentato in data 16/05/2019  appelliDaPrenotare
                  idAp[i]= prenotazioni[i].chiaveADContestualizzata.adId;
                  console.log('**********idAp=========='+ idAp[i] + ' cdsId ' + cdsId);//prenotazioni[i].chiaveADContestualizzata.
-                 strTemp+= 'Appello di ' + prenotazioni[i].adDes+ '\n';
+                 /* **  MODIFICA DEL 21/05/2019 AGGIUNTA FAKE               *******/
+                 strTemp+= 'Appello di ' + prenotazioni[i].adDes+ ' del 10 giugno 2019, appello di ' +  prenotazioni[i].adDes+' del 24 giugno 2019 \n';
                 
                 }
               
@@ -1237,8 +1238,10 @@ function callAVA(agent) {
                   console.log('all resolved [**', JSON.stringify(result)+ '**] termine ' +new Date());
                   if (Array.isArray(result)){
                       for(var i=0; i<result.length; i++){
-                     
-                        strTemp+='\n appello di ' + result[i].desApp + ', codice '+result[i].adCod + ', del giorno ' +result[i].turni[0].dataOraEsa + ', esame dell\' anno '+  result[i].aaCalId +', con presidente ' +result[i].presidenteCognome + ' '+ result[i].presidenteNome +'\n';
+                     /* MODIFICA DEL 21/05/2019  formattazione della data e della ora esame*/
+                     var dd=result[i].turni[0].dataOraEsa.split(" ");
+                     //console.log('data ' + dd[0] + ' ora '+ dd[1].substring(0,5));
+                        strTemp+='\n appello di ' + result[i].desApp + ', codice '+result[i].adCod + ', del giorno ' + dd[0] /*result[i].turni[0].dataOraEsa*/ + ' alle ore ' + dd[1].substring(0,5) +', esame dell\' anno '+  result[i].aaCalId +', con presidente ' +result[i].presidenteCognome + ' '+ result[i].presidenteNome +'\n';
                       } //fine for
                       var str=strOutput;
                       str=str.replace(/(@)/gi, strTemp);
