@@ -1118,6 +1118,7 @@ function callAVA(agent) {
           break;
           //************* PRENOTAZIONE 25/03/2019 -> MODIFICATO IN DATA 16/05/2019 MA LA QUERY DA S3 IMPIEG 30 SECONDI QUINDI TORNO AL LIBRETTO */
           case 'getPrenotazioneAppelli':
+          case 'getAppelliEsame':
           var idAp=[]; 
           var strTemp='';
 
