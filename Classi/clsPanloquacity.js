@@ -1320,15 +1320,17 @@ function callAVA(agent) {
           case 'getInfoAppelloEsame':
               console.log('sono in getInfoAppelloEsame');
               var strTemp='';
-              if(ctx.parameters.date){
+              if (ctx.parameters.date){
                 console.log('ho il parametro data');
                 agent.add('ho il parametro date');
+                resolve(agent);
               }else{  
                 console.log('NON ho il parametro data');
               agent.add('NON ho il parametro date');
+              resolve(agent);
 
               }
-              resolve(agent);
+            
 
           break;
 
