@@ -1322,7 +1322,7 @@ function callAVA(agent) {
               var strTemp='';
               if (ctx.parameters.date){
                 console.log('ho il parametro data');
-                var vv=tx.parameters.date.split('T')[0]; //2019-06-10
+                var vv=ctx.parameters.date.split('T')[0]; //2019-06-10
                 ctx.parameters.date=vv;
                 agent.add(strOutput);
                 resolve(agent);
