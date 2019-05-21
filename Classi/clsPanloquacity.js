@@ -1341,7 +1341,30 @@ function callAVA(agent) {
 
           break;
 
+            //getInfoAppelloPrenotato intent cancella appello prenotato #esse3 #appelli #cancellazione
+            case 'getInfoAppelloPrenotato':
+              console.log('sono in getInfoAppelloPrenotato cancellazione prenotazione');
+             
+              var strTemp;
+              if (ctx.parameters.date){
+                console.log('ho il parametro data');
+                var vv=ctx.parameters.date.split('T')[0]; //2019-06-10
+                strTemp=vv.split('-');
 
+                 var str=strOutput;
+                 str=str.replace(/(@)/gi, strTemp[2]+'/'+strTemp[1]+'/'+strTemp[0]);
+                 strOutput=str;
+                 agent.add(strOutput);
+                resolve(agent);
+              }else{  
+                console.log('NON ho il parametro data');
+              agent.add('NON ho il parametro date');
+              resolve(agent);
+
+              }
+            
+
+          break;
 
           /***************  FINE MODIFICA DEL 21/05/2019 PER FORMATTARE LE DATE IN CONFERMA DI PRENOTAZIONE ESAME  */
 
