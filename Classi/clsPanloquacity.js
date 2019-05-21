@@ -513,7 +513,7 @@ function callAVA(agent) {
        var cdsId=ctx.parameters.cdsId;
        console.log('LEGGO DAL CONTESTO corso di studio id  ='+cdsId);
        /************************************************ */
-      if (ctx.parameters.esami){
+      if (c.esami){
         var idEsame='';
         var idAppello='';
         for(var i =0;i<ctx.parameters.esami.length;i++){
@@ -1116,7 +1116,7 @@ function callAVA(agent) {
            
             
           break;
-          //************* PRENOTAZIONE 25/03/2019 -> MODIFICATO IN DATA 16/05/2019 MA LA QUERY DA S3 IMPIEG 30 SECONDI QUINDI TORNO AL LIBRETTO */
+          //************* P R E N O T A Z I O N E   A P P E L L O --------------------- 25/03/2019 -> MODIFICATO IN DATA 16/05/2019 MA LA QUERY DA S3 IMPIEG 30 SECONDI QUINDI TORNO AL LIBRETTO */
           case 'getPrenotazioneAppelli':
           case 'getAppelliEsame': // ********************  MODIFICA DEL 21/05/2019 FAKE
           var idAp=[]; 
@@ -1316,7 +1316,27 @@ function callAVA(agent) {
           }); */
 
         break;
-        /*  P R E N O T A Z I O N E    P O S T       17/05/2019    *********************/
+        /*************** MODIFICA DEL 21/05/2019 PER FORMATTARE LE DATE IN CONFERMA DI PRENOTAZIONE ESAME  */
+          case 'getInfoAppelloEsame':
+              console.log('sono in getInfoAppelloEsame');
+              var strTemp='';
+              if(ctx.parameters.date){
+                console.log('ho il parametro data');
+                agent.add('ho il parametro date');
+              }else{  
+                console.log('NON ho il parametro data');
+              agent.add('NON ho il parametro date');
+
+              }
+              resolve(agent);
+
+          break;
+
+
+
+          /***************  FINE MODIFICA DEL 21/05/2019 PER FORMATTARE LE DATE IN CONFERMA DI PRENOTAZIONE ESAME  */
+
+        /*  F A R E     U  N  A   P R E N O T A Z I O N E  ->  P O S T       17/05/2019    *********************/
           case 'getPrenotaEsame':
            console.log('sono in POST DI getPrenotaEsame');
            var strTemp='';
