@@ -989,6 +989,43 @@ function getSingoloAppelloPrenotatoNuovo(matId){
     })
 });
 }
+/********************** MODIFICA DEL 21/05/2019 F A K E tutti gli appelli che sono prenotabili in stato da iniziare ma non ancora attivi da Esse3 ********************************** */
+
+function getTuttiAppelliDaIniziareFake(){
+    return new Promise(function(resolve, reject) {
+
+        var pd=[new appello('2017','018GI',null, null,null, null,
+            null,null,null,null,null, null, 'ISTITUZIONI DI DIRITTO PRIVATO I',
+            null,null,null,null,null,
+            'BALLERINI',null,'LUCA',null,null,null,null,null,null, null,null,
+            null,null,null,null, '08/07/2019 13:00'),
+
+            new appello('2017','018GI',null, null,null, null,
+            null,null,null,null,null, null, 'ISTITUZIONI DI DIRITTO PRIVATO I',
+            null,null,null,null,null,
+            'BALLERINI',null,'LUCA',null,null,null,null,null,null, null,null,
+            null,null,null,null, '16/09/2019 13:00:'),
+
+            new appello('2017','018GI',null, null,null, null,
+            null,null,null,null,null, null, 'ISTITUZIONI DI DIRITTO PRIVATO I',
+            null,null,null,null,null,
+            'BALLERINI',null,'LUCA',null,null,null,null,null,null, null,null,
+            null,null,null,null, '07/10/2019 13:00:'),
+
+            new appello('2017','018GI',null, null,null, null,
+            null,null,null,null,null, null, 'ISTITUZIONI DI DIRITTO PRIVATO I',
+            null,null,null,null,null,
+            'BALLERINI',null,'LUCA',null,null,null,null,null,null, null,null,
+            null,null,null,null, '09/12/2019 13:00:')
+
+        ];
+
+
+        resolve(pd);
+});
+}
+
+/****************F I NE     F A K E ******************************************************* */
 // getAppelloDaPrenotare(cdsId,adId) modificato in data 16/05/2019
 function getAppelloDaPrenotare(cdsId,adId){
     return new Promise(function(resolve, reject) {
@@ -1142,4 +1179,5 @@ exports.getAppId=getAppId;
 exports.getSingoloAppelloPrenotato=getSingoloAppelloPrenotato;
 exports.getDettaglioSingoloAppelloPrenotato=getDettaglioSingoloAppelloPrenotato;
 exports.getSingoloAppelloPrenotatoNuovo=getSingoloAppelloPrenotatoNuovo;
+exports.getTuttiAppelliDaIniziareFake=getTuttiAppelliDaIniziareFake;
 exports.testCC=testCC;

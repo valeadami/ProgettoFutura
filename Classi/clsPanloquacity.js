@@ -1217,6 +1217,31 @@ function callAVA(agent) {
         }); 
   
               break;
+        // ******** MODIFICA DEL 21/05/2019 PROSSIMI APPELLI DA INIZIARE LISTA COMPLETA FAKE *****************
+        case "getListaAppelliCompleta":
+            console.log('sono in getListaAppelliCompleta FAKE');
+            var strTemp='';
+            controller.getTuttiAppelliDaIniziareFake().then((risultato)=> {
+              if (Array.isArray(risultato)){
+                console.log('sono in array risultato FAKE');
+                for(var i=0; i<risultato.length; i++){
+                  strTemp+='\n appello di ' + risultato[i].desApp + ', codice '+risultato[i].adCod + ', del giorno ' + risultato[1].turni.split(" ")[0] + ' alle ore ' + risultato[1].turni.split(" ")[1] +', esame dell\' anno '+  risultato[i].aaCalId +', con presidente ' +risultato[i].presidenteCognome + ' '+ risultato[i].presidenteNome +'\n';
+                 }
+                 var str=strOutput;
+                 str=str.replace(/(@)/gi, strTemp);
+                 strOutput=str;
+                 agent.add(strOutput);
+                 console.log('strOutput con replace in  getListaAppelliCompleta FAKE->  '+ strOutput);
+                 resolve(agent);
+              }
+
+            }).catch((error) => {
+              console.log('Si è verificato errore in getListaAppelliCompletaFake: ' +error);
+              agent.add('Si è verificato errore in getListaAppelliCompletaFake: ' +error);
+              resolve(agent);
+            }); 
+
+            break;
         //08/05/2019 getAppelliPrenotati: recupero la lista delle prenotazioni effettuate
         case 'getAppelliPrenotati':
           //console.log('sono in getApppelliPrenotati');
