@@ -1225,7 +1225,7 @@ function callAVA(agent) {
               if (Array.isArray(risultato)){
                 console.log('sono in array risultato FAKE');
                 for(var i=0; i<risultato.length; i++){
-                  strTemp+='\n appello di ' + risultato[i].desApp + ', codice '+risultato[i].adCod + ', del giorno ' + risultato[1].turni.split(" ")[0] + ' alle ore ' + risultato[1].turni.split(" ")[1] +', esame dell\' anno '+  risultato[i].aaCalId +', con presidente ' +risultato[i].presidenteCognome + ' '+ risultato[i].presidenteNome +'\n';
+                  strTemp+='\n appello di ' + risultato[i].desApp +  ', del giorno ' + risultato[i].turni.split(" ")[0] +'\n'; //+ ' alle ore ' + risultato[i].turni.split(" ")[1] +', esame dell\' anno '+  risultato[i].aaCalId +', con presidente ' +risultato[i].presidenteCognome + ' '+ risultato[i].presidenteNome 
                  }
                  var str=strOutput;
                  str=str.replace(/(@)/gi, strTemp);
