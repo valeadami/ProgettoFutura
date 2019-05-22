@@ -549,9 +549,10 @@ function callAVA(agent) {
               for(var i=0; i<libretto.length; i++){
                 
               /****************   modifica del 22/05/2019 LASCIO SOLO IL NOME DELL'ESAME  *************/
-                strTemp+=  libretto[i].adDes /*+ ', frequentato  nell \'anno ' +libretto[i].aaFreqId +', anno di corso ' +
-                libretto[i].annoCorso */+ '\n';
-    
+                strTemp+=  libretto[i].adDes; /*+ ', frequentato  nell \'anno ' +libretto[i].aaFreqId +', anno di corso ' +
+                libretto[i].annoCorso + '\n';*/
+                if (i<libretto.length-1)
+                    strTemp+=',';
               }
               
             }
