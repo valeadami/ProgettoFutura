@@ -1247,16 +1247,20 @@ function callAVA(agent) {
         //08/05/2019 getAppelliPrenotati: recupero la lista delle prenotazioni effettuate
         case 'getAppelliPrenotati':
           //console.log('sono in getApppelliPrenotati');
-          /*** prova del 15/05/2019 ******* */
+          /*** modifica del 15/05/2019 *******  modifica del 22/05/2019   gestione output da console DF con risposta diversa in caso no appelli */
           var appelliPrenotatiPromises=[];
         
           var strTemp='';
-         
+          var risposta=[]; //22/05/2019 in caso di appelli non prenotati risposta predefinita da console
+          risposta=strOutput.split("|");
+          console.log('dopo lo split, risposta[0] ='+ risposta[0] + ", risposta[1] " + risposta[1]);
           console.log('**** INIZIO TEST **** '+new Date());
           controller.getAppId(matId).then((risultato)=>{
             //verifica che CI SIANO LE PRENOTAZIONI!!!!
             if (Array.isArray(risultato)){
+              //dò la prima risposta ossia elenco prenotazioni
               console.log('HO LE PRENOTAZIONI \n' +JSON.stringify(risultato));
+              
               for(var i=0; i<risultato.length; i++){
          
                   appelliPrenotatiPromises.push(controller.getDettaglioSingoloAppelloPrenotato(risultato[i].cdsId, risultato[i].adId,risultato[i].appId)); //);
@@ -1270,7 +1274,7 @@ function callAVA(agent) {
                      //console.log('data ' + dd[0] + ' ora '+ dd[1].substring(0,5));
                         strTemp+='\n appello di ' + result[i].desApp + ', codice '+result[i].adCod + ', del giorno ' + dd[0] /*result[i].turni[0].dataOraEsa*/ + ' alle ore ' + dd[1].substring(0,5) +', esame dell\' anno '+  result[i].aaCalId +', con presidente ' +result[i].presidenteCognome + ' '+ result[i].presidenteNome +'\n';
                       } //fine for
-                      var str=strOutput;
+                      var str= risposta[0];// 22/05/2019--> strOutput;
                       str=str.replace(/(@)/gi, strTemp);
                       strOutput=str;
                       agent.add(strOutput);
@@ -1279,7 +1283,7 @@ function callAVA(agent) {
                   } //fine if isArray(result
                 });
               }else{ /*  15/05/2019 NON CI SONO PRENOTAZIONI */
-                 agent.add('Mi dispiace, non hai effettuato prenotazioni. Come posso aiutarti ora?');
+                 agent.add(risposta[1]); //--> 22/05/2019 'Mi dispiace, non hai effettuato prenotazioni. Come posso aiutarti ora?'
                  console.log('Mi dispiace, non hai effettuato prenotazioni. Come posso aiutarti ora?');
                  resolve(agent);
               }
