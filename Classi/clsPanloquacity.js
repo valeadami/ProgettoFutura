@@ -1374,10 +1374,11 @@ function callAVA(agent) {
           /***************  FINE MODIFICA DEL 21/05/2019 PER FORMATTARE LE DATE IN CONFERMA DI PRENOTAZIONE ESAME  */
 
         /*  F A R E     U  N  A   P R E N O T A Z I O N E  ->  P O S T       17/05/2019    *********************/
-          case 'getPrenotaEsame':
+          /* modificato in data 11/06/2019 esame da 215 a 216 appello del 24 giugno */
+        case 'getPrenotaEsame':
            console.log('sono in POST DI getPrenotaEsame');
            var strTemp='';
-            controller.postSingoloAppelloDaPrenotare(cdsId,idAppello,'215',idEsame).then((res)=>{ //cdsId,adId,appId,adsceId
+            controller.postSingoloAppelloDaPrenotare(cdsId,idAppello,'216',idEsame).then((res)=>{ //cdsId,adId,appId,adsceId
               if (res){
                 console.log('faccio post di prenotazione con cdsId '+cdsId + 'adId '+ idAppello + 'appID lo metto io '+' adsceId '+idEsame+ ' nome di paramEsame '+paramEsame);
                  strTemp=paramEsame;
@@ -1397,10 +1398,11 @@ function callAVA(agent) {
             //
           break;
           //***************** 17/05/2019 E L I M I N A Z I O N E   P R E N O T A Z I O N E */
+           /* modificato in data 11/06/2019 esame da 215 a 216 appello del 24 giugno */
           case 'getCancellaPrenotazione':
               console.log('sono in DELETE DI getCancellaPrenotazione con stuId '+stuId);
               var strTemp=''; 
-              controller.deleteSingoloAppelloDaPrenotare(cdsId,idAppello,'215',stuId).then((res)=>{ //cdsId,adId,appId,studId
+              controller.deleteSingoloAppelloDaPrenotare(cdsId,idAppello,'216',stuId).then((res)=>{ //cdsId,adId,appId,studId
                 if (res){
                   console.log('faccio delete della prenotazione appello con cdsId '+cdsId + 'adId '+ idAppello + 'appID lo metto io '+' stuId '+stuId+ ' nome di paramEsame '+paramEsame);
                    strTemp=paramEsame;
