@@ -1128,8 +1128,8 @@ function callAVA(agent) {
          
           controller.getPrenotazioni(matId).then((prenotazioni) => { //prenotazioni sono righe del libretto
              console.log('1) sono in getPrenotazioni '+new Date()); //+ JSON.stringify(prenotazioni)
-             
-             if (Array.isArray(prenotazioni)){
+             //MODIFICA DEL 25/06/2019 VERIFICARE CHE ARRAY DI PRENOTAZIONI ABBIA ALMENO UN ELEMENTO
+             if (Array.isArray(prenotazioni) && (prenotazioni.length>=1)){
                console.log('sono in array prenotazioni '+new Date() + ' con adId '+prenotazioni[0].chiaveADContestualizzata.adId);
                for(var i=0; i<prenotazioni.length; i++){
                 //nuovo del 16/05/2019
@@ -1176,7 +1176,7 @@ function callAVA(agent) {
                 resolve(agent);
               }else{ //  16/05/2019 NON CI SONO APPELLI PRENOTABILI
                 agent.add('Mi dispiace, non hai appelli prenotabili. Come posso aiutarti ora?');
-                console.log('Mi dispiace, non hai effettuato prenotabili. Come posso aiutarti ora?');
+                console.log('Mi dispiace, non hai appelli prenotabili. Come posso aiutarti ora?');
                 resolve(agent);
             }
             //commentato in data 08/05/2019 perchè la query impiega troppo tempo
@@ -1211,10 +1211,10 @@ function callAVA(agent) {
             agent.add('Si è verificato errore in getPrenotazioneAppelli> getAppelloDaPrenotare  ' +error);
             resolve(agent);
           });*/
-  /* qua commentato di sera*/
+  /* modifica del 25/06/2019 cambiato messaggio di errore in output */
         }).catch((error) => {
           console.log('Si è verificato errore in getPrenotazioneAppelli: ' +error);
-          agent.add('Si è verificato errore in getPrenotazioneAppelli: ' +error);
+          agent.add('Mi dispiace, si è verificato errore durante l\' accesso  agli appelli. Riprova più tardi.');
           resolve(agent);
         }); 
   
