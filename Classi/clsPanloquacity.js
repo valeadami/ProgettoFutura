@@ -468,7 +468,7 @@ function callAVA(agent) {
   
       /*  modifica del 18/04/2019: carico dinamicamente la classe controller per gestire Esse3 */
       if (agent.parameters.bot=='HEAD' || agent.parameters.bot=='HEADdemo'){
-        console.log('carico dinamicamente clsControllerS3.js');
+        //console.log('carico dinamicamente clsControllerS3.js');
         controller=require('./clsControllerS3.js');
       }
     let strRicerca='';

@@ -112,7 +112,7 @@ function RigaLibretto(aaFreqId, adCod,adDes,adsceId,annoCorso,chiaveADContestual
             console.log('CREATO OGGETTO RIGA LIBRETTO: anno frequenza=' +this.aaFreqId+ ', adCod ' + this.adCod + ', adDes  ' + this.adDes + ', adId' + this.adId + ', id matricola ' + this.matId + ', matricola '+ this.matricola + ',  adsceId '+ this.adsceId + 'esito '+ this.getEsito());
         } else {
 
-            console.log('creato oggetto riga libretto');
+            //console.log('creato oggetto riga libretto');
         }
        
     };
