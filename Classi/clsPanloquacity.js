@@ -605,17 +605,45 @@ function callAVA(agent) {
           // strOutput='ecco gli esami ';
           if (Array.isArray(libretto)){
             
-          
-              strTemp+='sei iscritto all\' anno di corso ' +   libretto[0].annoCorso;
-              //console.log('comando getStudente->getLibretto: ' + strTemp);
+          //MODIFICA DEL 01/07/2019 SOTTO ORIGINALE
+              // strTemp+='sei iscritto all\' anno di corso ' +   libretto[0].annoCorso;
+
+              if (agent.requestSource == "ACTIONS_ON_GOOGLE") {
+   
+                let conv = agent.conv();
+                strTemp+='Sei iscritto al <say-as interpret-as="ordinal">' + libretto[0].annoCorso +'</say-as> anno di corso';
+                var str=strOutput;
+                str=str.replace(/(@)/gi, strTemp);
+                strOutput='<speak>'+str;+'</speak>'
+                conv.ask(new SimpleResponse({
+                  speech: strOutput,
+                  text:strOutput
+                 }));
+                   agent.add(conv);
+                   console.log('strOutput con replace in getStudente->getLibretto: '+ strOutput);
+                  resolve(agent);
+              
+              
+              }//fine if ACTIONS_ON
+              else{ //altre piattaforme
+                var str=strOutput;
+                str=str.replace(/(@)/gi, strTemp);
+                strOutput=str;
+                agent.add(strOutput);
+                console.log('strOutput con replace in getStudente->getLibretto: '+ strOutput);
+                resolve(agent);
+
+              }
+            
           }
+          //QUI SOTTO ORIGINALE PRIMA DELLA MODIFICA DEL 01/07/2019
           //qui devo fare replace della @, che si trova in tmp[0]
-          var str=strOutput;
+          /*var str=strOutput;
           str=str.replace(/(@)/gi, strTemp);
           strOutput=str;
           agent.add(strOutput);
           console.log('strOutput con replace in getStudente->getLibretto: '+ strOutput);
-          resolve(agent);
+          resolve(agent);*/
           }).catch((error) => {
           console.log('Si è verificato errore getStudente: ' +error);
           agent.add('Mi dispiace, si è verificato un errore leggendo i tuoi dati dal libretto. Riprova più tardi.');
