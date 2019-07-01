@@ -614,10 +614,11 @@ function callAVA(agent) {
                 strTemp+='Sei iscritto al <say-as interpret-as="ordinal">' + libretto[0].annoCorso +'</say-as> anno di corso';
                 var str=strOutput;
                 str=str.replace(/(@)/gi, strTemp);
+                var strGA=str; //stringa strGA contiene il solo testo per uscita su Google Assistant su cell
                 strOutput='<speak>'+str+'</speak>';
                 conv.ask(new SimpleResponse({
                   speech: strOutput,
-                  text:strOutput
+                  text:strGA
                  }));
                    agent.add(conv);
                    console.log('strOutput con replace in getStudente->getLibretto: '+ strOutput);
