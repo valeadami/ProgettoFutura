@@ -46,7 +46,7 @@ function Carriera(aaId, aaImm1,aaImmSu,aaOrdId,aaRegId,cdsCod,cdsDes,cdsId,
                     ', tipoCorsoCod ' + this.tipoCorsoCod + ', tipoCorsoDes '+ this.tipoCorsoDes);
         } else {
 
-            console.log('creato oggetto carriera');
+            //console.log('creato oggetto carriera');
         }
        
     };

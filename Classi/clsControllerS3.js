@@ -616,7 +616,7 @@ function getCarriera(userid){
                 body[0].cdsCod, body[0].cdsDes, body[0].cdsId, body[0].dataChiusura,body[0].dataImm, body[0].dataImm1, body[0].dataImmSu,
                 body[0].matId, body[0].matricola, body[0].motStastuCod, body[0].motStastuDes, body[0].ordCod, body[0].ordDes,body[0].pdsCod,
                 body[0].pdsDes,body[0].pdsId, body[0].tipoCorsoCod,body[0].tipoCorsoDes, body[0].tipoTititCod, body[0].tipoTititDes);
-           car.log();
+           //car.log();
             //per debug
             rawData=JSON.stringify(body);
             //console.log('\n\nQUESTO IL BODY della carriera' +rawData);
