@@ -609,7 +609,7 @@ function callAVA(agent) {
               // strTemp+='sei iscritto all\' anno di corso ' +   libretto[0].annoCorso;
 
               if (agent.requestSource == "ACTIONS_ON_GOOGLE") {
-   
+                const { SimpleResponse} = require('actions-on-google');
                 let conv = agent.conv();
                 strTemp+='Sei iscritto al <say-as interpret-as="ordinal">' + libretto[0].annoCorso +'</say-as> anno di corso';
                 var str=strOutput;
