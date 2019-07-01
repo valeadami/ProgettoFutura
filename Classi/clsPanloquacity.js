@@ -1138,7 +1138,7 @@ function callAVA(agent) {
                  idAp[i]= prenotazioni[i].chiaveADContestualizzata.adId;
                  console.log('**********idAp=========='+ idAp[i] + ' cdsId ' + cdsId);//prenotazioni[i].chiaveADContestualizzata.
                  /* **  MODIFICA DEL 21/05/2019 AGGIUNTA FAKE               *******/
-                 strTemp+= 'Appello di ' + prenotazioni[i].adDes+ ' del 10 giugno 2019, appello di ' +  prenotazioni[i].adDes+' del 24 giugno 2019 \n';
+                 strTemp+= 'Appello di ' + prenotazioni[i].adDes+ ' del 8 luglio 2019';
                 
                 }
               
@@ -1375,10 +1375,11 @@ function callAVA(agent) {
 
         /*  F A R E     U  N  A   P R E N O T A Z I O N E  ->  P O S T       17/05/2019    *********************/
           /* modificato in data 11/06/2019 esame da 215 a 216 appello del 24 giugno */
+           /* modificato in data 01/07/2019 esame da 216 a 217 appello del 8 luglio */
         case 'getPrenotaEsame':
            console.log('sono in POST DI getPrenotaEsame');
            var strTemp='';
-            controller.postSingoloAppelloDaPrenotare(cdsId,idAppello,'216',idEsame).then((res)=>{ //cdsId,adId,appId,adsceId
+            controller.postSingoloAppelloDaPrenotare(cdsId,idAppello,'217',idEsame).then((res)=>{ //cdsId,adId,appId,adsceId
               if (res){
                 console.log('faccio post di prenotazione con cdsId '+cdsId + 'adId '+ idAppello + 'appID lo metto io '+' adsceId '+idEsame+ ' nome di paramEsame '+paramEsame);
                  strTemp=paramEsame;
@@ -1391,7 +1392,7 @@ function callAVA(agent) {
                 resolve(agent);
               }else{
                 console.log('la prenotazione non è andata a buon fine');
-                agent.add('la prenotazione non è andata a buon fine');
+                agent.add('Mi dispiace, la prenotazione non è andata a buon fine. Riprova più tardi.');
                 resolve(agent);
               }
             });
@@ -1399,10 +1400,11 @@ function callAVA(agent) {
           break;
           //***************** 17/05/2019 E L I M I N A Z I O N E   P R E N O T A Z I O N E */
            /* modificato in data 11/06/2019 esame da 215 a 216 appello del 24 giugno */
+            /* modificato in data 01/07/2019 esame 216 a 217 appello del 08 luglio */
           case 'getCancellaPrenotazione':
               console.log('sono in DELETE DI getCancellaPrenotazione con stuId '+stuId);
               var strTemp=''; 
-              controller.deleteSingoloAppelloDaPrenotare(cdsId,idAppello,'216',stuId).then((res)=>{ //cdsId,adId,appId,studId
+              controller.deleteSingoloAppelloDaPrenotare(cdsId,idAppello,'217',stuId).then((res)=>{ //cdsId,adId,appId,studId
                 if (res){
                   console.log('faccio delete della prenotazione appello con cdsId '+cdsId + 'adId '+ idAppello + 'appID lo metto io '+' stuId '+stuId+ ' nome di paramEsame '+paramEsame);
                    strTemp=paramEsame;
@@ -1415,7 +1417,7 @@ function callAVA(agent) {
                   resolve(agent);
                 }else{
                   console.log('la cancellazione non è andata a buon fine');
-                  agent.add('la cancellazione non è andata a buon fine');
+                  agent.add('Mi dispiace, la cancellazione non è andata a buon fine. Riprova più tardi.');
                   resolve(agent);
                 }
               });
