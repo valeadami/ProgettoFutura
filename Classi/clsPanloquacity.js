@@ -1282,7 +1282,7 @@ function callAVA(agent) {
                   appelliPrenotatiPromises.push(controller.getDettaglioSingoloAppelloPrenotato(risultato[i].cdsId, risultato[i].adId,risultato[i].appId)); //);
               }  
               Promise.all(appelliPrenotatiPromises).then((result) => {
-                 // console.log('all resolved [**', JSON.stringify(result)+ '**] termine ' +new Date());
+                 console.log('all resolved [**', JSON.stringify(result)+ '**] termine ' +new Date());
                   if (Array.isArray(result)){
                       for(var i=0; i<result.length; i++){
                      /* MODIFICA DEL 21/05/2019  formattazione della data e della ora esame*/
@@ -1294,7 +1294,7 @@ function callAVA(agent) {
                       str=str.replace(/(@)/gi, strTemp);
                       strOutput=str;
                       agent.add(strOutput);
-                      console.log('strOutput con replace in  getAppelliPrenotati FINE->  '+ strOutput+new Date());
+                      console.log('strOutput con replace in  getAppelliPrenotati FINE->  '+ strOutput+ ' ' + new Date());
                       resolve(agent);
                   } //fine if isArray(result
                 });
