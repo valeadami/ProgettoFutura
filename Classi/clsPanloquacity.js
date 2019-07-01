@@ -981,7 +981,7 @@ function callAVA(agent) {
         case 'getCreditiUltimoAnno':
         controller.getEsamiUltimoAnno(matId,2018).then((libretto) => { 
           //console.log('sono in getCreditiUltimoAnno')
-          var strTemp='0'; 
+          var strTemp=''; //modifica del 01/07/2019 -> 00 crediti 
           var conteggioCFU=0;
           if (Array.isArray(libretto)){
               
