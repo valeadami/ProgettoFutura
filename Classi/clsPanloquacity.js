@@ -622,8 +622,8 @@ function callAVA(agent) {
                 //var strGA=str; //stringa strGA contiene il solo testo per uscita su Google Assistant su cell
                 strOutput='<speak>'+str+'</speak>';
                 conv.ask(new SimpleResponse({
-                  speech: strOutput,
-                  text:str
+                  speech: strOutput
+                //  text:str
                  }));
                    agent.add(conv);
                    console.log('strOutput con replace in getStudente->getLibretto: '+ strOutput);
