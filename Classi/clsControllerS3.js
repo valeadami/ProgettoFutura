@@ -51,7 +51,7 @@ function getEsseTreLogin(){
             console.log('errore in doLogin '+ error);
         } else {
             if (response.statusCode==200){
-                console.log(body);
+                //console.log(body);
                 resolve(body); //ritorna una oggetto json
             }  
         }
@@ -157,7 +157,7 @@ function getEsseTreLibretto(){
             console.log('errore in doLogin '+ error);
         } else {
             if (response.statusCode==200){
-                console.log(body);
+                //console.log(body);
                 resolve(body); //ritorna una oggetto json
             }  
         }
@@ -619,7 +619,7 @@ function getCarriera(userid){
            car.log();
             //per debug
             rawData=JSON.stringify(body);
-            console.log('\n\nQUESTO IL BODY della carriera' +rawData);
+            //console.log('\n\nQUESTO IL BODY della carriera' +rawData);
             resolve(car);
         });
     });
@@ -638,7 +638,7 @@ function getLibretto(){
             //controllo che body sia un array
             if (Array.isArray(body)){
                 rawData=JSON.stringify(body);
-                console.log('\n\nQUESTO IL BODY del libretto ' +rawData);
+                //console.log('\n\nQUESTO IL BODY del libretto ' +rawData);
                 //creo oggetto libretto
                 for(var i=0; i<body.length; i++){
 
@@ -767,7 +767,7 @@ function getPrenotati(matId){
             //controllo che body sia un array
             if (Array.isArray(body)){
                 rawData=JSON.stringify(body);
-                console.log('\n\nQUESTO IL BODY APPELLI PRENOTATI ' +rawData);
+                //console.log('\n\nQUESTO IL BODY APPELLI PRENOTATI ' +rawData);
                 //creo oggetto libretto
                 for(var i=0; i<body.length; i++){
 
