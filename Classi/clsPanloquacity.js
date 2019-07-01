@@ -614,7 +614,7 @@ function callAVA(agent) {
                 strTemp+='Sei iscritto al <say-as interpret-as="ordinal">' + libretto[0].annoCorso +'</say-as> anno di corso';
                 var str=strOutput;
                 str=str.replace(/(@)/gi, strTemp);
-                strOutput='<speak>'+str;+'</speak>'
+                strOutput='<speak>'+str+'</speak>';
                 conv.ask(new SimpleResponse({
                   speech: strOutput,
                   text:strOutput
