@@ -611,14 +611,19 @@ function callAVA(agent) {
               if (agent.requestSource == "ACTIONS_ON_GOOGLE") {
                 const { SimpleResponse} = require('actions-on-google');
                 let conv = agent.conv();
-                strTemp+='Sei iscritto al <say-as interpret-as="ordinal">' + libretto[0].annoCorso +'</say-as> anno di corso';
+                if (!conv.surface.capabilities.has('actions.capability.SCREEN_OUTPUT')) {
+                  strTemp+='Sei iscritto al <say-as interpret-as="ordinal">' + libretto[0].annoCorso +'</say-as> anno di corso';
+                }else{
+                  strTemp+='Sei iscritto al ' + libretto[0].annoCorso +' anno di corso';
+              }
+               
                 var str=strOutput;
                 str=str.replace(/(@)/gi, strTemp);
-                var strGA=str; //stringa strGA contiene il solo testo per uscita su Google Assistant su cell
+                //var strGA=str; //stringa strGA contiene il solo testo per uscita su Google Assistant su cell
                 strOutput='<speak>'+str+'</speak>';
                 conv.ask(new SimpleResponse({
                   speech: strOutput,
-                  text:strGA
+                  text:str
                  }));
                    agent.add(conv);
                    console.log('strOutput con replace in getStudente->getLibretto: '+ strOutput);
