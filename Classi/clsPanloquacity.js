@@ -1184,7 +1184,7 @@ function callAVA(agent) {
 
               //ripristinato in data 03/05/2019
               controller.doLogin().then((stud) => { 
-               console.log('sono in getInizializzazione doLogin con valore di stud '+ JSON.stringify(stud));
+               console.log('sono in getInizializzazione doLogin '); //con valore di stud + JSON.stringify(stud)
                
                // ************************ MODIFICA DEL 02/07/2019 ***
                //se login va a buon fine, cioè torna il body dello studente, allora sistema ok
@@ -1506,6 +1506,11 @@ function callAVA(agent) {
            /* modificato in data 01/07/2019 esame da 216 a 217 appello del 8 luglio */
         case 'getPrenotaEsame':
            //console.log('sono in POST DI getPrenotaEsame');
+           if (ctx.parameters.date){
+            //console.log('ho il parametro data');
+            var vv=ctx.parameters.date.split('T')[0]; //2019-06-10
+            console.log('******* sono in getPrenotaEsame e ho il param date con valore '+ vv);
+           }
            var strTemp='';
             controller.postSingoloAppelloDaPrenotare(cdsId,idAppello,'217',idEsame).then((res)=>{ //cdsId,adId,appId,adsceId
               if (res){
