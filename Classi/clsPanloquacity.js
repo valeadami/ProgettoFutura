@@ -1184,15 +1184,18 @@ function callAVA(agent) {
 
               //ripristinato in data 03/05/2019
               controller.doLogin().then((stud) => { 
-               console.log('sono in getInizializzazione doLogin');
-               //console.log('questo il valore di studente '+ JSON.stringify(stud));
-               uID=stud.userId;
-               //console.log('uID = '+uID);
-               matricolaID=stud.trattiCarriera[0].matId;
-               stuId=stud.trattiCarriera[0].stuId;
-               //console.log('matricolaId ='+matricolaID + ' stuId '+stuId);
-               //MODIFICA DEL 25/03/2019
-               cdsId=stud.trattiCarriera[0].cdsId;
+               console.log('sono in getInizializzazione doLogin con valore di stud '+ stud);
+               console.log('questo il valore di studente '+ JSON.stringify(stud));
+               // ************************ MODIFICA DEL 02/07/2019 ***
+               //se login va a buon fine, cioè torna il body dello studente, allora sistema ok
+               if (strud!==false){
+                uID=stud.userId;
+                //console.log('uID = '+uID);
+                matricolaID=stud.trattiCarriera[0].matId;
+                stuId=stud.trattiCarriera[0].stuId;
+                //console.log('matricolaId ='+matricolaID + ' stuId '+stuId);
+                //MODIFICA DEL 25/03/2019
+                cdsId=stud.trattiCarriera[0].cdsId;
                //console.log('CORSO DI STUDIO ID  ='+cdsId);
                //modifica del  20/03/2019   così ho in un contesto solo tutti i dati *******************
                   controller.getLibretto().then((libretto)=> {
@@ -1221,6 +1224,15 @@ function callAVA(agent) {
                       console.log('Si è verificato errore in getInizializzazione -getLibretto: ' +error);
                       
                     });
+                    //in questo caso, login con codice 401 - modifica del 02/07/2019
+               }else{
+
+
+                agent.add("Mi dispiace, il sistema di EsseTre è in manutenzione. Riprova più tardi.");
+                resolve(agent);
+               }
+               
+               
   
     
             }).catch((error) => {

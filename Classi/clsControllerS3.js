@@ -48,12 +48,15 @@ function getEsseTreLogin(){
     request(options, function (error, response, body) {
         if (error) {
             reject(error);
-            console.log('errore in doLogin '+ error);
+            console.log('errore in getEsseTreLogin '+ error);
         } else {
             if (response.statusCode==200){
                 //console.log(body);
                 resolve(body); //ritorna una oggetto json
-            }  
+            }  // modifica del 02/07/2019
+            else if (response.statusCode==401) { 
+                resolve(false);
+            }
         }
 
     });
@@ -64,15 +67,23 @@ function getEsseTreLogin(){
 function doLogin(){
     return new Promise(function(resolve, reject) {
     getEsseTreLogin().then((body)=>{
-       var stud; //15/01/2019 non studente perchè è un riferimento al modulo 
-        stud=new studente(body.user.codFis,body.user.firstName,body.user.lastName,body.user.grpDes,body.user.grpId,body.user.id, body.user.persId,body.user.userId,body.user.trattiCarriera);
-        stud.log()
-        resolve(stud);
+        console.log('SONO IN doLogin')
+        //***************************  modifica del 02/07/2019  ***************/
+        if (body!==false){
+            var stud; //15/01/2019 non studente perchè è un riferimento al modulo 
+            stud=new studente(body.user.codFis,body.user.firstName,body.user.lastName,body.user.grpDes,body.user.grpId,body.user.id, body.user.persId,body.user.userId,body.user.trattiCarriera);
+            stud.log()
+            resolve(stud);
+        } else{
+//***************************  modifica del 02/07/2019  ***************/
+            resolve(false);
+        }
+            
 
     });
 });
 }
-//riscrivo doLogin con le promise
+
 function doLogout(){
 
     var blnLogout=false;
@@ -154,7 +165,7 @@ function getEsseTreLibretto(){
     request(options, function (error, response, body) {
         if (error) {
             reject(error);
-            console.log('errore in doLogin '+ error);
+            console.log('errore in getEsseTreLibretto '+ error);
         } else {
             if (response.statusCode==200){
                 //console.log(body);
@@ -594,7 +605,7 @@ function getMediaComplessiva(matId){
     }); 
 }
 // FA IL LOGIN
-function doLogin(){
+/*function doLogin(){
     return new Promise(function(resolve, reject) {
     getEsseTreLogin().then((body)=>{
        var stud; //15/01/2019 non studente perchè è un riferimento al modulo 
@@ -604,7 +615,7 @@ function doLogin(){
 
     });
 });
-}
+}*/
 
 //CARRIERA 
 function getCarriera(userid){
