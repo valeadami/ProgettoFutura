@@ -1251,8 +1251,10 @@ function callAVA(agent) {
                 //originale commentato in data 16/05/2019  appelliDaPrenotare
                  idAp[i]= prenotazioni[i].chiaveADContestualizzata.adId;
                  //console.log('**********idAp=========='+ idAp[i] + ' cdsId ' + cdsId);//prenotazioni[i].chiaveADContestualizzata.
-                 /* **  MODIFICA DEL 21/05/2019 AGGIUNTA FAKE   e del 01/07/2019    *******/
-                 strTemp+=  prenotazioni[i].adDes+ ' del 8 luglio 2019';
+                 /* **  MODIFICA DEL 21/05/2019 AGGIUNTA FAKE   e del 01/07/2019 E DEL 02/07/2019    *******/
+                // strTemp+=  prenotazioni[i].adDes+ ' del 8 luglio 2019';
+                //modificato il 02/07/2019 dopo richiesta a M. Salata di inserire nuovi appelli
+                 strTemp+= prenotazioni[i].adDes+ ' 8 luglio 2019, appello di ' +  prenotazioni[i].adDes+' del 16 luglio 2019, appello di ' +  prenotazioni[i].adDes+ ' del 7 agosto 2019';
                 
                 }
               
