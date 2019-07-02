@@ -1504,15 +1504,30 @@ function callAVA(agent) {
         /*  F A R E     U  N  A   P R E N O T A Z I O N E  ->  P O S T       17/05/2019    *********************/
           /* modificato in data 11/06/2019 esame da 215 a 216 appello del 24 giugno */
            /* modificato in data 01/07/2019 esame da 216 a 217 appello del 8 luglio */
+           /* MODIFICA DEL 02/07/2019 per gestire i nuovi appelli caricati da M. Salata */
         case 'getPrenotaEsame':
            //console.log('sono in POST DI getPrenotaEsame');
            if (ctx.parameters.date){
             //console.log('ho il parametro data');
-            var vv=ctx.parameters.date.split('T')[0]; //2019-06-10
-            console.log('******* sono in getPrenotaEsame e ho il param date con valore '+ vv);
+            var appId=ctx.parameters.date.split('T')[0]; //2019-06-10
+            console.log('******* sono in getPrenotaEsame e ho il param date con valore '+ appId); //2019-07-08
+            switch(appId){
+              case '2019-07-08':
+                appId='217';
+              break;
+              case '2019-07-16':
+                  appId='218';
+              break;
+              case '2019-08-07':
+                  appId='219';
+              break;
+              default:
+                  appId='217';
+              break;
+            }
            }
            var strTemp='';
-            controller.postSingoloAppelloDaPrenotare(cdsId,idAppello,'217',idEsame).then((res)=>{ //cdsId,adId,appId,adsceId
+            controller.postSingoloAppelloDaPrenotare(cdsId,idAppello,appId,idEsame).then((res)=>{ //cdsId,adId,appId,adsceId
               if (res){
                // console.log('faccio post di prenotazione con cdsId '+cdsId + 'adId '+ idAppello + 'appID lo metto io '+' adsceId '+idEsame+ ' nome di paramEsame '+paramEsame);
                  strTemp=paramEsame;
