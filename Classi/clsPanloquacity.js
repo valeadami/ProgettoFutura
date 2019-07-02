@@ -1552,7 +1552,26 @@ function callAVA(agent) {
           case 'getCancellaPrenotazione':
              // console.log('sono in DELETE DI getCancellaPrenotazione con stuId '+stuId);
               var strTemp=''; 
-              controller.deleteSingoloAppelloDaPrenotare(cdsId,idAppello,'217',stuId).then((res)=>{ //cdsId,adId,appId,studId
+              if (ctx.parameters.date){
+                //console.log('ho il parametro data');
+                var appId=ctx.parameters.date.split('T')[0]; //2019-06-10
+                console.log('******* sono in getCancellaPrenotazione e ho il param date con valore '+ appId); //2019-07-08
+                switch(appId){
+                  case '2019-07-08':
+                    appId='217';
+                  break;
+                  case '2019-07-16':
+                      appId='218';
+                  break;
+                  case '2019-08-07':
+                      appId='219';
+                  break;
+                  default:
+                      appId='217';
+                  break;
+                }
+               }
+              controller.deleteSingoloAppelloDaPrenotare(cdsId,idAppello,appId,stuId).then((res)=>{ //cdsId,adId,appId,studId
                 if (res){
                   console.log('faccio delete della prenotazione appello con cdsId '+cdsId + 'adId '+ idAppello + 'appID lo metto io '+' stuId '+stuId+ ' nome di paramEsame '+paramEsame);
                    strTemp=paramEsame;
