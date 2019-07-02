@@ -602,32 +602,47 @@ function callAVA(agent) {
         case 'getStudente':
         controller.getLibretto().then((libretto)=> {
           var strTemp='';
-          // strOutput='ecco gli esami ';
           if (Array.isArray(libretto)){
             
           //MODIFICA DEL 01/07/2019 SOTTO ORIGINALE
               // strTemp+='sei iscritto all\' anno di corso ' +   libretto[0].annoCorso;
-
+            //SONO SU GOOGLE HOME O DA ASSISTANT PER CELL
               if (agent.requestSource == "ACTIONS_ON_GOOGLE") {
                 const { SimpleResponse} = require('actions-on-google');
                 let conv = agent.conv();
+                //SE OUTPUT SOLO VOCALE 
                 if (!conv.surface.capabilities.has('actions.capability.SCREEN_OUTPUT')) {
                   strTemp+='Sei iscritto al <say-as interpret-as="ordinal">' + libretto[0].annoCorso +'</say-as> anno di corso';
-                }else{
-                  strTemp+='Sei iscritto al ' + libretto[0].annoCorso +' anno di corso';
+                  var str=strOutput;
+                  str=str.replace(/(@)/gi, strTemp);
+                 //var strGA=str; //stringa strGA contiene il solo testo per uscita su Google Assistant su cell
+                  strOutput='<speak>'+str+'</speak>';
+                  conv.ask(new SimpleResponse({
+                    speech: strOutput
+                  //  text:str
+                      }));
+                
+                //ALTRIMENTI HO schermo supportato GA e/o Google Nest
+                }else{ 
+                  var strTemp2='Sei iscritto al ' + libretto[0].annoCorso +' anno di corso'; //questo viene in output
+                  var strGA=strOutput; //prendo testo da DF ecco le informazioni universitarie ....
+                  strGA=strGA.replace(/(@)/gi, strTemp2);
+                  strTemp+='Sei iscritto al <say-as interpret-as="ordinal">' + libretto[0].annoCorso +'</say-as> anno di corso';
+                  var str=strOutput;
+                  str=str.replace(/(@)/gi, strTemp);
+                 //var strGA=str; //stringa strGA contiene il solo testo per uscita su Google Assistant su cell
+                  strOutput='<speak>'+str+'</speak>';
+                  conv.ask(new SimpleResponse({
+                    speech: strOutput,
+                    text:strGA
+                    }));
+
               }
                
-                var str=strOutput;
-                str=str.replace(/(@)/gi, strTemp);
-                //var strGA=str; //stringa strGA contiene il solo testo per uscita su Google Assistant su cell
-                strOutput='<speak>'+str+'</speak>';
-                conv.ask(new SimpleResponse({
-                  speech: strOutput
-                //  text:str
-                 }));
-                   agent.add(conv);
-                   console.log('strOutput con replace in getStudente->getLibretto: '+ strOutput);
-                  resolve(agent);
+          
+              agent.add(conv);
+              console.log('strOutput con replace in getStudente->getLibretto: '+ strOutput);
+              resolve(agent);
               
               
               }//fine if ACTIONS_ON
