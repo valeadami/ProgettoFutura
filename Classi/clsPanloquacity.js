@@ -1184,11 +1184,11 @@ function callAVA(agent) {
 
               //ripristinato in data 03/05/2019
               controller.doLogin().then((stud) => { 
-               console.log('sono in getInizializzazione doLogin con valore di stud '+ stud);
-               console.log('questo il valore di studente '+ JSON.stringify(stud));
+               console.log('sono in getInizializzazione doLogin con valore di stud '+ JSON.stringify(stud));
+               
                // ************************ MODIFICA DEL 02/07/2019 ***
                //se login va a buon fine, cioè torna il body dello studente, allora sistema ok
-               if (strud!==false){
+               if (stud!==false){
                 uID=stud.userId;
                 //console.log('uID = '+uID);
                 matricolaID=stud.trattiCarriera[0].matId;
