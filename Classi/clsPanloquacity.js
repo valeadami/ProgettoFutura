@@ -769,7 +769,7 @@ function callAVA(agent) {
             controller.GetDettaglioEsame(matId,idEsame, 'annoCorso').then((esame) => { 
               var strTemp=''; 
               //console.log( '**************** dati del ANNO getAnnoEsame= ' + esame.annoCorso);
-      
+              /* MODIFICA DEL 02/07/2019 PER GESTIRE NUMERO ORDINALE
               strTemp +=  esame.annoCorso; 
               var str=strOutput;
               str=str.replace(/(@)/gi, strTemp);
@@ -777,7 +777,56 @@ function callAVA(agent) {
               agent.add(strOutput);
               console.log('strOutput con replace in getAnnoEsame'+ strOutput);
               resolve(agent);
-  
+            */
+           if (agent.requestSource == "ACTIONS_ON_GOOGLE") {
+            const { SimpleResponse} = require('actions-on-google');
+            let conv = agent.conv();
+            //SE OUTPUT SOLO VOCALE 
+            if (!conv.surface.capabilities.has('actions.capability.SCREEN_OUTPUT')) {
+              strTemp+='<say-as interpret-as="ordinal">' + esame.annoCorso +'</say-as>';
+              var str=strOutput;
+              str=str.replace(/(@)/gi, strTemp);
+           
+              strOutput='<speak>'+str+'</speak>';
+              conv.ask(new SimpleResponse({
+                speech: strOutput
+             
+                  }));
+            
+            //ALTRIMENTI HO schermo supportato GA e/o Google Nest
+            }else{ 
+              var strTemp2= esame.annoCorso; //questo viene in output
+              var strGA=strOutput; //prendo testo da DF $esame è un corso del @ anno
+              strGA=strGA.replace(/(@)/gi, strTemp2);
+              strTemp+='<say-as interpret-as="ordinal">' + esame.annoCorso +'</say-as>';
+              var str=strOutput;
+              str=str.replace(/(@)/gi, strTemp);
+              strOutput='<speak>'+str+'</speak>';
+              conv.ask(new SimpleResponse({
+                speech: strOutput,
+                text:strGA
+                }));
+
+          }
+           
+      
+          agent.add(conv);
+          console.log('strOutput con replace in getAnnoEsame'+ strOutput);
+          resolve(agent);
+          
+          
+          }//fine if ACTIONS_ON
+          else{ //altre piattaforme
+              strTemp +=  esame.annoCorso; 
+              var str=strOutput;
+              str=str.replace(/(@)/gi, strTemp);
+              strOutput=str;
+              agent.add(strOutput);
+              console.log('strOutput con replace in getAnnoEsame'+ strOutput);
+              resolve(agent);
+
+          }
+
           }).catch((error) => {
             console.log('Si è verificato errore in getAnnoEsame: ' +error);
             agent.add('Mi dispiace, si è verificato un errore leggendo le informazioni sui tuoi esami. Riprova più tardi.');
