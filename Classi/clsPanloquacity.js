@@ -1451,19 +1451,39 @@ function callAVA(agent) {
         break;
         /*************** MODIFICA DEL 21/05/2019 PER FORMATTARE LE DATE IN CONFERMA DI PRENOTAZIONE ESAME  */
           case 'getInfoAppelloEsame':
-              //console.log('sono in getInfoAppelloEsame');
+              console.log('sono in getInfoAppelloEsame');
              
               var strTemp;
               if (ctx.parameters.date){
                 console.log('ho il parametro data');
                 var vv=ctx.parameters.date.split('T')[0]; //2019-06-10
+                //modifica del 03/07/2019
+                switch(vv){
+                  case '2019-07-08':
+                  case '2019-07-16':  
+                  case '2019-08-07':
+                      strTemp=vv.split('-');
+
+                      var str=strOutput;
+                      str=str.replace(/(@)/gi, strTemp[2]+'/'+strTemp[1]+'/'+strTemp[0]);
+                      strOutput=str;
+                      agent.add(strOutput);
+                     resolve(agent);
+                  default:
+                      agent.add('Mi dispiace, non ci sono appelli in questa data. Le date disponibili sono 8 luglio 2019, 16 luglio 2019, 7 agosto 2019.');
+                      resolve(agent);  
+                  break;
+                 
+                }
+
+/* originale
                 strTemp=vv.split('-');
 
                  var str=strOutput;
                  str=str.replace(/(@)/gi, strTemp[2]+'/'+strTemp[1]+'/'+strTemp[0]);
                  strOutput=str;
                  agent.add(strOutput);
-                resolve(agent);
+                resolve(agent);*/
               }else{  
                 console.log('NON ho il parametro data');
               agent.add('Non ho il parametro date');
@@ -1526,19 +1546,7 @@ function callAVA(agent) {
               break;
              
             }*/
-            if (appId=='2019-07-08'){
-
-              appId='217';
-            }else if (appId=='2019-07-16') {
-              appId='218';
-
-            } else if (appId=='2019-08-07') {
-              appId='219';
-
-            }else{
-              agent.add('Mi dispiace, non ci sono appelli in questa data. ');
-              resolve(agent);
-            }
+           
            }
            var strTemp='';
             controller.postSingoloAppelloDaPrenotare(cdsId,idAppello,appId,idEsame).then((res)=>{ //cdsId,adId,appId,adsceId
