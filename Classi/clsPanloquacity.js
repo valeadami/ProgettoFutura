@@ -1462,6 +1462,7 @@ function callAVA(agent) {
                   case '2019-07-08':
                   case '2019-07-16':  
                   case '2019-08-07':
+                    console.log('pd sono dentro case delle date...');
                       strTemp=vv.split('-');
 
                       var str=strOutput;
@@ -1470,6 +1471,7 @@ function callAVA(agent) {
                       agent.add(strOutput);
                      resolve(agent);
                   default:
+                      console.log('pd sono dentro case di default ...')
                       agent.add('Mi dispiace, non ci sono appelli in questa data. Le date disponibili sono 8 luglio 2019, 16 luglio 2019, 7 agosto 2019.');
                       resolve(agent);  
                   break;
