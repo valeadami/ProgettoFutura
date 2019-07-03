@@ -1529,7 +1529,21 @@ function callAVA(agent) {
             //console.log('ho il parametro data');
             var appId=ctx.parameters.date.split('T')[0]; //2019-06-10
             console.log('******* sono in getPrenotaEsame e ho il param date con valore '+ appId); //2019-07-08
-           
+            switch(appId){
+              case '2019-07-08':
+                appId='217';
+              break;
+              case '2019-07-16':
+                  appId='218';
+              break;
+              case '2019-08-07':
+                  appId='219';
+              break;
+              default:
+                  appId='217';
+              break;
+             
+            }
            
            }
            var strTemp='';
