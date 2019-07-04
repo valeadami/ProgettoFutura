@@ -71,7 +71,7 @@ function doLogin(){
         
         //***************************  modifica del 02/07/2019  ***************/
         if (body!==false){
-            console.log('SONO IN doLogin e recupero dati dello studente')
+            console.log('SONO IN clsController->doLogin e recupero dati dello studente')
             var stud; //15/01/2019 non studente perchè è un riferimento al modulo 
             stud=new studente(body.user.codFis,body.user.firstName,body.user.lastName,body.user.grpDes,body.user.grpId,body.user.id, body.user.persId,body.user.userId,body.user.trattiCarriera);
             stud.log()
@@ -691,7 +691,7 @@ function getAppelliPrenotabili(matId){
             json: true 
         }
         request(options, function (error, response, body) {
-            console.log('url di appelli prenotabili'+ options.url);
+            console.log('url di appelli prenotabili '+ options.url);
             if (error) {
                 reject(error);
                 console.log('errore in appelli prenotabili '+ error);
