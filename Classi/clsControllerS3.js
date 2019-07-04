@@ -51,10 +51,11 @@ function getEsseTreLogin(){
             console.log('errore in getEsseTreLogin '+ error);
         } else {
             if (response.statusCode==200){
-                //console.log(body);
+                console.log(body);
                 resolve(body); //ritorna una oggetto json
             }  // modifica del 02/07/2019
             else if (response.statusCode==401) { 
+                console.log('clsController->getEsseTreLogin errore 401');
                 resolve(false);
             }
         }
@@ -67,9 +68,10 @@ function getEsseTreLogin(){
 function doLogin(){
     return new Promise(function(resolve, reject) {
     getEsseTreLogin().then((body)=>{
-        console.log('SONO IN doLogin')
+        
         //***************************  modifica del 02/07/2019  ***************/
         if (body!==false){
+            console.log('SONO IN doLogin e recupero dati dello studente')
             var stud; //15/01/2019 non studente perchè è un riferimento al modulo 
             stud=new studente(body.user.codFis,body.user.firstName,body.user.lastName,body.user.grpDes,body.user.grpId,body.user.id, body.user.persId,body.user.userId,body.user.trattiCarriera);
             stud.log()
@@ -630,7 +632,7 @@ function getCarriera(userid){
            //car.log();
             //per debug
             rawData=JSON.stringify(body);
-            //console.log('\n\nQUESTO IL BODY della carriera' +rawData);
+             console.log('\n\nQUESTO IL BODY della carriera' +rawData);
             resolve(car);
         });
     });
@@ -754,7 +756,7 @@ function getAppelliPrenotati(matId){
             json: true 
         }
         request(options, function (error, response, body) {
-            console.log('url di appelli prenotati'+ options.url);
+            console.log('url di appelli prenotati '+ options.url);
             if (error) {
                 reject(error);
                 console.log('errore in appelli prenotati '+ error);

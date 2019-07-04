@@ -485,7 +485,7 @@ function callAVA(agent) {
       strRicerca=querystring.escape(str); //lo tengo comunque
      // options.path+=strRicerca+'&user=&pwd=&ava='+bot;
     
-      //console.log('il comando da passare : '+ strRicerca);
+      console.log('il comando da passare : '+ strRicerca);
     }  
     var strOutput=agent.fulfillmentText; //è la risposta statica da DF messa da Roberto
     //console.log('strOutput agente prima di EsseTre :' + strOutput);
@@ -493,7 +493,7 @@ function callAVA(agent) {
     if(agent.parameters.esame){
   
       var paramEsame=agent.parameters.esame;
-      //console.log('in callAvanew ho esame '+ paramEsame);
+      console.log('in callAvanew ho esame '+ paramEsame);
     }
     //recupero la variabile legata al contesto
     //21/03/2019 rinominato da contesto in vardisessione e inserito anche nell'agente 
@@ -508,7 +508,7 @@ function callAVA(agent) {
       var matId=ctx.parameters.matId;
       //MODIFICA DEL 17/05/2019 
       var stuId=ctx.parameters.stuId;
-      //console.log('LEGGO DAL CONTESTO matricola ID ='+matId + ' stuId '+stuId);
+      console.log('LEGGO DAL CONTESTO matricola ID ='+matId + ' stuId '+stuId);
        //modifica del 25/03/2019
        var cdsId=ctx.parameters.cdsId;
        //console.log('LEGGO DAL CONTESTO corso di studio id  ='+cdsId);
@@ -519,12 +519,12 @@ function callAVA(agent) {
         for(var i =0;i<ctx.parameters.esami.length;i++){
           //ciclo nell'array dei nomi degli esami, se lo trovo, prendo il corrispondente id nel array ID
             if (ctx.parameters.esami[i]===paramEsame){
-              //console.log('******** TROVATO ESAME IN CTX ESAMI*******');
+              console.log('******** TROVATO ESAME IN CTX ESAMI*******');
               idEsame=ctx.parameters.adsceId[i];
            
               //modifica del 25/03/2019 per prenotazione appelli
               idAppello=ctx.parameters.idAppelli[i];
-              //console.log('************ ID DI ESAME = '+idEsame + ' e con idAppello '+idAppello);
+              console.log('************ ID DI ESAME = '+idEsame + ' e con idAppello '+idAppello);
               break;
             }
           }
@@ -537,7 +537,7 @@ function callAVA(agent) {
     //IN BASE AL COMANDO ASSOCIATO ALL'INTENT ESEGUO AZIONE SU ESSETRE
       switch (strRicerca) {
         case 'getLibretto':
-         // console.log('sono nel getLibretto');
+          console.log('clsPanloquacity-> comando getLibretto');
          
           controller.getLibretto().then((libretto)=> {
             var strTemp='';
@@ -581,7 +581,7 @@ function callAVA(agent) {
               controller.getCarriera(userId).then((carriera)=> {
               var strTemp='';
               strTemp+='Ti sei immatricolato nell anno '+ carriera.aaId + ' , con numero matricola  '+ carriera.matricola + ', nel corso di laurea '+ carriera.cdsDes +', tipo di corso di laurea '+ carriera.tipoCorsoDes + ', percorso '+carriera.pdsDes +', stato attuale ' +carriera.motStastuDes
-              //console.log('sono nella carriera ...');
+              console.log('clsPanloquacity->getCarriera');
               // console.log('ho lo studente '+studente.codFisc + 'matricola ID '+ studente.trattiCarriera[0].matId);
               // agent.setContext({ name: 'matricola', lifespan: 5, parameters: { matID: studente.trattiCarriera[0].matId }});
               
@@ -603,7 +603,7 @@ function callAVA(agent) {
         controller.getLibretto().then((libretto)=> {
           var strTemp='';
           if (Array.isArray(libretto)){
-            
+            console.log('clsPanloquacity->getLibretto');
           //MODIFICA DEL 01/07/2019 SOTTO ORIGINALE
               // strTemp+='sei iscritto all\' anno di corso ' +   libretto[0].annoCorso;
             //SONO SU GOOGLE HOME O DA ASSISTANT PER CELL
@@ -666,7 +666,7 @@ function callAVA(agent) {
           console.log('strOutput con replace in getStudente->getLibretto: '+ strOutput);
           resolve(agent);*/
           }).catch((error) => {
-          console.log('Si è verificato errore getStudente: ' +error);
+          console.log('Si è verificato errore getStudente->getLibretto: ' +error);
           agent.add('Mi dispiace, si è verificato un errore leggendo i tuoi dati dal libretto. Riprova più tardi.');
           resolve(agent);
         
@@ -676,6 +676,7 @@ function callAVA(agent) {
         //19/03/2019 resta così per il momento
         case 'getNumeroMatricola':
           controller.getCarriera(userId).then((carriera)=> {
+            console.log('clsPanloquacity->getNumeroMatricola->getCarriera');
             var strTemp='';
             strTemp+='' + carriera.matricola;
           //console.log('chiedo il numero di matricola ...');
@@ -691,7 +692,7 @@ function callAVA(agent) {
             
           }).catch((error) => {
             
-            console.log('Si è verificato errore in getNumeroMatricola: ' +error);
+            console.log('Si è verificato errore in getNumeroMatricola->getCarriera: ' +error);
            
             agent.add('Mi dispiace, si è verificato un errore leggendo il tuo numero di matricola. Riprova più tardi.');
             resolve(agent);
@@ -711,11 +712,11 @@ function callAVA(agent) {
           str=str.replace(/(@)/gi, strTemp);
           strOutput=str;
           agent.add(strOutput);
-          console.log('strOutput con replace in getAnnoImmatricolazione '+ strOutput);
+          console.log('strOutput con replace in getAnnoImmatricolazione->getCarriera '+ strOutput);
           resolve(agent);
             
           }).catch((error) => {
-            console.log('Si è verificato errore in getAnnoImmatricolazione : ' +error);
+            console.log('Si è verificato errore in getAnnoImmatricolazione->getCarriera : ' +error);
             agent.add('Mi dispiace, si è verificato un errore leggendo il tuo anno di immatricolazione. Riprova più tardi.');
             resolve(agent);
           
@@ -730,13 +731,13 @@ function callAVA(agent) {
   
           //  if (paramEsame===esameDC){   '5188667' matI
           case 'getInfoGenEsame':
-             // console.log('sono dentro getInfoGenEsame con esame '+paramEsame);
+              console.log('clsPanloquacity->getInfoGenEsame->getEsame con esame '+paramEsame);
               controller.getEsame(matId,idEsame).then((esame) => { 
                 var strTemp=''; 
                // console.log( '**************** dati del singolo esame ******************');
         
                 strTemp += ' anno di corso ' + esame.annoCorso +', codice '+ esame.adCod +', corso di ' + esame.adDes + ', crediti in  CFU' + esame.peso + ', attività didattica '
-                + esame.statoDes +', frequentata nel '+  esame.aaFreqId;
+                + esame.statoDes +' nel '+  esame.aaFreqId; //, frequentata
                 if (typeof esito !=='undefined' && esito.dataEsa!=='' && esito.voto!=null){
                 
                 //if (typeof esame.esito !=='undefined'){
@@ -748,11 +749,11 @@ function callAVA(agent) {
                 str=str.replace(/(@)/gi, strTemp);
                 strOutput=str;
                 agent.add(strOutput);
-                console.log('strOutput con replace in getInfoGenEsame '+ strOutput);
+                console.log('strOutput con replace in getInfoGenEsame->getEsame '+ strOutput);
                 resolve(agent);
   
             }).catch((error) => {
-              console.log('Si è verificato errore in getInfoGenEsame: ' +error);
+              console.log('Si è verificato errore in getInfoGenEsame->getEsame: ' +error);
               agent.add('Mi dispiace, si è verificato un errore leggendo le informazioni sui tuoi esami. Riprova più tardi.');
               resolve(agent);
             
@@ -766,6 +767,7 @@ function callAVA(agent) {
             //modifica del 18/03/2019
             //getAnnoEsame GENERICO -> DINAMICO
             case 'getAnnoEsame':
+            console.log('clsPanloquacity->getAnnoEsame->GetDettaglioEsame ');
             controller.GetDettaglioEsame(matId,idEsame, 'annoCorso').then((esame) => { 
               var strTemp=''; 
               //console.log( '**************** dati del ANNO getAnnoEsame= ' + esame.annoCorso);
@@ -811,7 +813,7 @@ function callAVA(agent) {
            
       
           agent.add(conv);
-          console.log('strOutput con replace in getAnnoEsame'+ strOutput);
+          console.log('strOutput con replace in getAnnoEsame->GetDettaglioEsame '+ strOutput);
           resolve(agent);
           
           
@@ -822,13 +824,13 @@ function callAVA(agent) {
               str=str.replace(/(@)/gi, strTemp);
               strOutput=str;
               agent.add(strOutput);
-              console.log('strOutput con replace in getAnnoEsame'+ strOutput);
+              console.log('strOutput con replace in getAnnoEsame->GetDettaglioEsame '+ strOutput);
               resolve(agent);
 
           }
 
           }).catch((error) => {
-            console.log('Si è verificato errore in getAnnoEsame: ' +error);
+            console.log('Si è verificato errore in getAnnoEsame->GetDettaglioEsame: ' +error);
             agent.add('Mi dispiace, si è verificato un errore leggendo le informazioni sui tuoi esami. Riprova più tardi.');
             resolve(agent);
           
@@ -838,6 +840,7 @@ function callAVA(agent) {
         
             //18/03/2019 nuovo
             case 'getTipoEsame':
+            console.log('clsPanloquacity->getTipoEsame->GetDettaglioEsame ');
             controller.GetDettaglioEsame(matId,idEsame, 'tipoEsaDes').then((esame) => { 
               var strTemp=''; 
               //console.log( '**************** dati del TIPO getTipoEsame ' +esame.tipoEsaDes);
@@ -847,11 +850,11 @@ function callAVA(agent) {
               str=str.replace(/(@)/gi, strTemp.toLowerCase()); //modifica del 01/07/2019
               strOutput=str;
               agent.add(strOutput);
-              console.log('strOutput con replace in getTipoEsame'+ strOutput);
+              console.log('strOutput con replace in getTipoEsame->GetDettaglioEsame '+ strOutput);
               resolve(agent);
   
           }).catch((error) => {
-            console.log('Si è verificato errore in getTipoEsame: ' +error);
+            console.log('Si è verificato errore in getTipoEsame->GetDettaglioEsame: ' +error);
             agent.add('Mi dispiace, si è verificato un errore leggendo le informazioni sui tuoi esami. Riprova più tardi.');
             resolve(agent);
           
@@ -862,20 +865,21 @@ function callAVA(agent) {
          
             //nuovo 19/03/2019
             case 'getCreditoFormativoEsame':
-            controller.GetDettaglioEsame(matId,idEsame, 'peso').then((esame) => { 
-              var strTemp=''; 
-              //console.log( '**************** dati del peso getCreditoFormativoEsame' +esame.peso);
-      
+              console.log('clsPanloquacity->getCreditoFormativoEsame->GetDettaglioEsame ');
+              controller.GetDettaglioEsame(matId,idEsame, 'peso').then((esame) => { 
+                var strTemp=''; 
+                //console.log( '**************** dati del peso getCreditoFormativoEsame' +esame.peso);
+        
               strTemp +=  esame.peso; 
               var str=strOutput;
               str=str.replace(/(@)/gi, strTemp);
               strOutput=str;
               agent.add(strOutput);
-              console.log('strOutput con replace in getCreditoFormativoEsame '+ strOutput);
+              console.log('strOutput con replace in getCreditoFormativoEsame->GetDettaglioEsame '+ strOutput);
               resolve(agent);
   
           }).catch((error) => {
-            console.log('Si è verificato errore in getCreditoFormativoEsame: ' +error);
+            console.log('Si è verificato errore in getCreditoFormativoEsame->GetDettaglioEsame: ' +error);
             agent.add('Mi dispiace, si è verificato un errore leggendo le informazioni sui tuoi esami. Riprova più tardi.');
             resolve(agent);
           
@@ -885,20 +889,21 @@ function callAVA(agent) {
            
             //nuovo del 19/03/2019
             case 'getAnnoFrequentatoEsame':
-            controller.GetDettaglioEsame(matId,idEsame, 'aaFreqId').then((esame) => { 
-              var strTemp=''; 
-              //console.log( '**************** dati del ANNO DI FREQUENZA getAnnoFrequentatoEsame' +esame.aaFreqId);
+              console.log('clsPanloquacity->getAnnoFrequentatoEsame->GetDettaglioEsame ');
+              controller.GetDettaglioEsame(matId,idEsame, 'aaFreqId').then((esame) => { 
+                var strTemp=''; 
+                //console.log( '**************** dati del ANNO DI FREQUENZA getAnnoFrequentatoEsame' +esame.aaFreqId);
       
               strTemp +=  esame.aaFreqId;
               var str=strOutput;
               str=str.replace(/(@)/gi, strTemp);
               strOutput=str;
               agent.add(strOutput);
-              console.log('strOutput con replace in getAnnoFrequentatoEsame '+ strOutput);
+              console.log('strOutput con replace in getAnnoFrequentatoEsame>GetDettaglioEsame  '+ strOutput);
               resolve(agent);
   
           }).catch((error) => {
-            console.log('Si è verificato errore in getAnnoFrequentatoEsame: ' +error);
+            console.log('Si è verificato errore in getAnnoFrequentatoEsame>GetDettaglioEsame : ' +error);
             agent.add('Mi dispiace, si è verificato un errore leggendo le informazioni sui tuoi esami. Riprova più tardi.');
             resolve(agent);
           
@@ -907,8 +912,9 @@ function callAVA(agent) {
               
               //nuovo del 19/03/2019
               case 'getDataEsame':
-              controller.GetDettaglioEsame(matId,idEsame, 'esito.dataEsa').then((esame) => { 
-               // console.log( '**************** dati del esito.dataEsa getDataEsame' +esame.esito.dataEsa);
+                console.log('clsPanloquacity->getDataEsame->GetDettaglioEsame ');
+                controller.GetDettaglioEsame(matId,idEsame, 'esito.dataEsa').then((esame) => { 
+                // console.log( '**************** dati del esito.dataEsa getDataEsame' +esame.esito.dataEsa);
                 var strTemp=''; 
                 var risposta=[];
                 //console.log('strOutput prima dello split '+ strOutput);
@@ -932,11 +938,11 @@ function callAVA(agent) {
                
                 
                 agent.add(strOutput);
-                console.log('strOutput con replace in getDataEsame '+ strOutput);
+                console.log('strOutput con replace in getDataEsame->GetDettaglioEsame '+ strOutput);
                 resolve(agent);
   
             }).catch((error) => {
-              console.log('Si è verificato errore in getDataEsame: ' +error);
+              console.log('Si è verificato errore in getDataEsame->GetDettaglioEsame: ' +error);
               agent.add('Mi dispiace, si è verificato un errore leggendo le informazioni sui tuoi esami. Riprova più tardi.');
               resolve(agent);
             
@@ -945,8 +951,9 @@ function callAVA(agent) {
   
     
               case 'getVotoEsame':
-              controller.GetDettaglioEsame(matId,idEsame, 'esito.voto').then((esame) => { 
-                //console.log( '**************** dati del  getVotoEsame esame.esito.voto ' +esame.esito.voto);
+                console.log('clsPanloquacity->getVotoEsame->GetDettaglioEsame ');
+                controller.GetDettaglioEsame(matId,idEsame, 'esito.voto').then((esame) => { 
+                  //console.log( '**************** dati del  getVotoEsame esame.esito.voto ' +esame.esito.voto);
                 var strTemp=''; 
                 var risposta=[];
                 //console.log('strOutput prima dello split '+ strOutput);
@@ -968,11 +975,11 @@ function callAVA(agent) {
   
                 
                 agent.add(strOutput);
-                console.log('strOutput con replace in getVotoEsame '+ strOutput);
+                console.log('strOutput con replace in getVotoEsame->GetDettaglioEsame  '+ strOutput);
                 resolve(agent);
   
             }).catch((error) => {
-              console.log('Si è verificato errore in getVotoEsame: ' +error);
+              console.log('Si è verificato errore in getVotoEsame->GetDettaglioEsame : ' +error);
               agent.add('Mi dispiace, si è verificato un errore leggendo le informazioni sui tuoi esami. Riprova più tardi.');
               resolve(agent);
             
@@ -985,6 +992,7 @@ function callAVA(agent) {
         //controllo che idEsame rientri nell'elenco degli esami 
         //paramEsame
        // console.log('.......idEsame è stringa vuota ? '+idEsame);
+        console.log('clsPanloquacity->getDocenteEsame->GetDocente ');
         if (idEsame!=='')
         {
             controller.GetDocente(matId,idEsame).then((esame) => { 
@@ -996,11 +1004,11 @@ function callAVA(agent) {
               str=str.replace(/(@)/gi, strTemp);
               strOutput=str;
               agent.add(strOutput);
-              console.log('strOutput con replace in getDocenteEsame '+ strOutput);
+              console.log('strOutput con replace in getDocenteEsame->GetDocente'+ strOutput);
               resolve(agent);
       
           }).catch((error) => {
-            console.log('Si è verificato errore in getDocenteEsame: ' +error);
+            console.log('Si è verificato errore in getDocenteEsame->GetDocente: ' +error);
             agent.add('Mi dispiace, si è verificato un errore leggendo le informazioni sui tuoi esami. Riprova più tardi.');
             resolve(agent);
           
@@ -1014,7 +1022,8 @@ function callAVA(agent) {
       
         //nuovo del 18/03/2019
         case 'getTipoCorso':
-          controller.getSegmento(matId,idEsame).then((esame) => { 
+            console.log('clsPanloquacity->getTipoCorso->getSegmento ');
+            controller.getSegmento(matId,idEsame).then((esame) => { 
             var strTemp=''; 
             //console.log( '**************** dati del TIPO CORSO getTipoCorso ');
     
@@ -1038,6 +1047,7 @@ function callAVA(agent) {
       //getEsamiUltimoAnno ---> QUANTI ESAMI HO FATTO!!!
       case 'getEsamiUltimoAnno':
       controller.getEsamiUltimoAnno(matId,2018).then((libretto) => { 
+        console.log('clsPanloquacity->getEsamiUltimoAnno->getEsamiUltimoAnno ');
         //console.log('sono in getEsamiUltimoAnno')
         var strTemp=''; //modifica del 01/07/2019
         
@@ -1064,12 +1074,12 @@ function callAVA(agent) {
         strOutput=str;
         agent.add(strOutput);
         
-        console.log('strOutput con replace getEsamiUltimoAnno '+ strOutput);
+        console.log('strOutput con replace getEsamiUltimoAnno->getEsamiUltimoAnno '+ strOutput);
         
         //agent.setContext({ name: 'libretto', lifespan: 5, parameters: { matID: studente.trattiCarriera[0].matId }});
         resolve(agent);
       }).catch((error) => {
-        console.log('Si è verificato errore in getEsamiUltimoAnno: ' +error);
+        console.log('Si è verificato errore in getEsamiUltimoAnno->getEsamiUltimoAnno: ' +error);
         //resolve('si è verificato errore '+error);
         agent.add('Mi dispiace, si è verificato un errore leggendo le informazioni sui tuoi esami. Riprova più tardi.');
         resolve(agent);
@@ -1077,7 +1087,8 @@ function callAVA(agent) {
         break;
         //getCreditiUltimoAnno-> dal 2017 al 2018 19/03/2019
         case 'getCreditiUltimoAnno':
-        controller.getEsamiUltimoAnno(matId,2018).then((libretto) => { 
+          console.log('clsPanloquacity->getCreditiUltimoAnno->getEsamiUltimoAnno ');
+          controller.getEsamiUltimoAnno(matId,2018).then((libretto) => { 
           //console.log('sono in getCreditiUltimoAnno')
           var strTemp=''; //modifica del 01/07/2019 -> 00 crediti 
           var conteggioCFU=0;
@@ -1099,12 +1110,12 @@ function callAVA(agent) {
           strOutput=str;
           agent.add(strOutput);
           
-          console.log('strOutput con replace getCreditiUltimoAnno '+ strOutput);
+          console.log('strOutput con replace getCreditiUltimoAnno->getEsamiUltimoAnno '+ strOutput);
           
           //agent.setContext({ name: 'libretto', lifespan: 5, parameters: { matID: studente.trattiCarriera[0].matId }});
           resolve(agent);
         }).catch((error) => {
-          console.log('Si è verificato errore in getCreditiUltimoAnno : ' +error);
+          console.log('Si è verificato errore in ggetCreditiUltimoAnno->getEsamiUltimoAnno : ' +error);
           agent.add('Mi dispiace, si è verificato un errore leggendo le informazioni sui tuoi crediti universitari. Riprova più tardi.');
           resolve(agent);
         
@@ -1113,7 +1124,9 @@ function callAVA(agent) {
           //MEDIA ARITMETICA
           //19/03/2019 resta inalterata per il momento
           case 'getMediaComplessiva':
-          controller.getMediaComplessiva(matId).then((media) => { 
+           console.log('clsPanloquacity->getMediaComplessiva->getMediaComplessiva ');
+
+            controller.getMediaComplessiva(matId).then((media) => { 
            // console.log('sono in getMediaComplessiva');
             var strTemp='';
             //verifico che la media non sia null
@@ -1132,11 +1145,11 @@ function callAVA(agent) {
                 strOutput=str;
                 agent.add(strOutput);
                 
-                console.log('strOutput con replace in getMediaComplessiva '+ strOutput);
+                console.log('strOutput con replace in getMediaComplessiva->getMediaComplessiva '+ strOutput);
             
                 resolve(agent);
             }).catch((error) => {
-              console.log('Si è verificato errore in getMediaComplessiva: ' +error);
+              console.log('Si è verificato errore in getMediaComplessiva->getMediaComplessiva: ' +error);
               agent.add('Mi dispiace, si è verificato un errore leggendo le informazioni sulla tua media. Riprova più tardi.');
               resolve(agent);
           
@@ -1184,19 +1197,19 @@ function callAVA(agent) {
 
               //ripristinato in data 03/05/2019
               controller.doLogin().then((stud) => { 
-               console.log('sono in getInizializzazione doLogin '); //con valore di stud + JSON.stringify(stud)
+              console.log('claPanloquacity->getInizializzazione->doLogin '); //con valore di stud + JSON.stringify(stud)
                
                // ************************ MODIFICA DEL 02/07/2019 ***
                //se login va a buon fine, cioè torna il body dello studente, allora sistema ok
                if (stud!==false){
                 uID=stud.userId;
-                //console.log('uID = '+uID);
+                console.log('uID = '+uID);
                 matricolaID=stud.trattiCarriera[0].matId;
                 stuId=stud.trattiCarriera[0].stuId;
-                //console.log('matricolaId ='+matricolaID + ' stuId '+stuId);
+                console.log('matricolaId ='+matricolaID + ' stuId '+stuId);
                 //MODIFICA DEL 25/03/2019
                 cdsId=stud.trattiCarriera[0].cdsId;
-               //console.log('CORSO DI STUDIO ID  ='+cdsId);
+                console.log('CORSO DI STUDIO ID  ='+cdsId);
                //modifica del  20/03/2019   così ho in un contesto solo tutti i dati *******************
                   controller.getLibretto().then((libretto)=> {
                   
@@ -1205,12 +1218,12 @@ function callAVA(agent) {
                       for(var i=0; i<libretto.length; i++){
                       
                         arIDS.push(libretto[i].adsceId);
-                       // console.log('->inserito in arIDS '+arIDS[i]);
+                        console.log('->inserito in arIDS '+arIDS[i]);
                         arEsami.push(libretto[i].adDes);
-                       // console.log('->inserito in arEsami '+arEsami[i]);
+                        console.log('->inserito in arEsami '+arEsami[i]);
                         //modifica del 25/03/2019
                         arAdId.push(libretto[i].chiaveADContestualizzata.adId);
-                       // console.log('-> inserito adId '+libretto[i].chiaveADContestualizzata.adId);
+                        console.log('-> inserito adId '+libretto[i].chiaveADContestualizzata.adId);
                       }
                       
                     //25/03/2019 AGGIUNTO cdsId E idAppelli PER LE PRENOTAZIONI APPELLI
@@ -1246,17 +1259,17 @@ function callAVA(agent) {
           //************* P R E N O T A Z I O N E   A P P E L L O --------------------- 25/03/2019 -> MODIFICATO IN DATA 16/05/2019 MA LA QUERY DA S3 IMPIEG 30 SECONDI QUINDI TORNO AL LIBRETTO */
           case 'getPrenotazioneAppelli':
           case 'getAppelliEsame': // ********************  MODIFICA DEL 21/05/2019 FAKE
-          var idAp=[]; 
-          var strTemp='';
-
-         
-          //var appelliPrenotabiliPromises=[];
-         
-          controller.getPrenotazioni(matId).then((prenotazioni) => { //prenotazioni sono righe del libretto
+            var idAp=[]; 
+            var strTemp='';
+              
+            console.log('clsPanloquacity->getPrenotazioneAppelli-getAppelliEsame->getPrenotazioni');
+            //var appelliPrenotabiliPromises=[];
+          
+            controller.getPrenotazioni(matId).then((prenotazioni) => { //prenotazioni sono righe del libretto
              //console.log('1) sono in getPrenotazioni '+new Date()); //+ JSON.stringify(prenotazioni)
              //MODIFICA DEL 25/06/2019 VERIFICARE CHE ARRAY DI PRENOTAZIONI ABBIA ALMENO UN ELEMENTO
              if (Array.isArray(prenotazioni) && (prenotazioni.length>=1)){
-               //console.log('sono in array prenotazioni '+new Date() + ' con adId '+prenotazioni[0].chiaveADContestualizzata.adId);
+               console.log('sono in array prenotazioni '+new Date() + ' con adId '+prenotazioni[0].chiaveADContestualizzata.adId);
                for(var i=0; i<prenotazioni.length; i++){
                 //nuovo del 16/05/2019
                 //appelliPrenotabiliPromises.push(controller.getAppelloDaPrenotare(cdsId,'117741'))
@@ -1296,11 +1309,11 @@ function callAVA(agent) {
                     });
                 */
                  //originale commentato in data 16/05/2019
-               var str=strOutput;
+                var str=strOutput;
                 str=str.replace(/(@)/gi, strTemp);
                 strOutput=str;
                 agent.add(strOutput);
-                console.log('strOutput con replace in  getPrenotazioneAppelli->  '+ strOutput);
+                console.log('strOutput con replace in  getPrenotazioneAppelli-getAppelliEsame->getPrenotazioni  '+ strOutput);
                 resolve(agent);
               }else{ //  16/05/2019 NON CI SONO APPELLI PRENOTABILI
                 agent.add('Mi dispiace, non hai appelli prenotabili. Come posso aiutarti ora?');
@@ -1341,7 +1354,7 @@ function callAVA(agent) {
           });*/
   /* modifica del 25/06/2019 cambiato messaggio di errore in output */
         }).catch((error) => {
-          console.log('Si è verificato errore in getPrenotazioneAppelli: ' +error);
+          console.log('Si è verificato errore in getPrenotazioneAppelli-getAppelliEsame->getPrenotazioni: ' +error);
           agent.add('Mi dispiace, si è verificato errore durante l\' accesso  agli appelli. Riprova più tardi.');
           resolve(agent);
         }); 
@@ -1349,7 +1362,8 @@ function callAVA(agent) {
               break;
         // ******** MODIFICA DEL 21/05/2019 PROSSIMI APPELLI DA INIZIARE LISTA COMPLETA FAKE *****************
         case "getListaAppelliCompleta":
-            //console.log('sono in getListaAppelliCompleta FAKE');
+            
+            console.log('clsPanloquacity->getListaAppelliCompleta->getTuttiAppelliDaIniziareFake');
             var strTemp='';
             controller.getTuttiAppelliDaIniziareFake().then((risultato)=> {
               if (Array.isArray(risultato)){
@@ -1361,12 +1375,12 @@ function callAVA(agent) {
                  str=str.replace(/(@)/gi, strTemp);
                  strOutput=str;
                  agent.add(strOutput);
-                 console.log('strOutput con replace in  getListaAppelliCompleta FAKE->  '+ strOutput);
+                 console.log('strOutput con replace in  getListaAppelliCompleta->getTuttiAppelliDaIniziareFake  '+ strOutput);
                  resolve(agent);
               }
 
             }).catch((error) => {
-              console.log('Si è verificato errore in getListaAppelliCompletaFake: ' +error);
+              console.log('Si è verificato errore in getListaAppelliCompleta->getTuttiAppelliDaIniziareFake: ' +error);
               agent.add('Mi dispiace, si è verificato errore durante la lettura degli appelli. Riprova più tardi.');
               resolve(agent);
             }); 
@@ -1374,7 +1388,7 @@ function callAVA(agent) {
             break;
         //08/05/2019 getAppelliPrenotati: recupero la lista delle prenotazioni effettuate
         case 'getAppelliPrenotati':
-          //console.log('sono in getApppelliPrenotati');
+          console.log('clsPanloquacity->getAppelliPrenotati->getAppId->getDettaglioSingoloAppelloPrenotato');;
           /*** modifica del 15/05/2019 *******  modifica del 22/05/2019   gestione output da console DF con risposta diversa in caso no appelli */
           var appelliPrenotatiPromises=[];
         
@@ -1451,7 +1465,7 @@ function callAVA(agent) {
         break;
         /*************** MODIFICA DEL 21/05/2019 PER FORMATTARE LE DATE IN CONFERMA DI PRENOTAZIONE ESAME  */
           case 'getInfoAppelloEsame':
-              console.log('sono in getInfoAppelloEsame');
+              console.log('clsPanloquacity->getInfoAppelloEsame');
              
               var strTemp;
               if (ctx.parameters.date){
@@ -1524,7 +1538,7 @@ function callAVA(agent) {
            /* modificato in data 01/07/2019 esame da 216 a 217 appello del 8 luglio */
            /* MODIFICA DEL 02/07/2019 per gestire i nuovi appelli caricati da M. Salata */
         case 'getPrenotaEsame':
-           //console.log('sono in POST DI getPrenotaEsame');
+           console.log('sono in POST DI clsPanloquacity->getPrenotaEsame');
            if (ctx.parameters.date){
             //console.log('ho il parametro data');
             var appId=ctx.parameters.date.split('T')[0]; //2019-06-10
@@ -1549,7 +1563,7 @@ function callAVA(agent) {
            var strTemp='';
             controller.postSingoloAppelloDaPrenotare(cdsId,idAppello,appId,idEsame).then((res)=>{ //cdsId,adId,appId,adsceId
               if (res){
-               // console.log('faccio post di prenotazione con cdsId '+cdsId + 'adId '+ idAppello + 'appID lo metto io '+' adsceId '+idEsame+ ' nome di paramEsame '+paramEsame);
+                console.log('faccio post di prenotazione con cdsId '+cdsId + ', adId '+ idAppello + ', appID' +appId + ', adsceId '+idEsame+ ', nome di paramEsame '+paramEsame);
                  strTemp=paramEsame;
                  var str=strOutput;
                  str=str.replace(/(@)/gi, strTemp);
@@ -1570,7 +1584,7 @@ function callAVA(agent) {
            /* modificato in data 11/06/2019 esame da 215 a 216 appello del 24 giugno */
             /* modificato in data 01/07/2019 esame 216 a 217 appello del 08 luglio */
           case 'getCancellaPrenotazione':
-             // console.log('sono in DELETE DI getCancellaPrenotazione con stuId '+stuId);
+              console.log('sono in DELETE DI getCancellaPrenotazione');
               var strTemp=''; 
               if (ctx.parameters.date){
                 //console.log('ho il parametro data');
@@ -1593,7 +1607,7 @@ function callAVA(agent) {
                }
               controller.deleteSingoloAppelloDaPrenotare(cdsId,idAppello,appId,stuId).then((res)=>{ //cdsId,adId,appId,studId
                 if (res){
-                  console.log('faccio delete della prenotazione appello con cdsId '+cdsId + 'adId '+ idAppello + 'appID lo metto io '+' stuId '+stuId+ ' nome di paramEsame '+paramEsame);
+                  console.log('faccio delete della prenotazione appello con cdsId '+cdsId + ', adId '+ idAppello + ', appID  '+appId +', stuId '+stuId+ ', nome di paramEsame '+paramEsame);
                    strTemp=paramEsame;
                    var str=strOutput;
                    str=str.replace(/(@)/gi, strTemp);
