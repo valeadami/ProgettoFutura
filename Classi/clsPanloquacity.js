@@ -1279,7 +1279,10 @@ function callAVA(agent) {
                  /* **  MODIFICA DEL 21/05/2019 AGGIUNTA FAKE   e del 01/07/2019 E DEL 02/07/2019    *******/
                 // strTemp+=  prenotazioni[i].adDes+ ' del 8 luglio 2019';
                 //modificato il 02/07/2019 dopo richiesta a M. Salata di inserire nuovi appelli
-                 strTemp+= prenotazioni[i].adDes+ ' 8 luglio 2019, appello di ' +  prenotazioni[i].adDes+' del 16 luglio 2019, appello di ' +  prenotazioni[i].adDes+ ' del 7 agosto 2019';
+                //**********  modifica del 05/07/2019 su richiesta di Sergio: solo le date se c'è un solo appello ****************
+                //test di replace della stringa DIRITO PRIVATO I IN 1
+                prenotazioni[i].adDes=prenotazioni[i].adDes.replace(/(I)/gi, "1");
+                strTemp+= prenotazioni[i].adDes+ ' in data 8 luglio 2019, 16 luglio 2019, 7 agosto 2019. Quale data vuole scegliere?';
                 
                 }
               
