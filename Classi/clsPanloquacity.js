@@ -735,7 +735,7 @@ function callAVA(agent) {
   
           //  if (paramEsame===esameDC){   '5188667' matI
           case 'getInfoGenEsame':
-              console.log('clsPanloquacity->getInfoGenEsame->getEsame con esame '+paramEsame);
+              console.log('clsPanloquacity->getInfoGenEsame->getEsame con esame '+paramEsame + ' e idEsame '+ idEsame);
               controller.getEsame(matId,idEsame).then((esame) => { 
                 var strTemp=''; 
                // console.log( '**************** dati del singolo esame ******************');
