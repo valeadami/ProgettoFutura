@@ -122,7 +122,7 @@ function RigaLibretto(aaFreqId, adCod,adDes,adsceId,annoCorso,chiaveADContestual
 function bonificaStringa(nomeCorso){
   var strTemp=nomeCorso;
   if (strTemp==='ISTITUZIONI DI DIRITTO PRIVATO I'){
-      strTemp='ISTITUZIONI DI DIRITTO PRIVATO I UNO';
+      strTemp='ISTITUZIONI DI DIRITTO PRIVATO UNO';
   } else if (strTemp==='PROVA DI LINGUA INGLESE (LIV. B2)'){
       strTemp='PROVA DI LINGUA INGLESE (LIVELLO B2)';
   } else{
