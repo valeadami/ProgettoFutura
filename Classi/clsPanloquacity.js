@@ -559,10 +559,7 @@ function callAVA(agent) {
               }
               
             }
-            //********* TEST MODIFICA DELLE STRINGHE LIV. B2 E I DI DIRITTO ISTITUZIONALE I  data 05/07/2019 */
-            strTemp=strTemp.replace(/(PRIVATO I)/gi, "PRIVATO UNO");
-            strTemp=strTemp.replace(/(LIV.)/gi, "LIVELLO");
-            //*************************************** */
+  
             //qui devo fare replace della @, che si trova in tmp[0]
             var str=strOutput;
             str=str.replace(/(@)/gi, strTemp);
@@ -1288,8 +1285,8 @@ function callAVA(agent) {
                 //modificato il 02/07/2019 dopo richiesta a M. Salata di inserire nuovi appelli
                 //**********  modifica del 05/07/2019 su richiesta di Sergio: solo le date se c'è un solo appello ****************
                 //test di replace della stringa DIRITO PRIVATO I IN 1
-                prenotazioni[i].adDes=prenotazioni[i].adDes.replace(/( I)/gi, " uno");
-                strTemp+= prenotazioni[i].adDes+ ' in data 8 luglio 2019, 16 luglio 2019, 7 agosto 2019.'; //Quale data vuoi scegliere?
+               // prenotazioni[i].adDes=prenotazioni[i].adDes.replace(/( I)/gi, " uno");
+                strTemp+= prenotazioni[i].adDes+ ' in data 16 luglio 2019, 7 agosto 2019.'; //Quale data vuoi scegliere?
                 
                 }
               

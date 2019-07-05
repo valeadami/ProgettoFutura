@@ -5,7 +5,7 @@ function RigaLibretto(aaFreqId, adCod,adDes,adsceId,annoCorso,chiaveADContestual
     this.aaFreqId=aaFreqId; // anno di frequenza, valorizzato nel caso lo stato dell''attività sia F oppure S,
     //stringhe
     this.adCod=adCod; //004GI codice dell''attività didattica presente nel libretto. Il codice è copiato in ogni singolo libretto e, di norma, coincide con il codice previsto nell''offerta didattica alla quale l''attivit� didattica si riferisce  
-    this.adDes=adDes; //DIRITTO COSTITUZIONALE  descrizione dell''attivit� didattica presente nel libretto, come il codice, la descrizione risulta copiata dall''offerta didattica, ma pu� essere modificato  
+    this.adDes=bonificaStringa(adDes); //DIRITTO COSTITUZIONALE  descrizione dell''attivit� didattica presente nel libretto, come il codice, la descrizione risulta copiata dall''offerta didattica, ma pu� essere modificato  
     //intero
     this.adsceId=adsceId; //  id univoco che consente di individuare una riga di libretto dello studente ,
     this.annoCorso=annoCorso; //anno di corso al quale � prevista l''attivit� didattica , ,
@@ -116,7 +116,23 @@ function RigaLibretto(aaFreqId, adCod,adDes,adsceId,annoCorso,chiaveADContestual
         }
        
     };
+
 }
+/*  MODIFICA DELLE STRINGHE LIV. B2 E I DI DIRITTO ISTITUZIONALE I  data 05/07/2019 */
+function bonificaStringa(nomeCorso){
+  var strTemp=nomeCorso;
+  if (strTemp==='ISTITUZIONI DI DIRITTO PRIVATO I'){
+      strTemp='ISTITUZIONI DI DIRITTO PRIVATO I UNO';
+  } else if (strTemp==='PROVA DI LINGUA INGLESE (LIV. B2)'){
+      strTemp='PROVA DI LINGUA INGLESE (LIVELLO B2)';
+  } else{
+    strTemp=nomeCorso;
+  } 
+  return strTemp;
+}
+
+ 
+
 module.exports = RigaLibretto;
 
 

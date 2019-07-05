@@ -1007,12 +1007,12 @@ function getSingoloAppelloPrenotatoNuovo(matId){
 function getTuttiAppelliDaIniziareFake(){
     return new Promise(function(resolve, reject) {
 
-        var pd=[new appello('2017','018GI',null, null,null, null,
+        var pd=[/*new appello('2017','018GI',null, null,null, null,
             null,null,null,null,null, null, 'ISTITUZIONI DI DIRITTO PRIVATO I',
             null,null,null,null,null,
             'BALLERINI',null,'LUCA',null,null,null,null,null,null, null,null,
             null,null,null,null, '08/07/2019 13:00:'),
-
+*/
             new appello('2017','018GI',null, null,null, null,
             null,null,null,null,null, null, 'ISTITUZIONI DI DIRITTO PRIVATO I',
             null,null,null,null,null,
