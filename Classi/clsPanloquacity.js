@@ -550,12 +550,19 @@ function callAVA(agent) {
                 
               /****************   modifica del 22/05/2019 LASCIO SOLO IL NOME DELL'ESAME  *************/
                 strTemp+=  libretto[i].adDes; /*+ ', frequentato  nell \'anno ' +libretto[i].aaFreqId +', anno di corso ' +
-                libretto[i].annoCorso + '\n';*/
+              libretto[i].annoCorso + '\n';*/
+              /* */
+              
+
                 if (i<libretto.length-1)
                     strTemp+=',';
               }
               
             }
+            //********* TEST MODIFICA DELLE STRINGHE LIV. B2 E I DI DIRITTO ISTITUZIONALE I  data 05/07/2019 */
+            strTemp=strTemp.replace(/( I)/gi, " uno");
+            strTemp=strTemp.replace(/(LIV.)/gi, "Livello");
+            //*************************************** */
             //qui devo fare replace della @, che si trova in tmp[0]
             var str=strOutput;
             str=str.replace(/(@)/gi, strTemp);
