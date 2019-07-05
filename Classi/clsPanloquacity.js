@@ -560,8 +560,8 @@ function callAVA(agent) {
               
             }
             //********* TEST MODIFICA DELLE STRINGHE LIV. B2 E I DI DIRITTO ISTITUZIONALE I  data 05/07/2019 */
-            strTemp=strTemp.replace(/( I)/gi, " uno");
-            strTemp=strTemp.replace(/(LIV.)/gi, "Livello");
+            strTemp=strTemp.replace(/(PRIVATO I)/gi, "PRIVATO UNO");
+            strTemp=strTemp.replace(/(LIV.)/gi, "LIVELLO");
             //*************************************** */
             //qui devo fare replace della @, che si trova in tmp[0]
             var str=strOutput;
