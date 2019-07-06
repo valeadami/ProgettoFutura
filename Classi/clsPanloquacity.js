@@ -1446,15 +1446,21 @@ function callAVA(agent) {
                     //MODIFICA DEL 06/07/2019 
                     var nomeAppello=result[0].desApp; //BONIFICO LA STRINGA
                     nomeAppello=nomeAppello.replace(/( I)/gi, " UNO");
-                    strTemp+='Appello di ' + nomeAppello +' in data '; // nomeAppello-> result[0].desApp MODIFICA DEL 06/07/2019 
+                    strTemp+='appello di ' + nomeAppello +' in data '; // nomeAppello-> result[0].desApp MODIFICA DEL 06/07/2019 
                       for(var i=0; i<result.length; i++){
                      /* MODIFICA DEL 21/05/2019  formattazione della data e della ora esame*/
                      var dd=result[i].turni[0].dataOraEsa.split(" ");
                      //console.log('data ' + dd[0] + ' ora '+ dd[1].substring(0,5));
                      //MODIFICA DEL 06/07/2019 RIDUCO LA LUNGHEZZA DELLA RISPOSTA E NN RIPETO IL NOME DELL'APPELLO
                        // strTemp+='\n appello di ' + result[i].desApp + ', codice '+result[i].adCod + ', del giorno ' + dd[0] /*result[i].turni[0].dataOraEsa*/ + ' alle ore ' + dd[1].substring(0,5) +', esame dell\' anno '+  result[i].aaCalId +', con presidente ' +result[i].presidenteCognome + ' '+ result[i].presidenteNome +'\n';
-                       strTemp+= dd[0] /*result[i].turni[0].dataOraEsa*/ + ' alle ore ' + dd[1].substring(0,5) +','; // +', esame dell\' anno '+  result[i].aaCalId +', con presidente ' +result[i].presidenteCognome + ' '+ result[i].presidenteNome +'\n';
+                       strTemp+= dd[0] /*result[i].turni[0].dataOraEsa*/ + ' alle ore ' + dd[1].substring(0,5); // +', esame dell\' anno '+  result[i].aaCalId +', con presidente ' +result[i].presidenteCognome + ' '+ result[i].presidenteNome +'\n';
+                       if (i<result.length-1){
+
+                          strTemp+=',';
+                      }
+                      
                       } //fine for
+                    
                       var str= risposta[0];// 22/05/2019--> strOutput;
                       str=str.replace(/(@)/gi, strTemp);
                       strOutput=str;
