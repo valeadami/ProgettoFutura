@@ -583,19 +583,22 @@ function callAVA(agent) {
   
               //14/03/2109 il nuovo user è s262502 userId
               controller.getCarriera(userId).then((carriera)=> {
-              var strTemp='';
-              strTemp+='La tua immatricolazione è dell\'anno '+ carriera.aaId + ' , con numero matricola  '+ carriera.matricola + ', nel corso di laurea '+ carriera.cdsDes +', tipo di corso di laurea '+ carriera.tipoCorsoDes + ', percorso '+carriera.pdsDes +', stato attuale ' +carriera.motStastuDes
-              console.log('clsPanloquacity->getCarriera');
-              // console.log('ho lo studente '+studente.codFisc + 'matricola ID '+ studente.trattiCarriera[0].matId);
-              // agent.setContext({ name: 'matricola', lifespan: 5, parameters: { matID: studente.trattiCarriera[0].matId }});
-              
-              var str=strOutput;
-              str=str.replace(/(@)/gi, strTemp);
-              strOutput=str;
-              agent.add(strOutput);
-              console.log('strOutput con replace  in getInformazioni: '+ strOutput);
-              resolve(agent);
-              
+                if (carriera!==false){
+
+                
+                  var strTemp='';
+                  strTemp+='La tua immatricolazione è dell\'anno '+ carriera.aaId + ' , con numero matricola  '+ carriera.matricola + ', nel corso di laurea '+ carriera.cdsDes +', tipo di corso di laurea '+ carriera.tipoCorsoDes + ', percorso '+carriera.pdsDes +', stato attuale ' +carriera.motStastuDes
+                  console.log('clsPanloquacity->getCarriera');
+                  // console.log('ho lo studente '+studente.codFisc + 'matricola ID '+ studente.trattiCarriera[0].matId);
+                  // agent.setContext({ name: 'matricola', lifespan: 5, parameters: { matID: studente.trattiCarriera[0].matId }});
+                  
+                  var str=strOutput;
+                  str=str.replace(/(@)/gi, strTemp);
+                  strOutput=str;
+                  agent.add(strOutput);
+                  console.log('strOutput con replace  in getInformazioni: '+ strOutput);
+                  resolve(agent);
+                }
               }).catch((error) => {
                 console.log('Si è verificato errore in getInformazioni: ' +error);
                 agent.add('Mi dispiace, si è verificato un errore leggendo la tua carriera. Riprova più tardi.');
