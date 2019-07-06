@@ -1450,7 +1450,7 @@ function callAVA(agent) {
                      //console.log('data ' + dd[0] + ' ora '+ dd[1].substring(0,5));
                      //MODIFICA DEL 06/07/2019 RIDUCO LA LUNGHEZZA DELLA RISPOSTA E NN RIPETO IL NOME DELL'APPELLO
                        // strTemp+='\n appello di ' + result[i].desApp + ', codice '+result[i].adCod + ', del giorno ' + dd[0] /*result[i].turni[0].dataOraEsa*/ + ' alle ore ' + dd[1].substring(0,5) +', esame dell\' anno '+  result[i].aaCalId +', con presidente ' +result[i].presidenteCognome + ' '+ result[i].presidenteNome +'\n';
-                       strTemp+= 'codice '+result[i].adCod + ', del giorno ' + dd[0] /*result[i].turni[0].dataOraEsa*/ + ' alle ore ' + dd[1].substring(0,5); // +', esame dell\' anno '+  result[i].aaCalId +', con presidente ' +result[i].presidenteCognome + ' '+ result[i].presidenteNome +'\n';
+                       strTemp+= ' del giorno ' + dd[0] /*result[i].turni[0].dataOraEsa*/ + ' alle ore ' + dd[1].substring(0,5); +'\n'; // +', esame dell\' anno '+  result[i].aaCalId +', con presidente ' +result[i].presidenteCognome + ' '+ result[i].presidenteNome +'\n';
                       } //fine for
                       var str= risposta[0];// 22/05/2019--> strOutput;
                       str=str.replace(/(@)/gi, strTemp);
