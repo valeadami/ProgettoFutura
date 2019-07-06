@@ -598,6 +598,10 @@ function callAVA(agent) {
                   agent.add(strOutput);
                   console.log('strOutput con replace  in getInformazioni: '+ strOutput);
                   resolve(agent);
+                }else{
+                  console.log('getCarriera torna false ');
+                  agent.add('Mi dispiace, si è verificato un errore leggendo la tua carriera. Riprova più tardi.');
+                  resolve(agent);
                 }
               }).catch((error) => {
                 console.log('Si è verificato errore in getInformazioni: ' +error);

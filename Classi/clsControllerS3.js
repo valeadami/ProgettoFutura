@@ -128,7 +128,7 @@ return new Promise(function(resolve, reject) {
     var options = { 
         method: 'GET',
        // url: strUrlAnagraficaHome +userId +'/', //modifica del 06/07/2019 dopo cambio api anagrafica
-        url: strUrlAnagraficaHome +userId ,//+'/trattiAttivi', //passo userid dello studente loggato
+        url: strUrlAnagraficaHome +userId, // +'/trattiAttivi', //passo userid dello studente loggato
         headers: 
             { 
                 'cache-control': 'no-cache',
