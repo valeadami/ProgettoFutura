@@ -1584,11 +1584,14 @@ function callAVA(agent) {
            /* MODIFICA DEL 02/07/2019 per gestire i nuovi appelli caricati da M. Salata */
         case 'getPrenotaEsame':
            console.log('sono in POST DI clsPanloquacity->getPrenotaEsame');
+           var appId=''; //parametro da passare al POST 217,218 ecc... collegato alla riga dell'appello prenotabile
            if (ctx.parameters.date){
             //console.log('ho il parametro data');
-            var appId=ctx.parameters.date.split('T')[0]; //2019-06-10
-            console.log('******* sono in getPrenotaEsame e ho il param date con valore '+ appId); //2019-07-08
-            switch(appId){
+          
+            //var appId=ctx.parameters.date.split('T')[0]; //2019-06-10
+            var vv=ctx.parameters.date.split('T')[0];
+            console.log('******* sono in getPrenotaEsame e ho il param date con valore '+ vv); // appId2019-07-08
+            /*switch(appId){
               case '2019-07-08':
                 appId='217';
               break;
@@ -1602,8 +1605,20 @@ function callAVA(agent) {
                   appId='217';
               break;
              
-            }
-           
+            }*/
+            //modifica del 06/07/2019 controllo che non vengano accettate altre date
+            if  ( vv==='2019-07-08'){
+              appId='217';
+            }else if ( vv==='2019-07-16'){
+              appId='218';
+             
+            }else if (vv==='2019-08-07'){
+              appId='219';
+            }else{
+              agent.add('Mi dispiace, non ci sono appelli in questa data. Le date disponibili sono  16 luglio 2019 e 7 agosto 2019.');
+              resolve(agent);  
+
+            }          
            }
            var strTemp='';
             controller.postSingoloAppelloDaPrenotare(cdsId,idAppello,appId,idEsame).then((res)=>{ //cdsId,adId,appId,adsceId
