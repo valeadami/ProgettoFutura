@@ -901,7 +901,7 @@ function getDettaglioSingoloAppelloPrenotato(cdsId,adId,appId){
             json: true 
         }
         request(options, function (error, response, body) {
-            //console.log('url di getDettaglioSingoloAppelloPrenotato '+ options.url);
+            console.log('url di getDettaglioSingoloAppelloPrenotato '+ options.url);
             if (error) {
                 reject(error);
                //console.log('errore in getDettaglioSingoloAppelloPrenotato '+ error);
