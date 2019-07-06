@@ -580,12 +580,12 @@ function callAVA(agent) {
           break;
           //28/01/2019
         case 'getInformazioni':
-  
+              
               //14/03/2109 il nuovo user è s262502 userId
               controller.getCarriera(userId).then((carriera)=> {
+                  //MODIFICA DEL 06/07/2019 DOPO CAMBIO DI API ANAGRAFICA
                 if (carriera!==false){
 
-                
                   var strTemp='';
                   strTemp+='La tua immatricolazione è dell\'anno '+ carriera.aaId + ' , con numero matricola  '+ carriera.matricola + ', nel corso di laurea '+ carriera.cdsDes +', tipo di corso di laurea '+ carriera.tipoCorsoDes + ', percorso '+carriera.pdsDes +', stato attuale ' +carriera.motStastuDes
                   console.log('clsPanloquacity->getCarriera');
@@ -685,21 +685,30 @@ function callAVA(agent) {
           break;
         //28/01/2019
         //19/03/2019 resta così per il momento
+        //MODIFICA DEL 06/07/2019 DOPO CAMBIO DI API ANAGRAFICA
         case 'getNumeroMatricola':
           controller.getCarriera(userId).then((carriera)=> {
-            console.log('clsPanloquacity->getNumeroMatricola->getCarriera');
-            var strTemp='';
-            strTemp+='' + carriera.matricola;
-          //console.log('chiedo il numero di matricola ...');
-          // console.log('ho lo studente '+studente.codFisc + 'matricola ID '+ studente.trattiCarriera[0].matId);
-          // agent.setContext({ name: 'matricola', lifespan: 5, parameters: { matID: studente.trattiCarriera[0].matId }});
-            
-          var str=strOutput;
-          str=str.replace(/(@)/gi, strTemp);
-          strOutput=str;
-          agent.add(strOutput);
-          console.log('strOutput con replace in getNumeroMatricola '+ strOutput);
-          resolve(agent);
+            if (carriera !==false){
+              console.log('clsPanloquacity->getNumeroMatricola->getCarriera');
+              var strTemp='';
+              strTemp+='' + carriera.matricola;
+              //console.log('chiedo il numero di matricola ...');
+              // console.log('ho lo studente '+studente.codFisc + 'matricola ID '+ studente.trattiCarriera[0].matId);
+              // agent.setContext({ name: 'matricola', lifespan: 5, parameters: { matID: studente.trattiCarriera[0].matId }});
+                
+              var str=strOutput;
+              str=str.replace(/(@)/gi, strTemp);
+              strOutput=str;
+              agent.add(strOutput);
+              console.log('strOutput con replace in getNumeroMatricola '+ strOutput);
+              resolve(agent);
+            }else{
+              console.log('getCarriera torna false');
+           
+              agent.add('Mi dispiace, si è verificato un errore leggendo il tuo numero di matricola. Riprova più tardi.');
+              resolve(agent);
+            }
+           
             
           }).catch((error) => {
             
@@ -710,21 +719,29 @@ function callAVA(agent) {
           });
           break;
           //28/01/2019
+            //MODIFICA DEL 06/07/2019 DOPO CAMBIO DI API ANAGRAFICA
           case 'getAnnoImmatricolazione':
           controller.getCarriera(userId).then((carriera)=> {
-            var strTemp='';
-            var dt=carriera.dataImm; //elimino minuti e secondi
-            strTemp+='' + dt.substring(0,10);
-          //console.log('chiedo la data immatricolazione...');
-          // console.log('ho lo studente '+studente.codFisc + 'matricola ID '+ studente.trattiCarriera[0].matId);
-          // agent.setContext({ name: 'matricola', lifespan: 5, parameters: { matID: studente.trattiCarriera[0].matId }});
-            
-          var str=strOutput;
-          str=str.replace(/(@)/gi, strTemp);
-          strOutput=str;
-          agent.add(strOutput);
-          console.log('strOutput con replace in getAnnoImmatricolazione->getCarriera '+ strOutput);
-          resolve(agent);
+            if (carriera!==false){
+
+              var strTemp='';
+              var dt=carriera.dataImm; //elimino minuti e secondi
+              strTemp+='' + dt.substring(0,10);
+              //console.log('chiedo la data immatricolazione...');
+              // console.log('ho lo studente '+studente.codFisc + 'matricola ID '+ studente.trattiCarriera[0].matId);
+              // agent.setContext({ name: 'matricola', lifespan: 5, parameters: { matID: studente.trattiCarriera[0].matId }});
+                
+              var str=strOutput;
+              str=str.replace(/(@)/gi, strTemp);
+              strOutput=str;
+              agent.add(strOutput);
+              console.log('strOutput con replace in getAnnoImmatricolazione->getCarriera '+ strOutput);
+              resolve(agent);
+            }else{
+              console.log('getCarriera torna false ');
+              agent.add('Mi dispiace, si è verificato un errore leggendo il tuo anno di immatricolazione. Riprova più tardi.');
+              resolve(agent);
+            }
             
           }).catch((error) => {
             console.log('Si è verificato errore in getAnnoImmatricolazione->getCarriera : ' +error);
