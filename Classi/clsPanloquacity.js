@@ -584,7 +584,7 @@ function callAVA(agent) {
               //14/03/2109 il nuovo user è s262502 userId
               controller.getCarriera(userId).then((carriera)=> {
               var strTemp='';
-              strTemp+='Ti sei immatricolato nell anno '+ carriera.aaId + ' , con numero matricola  '+ carriera.matricola + ', nel corso di laurea '+ carriera.cdsDes +', tipo di corso di laurea '+ carriera.tipoCorsoDes + ', percorso '+carriera.pdsDes +', stato attuale ' +carriera.motStastuDes
+              strTemp+='La tua immatricolazione è dell\'anno '+ carriera.aaId + ' , con numero matricola  '+ carriera.matricola + ', nel corso di laurea '+ carriera.cdsDes +', tipo di corso di laurea '+ carriera.tipoCorsoDes + ', percorso '+carriera.pdsDes +', stato attuale ' +carriera.motStastuDes
               console.log('clsPanloquacity->getCarriera');
               // console.log('ho lo studente '+studente.codFisc + 'matricola ID '+ studente.trattiCarriera[0].matId);
               // agent.setContext({ name: 'matricola', lifespan: 5, parameters: { matID: studente.trattiCarriera[0].matId }});
@@ -1371,12 +1371,14 @@ function callAVA(agent) {
         case "getListaAppelliCompleta":
             
             console.log('clsPanloquacity->getListaAppelliCompleta->getTuttiAppelliDaIniziareFake');
-            var strTemp='';
+           
             controller.getTuttiAppelliDaIniziareFake().then((risultato)=> {
               if (Array.isArray(risultato)){
+                //MODIFICA DEL 05/07/2019 ORA ABBIAMO UN SOLO APPELLO DIRITTO PRIVATO 1
+                var strTemp='\n appello di ' + risultato[0].desApp; 
                 //console.log('sono in array risultato FAKE');
                 for(var i=0; i<risultato.length; i++){
-                  strTemp+='\n appello di ' + risultato[i].desApp +  ', del giorno ' + risultato[i].turni.split(" ")[0] +'\n'; //+ ' alle ore ' + risultato[i].turni.split(" ")[1] +', esame dell\' anno '+  risultato[i].aaCalId +', con presidente ' +risultato[i].presidenteCognome + ' '+ risultato[i].presidenteNome 
+                  strTemp+='  del giorno ' + risultato[i].turni.split(" ")[0] +'\n'; //+ ' alle ore ' + risultato[i].turni.split(" ")[1] +', esame dell\' anno '+  risultato[i].aaCalId +', con presidente ' +risultato[i].presidenteCognome + ' '+ risultato[i].presidenteNome 
                  }
                  var str=strOutput;
                  str=str.replace(/(@)/gi, strTemp);
@@ -1491,7 +1493,7 @@ function callAVA(agent) {
 
                   }else{
                     console.log('la data non è valida ...')
-                    agent.add('Mi dispiace, non ci sono appelli in questa data. Le date disponibili sono 8 luglio 2019, 16 luglio 2019, 7 agosto 2019.');
+                    agent.add('Mi dispiace, non ci sono appelli in questa data. Le date disponibili sono  16 luglio 2019 e 7 agosto 2019.');
                     resolve(agent);  
                   }
                 

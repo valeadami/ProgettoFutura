@@ -128,6 +128,7 @@ function bonificaStringa(nomeCorso){
   } else{
     strTemp=nomeCorso;
   } 
+  console.log('bonifica stringa: '+strTemp);
   return strTemp;
 }
 

@@ -10,7 +10,10 @@ var strUrlLogin='https://units.esse3.pp.cineca.it/e3rest/api/login';
 //logout
 var strUrlLogout='https://units.esse3.pp.cineca.it/e3rest/api/logout'
 //anagrafica utente homepage dopo login ->carriere(userId)
-var strUrlAnagraficaHome='https://units.esse3.pp.cineca.it/e3rest/api/anagrafica-service-v1/carriere/'; //s260856/
+
+// MODIFICA DEL 06/07/2019 CAMBIO DI ANAGRAFICA API
+//var strUrlAnagraficaHome='https://units.esse3.pp.cineca.it/e3rest/api/anagrafica-service-v1/carriere/'; //s260856/
+var strUrlAnagraficaHome='https://units.esse3.pp.cineca.it/e3rest/api/anagrafica-service-v2/utenti/' // USERID = s262502/trattiAttivi/';
 //scelgo link libretto
 var strUrlGetLibretto="https://units.esse3.pp.cineca.it/e3rest/api/libretto-service-v1/libretti/291783/righe/"; //?filter=adDes%3D%3D'DIRITTO%20COSTITUZIONALE'
 //per recuperare esami prenotabili vado sul libretto
@@ -124,7 +127,8 @@ function getCarrieraAnagraficaHome(userId){
 return new Promise(function(resolve, reject) {
     var options = { 
         method: 'GET',
-        url: strUrlAnagraficaHome +userId +'/', //passo userid dello studente loggato
+       // url: strUrlAnagraficaHome +userId +'/', //modifica del 06/07/2019 dopo cambio api anagrafica
+        url: strUrlAnagraficaHome +userId +'/trattiAttivi', //passo userid dello studente loggato
         headers: 
             { 
                 'cache-control': 'no-cache',
@@ -142,7 +146,10 @@ return new Promise(function(resolve, reject) {
             if (response.statusCode==200){
                 console.log(body);
                 resolve(body); //ritorna una oggetto json
-            }  
+            }  else {
+                console.log('clsController-> getCarrieraAnagraficaHome torna falso');
+                resolve(false);
+            }
         }
 
     });
