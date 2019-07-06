@@ -1616,7 +1616,8 @@ function callAVA(agent) {
               appId='219';
             }else{
               agent.add('Mi dispiace, non ci sono appelli in questa data. Le date disponibili sono  16 luglio 2019 e 7 agosto 2019.');
-              resolve(agent);  
+              resolve(agent); 
+              return; 
 
             }          
            }
