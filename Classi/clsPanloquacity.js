@@ -1446,7 +1446,7 @@ function callAVA(agent) {
                     //MODIFICA DEL 06/07/2019 
                     var nomeAppello=result[0].desApp; //BONIFICO LA STRINGA
                     nomeAppello=nomeAppello.replace(/( I)/gi, "UNO");
-                    strTemp+='Appello di ' + result[0].desApp +' in data '; //MODIFICA DEL 06/07/2019 
+                    strTemp+='Appello di ' + nomeAppello +' in data '; // nomeAppello-> result[0].desApp MODIFICA DEL 06/07/2019 
                       for(var i=0; i<result.length; i++){
                      /* MODIFICA DEL 21/05/2019  formattazione della data e della ora esame*/
                      var dd=result[i].turni[0].dataOraEsa.split(" ");
