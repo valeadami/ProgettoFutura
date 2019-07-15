@@ -1522,7 +1522,7 @@ function callAVA(agent) {
          if (idAppello!==111218){
           console.log('************  idAppello != 111218 '+ idAppello);
           agent.add('Mi dispiace, non puoi prenotare appelli per questo esame. Puoi prenotare solo istituzioni di diritto privato uno');
-          resolve(agent);
+          //resolve(agent);
           //return;
           controller.getPrenotazioni(matId).then((prenotazioni) => { //prenotazioni sono righe del libretto
            //console.log('1) sono in getPrenotazioni '+new Date()); //+ JSON.stringify(prenotazioni)
