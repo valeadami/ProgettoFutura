@@ -1693,6 +1693,7 @@ function callAVA(agent) {
             }          
            }
            var strTemp='';
+           agent.add('ok ora procedo...');
             controller.postSingoloAppelloDaPrenotare(cdsId,idAppello,appId,idEsame).then((res)=>{ //cdsId,adId,appId,adsceId
               if (res){
                 console.log('faccio post di prenotazione con cdsId '+cdsId + ', adId '+ idAppello + ', appID' +appId + ', adsceId '+idEsame+ ', nome di paramEsame '+paramEsame);
