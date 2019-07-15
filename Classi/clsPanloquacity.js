@@ -1514,6 +1514,7 @@ function callAVA(agent) {
              
               var strTemp;
               /*  MODIFICA DEL 15/07/2019 
+              ********************************
           VERIFICARE CHE SI POSSA PRENOTARE SOLO DIRITTO PRIVATO 
           SE DIVERSO DA PRIVATO UNO, AGENTE RISPONDE che non si può prenotare appello di quel esame 
           
@@ -1524,24 +1525,24 @@ function callAVA(agent) {
           agent.add('Mi dispiace, non puoi prenotare appelli per questo esame. Puoi prenotare solo istituzioni di diritto privato uno');
           //resolve(agent);
           //return;
+          //... e dò la lista delle prenotazioni disponibili
           controller.getPrenotazioni(matId).then((prenotazioni) => { //prenotazioni sono righe del libretto
-           //console.log('1) sono in getPrenotazioni '+new Date()); //+ JSON.stringify(prenotazioni)
-           //MODIFICA DEL 25/06/2019 VERIFICARE CHE ARRAY DI PRENOTAZIONI ABBIA ALMENO UN ELEMENTO
+       
            if (Array.isArray(prenotazioni) && (prenotazioni.length>=1)){
              console.log('sono in array prenotazioni di GETPRENOTAESAME'+new Date() + ' con adId '+prenotazioni[0].chiaveADContestualizzata.adId);
              for(var i=0; i<prenotazioni.length; i++){
              
              
-              strTemp+= prenotazioni[i].adDes+ ' in data 16 luglio 2019, 7 agosto 2019.'; //Quale data vuoi scegliere?
+              strTemp+= prenotazioni[i].adDes+ ' in data 16 luglio 2019, 7 agosto 2019.'; 
               
               }
             
-              
-              var str=strOutput;
+              //non devo fare il replace
+              /*var str=strOutput;
               str=str.replace(/(@)/gi, strTemp);
-              strOutput=str;
-              agent.add(strOutput);
-              console.log('strOutput con replace in  getPrenotazioneAppelli-getAppelliEsame->getPrenotazioni  '+ strOutput);
+              strOutput=str;*/
+              agent.add(strTemp);
+              //console.log('strOutput con replace in  getPrenotazioneAppelli-getAppelliEsame->getPrenotazioni  '+ strOutput);
               resolve(agent);
               return;
             }else{ //  16/05/2019 NON CI SONO APPELLI PRENOTABILI
