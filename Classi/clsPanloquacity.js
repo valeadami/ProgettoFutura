@@ -1286,7 +1286,7 @@ function callAVA(agent) {
           break;
           //************* P R E N O T A Z I O N E   A P P E L L O --------------------- 25/03/2019 -> MODIFICATO IN DATA 16/05/2019 MA LA QUERY DA S3 IMPIEG 30 SECONDI QUINDI TORNO AL LIBRETTO */
           case 'getPrenotazioneAppelli':
-          case 'getAppelliEsame': // ********************  MODIFICA DEL 21/05/2019 FAKE
+          //case 'getAppelliEsame': // ********************  MODIFICA DEL 21/05/2019 FAKE
             var idAp=[]; 
             var strTemp='';
               
@@ -1314,31 +1314,7 @@ function callAVA(agent) {
                 
                 }
               
-                //ri commentato di nuovo in data 16/05/2019 perchè la query impiega troppo tempo
-                /*
-                Promise.all(appelliPrenotabiliPromises).then((appelliDaPrenotare) => {
-                  
-                    if (Array.isArray(appelliDaPrenotare)){
-                      console.log('2) sono dentro getAppelloDaPrenotare PROMISES con '+appelliDaPrenotare.length + ' appelli');
-                      //var strTemp='';
-                      for(var i=0; i<appelliDaPrenotare.length; i++){
-        
-                        strTemp+= 'Appello di ' + appelliDaPrenotare[i].adDes + ', in data '+ appelliDaPrenotare[i].dataInizioApp +', iscrizione aperta dal '+  
-                                  appelliDaPrenotare[i].dataInizioIscr + ' fino al '+ appelliDaPrenotare[i].dataFineIscr +'\n';
-                      
-                       
-                        }//fine for
-                        console.log('Valore di strTemp '+ strTemp +new Date());
-                        var str=strOutput;
-                        str=str.replace(/(@)/gi, strTemp);
-                        strOutput=str;
-                        agent.add(strOutput);
-                        console.log('strOutput con replace in  getPrenotazioni PROMISES ->  '+ strOutput +' ' +new Date());
-                        resolve(agent);
-                      } //fine if is array
-                        
-                    });
-                */
+                
                  //originale commentato in data 16/05/2019
                 var str=strOutput;
                 str=str.replace(/(@)/gi, strTemp);
@@ -1351,38 +1327,7 @@ function callAVA(agent) {
                 console.log('Mi dispiace, non hai appelli prenotabili. Come posso aiutarti ora?');
                 resolve(agent);
             }
-            //commentato in data 08/05/2019 perchè la query impiega troppo tempo
-          // agent.add('questo è appello che puoi prenotare '+idAp);
-          //  resolve(agent);
-            //return idAp; //111218
-         /*}).then(function (idAp){
-            controller.getAppelloDaPrenotare(cdsId,idAp).then((appelliDaPrenotare)=>{
-              if (Array.isArray(appelliDaPrenotare)){
-                console.log('2) sono dentro getAppelloDaPrenotare');
-                var strTemp='';
-                for(var i=0; i<appelliDaPrenotare.length; i++){
-  
-                  strTemp+= 'Appello di ' + appelliDaPrenotare[i].adDes + ', in data '+ appelliDaPrenotare[i].dataInizioApp +', iscrizione aperta dal '+  
-                            appelliDaPrenotare[i].dataInizioIscr + ' fino al '+ appelliDaPrenotare[i].dataFineIscr +'\n';
-                 
-                  }
-                }
-                  console.log('Valore di strTemp '+ strTemp);
-                  return strTemp;
-              }).then(function (strTemp)  {
-  
-            
-                var str=strOutput;
-                str=str.replace(/(@)/gi, strTemp);
-                strOutput=str;
-                agent.add(strOutput);
-                console.log('strOutput con replace in  getPrenotazioneAppelli-> getAppelloDaPrenotare '+ strOutput);
-                resolve(agent);
-             }).catch((error) => {
-            console.log('Si è verificato errore in getPrenotazioneAppelli-> getAppelloDaPrenotare ' +error);
-            agent.add('Si è verificato errore in getPrenotazioneAppelli> getAppelloDaPrenotare  ' +error);
-            resolve(agent);
-          });*/
+           
   /* modifica del 25/06/2019 cambiato messaggio di errore in output */
         }).catch((error) => {
           console.log('Si è verificato errore in getPrenotazioneAppelli-getAppelliEsame->getPrenotazioni: ' +error);
@@ -1391,6 +1336,101 @@ function callAVA(agent) {
         }); 
   
               break;
+        //MODIFICA DEL 15/07/2019: getAppelliEsame ora viene gestito a parte, prima con getAppelliPrenotati
+        //torna elenco degli appelli prenotabili ma ha il controllo sul nome dell'esame
+        //ad esempio se utente dice prenota appello di diritto costituzionale risponde come in getInfoAppelloEsame
+        case 'getAppelliEsame': //INTENT prossimi appelli di esame #esse3 #appelli #infoesame #prenotazione
+
+            var idAp=[]; 
+            var strTemp='';
+              
+            console.log('clsPanloquacity->getAppelliEsame->getPrenotazioni');
+            // CONTROLLO CHE SI POSSA PRENOTARE SOLO APPELLO DI DIRITTO PRIVATO
+            if (idAppello!==111218){
+              
+              agent.add('Mi dispiace, non puoi prenotare appelli per questo esame. Puoi prenotare:');
+             
+              //... e dò la lista delle prenotazioni disponibili
+              controller.getPrenotazioni(matId).then((prenotazioni) => { //prenotazioni sono righe del libretto
+           
+               if (Array.isArray(prenotazioni) && (prenotazioni.length>=1)){
+                 console.log('sono in array prenotazioni di GETPRENOTAESAME'+new Date() + ' con adId '+prenotazioni[0].chiaveADContestualizzata.adId);
+                 for(var i=0; i<prenotazioni.length; i++){
+                 
+                 
+                  strTemp+= prenotazioni[i].adDes+ ' in data 16 luglio 2019, 7 agosto 2019.'; 
+                  
+                  }
+                
+                  agent.add(strTemp);
+                  //console.log('strOutput con replace in  getPrenotazioneAppelli-getAppelliEsame->getPrenotazioni  '+ strOutput);
+                  resolve(agent);
+                  return;
+                }else{ //  16/05/2019 NON CI SONO APPELLI PRENOTABILI
+                  agent.add('Mi dispiace, non hai appelli prenotabili. Come posso aiutarti ora?');
+                  console.log('Mi dispiace, non hai appelli prenotabili. Come posso aiutarti ora?');
+                  resolve(agent);
+                  return;
+              }
+            
+              }).catch((error) => {
+                 console.log('Si è verificato errore in getAppelliEsame->getPrenotazioni: ' +error);
+                 agent.add('Mi dispiace, si è verificato errore durante l\' accesso  agli appelli. Riprova più tardi.');
+                 resolve(agent);
+                 return;
+               }); 
+     //fine check appello che si può prenotare 
+            } else{
+              controller.getPrenotazioni(matId).then((prenotazioni) => { //prenotazioni sono righe del libretto
+                //console.log('1) sono in getPrenotazioni '+new Date()); //+ JSON.stringify(prenotazioni)
+                //MODIFICA DEL 25/06/2019 VERIFICARE CHE ARRAY DI PRENOTAZIONI ABBIA ALMENO UN ELEMENTO
+                if (Array.isArray(prenotazioni) && (prenotazioni.length>=1)){
+                  console.log('sono in array prenotazioni '+new Date() + ' con adId '+prenotazioni[0].chiaveADContestualizzata.adId);
+                  for(var i=0; i<prenotazioni.length; i++){
+                   //nuovo del 16/05/2019
+                   //appelliPrenotabiliPromises.push(controller.getAppelloDaPrenotare(cdsId,'117741'))
+                   //originale commentato in data 16/05/2019  appelliDaPrenotare
+                    idAp[i]= prenotazioni[i].chiaveADContestualizzata.adId;
+                    //console.log('**********idAp=========='+ idAp[i] + ' cdsId ' + cdsId);//prenotazioni[i].chiaveADContestualizzata.
+                    /* **  MODIFICA DEL 21/05/2019 AGGIUNTA FAKE   e del 01/07/2019 E DEL 02/07/2019    *******/
+                   // strTemp+=  prenotazioni[i].adDes+ ' del 8 luglio 2019';
+                   //modificato il 02/07/2019 dopo richiesta a M. Salata di inserire nuovi appelli
+                   //**********  modifica del 05/07/2019 su richiesta di Sergio: solo le date se c'è un solo appello ****************
+                   //test di replace della stringa DIRITO PRIVATO I IN 1
+                  // prenotazioni[i].adDes=prenotazioni[i].adDes.replace(/( I)/gi, " uno");
+                   strTemp+= prenotazioni[i].adDes+ ' in data 16 luglio 2019, 7 agosto 2019.'; //Quale data vuoi scegliere?
+                   
+                   }
+                 
+                   
+                    //originale commentato in data 16/05/2019
+                   var str=strOutput;
+                   str=str.replace(/(@)/gi, strTemp);
+                   strOutput=str;
+                   agent.add(strOutput);
+                   console.log('strOutput con replace in  getPrenotazioneAppelli-getAppelliEsame->getPrenotazioni  '+ strOutput);
+                   resolve(agent);
+                 }else{ //  16/05/2019 NON CI SONO APPELLI PRENOTABILI
+                   agent.add('Mi dispiace, non hai appelli prenotabili. Come posso aiutarti ora?');
+                   console.log('Mi dispiace, non hai appelli prenotabili. Come posso aiutarti ora?');
+                   resolve(agent);
+               }
+              
+     /* modifica del 25/06/2019 cambiato messaggio di errore in output */
+           }).catch((error) => {
+             console.log('Si è verificato errore in getAppelliEsame->getPrenotazioni: ' +error);
+             agent.add('Mi dispiace, si è verificato errore durante l\' accesso  agli appelli. Riprova più tardi.');
+             resolve(agent);
+           }); 
+
+            }
+    
+
+
+
+           
+
+        break;
         // ******** MODIFICA DEL 21/05/2019 PROSSIMI APPELLI DA INIZIARE LISTA COMPLETA FAKE *****************
         case "getListaAppelliCompleta":
             
