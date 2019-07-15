@@ -1585,48 +1585,6 @@ function callAVA(agent) {
         case 'getPrenotaEsame': //INTENT prenotami all'appello di esame in data #esse3 #appelli #prenotazione-YES
            console.log('sono in POST DI clsPanloquacity->getPrenotaEsame');
            var appId=''; //parametro da passare al POST 217,218 ecc... collegato alla riga dell'appello prenotabile
-          /*  MODIFICA DEL 15/07/2019 
-          VERIFICARE CHE SI POSSA PRENOTARE SOLO DIRITTO PRIVATO 
-          SE DIVERSO DA PRIVATO UNO, AGENTE RISPONDE
-          
-          */
-         if (idAppello!=='111218'){
-           agent.add('Mi dispiace, non puoi prenotare questo appello. Adesso ti dico quali sono attivi');
-           controller.getPrenotazioni(matId).then((prenotazioni) => { //prenotazioni sono righe del libretto
-            //console.log('1) sono in getPrenotazioni '+new Date()); //+ JSON.stringify(prenotazioni)
-            //MODIFICA DEL 25/06/2019 VERIFICARE CHE ARRAY DI PRENOTAZIONI ABBIA ALMENO UN ELEMENTO
-            if (Array.isArray(prenotazioni) && (prenotazioni.length>=1)){
-              console.log('sono in array prenotazioni di GETPRENOTAESAME'+new Date() + ' con adId '+prenotazioni[0].chiaveADContestualizzata.adId);
-              for(var i=0; i<prenotazioni.length; i++){
-              
-              
-               strTemp+= prenotazioni[i].adDes+ ' in data 16 luglio 2019, 7 agosto 2019.'; //Quale data vuoi scegliere?
-               
-               }
-             
-               
-               var str=strOutput;
-               str=str.replace(/(@)/gi, strTemp);
-               strOutput=str;
-               agent.add(strOutput);
-               console.log('strOutput con replace in  getPrenotazioneAppelli-getAppelliEsame->getPrenotazioni  '+ strOutput);
-               resolve(agent);
-             }else{ //  16/05/2019 NON CI SONO APPELLI PRENOTABILI
-               agent.add('Mi dispiace, non hai appelli prenotabili. Come posso aiutarti ora?');
-               console.log('Mi dispiace, non hai appelli prenotabili. Come posso aiutarti ora?');
-               resolve(agent);
-           }
-         
-           }).catch((error) => {
-              console.log('Si è verificato errore in getPrenotazioneAppelli-getAppelliEsame->getPrenotazioni: ' +error);
-              agent.add('Mi dispiace, si è verificato errore durante l\' accesso  agli appelli. Riprova più tardi.');
-              resolve(agent);
-            }); 
-
-         }
-         //fine check appello che si può prenotare 
-         // 15/07/2019
-
            if (ctx.parameters.date){
             //console.log('ho il parametro data');
           
