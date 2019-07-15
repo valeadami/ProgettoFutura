@@ -1582,30 +1582,58 @@ function callAVA(agent) {
           /* modificato in data 11/06/2019 esame da 215 a 216 appello del 24 giugno */
            /* modificato in data 01/07/2019 esame da 216 a 217 appello del 8 luglio */
            /* MODIFICA DEL 02/07/2019 per gestire i nuovi appelli caricati da M. Salata */
-        case 'getPrenotaEsame':
+        case 'getPrenotaEsame': //INTENT prenotami all'appello di esame in data #esse3 #appelli #prenotazione-YES
            console.log('sono in POST DI clsPanloquacity->getPrenotaEsame');
            var appId=''; //parametro da passare al POST 217,218 ecc... collegato alla riga dell'appello prenotabile
+          /*  MODIFICA DEL 15/07/2019 
+          VERIFICARE CHE SI POSSA PRENOTARE SOLO DIRITTO PRIVATO 
+          SE DIVERSO DA PRIVATO UNO, AGENTE RISPONDE
+          
+          */
+         if (idAppello!=='111218'){
+           agent.add('Mi dispiace, non puoi prenotare questo appello. Adesso ti dico quali sono attivi');
+           controller.getPrenotazioni(matId).then((prenotazioni) => { //prenotazioni sono righe del libretto
+            //console.log('1) sono in getPrenotazioni '+new Date()); //+ JSON.stringify(prenotazioni)
+            //MODIFICA DEL 25/06/2019 VERIFICARE CHE ARRAY DI PRENOTAZIONI ABBIA ALMENO UN ELEMENTO
+            if (Array.isArray(prenotazioni) && (prenotazioni.length>=1)){
+              console.log('sono in array prenotazioni di GETPRENOTAESAME'+new Date() + ' con adId '+prenotazioni[0].chiaveADContestualizzata.adId);
+              for(var i=0; i<prenotazioni.length; i++){
+              
+              
+               strTemp+= prenotazioni[i].adDes+ ' in data 16 luglio 2019, 7 agosto 2019.'; //Quale data vuoi scegliere?
+               
+               }
+             
+               
+               var str=strOutput;
+               str=str.replace(/(@)/gi, strTemp);
+               strOutput=str;
+               agent.add(strOutput);
+               console.log('strOutput con replace in  getPrenotazioneAppelli-getAppelliEsame->getPrenotazioni  '+ strOutput);
+               resolve(agent);
+             }else{ //  16/05/2019 NON CI SONO APPELLI PRENOTABILI
+               agent.add('Mi dispiace, non hai appelli prenotabili. Come posso aiutarti ora?');
+               console.log('Mi dispiace, non hai appelli prenotabili. Come posso aiutarti ora?');
+               resolve(agent);
+           }
+         
+           }).catch((error) => {
+              console.log('Si è verificato errore in getPrenotazioneAppelli-getAppelliEsame->getPrenotazioni: ' +error);
+              agent.add('Mi dispiace, si è verificato errore durante l\' accesso  agli appelli. Riprova più tardi.');
+              resolve(agent);
+            }); 
+
+         }
+         //fine check appello che si può prenotare 
+         // 15/07/2019
+
            if (ctx.parameters.date){
             //console.log('ho il parametro data');
           
             //var appId=ctx.parameters.date.split('T')[0]; //2019-06-10
             var vv=ctx.parameters.date.split('T')[0];
             console.log('******* sono in getPrenotaEsame e ho il param date con valore '+ vv); // appId2019-07-08
-            /*switch(appId){
-              case '2019-07-08':
-                appId='217';
-              break;
-              case '2019-07-16':
-                  appId='218';
-              break;
-              case '2019-08-07':
-                  appId='219';
-              break;
-              default:
-                  appId='217';
-              break;
-             
-            }*/
+            
             //modifica del 06/07/2019 controllo che non vengano accettate altre date
             if  ( vv==='2019-07-08'){
               appId='217';
