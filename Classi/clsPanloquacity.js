@@ -1512,7 +1512,7 @@ function callAVA(agent) {
           case 'getInfoAppelloEsame':
               console.log('clsPanloquacity->getInfoAppelloEsame');
              
-              var strTemp;
+              var strTemp='';
               /*  MODIFICA DEL 15/07/2019 
               ********************************
           VERIFICARE CHE SI POSSA PRENOTARE SOLO DIRITTO PRIVATO 
