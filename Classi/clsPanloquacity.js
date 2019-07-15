@@ -1346,7 +1346,7 @@ function callAVA(agent) {
               
             console.log('clsPanloquacity->getAppelliEsame->getPrenotazioni');
             // CONTROLLO CHE SI POSSA PRENOTARE SOLO APPELLO DI DIRITTO PRIVATO
-            if (idAppello!==111218){
+           /* if (idAppello!==111218){
               
               agent.add('Mi dispiace, non puoi prenotare appelli per questo esame. Puoi prenotare:');
              
@@ -1380,7 +1380,7 @@ function callAVA(agent) {
                  return;
                }); 
      //fine check appello che si può prenotare 
-            } else{
+            } else{*/
               controller.getPrenotazioni(matId).then((prenotazioni) => { //prenotazioni sono righe del libretto
                 //console.log('1) sono in getPrenotazioni '+new Date()); //+ JSON.stringify(prenotazioni)
                 //MODIFICA DEL 25/06/2019 VERIFICARE CHE ARRAY DI PRENOTAZIONI ABBIA ALMENO UN ELEMENTO
@@ -1423,12 +1423,8 @@ function callAVA(agent) {
              resolve(agent);
            }); 
 
-            }
-    
-
-
-
-           
+           // }
+      
 
         break;
         // ******** MODIFICA DEL 21/05/2019 PROSSIMI APPELLI DA INIZIARE LISTA COMPLETA FAKE *****************
