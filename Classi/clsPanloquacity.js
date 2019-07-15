@@ -1513,6 +1513,49 @@ function callAVA(agent) {
               console.log('clsPanloquacity->getInfoAppelloEsame');
              
               var strTemp;
+              /*  MODIFICA DEL 15/07/2019 
+          VERIFICARE CHE SI POSSA PRENOTARE SOLO DIRITTO PRIVATO 
+          SE DIVERSO DA PRIVATO UNO, AGENTE RISPONDE che non si può prenotare appello di quel esame 
+          
+          */
+         if (idAppello!=='111218'){
+          agent.add('Mi dispiace, non puoi prenotare appelli per questo esame. Puoi prenotare solo istituzioni di diritto privato uno');
+          resolve(agent);
+          return;
+          /*controller.getPrenotazioni(matId).then((prenotazioni) => { //prenotazioni sono righe del libretto
+           //console.log('1) sono in getPrenotazioni '+new Date()); //+ JSON.stringify(prenotazioni)
+           //MODIFICA DEL 25/06/2019 VERIFICARE CHE ARRAY DI PRENOTAZIONI ABBIA ALMENO UN ELEMENTO
+           if (Array.isArray(prenotazioni) && (prenotazioni.length>=1)){
+             console.log('sono in array prenotazioni di GETPRENOTAESAME'+new Date() + ' con adId '+prenotazioni[0].chiaveADContestualizzata.adId);
+             for(var i=0; i<prenotazioni.length; i++){
+             
+             
+              strTemp+= prenotazioni[i].adDes+ ' in data 16 luglio 2019, 7 agosto 2019.'; //Quale data vuoi scegliere?
+              
+              }
+            
+              
+              var str=strOutput;
+              str=str.replace(/(@)/gi, strTemp);
+              strOutput=str;
+              agent.add(strOutput);
+              console.log('strOutput con replace in  getPrenotazioneAppelli-getAppelliEsame->getPrenotazioni  '+ strOutput);
+              resolve(agent);
+            }else{ //  16/05/2019 NON CI SONO APPELLI PRENOTABILI
+              agent.add('Mi dispiace, non hai appelli prenotabili. Come posso aiutarti ora?');
+              console.log('Mi dispiace, non hai appelli prenotabili. Come posso aiutarti ora?');
+              resolve(agent);
+          }
+        
+          }).catch((error) => {
+             console.log('Si è verificato errore in getPrenotazioneAppelli-getAppelliEsame->getPrenotazioni: ' +error);
+             agent.add('Mi dispiace, si è verificato errore durante l\' accesso  agli appelli. Riprova più tardi.');
+             resolve(agent);
+           }); */
+
+        }
+        //fine check appello che si può prenotare 
+        // 15/07/2019
               if (ctx.parameters.date){
                 
                 var vv=ctx.parameters.date.split('T')[0]; //2019-06-10
