@@ -1557,46 +1557,46 @@ function callAVA(agent) {
              resolve(agent);
              return;
            }); 
-
-        }
-        //fine check appello che si può prenotare 
-        // 15/07/2019
-              if (ctx.parameters.date){
+ //fine check appello che si può prenotare 
+        } else{
+           // 15/07/2019
+           if (ctx.parameters.date){
                 
-                var vv=ctx.parameters.date.split('T')[0]; //2019-06-10
-                console.log('ho il parametro date con valore: ' + vv);
-                //modifica del 03/07/2019 controllo che le date siano valide 
-                  if  ( (vv==='2019-07-08') || ( vv==='2019-07-16') || ( vv==='2019-08-07') ){
-                    strTemp=vv.split('-');
-
-                    var str=strOutput;
-                    str=str.replace(/(@)/gi, strTemp[2]+'/'+strTemp[1]+'/'+strTemp[0]);
-                    strOutput=str;
-                    agent.add(strOutput);
-                    resolve(agent);
-
-                  }else{
-                    console.log('la data non è valida ...')
-                    agent.add('Mi dispiace, non ci sono appelli in questa data. Le date disponibili sono  16 luglio 2019 e 7 agosto 2019.');
-                    resolve(agent);  
-                  }
-                
-                /* originale
+            var vv=ctx.parameters.date.split('T')[0]; //2019-06-10
+            console.log('ho il parametro date con valore: ' + vv);
+            //modifica del 03/07/2019 controllo che le date siano valide 
+              if  ( (vv==='2019-07-08') || ( vv==='2019-07-16') || ( vv==='2019-08-07') ){
                 strTemp=vv.split('-');
 
-                 var str=strOutput;
-                 str=str.replace(/(@)/gi, strTemp[2]+'/'+strTemp[1]+'/'+strTemp[0]);
-                 strOutput=str;
-                 agent.add(strOutput);
-                resolve(agent);*/
-              }else{  
-                console.log('NON ho il parametro data');
-              agent.add('Scusami ma mi manca la data, non posso procedere. Ripeti per favore la data dell\'appello');
-              resolve(agent);
+                var str=strOutput;
+                str=str.replace(/(@)/gi, strTemp[2]+'/'+strTemp[1]+'/'+strTemp[0]);
+                strOutput=str;
+                agent.add(strOutput);
+                resolve(agent);
 
+              }else{
+                console.log('la data non è valida ...')
+                agent.add('Mi dispiace, non ci sono appelli in questa data. Le date disponibili sono  16 luglio 2019 e 7 agosto 2019.');
+                resolve(agent);  
               }
             
+            /* originale
+            strTemp=vv.split('-');
 
+             var str=strOutput;
+             str=str.replace(/(@)/gi, strTemp[2]+'/'+strTemp[1]+'/'+strTemp[0]);
+             strOutput=str;
+             agent.add(strOutput);
+            resolve(agent);*/
+          }else{  
+            console.log('NON ho il parametro data');
+          agent.add('Scusami ma mi manca la data, non posso procedere. Ripeti per favore la data dell\'appello');
+          resolve(agent);
+
+          }
+        
+        } //fine check 
+       
           break;
 
             //getInfoAppelloPrenotato intent cancella appello prenotato #esse3 #appelli #cancellazione
