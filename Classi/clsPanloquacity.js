@@ -1556,7 +1556,7 @@ function callAVA(agent) {
           
           */
          console.log('************ getInfoAppelloEsame-> idAppello = '+ idAppello);
-         if ( (idAppello!==111218) || (idAppello!=='')){
+         if  (idAppello!==111218){
           console.log('************  idAppello != 111218 '+ idAppello);
           agent.add('Mi dispiace, non puoi prenotare appelli per questo esame. Puoi prenotare:');
           //resolve(agent);
