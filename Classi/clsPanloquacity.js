@@ -1693,6 +1693,7 @@ function callAVA(agent) {
             }          
            }
            var strTemp='';
+           //modifica del 15/07/2019
            agent.add('ok ora procedo...');
             controller.postSingoloAppelloDaPrenotare(cdsId,idAppello,appId,idEsame).then((res)=>{ //cdsId,adId,appId,adsceId
               if (res){
@@ -1738,6 +1739,8 @@ function callAVA(agent) {
                   break;
                 }
                }
+               //modifica del 15/07/2019
+               agent.add('ok ora procedo...');
               controller.deleteSingoloAppelloDaPrenotare(cdsId,idAppello,appId,stuId).then((res)=>{ //cdsId,adId,appId,studId
                 if (res){
                   console.log('faccio delete della prenotazione appello con cdsId '+cdsId + ', adId '+ idAppello + ', appID  '+appId +', stuId '+stuId+ ', nome di paramEsame '+paramEsame);
