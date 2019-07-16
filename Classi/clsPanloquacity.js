@@ -1310,7 +1310,7 @@ function callAVA(agent) {
                 //**********  modifica del 05/07/2019 su richiesta di Sergio: solo le date se c'è un solo appello ****************
                 //test di replace della stringa DIRITO PRIVATO I IN 1
                // prenotazioni[i].adDes=prenotazioni[i].adDes.replace(/( I)/gi, " uno");
-                strTemp+= prenotazioni[i].adDes+ ' in data 16 luglio 2019, 7 agosto 2019.'; //Quale data vuoi scegliere?
+                strTemp+= prenotazioni[i].adDes+ ' in data 7 agosto 2019.'; //Quale data vuoi scegliere?
                 
                 }
               
@@ -1358,7 +1358,7 @@ function callAVA(agent) {
                  for(var i=0; i<prenotazioni.length; i++){
                  
                  
-                  strTemp+= prenotazioni[i].adDes+ ' in data 16 luglio 2019, 7 agosto 2019.'; 
+                  strTemp+= prenotazioni[i].adDes+ ' in data 7 agosto 2019.'; 
                   
                   }
                 
@@ -1398,7 +1398,7 @@ function callAVA(agent) {
                    //**********  modifica del 05/07/2019 su richiesta di Sergio: solo le date se c'è un solo appello ****************
                    //test di replace della stringa DIRITO PRIVATO I IN 1
                   // prenotazioni[i].adDes=prenotazioni[i].adDes.replace(/( I)/gi, " uno");
-                   strTemp+= prenotazioni[i].adDes+ ' in data 16 luglio 2019, 7 agosto 2019.'; //Quale data vuoi scegliere?
+                   strTemp+= prenotazioni[i].adDes+ ' in data 7 agosto 2019.'; //Quale data vuoi scegliere?
                    
                    }
                  
@@ -1471,7 +1471,7 @@ function callAVA(agent) {
           //************************* */
           controller.getAppId(matId).then((risultato)=>{
             //verifica che CI SIANO LE PRENOTAZIONI!!!!
-            if (Array.isArray(risultato)){
+            if  ( Array.isArray(risultato)  && (risultato.length>=1) ){
               //dò la prima risposta ossia elenco prenotazioni
              // console.log('HO LE PRENOTAZIONI \n' +JSON.stringify(risultato));
               
@@ -1508,7 +1508,7 @@ function callAVA(agent) {
                       resolve(agent);
                   } //fine if isArray(result
                 });
-              }else{ /*  15/05/2019 NON CI SONO PRENOTAZIONI */
+            }else{ /*  15/05/2019 NON CI SONO PRENOTAZIONI */
                  agent.add(risposta[1]); //--> 22/05/2019 'Mi dispiace, non hai effettuato prenotazioni. Come posso aiutarti ora?'
                  console.log('Mi dispiace, non hai effettuato prenotazioni. Come posso aiutarti ora?');
                  resolve(agent);
@@ -1572,7 +1572,7 @@ function callAVA(agent) {
              for(var i=0; i<prenotazioni.length; i++){
              
              
-              strTemp+= prenotazioni[i].adDes+ ' in data 16 luglio 2019, 7 agosto 2019.'; 
+              strTemp+= prenotazioni[i].adDes+ ' in data 7 agosto 2019.'; 
               
               }
             
@@ -1616,7 +1616,7 @@ function callAVA(agent) {
 
               }else{
                 console.log('la data non è valida ...')
-                agent.add('Mi dispiace, non ci sono appelli in questa data. Le date disponibili sono  16 luglio 2019 e 7 agosto 2019.');
+                agent.add('Mi dispiace, non ci sono appelli in questa data. Le date disponibili sono 7 agosto 2019.');
                 resolve(agent);  
               }
             
@@ -1689,7 +1689,7 @@ function callAVA(agent) {
             }else if (vv==='2019-08-07'){
               appId='219';
             }else{
-              agent.add('Mi dispiace, non ci sono appelli in questa data. Le date disponibili sono  16 luglio 2019 e 7 agosto 2019.');
+              agent.add('Mi dispiace, non ci sono appelli in questa data. Le date disponibili sono 7 agosto 2019.');
               resolve(agent); 
               return; 
 
