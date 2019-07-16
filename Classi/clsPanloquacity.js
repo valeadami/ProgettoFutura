@@ -1467,7 +1467,7 @@ function callAVA(agent) {
           //console.log('dopo lo split, risposta[0] ='+ risposta[0] + ", risposta[1] " + risposta[1]);
           //console.log('**** INIZIO TEST **** '+new Date());
           //test del 15/07/2019
-          agent.add('aspetta un secondo per favore...');
+          agent.add('un momento, per favore...');
           //************************* */
           controller.getAppId(matId).then((risultato)=>{
             //verifica che CI SIANO LE PRENOTAZIONI!!!!
