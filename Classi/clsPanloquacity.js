@@ -1310,7 +1310,12 @@ function callAVA(agent) {
                 //**********  modifica del 05/07/2019 su richiesta di Sergio: solo le date se c'è un solo appello ****************
                 //test di replace della stringa DIRITO PRIVATO I IN 1
                // prenotazioni[i].adDes=prenotazioni[i].adDes.replace(/( I)/gi, " uno");
-                strTemp+= prenotazioni[i].adDes+' in data 7 ottobre 2019'; //Quale data vuoi scegliere? + ' in data 7 agosto 2019.'
+                 //**modifica del 3 0ttobre */
+                 if (prenotazioni[i].chiaveADContestualizzata.adId==='111218'){
+                  strTemp+= prenotazioni[i].adDes+' in data 7 ottobre 2019'; 
+                 }
+                 //originale
+                //strTemp+= prenotazioni[i].adDes+' in data 7 ottobre 2019'; //Quale data vuoi scegliere? + ' in data 7 agosto 2019.'
                 
                 }
               
