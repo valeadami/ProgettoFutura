@@ -1356,10 +1356,11 @@ function callAVA(agent) {
                if (Array.isArray(prenotazioni) && (prenotazioni.length>=1)){
                  console.log('sono in array prenotazioni di GETPRENOTAESAME'+new Date() + ' con adId '+prenotazioni[0].chiaveADContestualizzata.adId);
                  for(var i=0; i<prenotazioni.length; i++){
-                 
-                 
-                  strTemp+= prenotazioni[i].adDes+ ' in data 7 ottobre 2019.'; 
-                  
+                   //modifica del 3 ottobre 2019
+                  if (prenotazioni[i].chiaveADContestualizzata.adId==='111218') {
+                    strTemp+= prenotazioni[i].adDes+ ' in data 7 ottobre 2019.';  //*** solo istutuzioni di diritto privato  */
+                  }
+              
                   }
                 
                   agent.add(strTemp);
@@ -1559,7 +1560,7 @@ function callAVA(agent) {
           
           */
          console.log('************ getInfoAppelloEsame-> idAppello = '+ idAppello);
-         if  (idAppello!==111218){
+         if  (idAppello!==111218){ 
           console.log('************  idAppello != 111218 '+ idAppello);
           agent.add('Mi dispiace, non puoi prenotare appelli per questo esame. Puoi prenotare:');
           //resolve(agent);
