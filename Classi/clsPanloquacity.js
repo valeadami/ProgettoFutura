@@ -1354,10 +1354,10 @@ function callAVA(agent) {
               controller.getPrenotazioni(matId).then((prenotazioni) => { //prenotazioni sono righe del libretto
            
                if (Array.isArray(prenotazioni) && (prenotazioni.length>=1)){
-                 console.log('sono in array prenotazioni di GETPRENOTAESAME'+new Date() + ' con adId '+prenotazioni[0].chiaveADContestualizzata.adId);
+                 console.log('sono in array prenotazioni di GETPRENOTAESAME '+new Date() + ' con adId '+prenotazioni[0].chiaveADContestualizzata.adId);
                  for(var i=0; i<prenotazioni.length; i++){
                    //modifica del 3 ottobre 2019
-                  if (prenotazioni[i].chiaveADContestualizzata.adId==='111218') {
+                  if (prenotazioni[0].chiaveADContestualizzata.adId==='111218') {
                     strTemp+= prenotazioni[i].adDes+ ' in data 7 ottobre 2019.';  //*** solo istutuzioni di diritto privato  */
                   }
               
@@ -1569,7 +1569,7 @@ function callAVA(agent) {
           controller.getPrenotazioni(matId).then((prenotazioni) => { //prenotazioni sono righe del libretto
        
            if (Array.isArray(prenotazioni) && (prenotazioni.length>=1)){
-             console.log('sono in array prenotazioni di GETPRENOTAESAME '+new Date() + ' con adId '+prenotazioni[0].chiaveADContestualizzata.adId);
+             console.log('QQQQ sono in array prenotazioni di GETPRENOTAESAME '+new Date() + ' con adId '+prenotazioni[0].chiaveADContestualizzata.adId);
              for(var i=0; i<prenotazioni.length; i++){
              
              
