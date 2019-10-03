@@ -59,6 +59,10 @@ module.exports = Carriera;
 classe CARRIERA -> VIENE DAL LOGIN
 **************************** e DA 
 https://units.esse3.pp.cineca.it/e3rest/api/anagrafica-service-v1/carriere/s260856/
+
+************ M O D I F I C A  DEL  06/07/2019  CAMBIO API ANAGRAFICA 
+anagrafica-service-v2/utenti/{userId}/trattiAttivi
+https://units.esse3.pp.cineca.it/e3rest/api/anagrafica-service-v2/utenti/s262502/trattiAttivi
 [
   {
     "aaId": 2017,
