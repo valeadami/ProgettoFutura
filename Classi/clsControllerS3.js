@@ -1036,7 +1036,7 @@ function getTuttiAppelliDaIniziareFake(){
             null,null,null,null,null, null, 'ISTITUZIONI DI DIRITTO PRIVATO UNO',
             null,null,null,null,null,
             'BALLERINI',null,'LUCA',null,null,null,null,null,null, null,null,
-            null,null,null,null, '07/08/2019 13:00:'),
+            null,null,null,null, '07/10/2019 13:00:'),
 
             new appello('2017','018GI',null, null,null, null,
             null,null,null,null,null, null, 'ISTITUZIONI DI DIRITTO PRIVATO UNO',

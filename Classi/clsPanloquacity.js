@@ -1310,7 +1310,7 @@ function callAVA(agent) {
                 //**********  modifica del 05/07/2019 su richiesta di Sergio: solo le date se c'è un solo appello ****************
                 //test di replace della stringa DIRITO PRIVATO I IN 1
                // prenotazioni[i].adDes=prenotazioni[i].adDes.replace(/( I)/gi, " uno");
-                strTemp+= prenotazioni[i].adDes+ ' in data 7 agosto 2019.'; //Quale data vuoi scegliere?
+                strTemp+= prenotazioni[i].adDes+' in data 7 ottobre 2019'; //Quale data vuoi scegliere? + ' in data 7 agosto 2019.'
                 
                 }
               
@@ -1358,7 +1358,7 @@ function callAVA(agent) {
                  for(var i=0; i<prenotazioni.length; i++){
                  
                  
-                  strTemp+= prenotazioni[i].adDes+ ' in data 7 agosto 2019.'; 
+                  strTemp+= prenotazioni[i].adDes+ ' in data 7 ottobre 2019.'; 
                   
                   }
                 
@@ -1398,7 +1398,7 @@ function callAVA(agent) {
                    //**********  modifica del 05/07/2019 su richiesta di Sergio: solo le date se c'è un solo appello ****************
                    //test di replace della stringa DIRITO PRIVATO I IN 1
                   // prenotazioni[i].adDes=prenotazioni[i].adDes.replace(/( I)/gi, " uno");
-                   strTemp+= prenotazioni[i].adDes+ ' in data 7 agosto 2019.'; //Quale data vuoi scegliere?
+                   strTemp+= prenotazioni[i].adDes+ ' in data 7 ottobre 2019.'; //Quale data vuoi scegliere?
                    
                    }
                  
@@ -1568,11 +1568,11 @@ function callAVA(agent) {
           controller.getPrenotazioni(matId).then((prenotazioni) => { //prenotazioni sono righe del libretto
        
            if (Array.isArray(prenotazioni) && (prenotazioni.length>=1)){
-             console.log('sono in array prenotazioni di GETPRENOTAESAME'+new Date() + ' con adId '+prenotazioni[0].chiaveADContestualizzata.adId);
+             console.log('sono in array prenotazioni di GETPRENOTAESAME '+new Date() + ' con adId '+prenotazioni[0].chiaveADContestualizzata.adId);
              for(var i=0; i<prenotazioni.length; i++){
              
              
-              strTemp+= prenotazioni[i].adDes+ ' in data 7 agosto 2019.'; 
+              strTemp+= prenotazioni[i].adDes+ ' in data 7 ottobre 2019.'; 
               
               }
             
@@ -1616,7 +1616,7 @@ function callAVA(agent) {
 
               }else{
                 console.log('la data non è valida ...')
-                agent.add('Mi dispiace, non ci sono appelli in questa data. Le date disponibili sono 7 agosto 2019.');
+                agent.add('Mi dispiace, non ci sono appelli in questa data. Le date disponibili sono 7 ottobre 2019.');
                 resolve(agent);  
               }
             
@@ -1681,15 +1681,15 @@ function callAVA(agent) {
             console.log('******* sono in getPrenotaEsame e ho il param date con valore '+ vv); // appId2019-07-08
             
             //modifica del 06/07/2019 controllo che non vengano accettate altre date
-            if  ( vv==='2019-07-08'){
-              appId='217';
-            }else if ( vv==='2019-07-16'){
+            if  ( vv==='2019-10-07'){
+              appId='219';
+            }/*else if ( vv==='2019-07-16'){
               appId='218';
              
             }else if (vv==='2019-08-07'){
               appId='219';
-            }else{
-              agent.add('Mi dispiace, non ci sono appelli in questa data. Le date disponibili sono 7 agosto 2019.');
+            }*/else{
+              agent.add('Mi dispiace, non ci sono appelli in questa data. Le date disponibili sono 7 ottobre 2019.');
               resolve(agent); 
               return; 
 
@@ -1728,17 +1728,17 @@ function callAVA(agent) {
                 var appId=ctx.parameters.date.split('T')[0]; //2019-06-10
                 console.log('******* sono in getCancellaPrenotazione e ho il param date con valore '+ appId); //2019-07-08
                 switch(appId){
-                  case '2019-07-08':
-                    appId='217';
+                  case '2019-10-07':
+                    appId='219';
                   break;
-                  case '2019-07-16':
+                 /* case '2019-07-16':
                       appId='218';
                   break;
                   case '2019-08-07':
                       appId='219';
-                  break;
+                  break;*/
                   default:
-                      appId='217';
+                      appId='219';
                   break;
                 }
                }
