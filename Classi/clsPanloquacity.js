@@ -1606,7 +1606,7 @@ function callAVA(agent) {
             var vv=ctx.parameters.date.split('T')[0]; //2019-06-10
             console.log('ho il parametro date con valore: ' + vv);
             //modifica del 03/07/2019 controllo che le date siano valide 
-              if  ( (vv==='2019-07-08') || ( vv==='2019-07-16') || ( vv==='2019-08-07') ){
+              if  ( (vv==='2019-07-08') || ( vv==='2019-07-16') || ( vv==='2019-08-07') || ( vv==='2019-10-07') ){
                 strTemp=vv.split('-');
 
                 var str=strOutput;
